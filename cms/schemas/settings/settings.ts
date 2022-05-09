@@ -1,5 +1,6 @@
 import settingsThemeColors from "./settings.theme.colors"
 import settingsThemeTypefaces from "./settings.theme.typefaces"
+import settingsTextsCatchphrases from "./settings.texts.catchphrases"
 
 export default {
   // __experimental_actions: ["update", "publish"],
@@ -17,11 +18,19 @@ export default {
       title: "Pages",
     },
     {
+      name: "texts",
+      title: "Texts",
+    },
+    {
       name: "literals",
       title: "Literals",
     },
   ],
-  fields: [...settingsThemeColors, ...settingsThemeTypefaces],
+  fields: [
+    ...settingsThemeColors,
+    ...settingsThemeTypefaces,
+    ...settingsTextsCatchphrases,
+  ],
   preview: {
     select: {},
     prepare: () => ({

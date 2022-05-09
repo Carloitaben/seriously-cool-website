@@ -13,7 +13,6 @@ import year from "./custom/year"
 import project from "./project"
 import sticker from "./sticker"
 import settings from "./settings"
-import themeCatchPhrase from "./theme.catchPhrase"
 import themeSlidingText from "./theme.slidingText"
 
 export default createSchema({
@@ -29,7 +28,6 @@ export default createSchema({
     // Schemas
     project,
     sticker,
-    themeCatchPhrase,
     themeSlidingText,
     settings,
   ]),
