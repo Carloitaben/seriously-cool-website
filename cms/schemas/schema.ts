@@ -11,9 +11,8 @@ import year from "./custom/year"
 
 // Schemas
 import project from "./project"
-import sticker from "./sticker"
 import settings from "./settings"
-import themeSlidingText from "./theme.slidingText"
+import sticker from "./sticker"
 
 export default createSchema({
   name: "default",
@@ -27,8 +26,7 @@ export default createSchema({
 
     // Schemas
     project,
-    sticker,
-    themeSlidingText,
     settings,
+    sticker,
   ]),
 })
