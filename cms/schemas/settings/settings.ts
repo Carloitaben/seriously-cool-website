@@ -1,3 +1,4 @@
+import settingsLiterals from "./settings.literals"
 import settingsTextsCatchphrases from "./settings.texts.catchphrases"
 import settingsTextsSlidingTexts from "./settings.texts.slidingTexts"
 import settingsThemeColors from "./settings.theme.colors"
@@ -28,6 +29,7 @@ export default {
     },
   ],
   fields: [
+    ...settingsLiterals,
     ...settingsTextsCatchphrases,
     ...settingsTextsSlidingTexts,
     ...settingsThemeColors,
