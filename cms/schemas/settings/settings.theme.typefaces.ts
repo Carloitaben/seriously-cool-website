@@ -3,8 +3,11 @@ export default [
     group: "theme",
     name: "typefaces",
     title: "Theme typefaces",
-    description:
-      "This field must match the property listed below the typeface name in the web project font list. Usually it will be the typeface name in lowercase and with dashes instead of spaces",
+    description: `
+      This field must match the property listed below the typeface name 
+      in the web project font list. Usually it will be the typeface name 
+      in lowercase and with dashes instead of spaces
+    `,
     type: "array",
     options: {
       sortable: false,

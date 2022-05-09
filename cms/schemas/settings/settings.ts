@@ -1,7 +1,7 @@
-import settingsThemeColors from "./settings.theme.colors"
-import settingsThemeTypefaces from "./settings.theme.typefaces"
 import settingsTextsCatchphrases from "./settings.texts.catchphrases"
 import settingsTextsSlidingTexts from "./settings.texts.slidingTexts"
+import settingsThemeColors from "./settings.theme.colors"
+import settingsThemeTypefaces from "./settings.theme.typefaces"
 
 export default {
   // __experimental_actions: ["update", "publish"],
@@ -28,10 +28,10 @@ export default {
     },
   ],
   fields: [
-    ...settingsThemeColors,
-    ...settingsThemeTypefaces,
     ...settingsTextsCatchphrases,
     ...settingsTextsSlidingTexts,
+    ...settingsThemeColors,
+    ...settingsThemeTypefaces,
   ],
   preview: {
     select: {},

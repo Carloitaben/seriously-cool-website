@@ -25,8 +25,10 @@ export default {
                 name: "alt",
                 title: "Alt",
                 type: "string",
-                description:
-                  "Text to show in the bottom of screen when hovering. Leaving it blank will use the linked text by default.",
+                description: `
+                  Text to show in the bottom of screen when hovering. 
+                  Leave it blank to use the linked text by default.
+                `,
               },
             ],
           },

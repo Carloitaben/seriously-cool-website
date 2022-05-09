@@ -23,7 +23,9 @@ export default [
           },
           prepare: ({ text }) => {
             const title = text
-              ? text.map((block) => block.children.map(({ text = "" }) => text).join(" ")).join(" ")
+              ? text
+                  .map((b) => b.children.map(({ text = "" }) => text).join(" "))
+                  .join(" ")
               : "No text"
 
             return {
@@ -38,8 +40,11 @@ export default [
         type: "object",
         fields: [
           {
-            description:
-              "Adding a single item will render it at the right side of the grid. Adding two will render each as half the grid. Adding three or more will render them in a carousel.",
+            description: `
+              Adding a single item will render it at the right side of the grid. 
+              Adding two will render each as half the grid. 
+              Adding three or more will render them in a carousel.
+            `,
             name: "mediaBlockBlocks",
             title: "Blocks",
             type: "array",
