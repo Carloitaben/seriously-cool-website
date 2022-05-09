@@ -12,8 +12,8 @@ import year from "./custom/year"
 // Schemas
 import project from "./project"
 import sticker from "./sticker"
+import settings from "./settings"
 import themeCatchPhrase from "./theme.catchPhrase"
-import themeColor from "./theme.color"
 import themeFont from "./theme.font"
 import themeSlidingText from "./theme.slidingText"
 
@@ -31,8 +31,8 @@ export default createSchema({
     project,
     sticker,
     themeCatchPhrase,
-    themeColor,
     themeFont,
     themeSlidingText,
+    settings,
   ]),
 })
