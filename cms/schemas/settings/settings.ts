@@ -1,4 +1,5 @@
 import settingsThemeColors from "./settings.theme.colors"
+import settingsThemeFonts from "./settings.theme.fonts"
 
 export default {
   // __experimental_actions: ["update", "publish"],
@@ -20,7 +21,7 @@ export default {
       title: "Literals",
     },
   ],
-  fields: [...settingsThemeColors],
+  fields: [...settingsThemeColors, ...settingsThemeFonts],
   preview: {
     select: {},
     prepare: () => ({
