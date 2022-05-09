@@ -24,6 +24,8 @@ export default [
                 if (string.includes(" ")) {
                   return "should not contain spaces"
                 }
+
+                return true
               }),
             ],
           },
