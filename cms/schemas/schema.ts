@@ -1,16 +1,38 @@
-// First, we must import the schema creator
-import createSchema from 'part:@sanity/base/schema-creator'
+// Dependencies
+import createSchema from "part:@sanity/base/schema-creator"
+import schemaTypes from "all:part:@sanity/base/schema-type"
 
-// Then import schema types from any plugins that might expose them
-import schemaTypes from 'all:part:@sanity/base/schema-type'
+// Custom types
+import blockRichText from "./custom/blockRichText"
+import media from "./custom/media"
+import mediaImage from "./custom/mediaImage"
+import mediaVideo from "./custom/mediaVideo"
+import year from "./custom/year"
 
-// Then we give our schema to the builder and provide the result to Sanity
+// Schemas
+import project from "./project"
+import sticker from "./sticker"
+import themeCatchPhrase from "./theme.catchPhrase"
+import themeColor from "./theme.color"
+import themeFont from "./theme.font"
+import themeSlidingText from "./theme.slidingText"
+
 export default createSchema({
-  // We name our schema
-  name: 'default',
-  // Then proceed to concatenate our document type
-  // to the ones provided by any plugins that are installed
+  name: "default",
   types: schemaTypes.concat([
-    /* Your types here! */
+    // Types
+    blockRichText,
+    media,
+    mediaImage,
+    mediaVideo,
+    year,
+
+    // Schemas
+    project,
+    sticker,
+    themeCatchPhrase,
+    themeColor,
+    themeFont,
+    themeSlidingText,
   ]),
 })
