@@ -468,8 +468,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-backdrop-sepia:  ;
 }
 
-.m-4 {
-  margin: 1rem;
+.p-4 {
+  padding: 1rem;
 }
 
 .text-red-500 {
