@@ -1,12 +1,10 @@
 {
   "name": "seriously-cool-website",
-  "private": true,
-  "version": "1.0.0",
-  "description": "CMS seriouslycool.website",
-  "main": "package.json",
+  "description": "CMS for seriouslycool.website",
   "author": "Carlo Domínguez <hello@carlo.works>",
+  "main": "package.json",
   "scripts": {
-    "start": "sanity start",
+    "dev": "sanity start",
     "build": "sanity build"
   },
   "dependencies": {
