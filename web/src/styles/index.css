@@ -502,6 +502,14 @@ a {
   position: fixed;
 }
 
+.-ml-20 {
+  margin-left: -5rem;
+}
+
+.-ml-10 {
+  margin-left: -2.5rem;
+}
+
 .inline-block {
   display: inline-block;
 }
@@ -551,6 +559,10 @@ a {
 
 .whitespace-nowrap {
   white-space: nowrap;
+}
+
+.border-t-2 {
+  border-top-width: 2px;
 }
 
 .bg-red-500 {
