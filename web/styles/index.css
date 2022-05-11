@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  a {
+    @apply underline;
+  }
+
+  .px-container {
+    @apply px-12;
+  }
+
+  .mx-container {
+    @apply mx-12;
+  }
+}
+
+@layer components {
+  @keyframes sliding-text-animation {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  } 
+}
+
+@layer utilities {
+}
