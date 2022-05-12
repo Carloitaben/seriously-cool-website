@@ -4,23 +4,17 @@ import type {
   MetaFunction,
 } from "@remix-run/node"
 import {
-  Link,
   Links,
   LiveReload,
   Meta,
-  Outlet,
   Scripts,
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react"
 
 import styles from "~/styles/index.css"
-
+import Layout from "~/components/Layout"
 import { getClient } from "~/utils/sanity/getClient"
-
-import Overlay from "~/components/Overlay"
-import Navbar from "~/components/Navbar"
-import SlidingText from "./components/SlidingText"
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -44,18 +38,8 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
-        <div>
-          <Navbar>Catchphrase</Navbar>
-          <div>Landing</div>
-        </div>
-        <Overlay>
-          <Navbar>
-            <Link to="/">Close</Link>
-          </Navbar>
-          <Outlet />
-        </Overlay>
-        <SlidingText>{settings.slidingTexts}</SlidingText>
+      <body className="h-screen flex flex-col">
+        <Layout settings={settings} />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

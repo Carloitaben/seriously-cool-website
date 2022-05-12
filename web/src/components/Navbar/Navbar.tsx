@@ -7,7 +7,7 @@ type Props = {
 
 const Navbar: FC<Props> = ({ children }) => {
   return (
-    <nav className="text-2xl flex justify-between py-4 space-x-4 px-container">
+    <nav className="text-2xl flex justify-between py-4 space-x-4 px-container fixed inset-x-0 top-0 h-16">
       <div className="flex-1">{children}</div>
       <ul className="flex space-x-4">
         <li>

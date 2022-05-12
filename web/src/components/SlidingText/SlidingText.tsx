@@ -29,7 +29,7 @@ const SlidingText: FC<Props> = ({ children }) => {
   }, [children, isFontLoaded])
 
   return (
-    <div className="h-12 text-2xl uppercase whitespace-nowrap select-none items-center flex overflow-hidden border-t-2">
+    <div className="h-[3.125rem] text-2xl uppercase whitespace-nowrap select-none items-center flex overflow-hidden border-t-2">
       <span
         ref={childWrapper}
         style={style}
