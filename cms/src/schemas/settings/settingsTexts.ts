@@ -1,6 +1,16 @@
 export default [
   {
     group: "texts",
+    name: "catchphrases",
+    title: "Catchphrases",
+    type: "array",
+    options: {
+      sortable: false,
+    },
+    of: [{ type: "settingsCatchphrase" }],
+  },
+  {
+    group: "texts",
     name: "slidingTexts",
     title: "Sliding texts (all pages)",
     description: `

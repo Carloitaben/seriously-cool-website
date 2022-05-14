@@ -1,8 +1,6 @@
-import settingsLiterals from "./settings.literals"
-import settingsTextsCatchphrases from "./settings.texts.catchphrases"
-import settingsTextsSlidingTexts from "./settings.texts.slidingTexts"
-import settingsThemeColors from "./settings.theme.colors"
-import settingsThemeTypefaces from "./settings.theme.typefaces"
+import settingsLiterals from "./settingsLiterals"
+import settingsTexts from "./settingsTexts"
+import settingsTheme from "./settingsTheme"
 
 export default {
   // __experimental_actions: ["update", "publish"],
@@ -28,13 +26,7 @@ export default {
       title: "Literals",
     },
   ],
-  fields: [
-    ...settingsLiterals,
-    ...settingsTextsCatchphrases,
-    ...settingsTextsSlidingTexts,
-    ...settingsThemeColors,
-    ...settingsThemeTypefaces,
-  ],
+  fields: [...settingsLiterals, ...settingsTexts, ...settingsTheme],
   preview: {
     select: {},
     prepare: () => ({
