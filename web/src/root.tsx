@@ -14,7 +14,9 @@ import {
 
 import styles from "~/styles/index.css"
 import Layout from "~/components/Layout"
+
 import { getClient } from "~/utils/sanity/getClient"
+import { getRandomArrayItem } from "~/utils"
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -22,15 +24,35 @@ export const meta: MetaFunction = () => ({
   viewport: "width=device-width,initial-scale=1",
 })
 
-export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }]
+export const links: LinksFunction = () => [
+  {
+    rel: "stylesheet",
+    href: styles,
+  },
+  {
+    rel: "stylesheet",
+    href: "https://use.typekit.net/jvo7aft.css",
+  },
+]
 
 export const loader: LoaderFunction = async () => {
   const settings = await getClient().fetch(`*[_type == "settings"][0]`)
-  return { settings }
+
+  const fontFamily = getRandomArrayItem(settings.typefaces)
+
+  const theme = {
+    fontFamily,
+  }
+
+  return { settings, theme }
 }
 
 export default function App() {
-  const { settings } = useLoaderData()
+  const { settings, theme } = useLoaderData()
+
+  const style = {
+    fontFamily: theme.fontFamily,
+  }
 
   return (
     <html lang="en">
@@ -38,7 +60,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="h-screen flex flex-col">
+      <body className="h-screen flex flex-col" style={style}>
         <Layout settings={settings} />
         <ScrollRestoration />
         <Scripts />

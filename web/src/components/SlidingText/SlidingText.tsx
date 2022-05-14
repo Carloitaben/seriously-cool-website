@@ -1,22 +1,24 @@
 import type { FC, CSSProperties } from "react"
 import { useEffect, useRef, useState } from "react"
 
+import useSettings from "~/hooks/useSettings"
+import useTheme from "~/hooks/useTheme"
+
 import useIsFontLoaded from "./useIsFontLoaded"
 import { getDuration, getTextShadow } from "./utils"
 
-type Props = {
-  children: string[]
-}
+const SlidingText: FC = () => {
+  const { slidingTexts } = useSettings()
+  const { fontFamily } = useTheme()
 
-const SlidingText: FC<Props> = ({ children }) => {
-  const isFontLoaded = useIsFontLoaded("arial") // TODO: get this from loaderData
+  const isFontLoaded = useIsFontLoaded(fontFamily)
   const childWrapper = useRef<HTMLSpanElement>(null)
   const [style, setStyle] = useState<CSSProperties>()
 
   useEffect(() => {
     if (!isFontLoaded || !childWrapper.current) return
 
-    const duration = getDuration(children)
+    const duration = getDuration(slidingTexts)
     const textShadow = getTextShadow(childWrapper.current.offsetWidth)
 
     setStyle({
@@ -26,17 +28,17 @@ const SlidingText: FC<Props> = ({ children }) => {
       animationIterationCount: "infinite",
       textShadow,
     })
-  }, [children, isFontLoaded])
+  }, [slidingTexts, isFontLoaded])
 
   return (
-    <div className="h-[3.125rem] text-2xl uppercase whitespace-nowrap select-none items-center flex overflow-hidden border-t-2">
+    <div className="h-slidingTextDesktop text-2xl uppercase whitespace-nowrap select-none items-center flex overflow-hidden border-t-2">
       <span
         ref={childWrapper}
         style={style}
         className="inline-block space-x-20 pr-20 -ml-10"
       >
-        {children.map((child, index) => (
-          <span key={index}>{child}</span>
+        {slidingTexts.map((text, index) => (
+          <span key={index}>{text}</span>
         ))}
       </span>
     </div>
