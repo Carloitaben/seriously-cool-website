@@ -2,6 +2,7 @@
   "name": "seriously-cool-website",
   "description": "CMS for seriouslycool.website",
   "author": "Carlo Domínguez <hello@carlo.works>",
+  "license": "UNLICENSED",
   "main": "package.json",
   "scripts": {
     "dev": "sanity start",
