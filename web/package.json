@@ -5,10 +5,14 @@
   "sideEffects": false,
   "license": "UNLICENSED",
   "scripts": {
+    "generate": "graphql-codegen --config codegen.yml",
+    "predev": "yarn generate",
     "dev": "concurrently \"npm run dev:css\" \"remix dev\"",
     "dev:css": "tailwindcss -w -i ./styles/index.css -o src/styles/index.css",
+    "prebuild": "yarn generate",
     "build": "npm run build:css && remix build",
     "build:css": "tailwindcss -m -i ./styles/index.css -o src/styles/index.css",
+    "prestart": "yarn generate",
     "start": "remix-serve build"
   },
   "dependencies": {
@@ -17,11 +21,15 @@
     "@remix-run/serve": "^1.4.3",
     "fontfaceobserver": "^2.1.0",
     "framer-motion": "^6.3.3",
-    "picosanity": "^4.0.0",
+    "graphql": "^16.5.0",
+    "graphql-request": "^4.2.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/typescript": "2.4.11",
+    "@graphql-codegen/typescript-operations": "2.4.0",
     "@remix-run/dev": "^1.4.3",
     "@remix-run/eslint-config": "^1.4.3",
     "@types/fontfaceobserver": "^2.1.0",

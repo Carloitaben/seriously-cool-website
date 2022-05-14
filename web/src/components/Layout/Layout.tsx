@@ -7,10 +7,7 @@ import Navbar from "~/components/Navbar"
 import Home from "~/components/Home"
 import SlidingText from "~/components/SlidingText"
 import LayoutDrawer from "./LayoutDrawer"
-
-type Props = {
-  settings: any // TODO: remove this and use context
-}
+import useRootData from "~/hooks/useRootData"
 
 const transition: Transition = {
   type: "tween",
@@ -18,9 +15,11 @@ const transition: Transition = {
   duration: 1,
 }
 
-const Layout: FC<Props> = ({ settings }) => {
+const Layout: FC = () => {
   const location = useLocation()
   const outlet = useOutlet()
+
+  const { slidingTexts } = useRootData()
 
   return (
     <>
@@ -42,7 +41,7 @@ const Layout: FC<Props> = ({ settings }) => {
           </AnimatePresence>
         </MotionConfig>
       </main>
-      <SlidingText>{settings.slidingTexts}</SlidingText>
+      <SlidingText>{slidingTexts}</SlidingText>
     </>
   )
 }
