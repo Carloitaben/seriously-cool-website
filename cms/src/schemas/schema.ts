@@ -19,7 +19,6 @@ import settingsThemeColor from "./objects/settingsThemeColor"
 // Schemas
 import project from "./project"
 import settings from "./settings"
-import sticker from "./sticker"
 
 export default createSchema({
   name: "default",
@@ -41,6 +40,5 @@ export default createSchema({
     // Schemas
     project,
     settings,
-    sticker,
   ]),
 })
