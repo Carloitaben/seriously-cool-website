@@ -46,7 +46,10 @@ export const links: LinksFunction = () => [
 
 export type RootLoaderData = {
   slidingTexts: string[]
-  catchPhrase: Pick<SettingsCatchphrase, "textRaw" | "visibility">
+  catchPhrase: {
+    desktop: Pick<SettingsCatchphrase, "textRaw" | "visibility">
+    mobile: Pick<SettingsCatchphrase, "textRaw" | "visibility">
+  }
   theme: {
     fontFamily: string
     background: string
@@ -63,7 +66,26 @@ export const loader: LoaderFunction = async (): Promise<RootLoaderData> => {
     Settings: { typefaces, slidingTexts, colors, catchphrases },
   } = await client.request<GetSettingsQuery>(GET_SETTINGS, getSettingsVariables)
 
-  const catchPhrase = getRandomArrayItem(catchphrases)
+  const { catchphrasesDesktop, catchphrasesMobile } = catchphrases.reduce(
+    (accumulator, catchphrase) => {
+      if (["BOTH", "DESKTOP"].includes(catchphrase.visibility)) {
+        accumulator.catchphrasesDesktop.push(catchphrase)
+      }
+
+      if (["BOTH", "MOBILE"].includes(catchphrase.visibility)) {
+        accumulator.catchphrasesMobile.push(catchphrase)
+      }
+
+      return accumulator
+    },
+    {
+      catchphrasesDesktop: [],
+      catchphrasesMobile: [],
+    }
+  )
+
+  const catchphraseDesktop = getRandomArrayItem(catchphrasesDesktop)
+  const catchphraseMobile = getRandomArrayItem(catchphrasesMobile)
   const fontFamily = getRandomArrayItem(typefaces)
   const { background, accent } = getRandomArrayItem(colors)
   const flipColors = Math.random() < 0.5
@@ -74,7 +96,14 @@ export const loader: LoaderFunction = async (): Promise<RootLoaderData> => {
     accent: flipColors ? accent.hex : background.hex,
   }
 
-  return { slidingTexts, catchPhrase, theme }
+  return {
+    theme,
+    slidingTexts,
+    catchPhrase: {
+      desktop: catchphraseDesktop,
+      mobile: catchphraseMobile,
+    },
+  }
 }
 
 export default function App() {

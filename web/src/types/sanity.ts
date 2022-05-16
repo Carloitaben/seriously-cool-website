@@ -566,13 +566,11 @@ export type RootQuery = {
   SanityFileAsset: Maybe<SanityFileAsset>;
   SanityImageAsset: Maybe<SanityImageAsset>;
   Settings: Maybe<Settings>;
-  Sticker: Maybe<Sticker>;
   allDocument: Array<Document>;
   allProject: Array<Project>;
   allSanityFileAsset: Array<SanityFileAsset>;
   allSanityImageAsset: Array<SanityImageAsset>;
   allSettings: Array<Settings>;
-  allSticker: Array<Sticker>;
 };
 
 
@@ -597,11 +595,6 @@ export type RootQuerySanityImageAssetArgs = {
 
 
 export type RootQuerySettingsArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type RootQueryStickerArgs = {
   id: Scalars['ID'];
 };
 
@@ -643,14 +636,6 @@ export type RootQueryAllSettingsArgs = {
   offset: InputMaybe<Scalars['Int']>;
   sort: InputMaybe<Array<SettingsSorting>>;
   where: InputMaybe<SettingsFilter>;
-};
-
-
-export type RootQueryAllStickerArgs = {
-  limit: InputMaybe<Scalars['Int']>;
-  offset: InputMaybe<Scalars['Int']>;
-  sort: InputMaybe<Array<StickerSorting>>;
-  where: InputMaybe<StickerFilter>;
 };
 
 export type SanityAssetSourceData = {
@@ -1163,47 +1148,6 @@ export type Span = {
   _type: Maybe<Scalars['String']>;
   marks: Maybe<Array<Maybe<Scalars['String']>>>;
   text: Maybe<Scalars['String']>;
-};
-
-export type Sticker = Document & {
-  __typename?: 'Sticker';
-  /** Date the document was created */
-  _createdAt: Maybe<Scalars['DateTime']>;
-  /** Document ID */
-  _id: Maybe<Scalars['ID']>;
-  _key: Maybe<Scalars['String']>;
-  /** Current document revision */
-  _rev: Maybe<Scalars['String']>;
-  /** Document type */
-  _type: Maybe<Scalars['String']>;
-  /** Date the document was last modified */
-  _updatedAt: Maybe<Scalars['DateTime']>;
-  image: Maybe<Image>;
-  page: Maybe<Scalars['String']>;
-};
-
-export type StickerFilter = {
-  /** Apply filters on document level */
-  _: InputMaybe<Sanity_DocumentFilter>;
-  _createdAt: InputMaybe<DatetimeFilter>;
-  _id: InputMaybe<IdFilter>;
-  _key: InputMaybe<StringFilter>;
-  _rev: InputMaybe<StringFilter>;
-  _type: InputMaybe<StringFilter>;
-  _updatedAt: InputMaybe<DatetimeFilter>;
-  image: InputMaybe<ImageFilter>;
-  page: InputMaybe<StringFilter>;
-};
-
-export type StickerSorting = {
-  _createdAt: InputMaybe<SortOrder>;
-  _id: InputMaybe<SortOrder>;
-  _key: InputMaybe<SortOrder>;
-  _rev: InputMaybe<SortOrder>;
-  _type: InputMaybe<SortOrder>;
-  _updatedAt: InputMaybe<SortOrder>;
-  image: InputMaybe<ImageSorting>;
-  page: InputMaybe<SortOrder>;
 };
 
 export type StringFilter = {

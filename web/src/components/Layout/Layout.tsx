@@ -8,6 +8,7 @@ import Home from "~/components/Home"
 import SlidingText from "~/components/SlidingText"
 import LayoutDrawer from "./LayoutDrawer"
 import useRootData from "~/hooks/useRootData"
+import TextBlock from "../TextBlock"
 
 const transition: Transition = {
   type: "tween",
@@ -19,11 +20,13 @@ const Layout: FC = () => {
   const location = useLocation()
   const outlet = useOutlet()
 
-  const { slidingTexts } = useRootData()
+  const { slidingTexts, catchPhrase } = useRootData()
 
   return (
     <>
-      <Navbar>Catchphrase</Navbar>
+      <Navbar>
+        <TextBlock>{catchPhrase.desktop.textRaw}</TextBlock>
+      </Navbar>
       <main className="flex-1">
         <Home />
         <MotionConfig transition={transition}>
