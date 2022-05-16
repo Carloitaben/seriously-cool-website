@@ -12,7 +12,7 @@ import {
   useLoaderData,
 } from "@remix-run/react"
 import type { CSSProperties } from "react"
-import { useLayoutEffect } from "react"
+import { useEffect } from "react"
 
 import styles from "~/styles/index.css"
 
@@ -87,7 +87,7 @@ export default function App() {
   }
 
   // TODO: maybe we don't need this? Remove if not necessary
-  useLayoutEffect(() => {
+  useEffect(() => {
     document.documentElement.style.setProperty(
       "--theme-colors-background",
       theme.background
@@ -105,7 +105,10 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="h-screen flex flex-col" style={style}>
+      <body
+        className="h-screen flex flex-col selection:bg-accent selection:text-background"
+        style={style}
+      >
         <Layout />
         <ScrollRestoration />
         <Scripts />
