@@ -66,11 +66,12 @@ export const loader: LoaderFunction = async (): Promise<RootLoaderData> => {
   const catchPhrase = getRandomArrayItem(catchphrases)
   const fontFamily = getRandomArrayItem(typefaces)
   const { background, accent } = getRandomArrayItem(colors)
+  const flipColors = Math.random() < 0.5
 
   const theme = {
     fontFamily,
-    background: background.hex,
-    accent: accent.hex,
+    background: flipColors ? background.hex : accent.hex,
+    accent: flipColors ? accent.hex : background.hex,
   }
 
   return { slidingTexts, catchPhrase, theme }
