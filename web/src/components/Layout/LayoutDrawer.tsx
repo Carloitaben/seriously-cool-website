@@ -1,6 +1,7 @@
-import type { FC, ReactNode } from "react"
+import type { CSSProperties, FC, ReactNode } from "react"
 import type { Variants } from "framer-motion"
 import { motion } from "framer-motion"
+import useRootData from "~/hooks/useRootData"
 
 type Props = {
   children: ReactNode
@@ -20,6 +21,13 @@ const variants: Variants = {
 }
 
 const LayoutDrawer: FC<Props> = ({ children, origin }) => {
+  const { theme } = useRootData()
+
+  const style: CSSProperties = {
+    background: theme.accent,
+    color: theme.background,
+  }
+
   const childrenVariants = origin === "left" ? "right" : "left"
 
   return (
@@ -29,9 +37,10 @@ const LayoutDrawer: FC<Props> = ({ children, origin }) => {
       animate="show"
       exit={origin}
       variants={variants}
+      style={style}
     >
       <motion.div
-        className="bg-red-500 h-full pt-16"
+        className="h-full pt-16"
         initial={childrenVariants}
         animate="show"
         exit={childrenVariants}

@@ -5,7 +5,7 @@ import { emojiLogo } from "~/components/Svg"
 
 const Home: FC = () => {
   return (
-    <div className="bg-red-300 h-full pt-16 flex  pb-12">
+    <div className="h-full pt-16 flex  pb-12">
       <LateralTitle href="/about">
         About myself
         <br />

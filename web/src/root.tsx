@@ -11,6 +11,8 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react"
+import type { CSSProperties } from "react"
+import { useLayoutEffect } from "react"
 
 import styles from "~/styles/index.css"
 
@@ -18,11 +20,29 @@ import Layout from "~/components/Layout"
 
 import { getRandomArrayItem } from "~/utils"
 import { client, GET_SETTINGS } from "~/graphql"
+
 import type {
   GetSettingsQuery,
   GetSettingsQueryVariables,
   SettingsCatchphrase,
 } from "~/types/sanity"
+
+export const meta: MetaFunction = () => ({
+  charset: "utf-8",
+  title: "New Remix App",
+  viewport: "width=device-width,initial-scale=1",
+})
+
+export const links: LinksFunction = () => [
+  {
+    rel: "stylesheet",
+    href: styles,
+  },
+  {
+    rel: "stylesheet",
+    href: "https://use.typekit.net/jvo7aft.css",
+  },
+]
 
 export type RootLoaderData = {
   slidingTexts: string[]
@@ -56,29 +76,27 @@ export const loader: LoaderFunction = async (): Promise<RootLoaderData> => {
   return { slidingTexts, catchPhrase, theme }
 }
 
-export const meta: MetaFunction = () => ({
-  charset: "utf-8",
-  title: "New Remix App",
-  viewport: "width=device-width,initial-scale=1",
-})
-
-export const links: LinksFunction = () => [
-  {
-    rel: "stylesheet",
-    href: styles,
-  },
-  {
-    rel: "stylesheet",
-    href: "https://use.typekit.net/jvo7aft.css",
-  },
-]
-
 export default function App() {
   const { theme } = useLoaderData<RootLoaderData>()
 
-  const style = {
+  const style: CSSProperties = {
     fontFamily: theme.fontFamily,
+    background: theme.background,
+    color: theme.accent,
   }
+
+  // TODO: maybe we don't need this? Remove if not necessary
+  useLayoutEffect(() => {
+    document.documentElement.style.setProperty(
+      "--theme-colors-background",
+      theme.background
+    )
+
+    document.documentElement.style.setProperty(
+      "--theme-colors-accent",
+      theme.accent
+    )
+  }, [theme.accent, theme.background])
 
   return (
     <html lang="en">

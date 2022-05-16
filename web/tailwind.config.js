@@ -3,8 +3,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "var(--theme-background)",
-        accent: "var(--theme-accent)",
+        background: "var(--theme-colors-background)",
+        accent: "var(--theme-colors-accent)",
       },
       spacing: {
         slidingTextDesktop: "3.125rem",
