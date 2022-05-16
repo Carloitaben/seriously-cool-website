@@ -6,7 +6,8 @@
   "main": "package.json",
   "scripts": {
     "dev": "sanity start",
-    "build": "sanity build"
+    "build": "sanity build",
+    "deploy": "sanity graphql deploy"
   },
   "dependencies": {
     "@sanity/base": "^2.30.0",

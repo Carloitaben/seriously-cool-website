@@ -1,18 +1,22 @@
 import type { LoaderFunction } from "@remix-run/node"
 import { Link, useLoaderData } from "@remix-run/react"
 
-import { getClient } from "~/utils/sanity/getClient"
+import { client, GET_PROJECTS } from "~/graphql"
+import type { GetProjectsQuery } from "~/types/sanity"
 
 import Navbar from "~/components/Navbar"
 
-export const loader: LoaderFunction = async () => {
-  const projects = await getClient().fetch(`*[_type == "project"]`)
+type ProjectsLoaderData = {
+  projects: GetProjectsQuery["allProject"]
+}
 
-  return { projects }
+export const loader: LoaderFunction = async (): Promise<ProjectsLoaderData> => {
+  const response = await client.request<GetProjectsQuery>(GET_PROJECTS)
+  return { projects: response.allProject }
 }
 
 export default function Route() {
-  const { projects } = useLoaderData()
+  const { projects } = useLoaderData<ProjectsLoaderData>()
 
   return (
     <>

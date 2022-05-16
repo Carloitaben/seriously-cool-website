@@ -1,6 +1,6 @@
-import projectAbout from "./project.about"
-import projectBlocks from "./project.blocks"
-import projectAppendix from "./project.appendix"
+import projectAbout from "./projectAbout"
+import projectAppendix from "./projectAppendix"
+import projectBlocks from "./projectBlocks"
 
 export default {
   name: "project",

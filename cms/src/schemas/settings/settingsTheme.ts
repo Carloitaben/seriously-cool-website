@@ -1,6 +1,21 @@
 export default [
   {
     group: "theme",
+    name: "colors",
+    title: "Theme colors",
+    type: "array",
+    options: {
+      sortable: false,
+    },
+    of: [
+      {
+        title: "Color",
+        type: "settingsThemeColor",
+      },
+    ],
+  },
+  {
+    group: "theme",
     name: "typefaces",
     title: "Theme typefaces",
     description: `

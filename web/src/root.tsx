@@ -13,10 +13,48 @@ import {
 } from "@remix-run/react"
 
 import styles from "~/styles/index.css"
+
 import Layout from "~/components/Layout"
 
-import { getClient } from "~/utils/sanity/getClient"
 import { getRandomArrayItem } from "~/utils"
+import { client, GET_SETTINGS } from "~/graphql"
+import type {
+  GetSettingsQuery,
+  GetSettingsQueryVariables,
+  SettingsCatchphrase,
+} from "~/types/sanity"
+
+export type RootLoaderData = {
+  slidingTexts: string[]
+  catchPhrase: Pick<SettingsCatchphrase, "textRaw" | "visibility">
+  theme: {
+    fontFamily: string
+    background: string
+    accent: string
+  }
+}
+
+export const loader: LoaderFunction = async (): Promise<RootLoaderData> => {
+  const getSettingsVariables: GetSettingsQueryVariables = {
+    id: "settings",
+  }
+
+  const {
+    Settings: { typefaces, slidingTexts, colors, catchphrases },
+  } = await client.request<GetSettingsQuery>(GET_SETTINGS, getSettingsVariables)
+
+  const catchPhrase = getRandomArrayItem(catchphrases)
+  const fontFamily = getRandomArrayItem(typefaces)
+  const { background, accent } = getRandomArrayItem(colors)
+
+  const theme = {
+    fontFamily,
+    background: background.hex,
+    accent: accent.hex,
+  }
+
+  return { slidingTexts, catchPhrase, theme }
+}
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -35,20 +73,8 @@ export const links: LinksFunction = () => [
   },
 ]
 
-export const loader: LoaderFunction = async () => {
-  const settings = await getClient().fetch(`*[_type == "settings"][0]`)
-
-  const fontFamily = getRandomArrayItem(settings.typefaces)
-
-  const theme = {
-    fontFamily,
-  }
-
-  return { settings, theme }
-}
-
 export default function App() {
-  const { settings, theme } = useLoaderData()
+  const { theme } = useLoaderData<RootLoaderData>()
 
   const style = {
     fontFamily: theme.fontFamily,
@@ -61,7 +87,7 @@ export default function App() {
         <Links />
       </head>
       <body className="h-screen flex flex-col" style={style}>
-        <Layout settings={settings} />
+        <Layout />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
