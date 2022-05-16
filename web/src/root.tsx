@@ -86,7 +86,6 @@ export default function App() {
     color: theme.accent,
   }
 
-  // TODO: maybe we don't need this? Remove if not necessary
   useEffect(() => {
     document.documentElement.style.setProperty(
       "--theme-colors-background",
