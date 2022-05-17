@@ -7,7 +7,7 @@ type Props = {
   flip?: boolean
 }
 
-const LateralTitle: FC<Props> = ({ children, flip = false, href }) => {
+const LateralTitle: FC<Props> = ({ children, href, flip = false }) => {
   return (
     <div className="h-full text-5xl text-center uppercase whitespace-nowrap px-container">
       <div className="flex items-center justify-center w-24 underline h-full">
