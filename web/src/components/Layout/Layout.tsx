@@ -20,12 +20,12 @@ const Layout: FC = () => {
   const location = useLocation()
   const outlet = useOutlet()
 
-  const { slidingTexts, catchPhrase } = useRootData()
+  const { slidingTexts, catchphrase } = useRootData()
 
   return (
     <>
       <Navbar>
-        <TextBlock>{catchPhrase.desktop.textRaw}</TextBlock>
+        <TextBlock>{catchphrase.desktop.textRaw}</TextBlock>
       </Navbar>
       <main className="flex-1">
         <Home />

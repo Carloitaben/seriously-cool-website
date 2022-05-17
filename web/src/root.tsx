@@ -46,7 +46,7 @@ export const links: LinksFunction = () => [
 
 export type RootLoaderData = {
   slidingTexts: string[]
-  catchPhrase: {
+  catchphrase: {
     desktop: Pick<SettingsCatchphrase, "textRaw" | "visibility">
     mobile: Pick<SettingsCatchphrase, "textRaw" | "visibility">
   }
@@ -66,7 +66,9 @@ export const loader: LoaderFunction = async (): Promise<RootLoaderData> => {
     Settings: { typefaces, slidingTexts, colors, catchphrases },
   } = await client.request<GetSettingsQuery>(GET_SETTINGS, getSettingsVariables)
 
-  const { catchphrasesDesktop, catchphrasesMobile } = catchphrases.reduce(
+  const { catchphrasesDesktop, catchphrasesMobile } = catchphrases.reduce<
+    Record<string, typeof catchphrases>
+  >(
     (accumulator, catchphrase) => {
       if (["BOTH", "DESKTOP"].includes(catchphrase.visibility)) {
         accumulator.catchphrasesDesktop.push(catchphrase)
@@ -99,7 +101,7 @@ export const loader: LoaderFunction = async (): Promise<RootLoaderData> => {
   return {
     theme,
     slidingTexts,
-    catchPhrase: {
+    catchphrase: {
       desktop: catchphraseDesktop,
       mobile: catchphraseMobile,
     },
