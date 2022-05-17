@@ -16,12 +16,14 @@ type Props = {
 const SlidingText: FC<Props> = ({ children }) => {
   const { theme } = useRootData()
 
+  const slidingText = store((state) => state.slidingText)
   const slidingTextMask = store((state) => state.slidingTextMask)
 
-  const childrenOrMask = useMemo(
-    () => (slidingTextMask ? [slidingTextMask] : children),
-    [children, slidingTextMask]
-  )
+  const childrenOrMask = useMemo(() => {
+    if (slidingTextMask) return slidingTextMask
+    if (slidingText) return slidingText
+    return children
+  }, [children, slidingText, slidingTextMask])
 
   const isFontLoaded = useIsFontLoaded(theme.fontFamily)
   const childWrapper = useRef<HTMLSpanElement>(null)

@@ -12,15 +12,15 @@ type Props = {
 }
 
 const TextBlock: FC<Props> = ({ children }) => {
-  const setSlidingTextMask = store((state) => state.setSlidingTextMask)
+  const setSlidingText = store((state) => state.setSlidingText)
 
   const components = useMemo(() => {
     function getEvents(text: string) {
       return {
-        onMouseEnter: () => setSlidingTextMask(text),
-        onMouseLeave: () => setSlidingTextMask(null),
-        onFocus: () => setSlidingTextMask(text),
-        onBlur: () => setSlidingTextMask(null),
+        onMouseEnter: () => setSlidingText(text),
+        onMouseLeave: () => setSlidingText(null),
+        onFocus: () => setSlidingText(text),
+        onBlur: () => setSlidingText(null),
       }
     }
 
@@ -58,7 +58,7 @@ const TextBlock: FC<Props> = ({ children }) => {
         },
       },
     }
-  }, [setSlidingTextMask])
+  }, [setSlidingText])
 
   return (
     <div>
