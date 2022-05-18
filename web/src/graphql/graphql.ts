@@ -61,3 +61,56 @@ export const GET_PROJECTS = gql`
     }
   }
 `
+
+export const GET_PROJECT = gql`
+  query GetProject($slug: String!) {
+    allProject(where: { slug: { current: { eq: $slug } } }) {
+      _id
+      title
+      descriptionRaw
+      thumbnail {
+        kind
+        video {
+          mp4 {
+            asset {
+              url
+            }
+          }
+          width
+          height
+          alt
+        }
+        image {
+          image {
+            asset {
+              metadata {
+                dimensions {
+                  height
+                  width
+                }
+              }
+              url
+            }
+          }
+          alt
+        }
+      }
+      blocks {
+        __typename
+      }
+      clientRaw
+      location
+      year
+      roles {
+        _key
+        pretitle
+        title
+      }
+      awards {
+        _key
+        textRaw
+        year
+      }
+    }
+  }
+`

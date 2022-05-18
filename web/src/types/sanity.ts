@@ -1172,3 +1172,10 @@ export type GetProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetProjectsQuery = { __typename?: 'RootQuery', allProject: Array<{ __typename?: 'Project', title: string, slug: { __typename?: 'Slug', current: string }, awards: Array<{ __typename?: 'ProjectAward', showBadge: boolean }>, thumbnail: { __typename?: 'ProjectThumbnail', kind: string, video: { __typename?: 'MediaVideo', width: number, height: number, alt: string, mp4: { __typename?: 'File', asset: { __typename?: 'SanityFileAsset', url: string } } }, image: { __typename?: 'MediaImage', alt: string, image: { __typename?: 'Image', asset: { __typename?: 'SanityImageAsset', url: string, metadata: { __typename?: 'SanityImageMetadata', dimensions: { __typename?: 'SanityImageDimensions', height: number, width: number } } } } } } }> };
+
+export type GetProjectQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+export type GetProjectQuery = { __typename?: 'RootQuery', allProject: Array<{ __typename?: 'Project', _id: string, title: string, descriptionRaw: any, clientRaw: any, location: string, year: number, thumbnail: { __typename?: 'ProjectThumbnail', kind: string, video: { __typename?: 'MediaVideo', width: number, height: number, alt: string, mp4: { __typename?: 'File', asset: { __typename?: 'SanityFileAsset', url: string } } }, image: { __typename?: 'MediaImage', alt: string, image: { __typename?: 'Image', asset: { __typename?: 'SanityImageAsset', url: string, metadata: { __typename?: 'SanityImageMetadata', dimensions: { __typename?: 'SanityImageDimensions', height: number, width: number } } } } } }, blocks: Array<{ __typename: 'Media' } | { __typename: 'ProjectBlockMedia' } | { __typename: 'ProjectBlockRichText' }>, roles: Array<{ __typename?: 'ProjectRole', _key: string, pretitle: string, title: string }>, awards: Array<{ __typename?: 'ProjectAward', _key: string, textRaw: any, year: number }> }> };
