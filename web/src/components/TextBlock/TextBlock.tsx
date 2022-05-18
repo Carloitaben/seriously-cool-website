@@ -60,11 +60,7 @@ const TextBlock: FC<Props> = ({ children }) => {
     }
   }, [setSlidingText])
 
-  return (
-    <div>
-      <PortableText value={children} components={components} />
-    </div>
-  )
+  return <PortableText value={children} components={components} />
 }
 
 export default TextBlock
