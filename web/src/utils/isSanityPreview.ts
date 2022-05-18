@@ -3,6 +3,6 @@ export function isSanityPreview(request: Request) {
 
   return (
     requestUrl?.searchParams?.get("preview") ===
-    process.env.SANITY_PREVIEW_SECRET
+    process.env.SANITY_STUDIO_PREVIEW_SECRET
   )
 }
