@@ -1161,17 +1161,15 @@ export type StringFilter = {
   nin: InputMaybe<Array<Scalars['String']>>;
 };
 
-export type GetSettingsQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
+export type GetSettingsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetSettingsQuery = { __typename?: 'RootQuery', Settings: { __typename?: 'Settings', slidingTexts: Array<string>, typefaces: Array<string>, catchphrases: Array<{ __typename?: 'SettingsCatchphrase', textRaw: any, visibility: string }>, colors: Array<{ __typename?: 'SettingsThemeColor', background: { __typename?: 'Color', hex: string }, accent: { __typename?: 'Color', hex: string } }> } };
+export type GetSettingsQuery = { __typename?: 'RootQuery', allSettings: Array<{ __typename?: 'Settings', _id: string, slidingTexts: Array<string>, typefaces: Array<string>, catchphrases: Array<{ __typename?: 'SettingsCatchphrase', textRaw: any, visibility: string }>, colors: Array<{ __typename?: 'SettingsThemeColor', background: { __typename?: 'Color', hex: string }, accent: { __typename?: 'Color', hex: string } }> }> };
 
 export type GetProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetProjectsQuery = { __typename?: 'RootQuery', allProject: Array<{ __typename?: 'Project', title: string, slug: { __typename?: 'Slug', current: string }, awards: Array<{ __typename?: 'ProjectAward', showBadge: boolean }>, thumbnail: { __typename?: 'ProjectThumbnail', kind: string, video: { __typename?: 'MediaVideo', width: number, height: number, alt: string, mp4: { __typename?: 'File', asset: { __typename?: 'SanityFileAsset', url: string } } }, image: { __typename?: 'MediaImage', alt: string, image: { __typename?: 'Image', asset: { __typename?: 'SanityImageAsset', url: string, metadata: { __typename?: 'SanityImageMetadata', dimensions: { __typename?: 'SanityImageDimensions', height: number, width: number } } } } } } }> };
+export type GetProjectsQuery = { __typename?: 'RootQuery', allProject: Array<{ __typename?: 'Project', _id: string, title: string, slug: { __typename?: 'Slug', current: string }, awards: Array<{ __typename?: 'ProjectAward', showBadge: boolean }>, thumbnail: { __typename?: 'ProjectThumbnail', kind: string, video: { __typename?: 'MediaVideo', width: number, height: number, alt: string, mp4: { __typename?: 'File', asset: { __typename?: 'SanityFileAsset', url: string } } }, image: { __typename?: 'MediaImage', alt: string, image: { __typename?: 'Image', asset: { __typename?: 'SanityImageAsset', url: string, metadata: { __typename?: 'SanityImageMetadata', dimensions: { __typename?: 'SanityImageDimensions', height: number, width: number } } } } } } }> };
 
 export type GetProjectQueryVariables = Exact<{
   slug: Scalars['String'];

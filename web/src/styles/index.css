@@ -515,12 +515,12 @@ a {
   bottom: 3.125rem;
 }
 
-.col-span-3 {
-  grid-column: span 3 / span 3;
-}
-
 .col-span-6 {
   grid-column: span 6 / span 6;
+}
+
+.col-span-3 {
+  grid-column: span 3 / span 3;
 }
 
 .-mx-1 {

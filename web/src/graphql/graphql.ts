@@ -1,8 +1,9 @@
 import { gql } from "graphql-request"
 
 export const GET_SETTINGS = gql`
-  query GetSettings($id: ID!) {
-    Settings(id: $id) {
+  query GetSettings {
+    allSettings {
+      _id
       slidingTexts
       typefaces
       catchphrases {
@@ -24,6 +25,7 @@ export const GET_SETTINGS = gql`
 export const GET_PROJECTS = gql`
   query GetProjects {
     allProject {
+      _id
       slug {
         current
       }

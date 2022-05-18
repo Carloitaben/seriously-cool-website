@@ -8,14 +8,20 @@ import type { GetProjectsQuery } from "~/types/sanity"
 import store from "~/store"
 
 import Navbar from "~/components/Navbar"
+import { isSanityPreview, filterSanityDocumentDrafts } from "~/utils"
 
 type ProjectsLoaderData = {
   projects: GetProjectsQuery["allProject"]
 }
 
-export const loader: LoaderFunction = async (): Promise<ProjectsLoaderData> => {
+export const loader: LoaderFunction = async ({
+  request,
+}): Promise<ProjectsLoaderData> => {
+  const preview = isSanityPreview(request)
   const response = await client.request<GetProjectsQuery>(GET_PROJECTS)
-  return { projects: response.allProject }
+  const projects = filterSanityDocumentDrafts(response.allProject, preview)
+
+  return { projects }
 }
 
 export default function Route() {
@@ -47,9 +53,7 @@ export default function Route() {
               onBlur={() => setSlidingText(null)}
               onClick={() => setSlidingText(null)}
             >
-              <div className="bg-green-500">
-                {projects.map((project) => project.slug.current)}
-              </div>
+              <div className="bg-green-500">{project.title}</div>
             </Link>
           </li>
         ))}

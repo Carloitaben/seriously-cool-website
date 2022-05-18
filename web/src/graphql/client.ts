@@ -1,5 +1,28 @@
 import { GraphQLClient } from "graphql-request"
 
+const isPreviewMode = !!process.env.SANITY_API_TOKEN
+
+const token = process.env.SANITY_API_TOKEN ?? ""
+
+const dataset = "production"
+const projectId = "823i2uuw"
+const endpoint = "default"
+
+const cdnHost = "apicdn.sanity.io"
+const apiHost = "api.sanity.io"
+const host = isPreviewMode ? apiHost : cdnHost
+
+const auth = token && {
+  Authorization: `Bearer ${token}`,
+}
+
 export const client = new GraphQLClient(
-  "https://823i2uuw.api.sanity.io/v1/graphql/production/default"
+  `https://${projectId}.${host}/v1/graphql/${dataset}/${endpoint}`,
+  {
+    headers: {
+      ...auth,
+    },
+  }
 )
+
+console.log(`https://${projectId}.${host}/v1/graphql/${dataset}/${endpoint}`)

@@ -16,16 +16,17 @@ import { useEffect } from "react"
 
 import styles from "~/styles/index.css"
 
-import Layout from "~/components/Layout"
+import {
+  getRandomArrayItem,
+  isSanityPreview,
+  filterSanityDocumentDrafts,
+} from "~/utils"
 
-import { getRandomArrayItem } from "~/utils"
+import type { GetSettingsQuery, SettingsCatchphrase } from "~/types/sanity"
+
 import { client, GET_SETTINGS } from "~/graphql"
 
-import type {
-  GetSettingsQuery,
-  GetSettingsQueryVariables,
-  SettingsCatchphrase,
-} from "~/types/sanity"
+import Layout from "~/components/Layout"
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -57,14 +58,14 @@ export type RootLoaderData = {
   }
 }
 
-export const loader: LoaderFunction = async (): Promise<RootLoaderData> => {
-  const getSettingsVariables: GetSettingsQueryVariables = {
-    id: "settings",
-  }
+export const loader: LoaderFunction = async ({
+  request,
+}): Promise<RootLoaderData> => {
+  const preview = isSanityPreview(request)
+  const response = await client.request<GetSettingsQuery>(GET_SETTINGS)
 
-  const {
-    Settings: { typefaces, slidingTexts, colors, catchphrases },
-  } = await client.request<GetSettingsQuery>(GET_SETTINGS, getSettingsVariables)
+  const [{ catchphrases, colors, slidingTexts, typefaces }] =
+    filterSanityDocumentDrafts(response.allSettings, preview)
 
   const { catchphrasesDesktop, catchphrasesMobile } = catchphrases.reduce<
     Record<string, typeof catchphrases>
