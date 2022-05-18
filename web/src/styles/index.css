@@ -519,6 +519,10 @@ a {
   grid-column: span 3 / span 3;
 }
 
+.col-span-6 {
+  grid-column: span 6 / span 6;
+}
+
 .-mx-1 {
   margin-left: -0.25rem;
   margin-right: -0.25rem;
@@ -528,12 +532,12 @@ a {
   margin-left: -2.5rem;
 }
 
-.mb-24 {
-  margin-bottom: 6rem;
-}
-
 .mt-12 {
   margin-top: 3rem;
+}
+
+.mb-24 {
+  margin-bottom: 6rem;
 }
 
 .-mb-2 {
@@ -708,10 +712,6 @@ a {
 
 .pb-2 {
   padding-bottom: 0.5rem;
-}
-
-.pt-12 {
-  padding-top: 3rem;
 }
 
 .text-center {

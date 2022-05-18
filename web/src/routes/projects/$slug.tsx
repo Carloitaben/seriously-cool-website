@@ -1,10 +1,12 @@
 import type { LoaderFunction } from "@remix-run/node"
 import { Link, useLoaderData } from "@remix-run/react"
 
-import Navbar from "~/components/Navbar"
-import TextBlock from "~/components/TextBlock"
 import { client, GET_PROJECT } from "~/graphql"
 import type { GetProjectQuery, GetProjectQueryVariables } from "~/types/sanity"
+
+import Navbar from "~/components/Navbar"
+import TextBlock from "~/components/TextBlock"
+import ProjectDetailClientLocation from "~/components/ProjectDetailClientLocation"
 
 type ProjectDetailLoaderData = {
   project: GetProjectQuery["allProject"][number]
@@ -38,13 +40,20 @@ export default function Route() {
       <Navbar>
         <Link to="/projects">Close</Link>
       </Navbar>
-      <div className="grid grid-cols-6 gap-x-2 px-container text-2xl mt-12 mb-24">
+      <div className="text-2xl px-container grid grid-cols-6 gap-x-2 mt-12 mb-24">
         <div className="col-span-3 max-w-xl text-5xl leading-tight">
           <h1>{project.title}</h1>
         </div>
         <div className="col-span-3 max-w-2xl">
           <TextBlock>{project.descriptionRaw}</TextBlock>
         </div>
+      </div>
+      <div className="text-2xl px-container grid grid-cols-6 gap-x-2">
+        <ProjectDetailClientLocation
+          client={project.clientRaw}
+          location={project.location}
+          year={project.year}
+        />
       </div>
     </>
   )
