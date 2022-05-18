@@ -33,8 +33,6 @@ export const loader: LoaderFunction = async ({
 export default function Route() {
   const { project } = useLoaderData<ProjectDetailLoaderData>()
 
-  console.log(project)
-
   return (
     <>
       <Navbar>
