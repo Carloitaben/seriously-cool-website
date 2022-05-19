@@ -2,7 +2,7 @@ import type { LoaderFunction } from "@remix-run/node"
 import { Link, useLoaderData } from "@remix-run/react"
 
 import { client, GET_PROJECT } from "~/graphql"
-import type { GetProjectQuery, GetProjectQueryVariables } from "~/types/sanity"
+import type { GetProjectQuery, GetProjectQueryVariables } from "~/types"
 
 import Navbar from "~/components/Navbar"
 import TextBlock from "~/components/TextBlock"

@@ -3,7 +3,7 @@ import type { LoaderFunction } from "@remix-run/node"
 import { Link, useLoaderData } from "@remix-run/react"
 
 import { client, GET_PROJECTS } from "~/graphql"
-import type { GetProjectsQuery } from "~/types/sanity"
+import type { GetProjectsQuery } from "~/types"
 
 import store from "~/store"
 

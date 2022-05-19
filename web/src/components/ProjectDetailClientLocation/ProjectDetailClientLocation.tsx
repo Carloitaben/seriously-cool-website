@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import type { Scalars } from "~/types/sanity"
+import type { Scalars } from "~/types"
 import TextBlock from "../TextBlock"
 
 type Props = {

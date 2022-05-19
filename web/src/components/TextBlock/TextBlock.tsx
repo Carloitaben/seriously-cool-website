@@ -3,7 +3,7 @@ import { useMemo } from "react"
 import { PortableText } from "@portabletext/react"
 import { Link } from "@remix-run/react"
 
-import type { Scalars } from "~/types/sanity"
+import type { Scalars } from "~/types"
 
 import store from "~/store"
 

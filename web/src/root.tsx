@@ -23,8 +23,7 @@ import {
   filterSanityDocumentDrafts,
 } from "~/utils"
 
-import type { GetSettingsQuery, SettingsCatchphrase } from "~/types/sanity"
-import type { Toy } from "./types"
+import type { GetSettingsQuery, SettingsCatchphrase, Toy } from "./types"
 
 import { client, GET_SETTINGS } from "~/graphql"
 
