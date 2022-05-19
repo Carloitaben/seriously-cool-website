@@ -18,11 +18,13 @@ import styles from "~/styles/index.css"
 
 import {
   getRandomArrayItem,
+  getRandomToy,
   isSanityPreview,
   filterSanityDocumentDrafts,
 } from "~/utils"
 
 import type { GetSettingsQuery, SettingsCatchphrase } from "~/types/sanity"
+import type { Toy } from "./types"
 
 import { client, GET_SETTINGS } from "~/graphql"
 
@@ -55,6 +57,7 @@ export type RootLoaderData = {
     fontFamily: string
     background: string
     accent: string
+    toy: Toy
   }
 }
 
@@ -64,7 +67,7 @@ export const loader: LoaderFunction = async ({
   const preview = isSanityPreview(request)
   const response = await client.request<GetSettingsQuery>(GET_SETTINGS)
 
-  const [{ catchphrases, colors, slidingTexts, typefaces }] =
+  const [{ catchphrases, colors, slidingTexts, typefaces, toys }] =
     filterSanityDocumentDrafts(response.allSettings, preview)
 
   const { catchphrasesDesktop, catchphrasesMobile } = catchphrases.reduce<
@@ -90,10 +93,13 @@ export const loader: LoaderFunction = async ({
   const catchphraseDesktop = getRandomArrayItem(catchphrasesDesktop)
   const catchphraseMobile = getRandomArrayItem(catchphrasesMobile)
   const fontFamily = getRandomArrayItem(typefaces)
+  const toy = getRandomToy(toys)
+
   const { background, accent } = getRandomArrayItem(colors)
   const flipColors = Math.random() < 0.5
 
   const theme = {
+    toy,
     fontFamily,
     background: flipColors ? background.hex : accent.hex,
     accent: flipColors ? accent.hex : background.hex,
