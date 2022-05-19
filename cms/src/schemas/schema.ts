@@ -15,6 +15,7 @@ import projectThumbnail from "./objects/projectThumbnail"
 import settingsCatchphrases from "./objects/settingsCatchphrases"
 import settingsLiteral from "./objects/settingsLiteral"
 import settingsThemeColor from "./objects/settingsThemeColor"
+import settingsToys from "./objects/settingsToys"
 
 // Schemas
 import project from "./project"
@@ -36,6 +37,7 @@ export default createSchema({
     settingsCatchphrases,
     settingsLiteral,
     settingsThemeColor,
+    settingsToys,
 
     // Schemas
     project,
