@@ -3,7 +3,7 @@ schema: "https://823i2uuw.api.sanity.io/v1/graphql/production/default"
 assumeValid: true
 documents: "src/**/*.{ts,tsx,gql,graphql}"
 generates:
-  src/types/sanity.ts:
+  src/types/sanity.types.ts:
     plugins:
       - "typescript"
       - "typescript-operations"
