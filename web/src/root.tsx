@@ -12,7 +12,6 @@ import {
   useLoaderData,
 } from "@remix-run/react"
 import type { CSSProperties } from "react"
-import { useEffect } from "react"
 
 import styles from "~/styles/index.css"
 
@@ -28,6 +27,7 @@ import type { GetSettingsQuery, SettingsCatchphrase, Toy } from "./types"
 import { client, GET_SETTINGS } from "~/graphql"
 
 import Layout from "~/components/Layout"
+import { useIsomorphicLayoutEffect } from "framer-motion"
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -123,7 +123,7 @@ export default function App() {
     color: theme.accent,
   }
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     document.documentElement.style.setProperty(
       "--theme-colors-background",
       theme.background
