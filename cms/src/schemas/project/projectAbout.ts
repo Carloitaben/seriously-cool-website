@@ -30,4 +30,15 @@ export default [
     title: "Thumbnail",
     type: "projectThumbnail",
   },
+  {
+    group: "about",
+    name: "openGraphImage",
+    title: "Open Graph Image",
+    description: "Will be used when the project is shared on social media",
+    type: "image",
+    options: {
+      metadata: [],
+    },
+    validation: (Rule) => Rule.required(),
+  },
 ]

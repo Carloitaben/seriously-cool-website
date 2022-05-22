@@ -74,6 +74,17 @@ export const GET_PROJECT = gql`
       _id
       title
       descriptionRaw
+      openGraphImage {
+        asset {
+          metadata {
+            dimensions {
+              height
+              width
+            }
+          }
+          url
+        }
+      }
       thumbnail {
         kind
         video {
