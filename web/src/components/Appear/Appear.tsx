@@ -12,7 +12,7 @@ type Props = {
 
 const Appear: FC<Props> = ({ children, animate }) => {
   const [show, setShow] = useState(animate)
-  const ref = useRef<HTMLElement>()
+  const ref = useRef<HTMLElement>(null)
 
   useEffect(() => {
     if (animate) setShow(true)
