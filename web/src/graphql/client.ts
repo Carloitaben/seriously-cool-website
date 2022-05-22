@@ -4,9 +4,9 @@ const isPreviewMode = !!process.env.SANITY_API_TOKEN
 
 const token = process.env.SANITY_API_TOKEN ?? ""
 
-const dataset = "production"
-const projectId = "823i2uuw"
-const endpoint = "default"
+export const dataset = "production"
+export const projectId = "823i2uuw"
+export const endpoint = "default"
 
 const cdnHost = "apicdn.sanity.io"
 const apiHost = "api.sanity.io"

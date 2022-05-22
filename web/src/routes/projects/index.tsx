@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react"
 import type { LoaderFunction } from "@remix-run/node"
 import { Link, useLoaderData } from "@remix-run/react"
+import { getFileAsset } from "@sanity/asset-utils"
 
-import { client, GET_PROJECTS } from "~/graphql"
+import { client, dataset, projectId, GET_PROJECTS } from "~/graphql"
 import type { GetProjectsQuery } from "~/types"
 
-import store from "~/store"
-
-import Navbar from "~/components/Navbar"
 import { isSanityPreview, filterSanityDocumentDrafts } from "~/utils"
 
-type ProjectsLoaderData = {
+import Navbar from "~/components/Navbar"
+import ProjectThumbnail from "~/components/ProjectThumbnail"
+
+export type ProjectsLoaderData = {
   projects: GetProjectsQuery["allProject"]
 }
 
@@ -21,12 +22,27 @@ export const loader: LoaderFunction = async ({
   const response = await client.request<GetProjectsQuery>(GET_PROJECTS)
   const projects = filterSanityDocumentDrafts(response.allProject, preview)
 
-  return { projects }
+  const projectsWithFileAssets = projects.map((project) => {
+    switch (project?.thumbnail?.kind) {
+      case "VIDEO_GIF":
+        project.thumbnail.video.asset = getFileAsset(
+          project.thumbnail.video.mp4,
+          { dataset, projectId, useVanityName: true }
+        )
+        break
+      default:
+        console.log("unhandled thumbnail kind", project?.thumbnail?.kind)
+        break
+    }
+
+    return project
+  })
+
+  return { projects: projectsWithFileAssets }
 }
 
 export default function Route() {
   const loaderData = useLoaderData<ProjectsLoaderData>()
-  const setSlidingText = store((state) => state.setSlidingText)
 
   const [projects, setProjects] = useState<ProjectsLoaderData["projects"]>([])
 
@@ -41,21 +57,9 @@ export default function Route() {
       <Navbar>
         <Link to="/">Close</Link>
       </Navbar>
-      <ul className="px-container grid grid-cols-6 -mx-1 -mb-2">
+      <ul className="px-container grid grid-cols-6 -mx-1 overflow-y-auto h-full pb-[2.375rem]">
         {projects.map((project) => (
-          <li key={project.slug.current} className="col-span-3">
-            <Link
-              className="px-1 pb-2 block"
-              to={project.slug.current}
-              onMouseEnter={() => setSlidingText(project.title)}
-              onMouseLeave={() => setSlidingText(null)}
-              onFocus={() => setSlidingText(project.title)}
-              onBlur={() => setSlidingText(null)}
-              onClick={() => setSlidingText(null)}
-            >
-              <div className="bg-green-500">{project.title}</div>
-            </Link>
-          </li>
+          <ProjectThumbnail key={project.slug.current} project={project} />
         ))}
       </ul>
     </>
