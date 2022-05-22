@@ -12,7 +12,7 @@ type Props = {
 
 const Appear: FC<Props> = ({ children, animate }) => {
   const [show, setShow] = useState(animate)
-  const ref = useRef()
+  const ref = useRef<HTMLElement>()
 
   useEffect(() => {
     if (animate) setShow(true)
@@ -20,7 +20,7 @@ const Appear: FC<Props> = ({ children, animate }) => {
 
   return cloneElement(children, {
     ref,
-    stlye: {
+    style: {
       ...children.props.style,
       animation: `appear-animation 1s cubic-bezier(1, 0, 0, 1) 0s both ${
         show ? "running" : "paused"

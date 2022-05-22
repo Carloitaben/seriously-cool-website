@@ -24,7 +24,23 @@
     100% {
       transform: translateX(-100%);
     }
-  } 
+  }
+
+  @keyframes appear-animation {
+    0% {
+      opacity: 0;
+      transform: translateY(96px);
+    }
+    50% {
+      opacity: 0;
+    }
+    55% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
 }
 
 @layer utilities {

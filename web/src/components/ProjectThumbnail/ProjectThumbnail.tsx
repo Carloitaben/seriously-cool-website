@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react"
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import type { FC } from "react"
 
 import type { ProjectsLoaderData } from "~/routes/projects"
@@ -15,7 +15,7 @@ type Props = {
 const ProjectThumbnail: FC<Props> = ({ project }) => {
   const setSlidingText = store((state) => state.setSlidingText)
 
-  const [animate, setAnimate] = useState(false)
+  const [animate, setAnimate] = useState(true)
 
   const awardsToShow = useMemo(
     () => project.awards?.filter((award) => award.showBadge) || [],
