@@ -1,5 +1,6 @@
 /**
- * On preview mode, prefer drafts over published content
+ * On preview mode or in development environment,
+ * prefer drafts over published content
  */
 export function filterSanityDocumentDrafts<T extends { _id: string }>(
   documents: T[],

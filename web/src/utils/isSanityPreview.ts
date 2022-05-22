@@ -1,4 +1,6 @@
 export function isSanityPreview(request: Request) {
+  if (process.env.NODE_ENV === "development") return true
+
   const requestUrl = new URL(request?.url)
 
   return (
