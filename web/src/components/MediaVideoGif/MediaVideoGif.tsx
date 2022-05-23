@@ -1,4 +1,6 @@
+import type { SanityFileAsset } from "@sanity/asset-utils"
 import type { FC } from "react"
+import { useState } from "react"
 import { useRef, useEffect } from "react"
 
 import useIntersectionObserver from "~/hooks/useIntersectionObserver"
@@ -10,6 +12,7 @@ type Props = Omit<MediaVideo, "__typename" | "_key" | "_type"> & {
    * Used to programatically control the intersection state
    */
   intersecting?: boolean
+  onLoad?: () => void
 }
 
 const MediaVideoGif: FC<Props> = ({
@@ -17,11 +20,13 @@ const MediaVideoGif: FC<Props> = ({
   width,
   height,
   alt,
-  asset,
+  onLoad,
   mp4,
+  asset: assetProp,
   intersecting: intersectingProp,
 }) => {
   const video = useRef<HTMLVideoElement>(null)
+  const [asset, setAsset] = useState<SanityFileAsset>()
 
   // Create the Intersection Observer only if the `intersecting` prop is not used
   const intersecting = useIntersectionObserver(video, {
@@ -33,10 +38,25 @@ const MediaVideoGif: FC<Props> = ({
 
     if (intersectingProp || intersecting) {
       video.current.play()
+      setAsset(assetProp)
     } else {
       video.current.pause()
     }
-  }, [intersectingProp, intersecting])
+  }, [intersectingProp, intersecting, assetProp])
+
+  useEffect(() => {
+    const element = video.current
+
+    if (element && onLoad) {
+      element.addEventListener("loadeddata", onLoad)
+    }
+
+    return () => {
+      if (element && onLoad) {
+        element.removeEventListener("loadeddata", onLoad)
+      }
+    }
+  }, [onLoad])
 
   return (
     <div
@@ -52,7 +72,7 @@ const MediaVideoGif: FC<Props> = ({
         muted
         playsInline
       >
-        <source src={asset.url} type={`video/${asset.extension}`} />
+        {asset && <source src={asset.url} type={`video/${asset.extension}`} />}
       </video>
     </div>
   )

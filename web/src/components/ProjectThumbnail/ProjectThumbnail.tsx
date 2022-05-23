@@ -3,11 +3,11 @@ import { useEffect, useMemo, useRef, useState } from "react"
 import type { FC } from "react"
 
 import type { ProjectsLoaderData } from "~/routes/projects"
-
 import store from "~/store"
+import useIntersectionObserver from "~/hooks/useIntersectionObserver"
+
 import Appear from "../Appear"
 import MediaVideoGif from "../MediaVideoGif"
-import useIntersectionObserver from "~/hooks/useIntersectionObserver"
 
 type Props = {
   project: ProjectsLoaderData["projects"][number]
@@ -16,19 +16,20 @@ type Props = {
 const ProjectThumbnail: FC<Props> = ({ project }) => {
   const setSlidingText = store((state) => state.setSlidingText)
 
-  const ref = useRef<HTMLLIElement>(null)
-  const [animate, setAnimate] = useState(false)
-
   const awardsToShow = useMemo(
     () => project.awards?.filter((award) => award.showBadge) || [],
     [project.awards]
   )
 
+  const ref = useRef<HTMLLIElement>(null)
+  const [loaded, setLoaded] = useState(false)
+  const [animate, setAnimate] = useState(false)
+
   const intersecting = useIntersectionObserver(ref)
 
   useEffect(() => {
-    if (intersecting) setAnimate(true)
-  }, [intersecting])
+    if (intersecting && loaded) setAnimate(true)
+  }, [intersecting, loaded])
 
   return (
     <li ref={ref} className="col-span-3">
@@ -47,6 +48,7 @@ const ProjectThumbnail: FC<Props> = ({ project }) => {
               {...project.thumbnail.video}
               alt={project.thumbnail.video.alt || project.title}
               intersecting={intersecting}
+              onLoad={() => setLoaded(true)}
             />
           )}
           {/* TODO: awards with `toy` integration */}
