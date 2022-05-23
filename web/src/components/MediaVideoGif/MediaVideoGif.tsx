@@ -37,10 +37,10 @@ const MediaVideoGif: FC<Props> = ({
     if (!video.current) return
 
     if (intersectingProp || intersecting) {
-      video.current.play()
       setAsset(assetProp)
+      video.current.paused && video.current.play()
     } else {
-      video.current.pause()
+      !video.current.paused && video.current.pause()
     }
   }, [intersectingProp, intersecting, assetProp])
 
