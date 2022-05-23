@@ -6,6 +6,10 @@ import type { MediaVideo } from "~/types"
 
 type Props = Omit<MediaVideo, "__typename" | "_key" | "_type"> & {
   className?: string
+  /**
+   * Used to programatically control the intersection state
+   */
+  intersecting?: boolean
 }
 
 const MediaVideoGif: FC<Props> = ({
@@ -15,24 +19,28 @@ const MediaVideoGif: FC<Props> = ({
   alt,
   asset,
   mp4,
+  intersecting: intersectingProp,
 }) => {
   const video = useRef<HTMLVideoElement>(null)
 
-  const intersecting = useIntersectionObserver(video)
+  // Create the Intersection Observer only if the `intersecting` prop is not used
+  const intersecting = useIntersectionObserver(video, {
+    disconnect: typeof intersectingProp !== "undefined",
+  })
 
   useEffect(() => {
     if (!video.current) return
 
-    if (intersecting) {
+    if (intersectingProp || intersecting) {
       video.current.play()
     } else {
       video.current.pause()
     }
-  }, [intersecting])
+  }, [intersectingProp, intersecting])
 
   return (
     <div
-      data-intersecting={intersecting}
+      data-intersecting={intersectingProp}
       className={`${className} w-full relative overflow-hidden`}
       style={{ paddingBottom: `${(height / width) * 100}%` }}
     >
@@ -42,7 +50,6 @@ const MediaVideoGif: FC<Props> = ({
         title={alt}
         loop
         muted
-        autoPlay
         playsInline
       >
         <source src={asset.url} type={`video/${asset.extension}`} />

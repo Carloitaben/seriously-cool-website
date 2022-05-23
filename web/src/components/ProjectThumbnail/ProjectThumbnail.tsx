@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import type { FC } from "react"
 
 import type { ProjectsLoaderData } from "~/routes/projects"
@@ -7,6 +7,7 @@ import type { ProjectsLoaderData } from "~/routes/projects"
 import store from "~/store"
 import Appear from "../Appear"
 import MediaVideoGif from "../MediaVideoGif"
+import useIntersectionObserver from "~/hooks/useIntersectionObserver"
 
 type Props = {
   project: ProjectsLoaderData["projects"][number]
@@ -15,16 +16,23 @@ type Props = {
 const ProjectThumbnail: FC<Props> = ({ project }) => {
   const setSlidingText = store((state) => state.setSlidingText)
 
-  const [animate, setAnimate] = useState(true)
+  const ref = useRef<HTMLLIElement>(null)
+  const [animate, setAnimate] = useState(false)
 
   const awardsToShow = useMemo(
     () => project.awards?.filter((award) => award.showBadge) || [],
     [project.awards]
   )
 
+  const intersecting = useIntersectionObserver(ref)
+
+  useEffect(() => {
+    if (intersecting) setAnimate(true)
+  }, [intersecting])
+
   return (
-    <Appear animate={animate}>
-      <li className="col-span-3">
+    <li ref={ref} className="col-span-3">
+      <Appear animate={animate}>
         <Link
           className="mx-1 mb-2 block focus:outline-none relative"
           to={project.slug.current}
@@ -38,6 +46,7 @@ const ProjectThumbnail: FC<Props> = ({ project }) => {
             <MediaVideoGif
               {...project.thumbnail.video}
               alt={project.thumbnail.video.alt || project.title}
+              intersecting={intersecting}
             />
           )}
           {/* TODO: awards with `toy` integration */}
@@ -49,8 +58,8 @@ const ProjectThumbnail: FC<Props> = ({ project }) => {
             </div>
           )} */}
         </Link>
-      </li>
-    </Appear>
+      </Appear>
+    </li>
   )
 }
 
