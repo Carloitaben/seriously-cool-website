@@ -1,7 +1,7 @@
 import type { tailwindScreen } from "~/types"
 import tailwindConfig from "tailwind.config"
 
-import useOnBreakpoint from "./useOnBreakpoint"
+import useOnMatchMedia from "./useOnMatchMedia"
 
 /**
  * Executes a callback whenever the provided Tailwind screen
@@ -11,7 +11,7 @@ export default function useOnTailwindBreakpoint(
   screen: tailwindScreen,
   callback: (matches: boolean) => void
 ) {
-  useOnBreakpoint(
+  useOnMatchMedia(
     `(min-width: ${tailwindConfig.theme.screens[screen]})`,
     callback
   )

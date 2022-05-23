@@ -3,7 +3,7 @@ import { useEffect } from "react"
 /**
  * Executes a callback whenever the provided `breakpoint` matches
  */
-export default function useOnBreakpoint(
+export default function useOnMatchMedia(
   breakpoint: string,
   callback: (matches: boolean) => void
 ) {
