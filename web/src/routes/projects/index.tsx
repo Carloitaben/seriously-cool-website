@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import type { LoaderFunction } from "@remix-run/node"
 import { Link, useLoaderData } from "@remix-run/react"
 import { getFileAsset } from "@sanity/asset-utils"
 
-import { client, dataset, projectId, GET_PROJECTS } from "~/graphql"
 import type { GetProjectsQuery } from "~/types"
-
+import { client, dataset, projectId, GET_PROJECTS } from "~/graphql"
 import { isSanityPreview, filterSanityDocumentDrafts } from "~/utils"
 
 import Navbar from "~/components/Navbar"
 import ProjectThumbnail from "~/components/ProjectThumbnail"
+import useGroupProjectsAnimations from "~/hooks/useGroupProjectsAnimations"
 
 export type ProjectsLoaderData = {
   projects: GetProjectsQuery["allProject"]
@@ -44,6 +44,7 @@ export const loader: LoaderFunction = async ({
 export default function Route() {
   const loaderData = useLoaderData<ProjectsLoaderData>()
 
+  const ref = useRef<HTMLUListElement>(null)
   const [projects, setProjects] = useState<ProjectsLoaderData["projects"]>([])
 
   // This is a workaround for a bug in Remix with `AnimatePresence`
@@ -52,14 +53,27 @@ export default function Route() {
     if (loaderData?.projects) setProjects(loaderData.projects)
   }, [loaderData])
 
+  const { onProjectLoad, animateProjects } = useGroupProjectsAnimations({
+    ref,
+    projects,
+  })
+
   return (
     <>
       <Navbar>
         <Link to="/">Close</Link>
       </Navbar>
-      <ul className="px-container grid grid-cols-6 -mx-1 overflow-y-auto h-full pb-[2.375rem]">
-        {projects.map((project) => (
-          <ProjectThumbnail key={project.slug.current} project={project} />
+      <ul
+        ref={ref}
+        className="px-container grid grid-cols-6 -mx-1 overflow-y-auto h-full pb-[2.375rem]"
+      >
+        {projects.map((project, index) => (
+          <ProjectThumbnail
+            key={project.slug.current}
+            project={project}
+            onLoad={() => onProjectLoad(index)}
+            animate={index in animateProjects}
+          />
         ))}
       </ul>
     </>
