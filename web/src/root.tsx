@@ -52,6 +52,7 @@ export const links: LinksFunction = () => [
 
 export type RootLoaderData = {
   slidingTexts: string[]
+  literals: Record<string, string>
   catchphrase: {
     desktop: Pick<SettingsCatchphrase, "textRaw" | "visibility">
     mobile: Pick<SettingsCatchphrase, "textRaw" | "visibility">
@@ -70,7 +71,7 @@ export const loader: LoaderFunction = async ({
   const preview = isSanityPreview(request)
   const response = await client.request<GetSettingsQuery>(GET_SETTINGS)
 
-  const [{ catchphrases, colors, slidingTexts, typefaces, toys }] =
+  const [{ catchphrases, colors, slidingTexts, typefaces, toys, literals }] =
     filterSanityDocumentDrafts(response.allSettings, preview)
 
   const { catchphrasesDesktop, catchphrasesMobile } = catchphrases.reduce<
@@ -108,9 +109,22 @@ export const loader: LoaderFunction = async ({
     accent: flipColors ? accent.hex : background.hex,
   }
 
+  const formattedLiterals = literals.reduce<Record<string, string>>(
+    (accumulator, { key, value }) => {
+      if (key in accumulator) {
+        throw Error(`found duplicated literal "${key}"`)
+      }
+
+      accumulator[key] = value
+      return accumulator
+    },
+    {}
+  )
+
   return {
     theme,
     slidingTexts,
+    literals: formattedLiterals,
     catchphrase: {
       desktop: catchphraseDesktop,
       mobile: catchphraseMobile,

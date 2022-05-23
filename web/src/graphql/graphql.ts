@@ -6,6 +6,10 @@ export const GET_SETTINGS = gql`
       _id
       slidingTexts
       typefaces
+      literals {
+        key
+        value
+      }
       toys {
         TOY_STICKERS
         TOY_2D_PHYSICAL_SHAPES

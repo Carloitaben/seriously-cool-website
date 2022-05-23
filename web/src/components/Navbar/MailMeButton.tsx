@@ -1,6 +1,7 @@
 import type { FC } from "react"
 import { useEffect, useRef, useState, useCallback } from "react"
 
+import useRootData from "~/hooks/useRootData"
 import store from "~/store"
 
 type Props = {
@@ -10,6 +11,8 @@ type Props = {
 const TIMEOUT_DURATION_MS = 1250
 
 const MailMeButton: FC<Props> = ({ children }) => {
+  const { literals } = useRootData()
+
   const [blockClicks, setBlockClicks] = useState(false)
   const timeout = useRef<NodeJS.Timeout>()
 
@@ -22,19 +25,24 @@ const MailMeButton: FC<Props> = ({ children }) => {
         throw Error("Clipboard API is not supported")
       }
 
-      await navigator.clipboard.writeText("the@seriouslycool.website")
-      setSlidingTextMask(["Copied!"])
+      await navigator.clipboard.writeText(literals.email)
+      setSlidingTextMask([literals.clickToCopySuccess])
     } catch (error) {
       // noop
-      window.open("mailto:the@seriouslycool.website", "_blank")
-      setSlidingTextMask(["Opened!"])
+      window.open(`mailto:${literals.email}`, "_blank")
+      setSlidingTextMask([literals.clickToOpenSuccess])
     } finally {
       timeout.current = setTimeout(() => {
         setSlidingTextMask(null)
         setBlockClicks(false)
       }, TIMEOUT_DURATION_MS)
     }
-  }, [setSlidingTextMask])
+  }, [
+    literals.clickToCopySuccess,
+    literals.clickToOpenSuccess,
+    literals.email,
+    setSlidingTextMask,
+  ])
 
   useEffect(() => {
     if (blockClicks) {
@@ -51,9 +59,9 @@ const MailMeButton: FC<Props> = ({ children }) => {
 
   function setText() {
     if ("clipboard" in navigator) {
-      setSlidingText(["Click to copy", "the@seriouslycool.website"])
+      setSlidingText([literals.clickToCopy, literals.email])
     } else {
-      setSlidingText(["Click to open", "the@seriouslycool.website"])
+      setSlidingText([literals.clickToOpen, literals.email])
     }
   }
 
