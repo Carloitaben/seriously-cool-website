@@ -1,3 +1,4 @@
-.env.development
+.env
+.env.*
 node_modules
 dist
