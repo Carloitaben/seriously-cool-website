@@ -12,6 +12,7 @@ import {
   useLoaderData,
 } from "@remix-run/react"
 import type { CSSProperties } from "react"
+import { useIsomorphicLayoutEffect } from "framer-motion"
 
 import styles from "~/styles/index.css"
 
@@ -23,11 +24,9 @@ import {
 } from "~/utils"
 
 import type { GetSettingsQuery, SettingsCatchphrase, Toy } from "./types"
-
 import { client, GET_SETTINGS } from "~/graphql"
-
 import Layout from "~/components/Layout"
-import { useIsomorphicLayoutEffect } from "framer-motion"
+import useOnMatchMedia from "~/hooks/useOnMatchMedia"
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -36,6 +35,11 @@ export const meta: MetaFunction = () => ({
 })
 
 export const links: LinksFunction = () => [
+  {
+    rel: "icon",
+    href: "/favicon-black.png",
+    type: "image/png",
+  },
   {
     rel: "stylesheet",
     href: styles,
@@ -134,6 +138,18 @@ export default function App() {
       theme.accent
     )
   }, [theme.accent, theme.background])
+
+  useOnMatchMedia("(prefers-color-scheme: dark)", (matches) => {
+    const link = document.querySelector<HTMLLinkElement>('link[rel="icon"]')
+
+    if (!link) return
+
+    if (matches) {
+      link.href = "/favicon-white.png"
+    } else {
+      link.href = "/favicon-black.png"
+    }
+  })
 
   return (
     <html lang="en">
