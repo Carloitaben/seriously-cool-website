@@ -32,7 +32,7 @@ const LayoutDrawer: FC<Props> = ({ children, origin }) => {
 
   return (
     <motion.div
-      className="fixed inset-x-0 top-0 bottom-slidingTextDesktop overflow-hidden selection:bg-background selection:text-accent"
+      className="bottom-slidingTextDesktop selection:bg-background selection:text-accent fixed inset-x-0 top-0 overflow-hidden"
       initial={origin}
       animate="show"
       exit={origin}

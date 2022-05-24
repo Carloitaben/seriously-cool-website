@@ -61,11 +61,11 @@ const MediaVideoGif: FC<Props> = ({
   return (
     <div
       data-intersecting={intersectingProp}
-      className={`${className} w-full relative overflow-hidden`}
+      className={`${className} relative w-full overflow-hidden`}
       style={{ paddingBottom: `${(height / width) * 100}%` }}
     >
       <video
-        className="absolute inset-0 w-full h-full"
+        className="absolute inset-0 h-full w-full"
         ref={video}
         title={alt}
         loop

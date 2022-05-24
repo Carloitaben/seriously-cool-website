@@ -5,13 +5,13 @@ import { emojiLogo } from "~/components/Svg"
 
 const Home: FC = () => {
   return (
-    <div className="h-full pt-16 flex  pb-12">
+    <div className="flex h-full pt-16  pb-12">
       <LateralTitle href="/about">
         About myself
         <br />
         over here
       </LateralTitle>
-      <div className="flex-1 flex items-center justify-center px-12">
+      <div className="flex flex-1 items-center justify-center px-12">
         {emojiLogo}
       </div>
       <LateralTitle href="/projects" flip>

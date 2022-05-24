@@ -36,7 +36,8 @@ export default {
       name: "video",
       title: "Video",
       type: "mediaVideo",
-      hidden: ({ parent }) => !["VIDEO_GIF", "VIDEO_PLAYER"].includes(parent?.kind),
+      hidden: ({ parent }) =>
+        !["VIDEO_GIF", "VIDEO_PLAYER"].includes(parent?.kind),
     },
   ],
 }

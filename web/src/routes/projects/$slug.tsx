@@ -38,7 +38,7 @@ export default function Route() {
       <Navbar>
         <Link to="/projects">Close</Link>
       </Navbar>
-      <div className="text-2xl px-container grid grid-cols-6 gap-x-2 mt-12 mb-24">
+      <div className="px-container mt-12 mb-24 grid grid-cols-6 gap-x-2 text-2xl">
         <div className="col-span-3 max-w-xl text-5xl leading-tight">
           <h1>{project.title}</h1>
         </div>
@@ -46,7 +46,7 @@ export default function Route() {
           <TextBlock>{project.descriptionRaw}</TextBlock>
         </div>
       </div>
-      <div className="text-2xl px-container grid grid-cols-6 gap-x-2">
+      <div className="px-container grid grid-cols-6 gap-x-2 text-2xl">
         <ProjectDetailClientLocation
           client={project.clientRaw}
           location={project.location}

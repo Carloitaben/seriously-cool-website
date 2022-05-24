@@ -10,7 +10,7 @@ type Props = {
 
 const ProjectDetailClientLocation: FC<Props> = ({ client, location, year }) => {
   return (
-    <div className="flex col-span-6">
+    <div className="col-span-6 flex">
       <div className="flex flex-1">
         <TextBlock>{client}</TextBlock>, {location}
       </div>

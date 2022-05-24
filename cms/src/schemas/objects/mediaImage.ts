@@ -12,7 +12,8 @@ export default {
       },
     },
     {
-      description: "An optional description. Used with assistive technologies and as SEO information.",
+      description:
+        "An optional description. Used with assistive technologies and as SEO information.",
       name: "alt",
       title: "Alternative text",
       type: "string",

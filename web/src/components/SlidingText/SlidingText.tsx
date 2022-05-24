@@ -45,11 +45,11 @@ const SlidingText: FC<Props> = ({ children }) => {
   }, [childrenOrMask, isFontLoaded])
 
   return (
-    <div className="h-slidingTextDesktop text-2xl uppercase whitespace-nowrap select-none items-center flex overflow-hidden border-t-2 border-current">
+    <div className="h-slidingTextDesktop flex select-none items-center overflow-hidden whitespace-nowrap border-t-2 border-current text-2xl uppercase">
       <span
         ref={childWrapper}
         style={style}
-        className="inline-block space-x-20 pr-20 -ml-10"
+        className="-ml-10 inline-block space-x-20 pr-20"
       >
         {childrenOrMask.map((text, index) => (
           <span key={index}>{text}</span>

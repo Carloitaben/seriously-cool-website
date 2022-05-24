@@ -46,7 +46,7 @@ const ProjectThumbnail: FC<Props> = ({
     <li ref={ref} className="col-span-3">
       <Appear animate={animate}>
         <Link
-          className="mx-1 mb-2 block focus:outline-none relative ring-current ring-0 hover:ring-2 focus:ring-2 transition-shadow duration-75"
+          className="relative mx-1 mb-2 block ring-0 ring-current transition-shadow duration-75 hover:ring-2 focus:outline-none focus:ring-2"
           to={project.slug.current}
           onMouseEnter={() => setSlidingText(project.title)}
           onMouseLeave={() => setSlidingText(null)}

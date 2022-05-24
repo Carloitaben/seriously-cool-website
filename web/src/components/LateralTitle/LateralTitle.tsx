@@ -9,8 +9,8 @@ type Props = {
 
 const LateralTitle: FC<Props> = ({ children, href, flip = false }) => {
   return (
-    <div className="h-full text-5xl text-center uppercase whitespace-nowrap px-container">
-      <div className="flex items-center justify-center w-24 underline h-full">
+    <div className="px-container h-full whitespace-nowrap text-center text-5xl uppercase">
+      <div className="flex h-full w-24 items-center justify-center underline">
         <Link
           prefetch="intent"
           to={href}

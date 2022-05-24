@@ -172,7 +172,7 @@ export default function App() {
         <Links />
       </head>
       <body
-        className="h-screen flex flex-col selection:bg-accent selection:text-background"
+        className="selection:bg-accent selection:text-background flex h-screen flex-col"
         style={style}
       >
         <Layout />

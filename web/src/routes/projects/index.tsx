@@ -65,7 +65,7 @@ export default function Route() {
       </Navbar>
       <ul
         ref={ref}
-        className="px-container grid grid-cols-6 -mx-1 overflow-y-auto h-full pb-[2.375rem] pt-0.5"
+        className="px-container -mx-1 grid h-full grid-cols-6 overflow-y-auto pb-[2.375rem] pt-0.5"
       >
         {projects.map((project, index) => (
           <ProjectThumbnail
