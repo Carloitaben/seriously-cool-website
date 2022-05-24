@@ -3,5 +3,19 @@
   "version": "1.0.0",
   "description": "Monorepo for seriouslycool.website",
   "author": "Carlo Domínguez <hello@carlo.works>",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "scripts": {
+    "format": "prettier --write ."
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "devDependencies": {
+    "husky": "^8.0.1",
+    "prettier": "^2.6.2",
+    "prettier-plugin-tailwindcss": "^0.1.11",
+    "pretty-quick": "^3.1.3"
+  }
 }
