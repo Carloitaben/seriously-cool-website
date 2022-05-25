@@ -3,10 +3,10 @@ module.exports = {
   theme: {
     screens: {
       // mobileLandscape: "",
-      // tablet: "",
+      tablet: "640px",
       desktop: "770px",
       /** Max desktop size */
-      desktopMax: "1291px",
+      desktopMax: "1921px",
       /** Breakpoint at witch the hamburger menu stops showing */
       menuVisible: "1116px",
     },

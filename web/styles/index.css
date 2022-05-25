@@ -6,13 +6,33 @@
   a {
     @apply underline;
   }
-
+  
   .px-container {
-    @apply px-12;
+    @apply px-2;
+  }
+  
+  .mx-container {
+    @apply mx-2;
   }
 
-  .mx-container {
-    @apply mx-12;
+  @screen tablet {
+    .px-container {
+      @apply px-4;
+    }
+  
+    .mx-container {
+      @apply mx-4;
+    }
+  }
+  
+  @screen desktop {
+   .px-container {
+      @apply px-12;
+    }
+
+    .mx-container {
+      @apply mx-12;
+    } 
   }
 }
 

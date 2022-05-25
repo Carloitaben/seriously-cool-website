@@ -429,8 +429,32 @@ a {
 }
 
 .px-container {
-  padding-left: 3rem;
-  padding-right: 3rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .px-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .mx-container {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+@media (min-width: 770px) {
+  .px-container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .mx-container {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
 }
 
 *, ::before, ::after {
@@ -576,18 +600,12 @@ a {
   grid-column: span 3 / span 3;
 }
 
-.mx-1 {
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
+.mt-6 {
+  margin-top: 1.5rem;
 }
 
-.-mx-1 {
-  margin-left: -0.25rem;
-  margin-right: -0.25rem;
-}
-
-.mb-2 {
-  margin-bottom: 0.5rem;
+.mb-10 {
+  margin-bottom: 2.5rem;
 }
 
 .-ml-10 {
@@ -602,8 +620,8 @@ a {
   margin-bottom: 6rem;
 }
 
-.block {
-  display: block;
+.mt-2 {
+  margin-top: 0.5rem;
 }
 
 .inline-block {
@@ -922,4 +940,40 @@ a {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+@media (min-width: 640px) {
+  .tablet\:mt-6 {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (min-width: 770px) {
+  .desktop\:col-span-3 {
+    grid-column: span 3 / span 3;
+  }
+
+  .desktop\:mx-1 {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+  }
+
+  .desktop\:-mx-1 {
+    margin-left: -0.25rem;
+    margin-right: -0.25rem;
+  }
+
+  .desktop\:mb-2 {
+    margin-bottom: 0.5rem;
+  }
+
+  .desktop\:hidden {
+    display: none;
+  }
+}
+
+@media (min-width: 1921px) {
+  .desktopMax\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
 }

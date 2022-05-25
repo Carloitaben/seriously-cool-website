@@ -45,34 +45,42 @@ const ProjectThumbnail: FC<Props> = ({
   }
 
   return (
-    <li ref={ref} className="col-span-3">
+    <li
+      ref={ref}
+      className="desktopMax:col-span-2 desktop:col-span-3 col-span-6"
+    >
       <Appear animate={animate} skip={skipAppear}>
-        <Link
-          className="relative mx-1 mb-2 block ring-0 ring-current transition-shadow duration-75 hover:ring-2 focus:outline-none focus:ring-2"
-          to={project.slug.current}
-          onMouseEnter={() => setSlidingText(project.title)}
-          onMouseLeave={() => setSlidingText(null)}
-          onFocus={() => setSlidingText(project.title)}
-          onBlur={() => setSlidingText(null)}
-          onClick={() => setSlidingText(null)}
-        >
-          {project?.thumbnail?.kind === "VIDEO_GIF" && (
-            <MediaVideoGif
-              {...project.thumbnail.video}
-              alt={project.thumbnail.video.alt || project.title}
-              intersecting={intersecting}
-              onLoad={onProjectLoad}
-            />
-          )}
-          {/* TODO: awards with `toy` integration */}
-          {/* {awardsToShow.length > 0 && (
-            <div className="absolute inset-0">
-              {awardsToShow.map((award, index) => (
-                <span key={index}>award</span>
-              ))}
-            </div>
-          )} */}
-        </Link>
+        <div className="flex flex-col">
+          <Link
+            className="desktop:mb-2 desktop:mx-1 relative ring-0 ring-current transition-shadow duration-75 hover:ring-2 focus:outline-none focus:ring-2"
+            to={project.slug.current}
+            onMouseEnter={() => setSlidingText(project.title)}
+            onMouseLeave={() => setSlidingText(null)}
+            onFocus={() => setSlidingText(project.title)}
+            onBlur={() => setSlidingText(null)}
+            onClick={() => setSlidingText(null)}
+          >
+            {project?.thumbnail?.kind === "VIDEO_GIF" && (
+              <MediaVideoGif
+                {...project.thumbnail.video}
+                alt={project.thumbnail.video.alt || project.title}
+                intersecting={intersecting}
+                onLoad={onProjectLoad}
+              />
+            )}
+            {/* TODO: awards with `toy` integration */}
+            {/* {awardsToShow.length > 0 && (
+              <div className="absolute inset-0">
+                {awardsToShow.map((award, index) => (
+                  <span key={index}>award</span>
+                ))}
+              </div>
+            )} */}
+          </Link>
+          <h6 className="desktop:hidden tablet:mt-6 mt-2 mb-10 text-2xl">
+            {project.title}
+          </h6>
+        </div>
       </Appear>
     </li>
   )
