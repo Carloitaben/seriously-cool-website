@@ -600,8 +600,8 @@ a {
   grid-column: span 3 / span 3;
 }
 
-.mt-6 {
-  margin-top: 1.5rem;
+.mt-2 {
+  margin-top: 0.5rem;
 }
 
 .mb-10 {
@@ -620,10 +620,6 @@ a {
   margin-bottom: 6rem;
 }
 
-.mt-2 {
-  margin-top: 0.5rem;
-}
-
 .inline-block {
   display: inline-block;
 }
@@ -634,6 +630,10 @@ a {
 
 .grid {
   display: grid;
+}
+
+.hidden {
+  display: none;
 }
 
 .h-screen {
@@ -946,6 +946,18 @@ a {
   .tablet\:mt-6 {
     margin-top: 1.5rem;
   }
+
+  .tablet\:block {
+    display: block;
+  }
+
+  .tablet\:hidden {
+    display: none;
+  }
+
+  .tablet\:\[display\:unset\] {
+    display: unset;
+  }
 }
 
 @media (min-width: 770px) {
@@ -969,6 +981,10 @@ a {
 
   .desktop\:hidden {
     display: none;
+  }
+
+  .desktop\:\[display\:unset\] {
+    display: unset;
   }
 }
 

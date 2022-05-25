@@ -16,10 +16,10 @@ const Navbar: FC<Props> = ({ children }) => {
     <nav className="px-container fixed inset-x-0 top-0 flex h-16 justify-between space-x-4 py-4 text-2xl">
       <div className="flex-1">{children}</div>
       <ul className="flex space-x-4">
-        <li>
+        <li className="tablet:hidden">
           <NavLink to="/about">{literals.navLinkAboutLabel}</NavLink>
         </li>
-        <li>
+        <li className="tablet:hidden">
           <NavLink to="/projects">{literals.navLinkProjectsLabel}</NavLink>
         </li>
         <a

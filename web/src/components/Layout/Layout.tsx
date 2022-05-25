@@ -29,7 +29,12 @@ const Layout: FC = () => {
   return (
     <>
       <Navbar>
-        <TextBlock>{catchphrase.desktop.textRaw}</TextBlock>
+        <span className="tablet:hidden">
+          <TextBlock>{catchphrase.mobile.textRaw}</TextBlock>
+        </span>
+        <span className="tablet:[display:unset] hidden">
+          <TextBlock>{catchphrase.desktop.textRaw}</TextBlock>
+        </span>
       </Navbar>
       <main className="flex-1">
         <Home />
