@@ -6,6 +6,10 @@
   a {
     @apply underline;
   }
+
+  button {
+    text-transform: unset;
+  }
   
   .px-container {
     @apply px-2;
@@ -59,6 +63,22 @@
     }
     100% {
       transform: translateY(0);
+    }
+  }
+
+  .h-navbar {
+    height: 3rem;
+  }
+
+  @screen tablet {
+    .h-navbar {
+      height: 4.5rem;
+    }
+  }
+
+  @screen desktop {
+    .h-navbar {
+      height: 4rem;
     }
   }
 }

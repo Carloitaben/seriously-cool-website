@@ -13,7 +13,7 @@ export type Props = {
 const LateralTitle: FC<Props> = ({ labels, href, flip = false }) => {
   return (
     <div className="px-container tablet:block hidden h-full whitespace-nowrap text-center text-5xl uppercase">
-      <div className="flex h-full w-24 items-center justify-center underline">
+      <div className="desktop:w-24 flex h-full w-12 items-center justify-center underline">
         <Link
           prefetch="intent"
           to={href}

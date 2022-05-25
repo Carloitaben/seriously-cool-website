@@ -10,7 +10,7 @@ type Props = {
 
 const TIMEOUT_DURATION_MS = 1250
 
-const MailMeButton: FC<Props> = ({ children }) => {
+const NavbarMailMeButton: FC<Props> = ({ children }) => {
   const { literals } = useRootData()
 
   const [blockClicks, setBlockClicks] = useState(false)
@@ -89,4 +89,4 @@ const MailMeButton: FC<Props> = ({ children }) => {
   )
 }
 
-export default MailMeButton
+export default NavbarMailMeButton

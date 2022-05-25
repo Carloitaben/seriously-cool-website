@@ -428,6 +428,10 @@ a {
           text-decoration-line: underline;
 }
 
+button {
+  text-transform: unset;
+}
+
 .px-container {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -560,6 +564,22 @@ a {
   }
 }
 
+.h-navbar {
+  height: 3rem;
+}
+
+@media (min-width: 640px) {
+  .h-navbar {
+    height: 4.5rem;
+  }
+}
+
+@media (min-width: 770px) {
+  .h-navbar {
+    height: 4rem;
+  }
+}
+
 .fixed {
   position: fixed;
 }
@@ -592,6 +612,10 @@ a {
   top: 0px;
 }
 
+.right-0 {
+  right: 0px;
+}
+
 .col-span-6 {
   grid-column: span 6 / span 6;
 }
@@ -620,6 +644,10 @@ a {
   margin-bottom: 6rem;
 }
 
+.-mr-2 {
+  margin-right: -0.5rem;
+}
+
 .inline-block {
   display: inline-block;
 }
@@ -644,10 +672,6 @@ a {
   height: 100%;
 }
 
-.h-16 {
-  height: 4rem;
-}
-
 .h-slidingTextDesktop {
   height: 3.125rem;
 }
@@ -656,12 +680,20 @@ a {
   height: auto;
 }
 
+.h-12 {
+  height: 3rem;
+}
+
 .w-24 {
   width: 6rem;
 }
 
 .w-full {
   width: 100%;
+}
+
+.w-12 {
+  width: 3rem;
 }
 
 .max-w-\[14\.375rem\] {
@@ -726,12 +758,6 @@ a {
        column-gap: 0.5rem;
 }
 
-.space-x-4 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(1rem * var(--tw-space-x-reverse));
-  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
 .space-x-20 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(5rem * var(--tw-space-x-reverse));
@@ -758,6 +784,10 @@ a {
   border-color: currentColor;
 }
 
+.bg-accent {
+  background-color: var(--theme-colors-accent);
+}
+
 .fill-current {
   fill: currentColor;
 }
@@ -765,11 +795,6 @@ a {
 .px-12 {
   padding-left: 3rem;
   padding-right: 3rem;
-}
-
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
 }
 
 .pt-16 {
@@ -814,8 +839,16 @@ a {
   text-transform: uppercase;
 }
 
+.leading-normal {
+  line-height: 1.5;
+}
+
 .leading-tight {
   line-height: 1.25;
+}
+
+.text-background {
+  color: var(--theme-colors-background);
 }
 
 .underline {
@@ -837,6 +870,11 @@ a {
 
 .ring-current {
   --tw-ring-color: currentColor;
+}
+
+.invert {
+  --tw-invert: invert(100%);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 .filter {
@@ -942,9 +980,19 @@ a {
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 
+@media (max-width: 360px) {
+  .mobileSub\:text-\[13vw\] {
+    font-size: 13vw;
+  }
+}
+
 @media (min-width: 640px) {
   .tablet\:mt-6 {
     margin-top: 1.5rem;
+  }
+
+  .tablet\:mr-0 {
+    margin-right: 0px;
   }
 
   .tablet\:block {
@@ -953,6 +1001,10 @@ a {
 
   .tablet\:hidden {
     display: none;
+  }
+
+  .tablet\:leading-loose {
+    line-height: 2;
   }
 
   .tablet\:\[display\:unset\] {
@@ -983,6 +1035,10 @@ a {
     display: none;
   }
 
+  .desktop\:w-24 {
+    width: 6rem;
+  }
+
   .desktop\:\[display\:unset\] {
     display: unset;
   }
@@ -991,5 +1047,38 @@ a {
 @media (min-width: 1921px) {
   .desktopMax\:col-span-2 {
     grid-column: span 2 / span 2;
+  }
+}
+
+@media (min-width: 1116px) {
+  .menuContentVisible\:hidden {
+    display: none;
+  }
+
+  .menuContentVisible\:flex-row {
+    flex-direction: row;
+  }
+
+  .menuContentVisible\:space-x-4 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(1rem * var(--tw-space-x-reverse));
+    margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .menuContentVisible\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .menuContentVisible\:normal-case {
+    text-transform: none;
+  }
+
+  .menuContentVisible\:leading-normal {
+    line-height: 1.5;
+  }
+
+  .menuContentVisible\:\[display\:unset\] {
+    display: unset;
   }
 }

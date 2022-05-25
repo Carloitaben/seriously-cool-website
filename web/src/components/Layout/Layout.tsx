@@ -1,9 +1,9 @@
 import type { FC } from "react"
 import { useLocation, useOutlet } from "@remix-run/react"
-import type { Transition } from "framer-motion"
 import { MotionConfig, AnimatePresence } from "framer-motion"
 
 import useRootData from "~/hooks/useRootData"
+import { layoutTransitionProp } from "~/utils"
 
 import Navbar from "~/components/Navbar"
 import Home from "~/components/Home"
@@ -12,12 +12,6 @@ import TextBlock from "~/components/TextBlock"
 
 import LayoutDrawer from "./LayoutDrawer"
 import useSkipProjectsAppear from "./useSkipProjectsAppear"
-
-const transition: Transition = {
-  type: "tween",
-  ease: [0.76, 0, 0.24, 1],
-  duration: 1,
-}
 
 const Layout: FC = () => {
   const outlet = useOutlet()
@@ -38,7 +32,7 @@ const Layout: FC = () => {
       </Navbar>
       <main className="flex-1">
         <Home />
-        <MotionConfig transition={transition}>
+        <MotionConfig transition={layoutTransitionProp}>
           <AnimatePresence exitBeforeEnter initial={false}>
             {location.pathname === "/about" && (
               <LayoutDrawer key="left" origin="left">
