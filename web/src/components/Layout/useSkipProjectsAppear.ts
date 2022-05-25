@@ -18,7 +18,5 @@ export default function useSkipProjectsAppear() {
     } else if (location.pathname !== "/projects") {
       setSkipProjectsAppear(false)
     }
-
-    console.log(routeTransition)
   }, [location.pathname, routeTransition, setSkipProjectsAppear])
 }
