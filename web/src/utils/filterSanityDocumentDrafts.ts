@@ -15,6 +15,12 @@ export function filterSanityDocumentDrafts<T extends { _id: string }>(
       )
 
       if (index > -1) accumulator.splice(index, 1)
+    } else {
+      const index = accumulator.findIndex(
+        (item) => `drafts.${document._id}` === item._id
+      )
+
+      if (index > -1) accumulator.splice(index, 1)
     }
 
     accumulator.push(document)
