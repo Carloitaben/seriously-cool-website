@@ -6,6 +6,7 @@ import { getFileAsset } from "@sanity/asset-utils"
 import type { GetProjectsQuery } from "~/types"
 import { client, dataset, projectId, GET_PROJECTS } from "~/graphql"
 import { isSanityPreview, filterSanityDocumentDrafts } from "~/utils"
+import store from "~/store"
 
 import Navbar from "~/components/Navbar"
 import ProjectThumbnail from "~/components/ProjectThumbnail"
@@ -13,6 +14,17 @@ import useGroupProjectsAnimations from "~/hooks/useGroupProjectsAnimations"
 
 export type ProjectsLoaderData = {
   projects: GetProjectsQuery["allProject"]
+}
+
+function useSkipAppear() {
+  const [skipAppear, setSkipAppear] = useState(false)
+
+  useEffect(() => {
+    const skip = store.getState().skipProjectsAppear
+    setSkipAppear(skip)
+  }, [])
+
+  return skipAppear
 }
 
 export const loader: LoaderFunction = async ({
@@ -43,6 +55,7 @@ export const loader: LoaderFunction = async ({
 
 export default function Route() {
   const loaderData = useLoaderData<ProjectsLoaderData>()
+  const skipAppear = useSkipAppear()
 
   const ref = useRef<HTMLUListElement>(null)
   const [projects, setProjects] = useState<ProjectsLoaderData["projects"]>([])
@@ -73,6 +86,7 @@ export default function Route() {
             project={project}
             onLoad={() => onProjectLoad(index)}
             animate={index in animateProjects}
+            skipAppear={skipAppear}
           />
         ))}
       </ul>

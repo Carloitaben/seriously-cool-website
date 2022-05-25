@@ -3,12 +3,15 @@ import { useLocation, useOutlet } from "@remix-run/react"
 import type { Transition } from "framer-motion"
 import { MotionConfig, AnimatePresence } from "framer-motion"
 
+import useRootData from "~/hooks/useRootData"
+
 import Navbar from "~/components/Navbar"
 import Home from "~/components/Home"
 import SlidingText from "~/components/SlidingText"
+import TextBlock from "~/components/TextBlock"
+
 import LayoutDrawer from "./LayoutDrawer"
-import useRootData from "~/hooks/useRootData"
-import TextBlock from "../TextBlock"
+import useSkipProjectsAppear from "./useSkipProjectsAppear"
 
 const transition: Transition = {
   type: "tween",
@@ -17,10 +20,11 @@ const transition: Transition = {
 }
 
 const Layout: FC = () => {
-  const location = useLocation()
   const outlet = useOutlet()
-
+  const location = useLocation()
   const { slidingTexts, catchphrase } = useRootData()
+
+  useSkipProjectsAppear()
 
   return (
     <>

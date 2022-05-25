@@ -7,10 +7,14 @@ type Props = {
    * Programatically control the animation
    */
   animate?: boolean
+  /**
+   * Skips animation
+   */
+  skip?: boolean
   children: ReactElement<any, string | JSXElementConstructor<any>>
 }
 
-const Appear: FC<Props> = ({ children, animate }) => {
+const Appear: FC<Props> = ({ children, skip, animate }) => {
   const [show, setShow] = useState(animate)
   const ref = useRef<HTMLElement>(null)
 
@@ -22,9 +26,11 @@ const Appear: FC<Props> = ({ children, animate }) => {
     ref,
     style: {
       ...children.props.style,
-      animation: `appear-animation 1s cubic-bezier(1, 0, 0, 1) 0s both ${
-        show ? "running" : "paused"
-      }`,
+      animation:
+        !skip &&
+        `appear-animation 1s cubic-bezier(1, 0, 0, 1) 0s both ${
+          show ? "running" : "paused"
+        }`,
     },
   })
 }

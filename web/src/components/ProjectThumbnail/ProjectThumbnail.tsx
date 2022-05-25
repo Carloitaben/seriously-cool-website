@@ -13,12 +13,14 @@ type Props = {
   animate: boolean
   project: ProjectsLoaderData["projects"][number]
   onLoad: () => void
+  skipAppear: boolean
 }
 
 const ProjectThumbnail: FC<Props> = ({
   animate: animateProp,
   project,
   onLoad,
+  skipAppear,
 }) => {
   const setSlidingText = store((state) => state.setSlidingText)
 
@@ -44,7 +46,7 @@ const ProjectThumbnail: FC<Props> = ({
 
   return (
     <li ref={ref} className="col-span-3">
-      <Appear animate={animate}>
+      <Appear animate={animate} skip={skipAppear}>
         <Link
           className="relative mx-1 mb-2 block ring-0 ring-current transition-shadow duration-75 hover:ring-2 focus:outline-none focus:ring-2"
           to={project.slug.current}

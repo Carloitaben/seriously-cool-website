@@ -5,6 +5,8 @@ export type Store = {
   setSlidingText: (slidingText: string[] | string | null) => void
   slidingTextMask: Store["slidingText"]
   setSlidingTextMask: Store["setSlidingText"]
+  skipProjectsAppear: boolean
+  setSkipProjectsAppear: (value: boolean) => void
 }
 
 function ensureArray(text: string[] | string | null) {
@@ -24,6 +26,12 @@ const useStore = create<Store>((set, get) => ({
     set((state) => ({
       ...state,
       slidingTextMask: ensureArray(text),
+    })),
+  skipProjectsAppear: false,
+  setSkipProjectsAppear: (value) =>
+    set((state) => ({
+      ...state,
+      skipProjectsAppear: value,
     })),
 }))
 
