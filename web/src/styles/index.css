@@ -632,6 +632,10 @@ button {
   right: 0px;
 }
 
+.col-span-4 {
+  grid-column: span 4 / span 4;
+}
+
 .col-span-6 {
   grid-column: span 6 / span 6;
 }
@@ -640,8 +644,9 @@ button {
   grid-column: span 3 / span 3;
 }
 
-.col-span-4 {
-  grid-column: span 4 / span 4;
+.-my-2 {
+  margin-top: -0.5rem;
+  margin-bottom: -0.5rem;
 }
 
 .-mr-2 {
@@ -753,12 +758,12 @@ button {
           user-select: none;
 }
 
-.grid-cols-6 {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-}
-
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-cols-6 {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
 .flex-col {
@@ -792,12 +797,22 @@ button {
   margin-left: calc(5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
+.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
 .overflow-hidden {
   overflow: hidden;
 }
 
 .overflow-y-auto {
   overflow-y: auto;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
 }
 
 .whitespace-nowrap {
@@ -816,6 +831,11 @@ button {
   background-color: var(--theme-colors-accent);
 }
 
+.bg-red-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
+}
+
 .fill-current {
   fill: currentColor;
 }
@@ -823,6 +843,11 @@ button {
 .px-12 {
   padding-left: 3rem;
   padding-right: 3rem;
+}
+
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 .pb-12 {
@@ -859,6 +884,11 @@ button {
   line-height: 2rem;
 }
 
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
 .uppercase {
   text-transform: uppercase;
 }
@@ -873,6 +903,11 @@ button {
 
 .text-background {
   color: var(--theme-colors-background);
+}
+
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -1032,6 +1067,11 @@ button {
          column-gap: 1rem;
   }
 
+  .tablet\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
   .tablet\:leading-loose {
     line-height: 2;
   }
@@ -1042,12 +1082,16 @@ button {
 }
 
 @media (min-width: 770px) {
+  .desktop\:col-span-6 {
+    grid-column: span 6 / span 6;
+  }
+
   .desktop\:col-span-3 {
     grid-column: span 3 / span 3;
   }
 
-  .desktop\:col-span-6 {
-    grid-column: span 6 / span 6;
+  .desktop\:col-end-7 {
+    grid-column-end: 7;
   }
 
   .desktop\:mx-1 {
@@ -1079,6 +1123,16 @@ button {
   .desktop\:gap-x-2 {
     -moz-column-gap: 0.5rem;
          column-gap: 0.5rem;
+  }
+
+  .desktop\:py-20 {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .desktop\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
   }
 
   .desktop\:\[display\:unset\] {

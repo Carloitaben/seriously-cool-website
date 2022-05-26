@@ -1,5 +1,6 @@
 import type { FC } from "react"
 import { useMemo } from "react"
+import type { PortableTextReactComponents } from "@portabletext/react"
 import { PortableText } from "@portabletext/react"
 import { Link } from "@remix-run/react"
 
@@ -14,7 +15,7 @@ type Props = {
 const TextBlock: FC<Props> = ({ children }) => {
   const setSlidingText = store((state) => state.setSlidingText)
 
-  const components = useMemo(() => {
+  const components = useMemo((): Partial<PortableTextReactComponents> => {
     function getEvents(text: string) {
       return {
         onMouseEnter: () => setSlidingText(text),
@@ -60,7 +61,11 @@ const TextBlock: FC<Props> = ({ children }) => {
     }
   }, [setSlidingText])
 
-  return <PortableText value={children} components={components} />
+  return (
+    <span className="space-y-4">
+      <PortableText value={children} components={components} />
+    </span>
+  )
 }
 
 export default TextBlock
