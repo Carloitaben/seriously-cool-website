@@ -27,7 +27,7 @@ const TextBlock: FC<Props> = ({ children }) => {
     return {
       marks: {
         link: ({ children, value }: any) => {
-          const events = getEvents(children)
+          const events = getEvents(value?.alt || children)
 
           if (value?.href?.charAt(0) === "/") {
             return (
