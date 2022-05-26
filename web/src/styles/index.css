@@ -624,6 +624,10 @@ button {
   grid-column: span 3 / span 3;
 }
 
+.-mr-2 {
+  margin-right: -0.5rem;
+}
+
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -642,10 +646,6 @@ button {
 
 .mb-24 {
   margin-bottom: 6rem;
-}
-
-.-mr-2 {
-  margin-right: -0.5rem;
 }
 
 .inline-block {
@@ -672,6 +672,10 @@ button {
   height: 100%;
 }
 
+.h-12 {
+  height: 3rem;
+}
+
 .h-slidingTextDesktop {
   height: 3.125rem;
 }
@@ -680,20 +684,12 @@ button {
   height: auto;
 }
 
-.h-12 {
-  height: 3rem;
-}
-
-.w-24 {
-  width: 6rem;
+.w-12 {
+  width: 3rem;
 }
 
 .w-full {
   width: 100%;
-}
-
-.w-12 {
-  width: 3rem;
 }
 
 .max-w-\[14\.375rem\] {
@@ -987,12 +983,12 @@ button {
 }
 
 @media (min-width: 640px) {
-  .tablet\:mt-6 {
-    margin-top: 1.5rem;
-  }
-
   .tablet\:mr-0 {
     margin-right: 0px;
+  }
+
+  .tablet\:mt-6 {
+    margin-top: 1.5rem;
   }
 
   .tablet\:block {
@@ -1051,6 +1047,10 @@ button {
 }
 
 @media (min-width: 1116px) {
+  .menuContentVisible\:inline-block {
+    display: inline-block;
+  }
+
   .menuContentVisible\:hidden {
     display: none;
   }

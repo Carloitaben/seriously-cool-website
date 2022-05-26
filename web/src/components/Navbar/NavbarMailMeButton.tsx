@@ -1,6 +1,7 @@
 import type { FC } from "react"
 import { useEffect, useRef, useState, useCallback } from "react"
 
+import useOnTailwindBreakpoint from "~/hooks/useOnTailwindBreakpoint"
 import useRootData from "~/hooks/useRootData"
 import store from "~/store"
 
@@ -13,11 +14,14 @@ const TIMEOUT_DURATION_MS = 1250
 const NavbarMailMeButton: FC<Props> = ({ children }) => {
   const { literals } = useRootData()
 
+  const [menuContentVisible, setIsMenuContentVisible] = useState(false)
   const [blockClicks, setBlockClicks] = useState(false)
   const timeout = useRef<NodeJS.Timeout>()
 
   const setSlidingText = store((state) => state.setSlidingText)
   const setSlidingTextMask = store((state) => state.setSlidingTextMask)
+
+  useOnTailwindBreakpoint("menuContentVisible", setIsMenuContentVisible)
 
   const handleEmail = useCallback(async () => {
     try {
@@ -70,7 +74,13 @@ const NavbarMailMeButton: FC<Props> = ({ children }) => {
   }
 
   function handleClick() {
-    if (!blockClicks) setBlockClicks(true)
+    if (!menuContentVisible) {
+      return window.open(`mailto:${literals.email}`, "_blank")
+    }
+
+    if (!blockClicks) {
+      setBlockClicks(true)
+    }
   }
 
   return (

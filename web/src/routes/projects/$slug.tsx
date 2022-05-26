@@ -4,6 +4,8 @@ import { Link, useLoaderData } from "@remix-run/react"
 import { client, GET_PROJECT } from "~/graphql"
 import type { GetProjectQuery, GetProjectQueryVariables } from "~/types"
 
+import useRootData from "~/hooks/useRootData"
+
 import Navbar from "~/components/Navbar"
 import TextBlock from "~/components/TextBlock"
 import ProjectDetailClientLocation from "~/components/ProjectDetailClientLocation"
@@ -32,11 +34,15 @@ export const loader: LoaderFunction = async ({
 
 export default function Route() {
   const { project } = useLoaderData<ProjectDetailLoaderData>()
+  const { literals } = useRootData()
 
   return (
     <>
-      <Navbar>
-        <Link to="/projects">Close</Link>
+      <Navbar goBackRoute="/projects">
+        <Link to="/projects" className="menuContentVisible:inline-block hidden">
+          {literals.close}
+        </Link>
+        <span className="menuContentVisible:hidden" />
       </Navbar>
       <div className="px-container mt-12 mb-24 grid grid-cols-6 gap-x-2 text-2xl">
         <div className="col-span-3 max-w-xl text-5xl leading-tight">

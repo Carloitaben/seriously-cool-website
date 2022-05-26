@@ -8,9 +8,11 @@ import { client, dataset, projectId, GET_PROJECTS } from "~/graphql"
 import { isSanityPreview, filterSanityDocumentDrafts } from "~/utils"
 import store from "~/store"
 
+import useGroupProjectsAnimations from "~/hooks/useGroupProjectsAnimations"
+import useRootData from "~/hooks/useRootData"
+
 import Navbar from "~/components/Navbar"
 import ProjectThumbnail from "~/components/ProjectThumbnail"
-import useGroupProjectsAnimations from "~/hooks/useGroupProjectsAnimations"
 
 export type ProjectsLoaderData = {
   projects: GetProjectsQuery["allProject"]
@@ -56,6 +58,7 @@ export const loader: LoaderFunction = async ({
 export default function Route() {
   const loaderData = useLoaderData<ProjectsLoaderData>()
   const skipAppear = useSkipAppear()
+  const { literals } = useRootData()
 
   const ref = useRef<HTMLUListElement>(null)
   const [projects, setProjects] = useState<ProjectsLoaderData["projects"]>([])
@@ -73,8 +76,13 @@ export default function Route() {
 
   return (
     <>
-      <Navbar>
-        <Link to="/">Close</Link>
+      <Navbar goBackRoute="/">
+        <Link to="/" className="menuContentVisible:inline-block hidden">
+          {literals.close}
+        </Link>
+        <span className="menuContentVisible:hidden">
+          {literals.navLinkProjectsLabel}
+        </span>
       </Navbar>
       <ul
         ref={ref}

@@ -3,7 +3,7 @@ import type { Transition, Variants } from "framer-motion"
 import { m, MotionConfig } from "framer-motion"
 
 type Props = {
-  opened: boolean
+  close: boolean
 }
 
 const transition: Transition = {
@@ -12,29 +12,29 @@ const transition: Transition = {
 
 const variants: Record<string, Variants> = {
   edges: {
-    opened: (position: "top" | "bottom") => {
+    close: (position: "top" | "bottom") => {
       return {
         y: position === "top" ? 7 : -7,
         rotate: position === "top" ? 45 : -45,
       }
     },
-    closed: {
+    open: {
       y: 0,
       rotate: 0,
     },
   },
   center: {
-    opened: {
+    close: {
       scaleX: 0,
     },
-    closed: {
+    open: {
       scaleX: 1,
     },
   },
 }
 
-const NavbarMobileMenuIcon: FC<Props> = ({ opened }) => {
-  const animate: keyof typeof variants = opened ? "opened" : "closed"
+const NavbarMobileMenuIcon: FC<Props> = ({ close }) => {
+  const animate: keyof typeof variants = close ? "close" : "open"
 
   return (
     <div className="tablet:mr-0 -mr-2 flex h-12 w-12 items-center justify-center">

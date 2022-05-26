@@ -8,15 +8,16 @@ import NavbarMobileMenu from "./NavbarMobileMenu"
 
 type Props = {
   children: ReactNode
+  goBackRoute?: string
 }
 
-const Navbar: FC<Props> = ({ children }) => {
+const Navbar: FC<Props> = ({ children, goBackRoute }) => {
   const { literals } = useRootData()
 
   return (
     <nav className="px-container menuContentVisible:space-x-4 h-navbar fixed inset-x-0 top-0 flex items-center justify-between text-2xl">
       {children}
-      <NavbarMobileMenu>
+      <NavbarMobileMenu goBackRoute={goBackRoute}>
         <ul
           className={`
             menuContentVisible:flex-row menuContentVisible:text-2xl menuContentVisible:normal-case menuContentVisible:leading-normal
