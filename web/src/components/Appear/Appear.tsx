@@ -1,6 +1,8 @@
 import type { FC, JSXElementConstructor, ReactElement } from "react"
-import { useEffect } from "react"
-import { cloneElement, useRef, useState } from "react"
+import { cloneElement, useEffect, useRef, useState } from "react"
+
+import type { IntersectionObserverHookConfig } from "~/hooks/useIntersectionObserver"
+import useIntersectionObserver from "~/hooks/useIntersectionObserver"
 
 type Props = {
   /**
@@ -12,15 +14,30 @@ type Props = {
    */
   skip?: boolean
   children: ReactElement<any, string | JSXElementConstructor<any>>
+  intersectionObserverConfig?: Partial<
+    Omit<IntersectionObserverHookConfig, "disconnect">
+  >
 }
 
-const Appear: FC<Props> = ({ children, skip, animate }) => {
+const Appear: FC<Props> = ({
+  children,
+  skip,
+  animate,
+  intersectionObserverConfig = {
+    rootMargin: "0% 0% -30%",
+  },
+}) => {
   const [show, setShow] = useState(animate)
   const ref = useRef<HTMLElement>(null)
 
+  const intersecting = useIntersectionObserver(ref, {
+    disconnect: typeof animate !== "undefined",
+    ...intersectionObserverConfig,
+  })
+
   useEffect(() => {
-    if (animate) setShow(true)
-  }, [animate])
+    if (animate || intersecting) setShow(true)
+  }, [animate, intersecting])
 
   return cloneElement(children, {
     ref,

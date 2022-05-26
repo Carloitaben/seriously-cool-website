@@ -1,7 +1,7 @@
 import type { RefObject } from "react"
 import { useEffect, useRef, useState } from "react"
 
-type IntersectionObserverHookConfig = IntersectionObserverInit & {
+export type IntersectionObserverHookConfig = IntersectionObserverInit & {
   callback?: (entry: IntersectionObserverEntry) => void
   disconnect?: boolean
 }
