@@ -40,7 +40,7 @@ const LayoutDrawer: FC<Props> = ({ children, origin }) => {
       style={style}
     >
       <m.div
-        className="h-full pt-16"
+        className="pt-navbar h-full"
         initial={childrenVariants}
         animate="show"
         exit={childrenVariants}

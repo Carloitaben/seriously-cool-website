@@ -42,7 +42,7 @@ const Home: FC = () => {
   )
 
   return (
-    <div className="flex h-full pt-16  pb-12">
+    <div className="pt-navbar flex h-full pb-12">
       <LateralTitle href="/about" labels={labelsAbout} />
       <div className="flex flex-1 items-center justify-center px-12">
         {emojiLogo}
