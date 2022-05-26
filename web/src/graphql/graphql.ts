@@ -118,6 +118,65 @@ export const GET_PROJECT = gql`
       }
       blocks {
         __typename
+        ... on ProjectBlockRichText {
+          textRaw
+        }
+        ... on ProjectBlockMedia {
+          mediaBlockBlocks {
+            kind
+            video {
+              mp4 {
+                asset {
+                  url
+                }
+              }
+              width
+              height
+              alt
+            }
+            image {
+              image {
+                asset {
+                  metadata {
+                    dimensions {
+                      height
+                      width
+                    }
+                  }
+                  url
+                }
+              }
+              alt
+            }
+          }
+        }
+        ... on Media {
+          kind
+          video {
+            mp4 {
+              asset {
+                url
+              }
+            }
+            width
+            height
+            alt
+          }
+          image {
+            image {
+              asset {
+                metadata {
+                  dimensions {
+                    height
+                    width
+                  }
+                }
+                url
+              }
+            }
+            alt
+          }
+        }
       }
       clientRaw
       location
