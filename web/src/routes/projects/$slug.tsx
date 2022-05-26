@@ -1,14 +1,15 @@
 import type { LoaderFunction } from "@remix-run/node"
 import { Link, useLoaderData } from "@remix-run/react"
 
-import { client, GET_PROJECT } from "~/graphql"
 import type { GetProjectQuery, GetProjectQueryVariables } from "~/types"
 
+import { client, GET_PROJECT } from "~/graphql"
 import useRootData from "~/hooks/useRootData"
 
 import Navbar from "~/components/Navbar"
 import TextBlock from "~/components/TextBlock"
 import ProjectDetailClientLocation from "~/components/ProjectDetailClientLocation"
+import ProjectDetailBlocks from "~/components/ProjectDetailBlocks"
 
 type ProjectDetailLoaderData = {
   project: GetProjectQuery["allProject"][number]
@@ -52,6 +53,7 @@ export default function Route() {
           <TextBlock>{project.descriptionRaw}</TextBlock>
         </div>
       </div>
+      <ProjectDetailBlocks>{project.blocks}</ProjectDetailBlocks>
       <div className="px-container grid grid-cols-6 gap-x-2 text-2xl">
         <ProjectDetailClientLocation
           client={project.clientRaw}

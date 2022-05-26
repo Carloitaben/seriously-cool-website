@@ -119,9 +119,11 @@ export const GET_PROJECT = gql`
       blocks {
         __typename
         ... on ProjectBlockRichText {
+          _key
           textRaw
         }
         ... on ProjectBlockMedia {
+          _key
           mediaBlockBlocks {
             kind
             video {
@@ -151,6 +153,7 @@ export const GET_PROJECT = gql`
           }
         }
         ... on Media {
+          _key
           kind
           video {
             mp4 {
