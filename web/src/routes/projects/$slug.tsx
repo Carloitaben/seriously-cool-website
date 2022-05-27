@@ -12,6 +12,7 @@ import Navbar from "~/components/Navbar"
 import TextBlock from "~/components/TextBlock"
 import ProjectDetailClientLocation from "~/components/ProjectDetailClientLocation"
 import ProjectDetailBlocks from "~/components/ProjectDetailBlocks"
+import { useState } from "react"
 
 type ProjectDetailLoaderData = {
   project: GetProjectQuery["allProject"][number]
@@ -39,6 +40,8 @@ export default function Route() {
   const { project } = useLoaderData<ProjectDetailLoaderData>()
   const { literals } = useRootData()
 
+  const [finishedTitleAnimation, setFinishedTitleAnimation] = useState(false)
+
   return (
     <>
       <Navbar goBackRoute="/projects">
@@ -51,10 +54,14 @@ export default function Route() {
         <div className="px-container mt-12 mb-24 grid grid-cols-6 gap-x-2 text-2xl">
           <div className="col-span-3 max-w-xl text-5xl leading-tight">
             <h1>
-              <AppearText>{project.title}</AppearText>
+              <AppearText
+                onAnimationStart={() => setFinishedTitleAnimation(true)}
+              >
+                {project.title}
+              </AppearText>
             </h1>
           </div>
-          <Appear>
+          <Appear animate={finishedTitleAnimation}>
             <div className="col-span-3 max-w-2xl">
               <TextBlock>{project.descriptionRaw}</TextBlock>
             </div>
