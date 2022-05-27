@@ -1,13 +1,18 @@
 import type { FC } from "react"
-import type { Media } from "~/types"
 
-type Props = Media
+import type { ProjectDetailBlockCommonProps, Media } from "~/types"
 
-const ProjectDetailBlockFullMedia: FC<Props> = ({}) => {
+import Appear from "../Appear"
+
+type Props = ProjectDetailBlockCommonProps & Media
+
+const ProjectDetailBlockFullMedia: FC<Props> = ({ animate }) => {
   return (
-    <div className="desktop:col-span-6 col-span-4">
-      ProjectDetailBlockFullMedia
-    </div>
+    <Appear animate={animate}>
+      <div className="desktop:col-span-6 col-span-4">
+        ProjectDetailBlockFullMedia
+      </div>
+    </Appear>
   )
 }
 

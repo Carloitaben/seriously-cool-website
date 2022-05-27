@@ -18,12 +18,13 @@ type Props = {
 const ProjectDetailBlocks: FC<Props> = ({ children }) => {
   return (
     <div className="desktop:grid-cols-6 tablet:gap-x-4 desktop:gap-x-2 px-container grid grid-cols-4 gap-x-2 gap-y-2">
-      {children.map(({ __typename, _key, ...props }) => {
+      {children.map(({ __typename, _key, ...props }, index) => {
         switch (__typename) {
           case "ProjectBlockRichText":
             return (
               <ProjectDetailBlockText
                 key={_key}
+                animate={index === 0}
                 {...(props as ProjectBlockRichText)}
               />
             )
@@ -31,12 +32,17 @@ const ProjectDetailBlocks: FC<Props> = ({ children }) => {
             return (
               <ProjectDetailBlockMedia
                 key={_key}
+                animate={index === 0}
                 {...(props as ProjectBlockMedia)}
               />
             )
           case "Media":
             return (
-              <ProjectDetailBlockFullMedia key={_key} {...(props as Media)} />
+              <ProjectDetailBlockFullMedia
+                key={_key}
+                animate={index === 0}
+                {...(props as Media)}
+              />
             )
           default:
             return null

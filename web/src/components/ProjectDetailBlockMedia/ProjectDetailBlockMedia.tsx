@@ -1,11 +1,17 @@
 import type { FC } from "react"
 
-import type { ProjectBlockMedia } from "~/types"
+import type { ProjectDetailBlockCommonProps, ProjectBlockMedia } from "~/types"
 
-type Props = ProjectBlockMedia
+import Appear from "../Appear"
 
-const ProjectDetailBlockMedia: FC<Props> = () => {
-  return <div>ProjectDetailBlockMedia</div>
+type Props = ProjectDetailBlockCommonProps & ProjectBlockMedia
+
+const ProjectDetailBlockMedia: FC<Props> = ({ animate }) => {
+  return (
+    <Appear animate={animate}>
+      <div>ProjectDetailBlockMedia</div>
+    </Appear>
+  )
 }
 
 export default ProjectDetailBlockMedia
