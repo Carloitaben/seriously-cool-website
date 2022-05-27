@@ -529,7 +529,7 @@ button {
 @-webkit-keyframes appear-animation {
   0% {
     opacity: 0;
-    transform: translateY(96px);
+    transform: translateY(50%);
   }
 
   50% {
@@ -541,14 +541,14 @@ button {
   }
 
   100% {
-    transform: translateY(0);
+    transform: translateY(0%);
   }
 }
 
 @keyframes appear-animation {
   0% {
     opacity: 0;
-    transform: translateY(96px);
+    transform: translateY(50%);
   }
 
   50% {
@@ -560,7 +560,7 @@ button {
   }
 
   100% {
-    transform: translateY(0);
+    transform: translateY(0%);
   }
 }
 
@@ -673,16 +673,16 @@ button {
   margin-bottom: 6rem;
 }
 
-.block {
-  display: block;
-}
-
 .inline-block {
   display: inline-block;
 }
 
 .flex {
   display: flex;
+}
+
+.inline-flex {
+  display: inline-flex;
 }
 
 .grid {
@@ -811,10 +811,6 @@ button {
   overflow-y: auto;
 }
 
-.overflow-x-hidden {
-  overflow-x: hidden;
-}
-
 .whitespace-nowrap {
   white-space: nowrap;
 }
@@ -829,11 +825,6 @@ button {
 
 .bg-accent {
   background-color: var(--theme-colors-accent);
-}
-
-.bg-red-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
 }
 
 .fill-current {
@@ -903,11 +894,6 @@ button {
 
 .text-background {
   color: var(--theme-colors-background);
-}
-
-.text-red-500 {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
 .underline {

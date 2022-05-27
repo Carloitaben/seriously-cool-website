@@ -6,6 +6,8 @@ import type { GetProjectQuery, GetProjectQueryVariables } from "~/types"
 import { client, GET_PROJECT } from "~/graphql"
 import useRootData from "~/hooks/useRootData"
 
+import Appear from "~/components/Appear"
+import AppearText from "~/components/AppearText"
 import Navbar from "~/components/Navbar"
 import TextBlock from "~/components/TextBlock"
 import ProjectDetailClientLocation from "~/components/ProjectDetailClientLocation"
@@ -48,11 +50,15 @@ export default function Route() {
       <div className="h-full overflow-y-auto">
         <div className="px-container mt-12 mb-24 grid grid-cols-6 gap-x-2 text-2xl">
           <div className="col-span-3 max-w-xl text-5xl leading-tight">
-            <h1>{project.title}</h1>
+            <h1>
+              <AppearText>{project.title}</AppearText>
+            </h1>
           </div>
-          <div className="col-span-3 max-w-2xl">
-            <TextBlock>{project.descriptionRaw}</TextBlock>
-          </div>
+          <Appear>
+            <div className="col-span-3 max-w-2xl">
+              <TextBlock>{project.descriptionRaw}</TextBlock>
+            </div>
+          </Appear>
         </div>
         <ProjectDetailBlocks>{project.blocks}</ProjectDetailBlocks>
         <div className="px-container grid grid-cols-6 gap-x-2 text-2xl">
