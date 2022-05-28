@@ -1,12 +1,11 @@
 import type { FC } from "react"
 
-import type {
-  ProjectDetailBlockCommonProps,
-  ProjectBlockRichText,
-} from "~/types"
+import type { ProjectBlockRichText } from "~/types"
 
+import type { ProjectDetailBlockCommonProps } from "~/components/ProjectDetailBlocks"
 import Appear from "~/components/Appear"
 import TextBlock from "~/components/TextBlock"
+
 
 type Props = ProjectDetailBlockCommonProps & ProjectBlockRichText
 

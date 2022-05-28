@@ -12,6 +12,3 @@ export type ToyObject = Omit<SettingsToys, "__typename" | "_key" | "_type">
  */
 export type Toy = keyof ToyObject
 
-export type ProjectDetailBlockCommonProps = {
-  animate?: boolean
-}

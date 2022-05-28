@@ -15,6 +15,10 @@ type Props = {
   children: GetProjectQuery["allProject"][number]["blocks"]
 }
 
+export type ProjectDetailBlockCommonProps = {
+  animate?: boolean
+}
+
 const ProjectDetailBlocks: FC<Props> = ({ children }) => {
   return (
     <div className="desktop:grid-cols-6 tablet:gap-x-4 desktop:gap-x-2 px-container grid grid-cols-4 gap-x-2 gap-y-2">

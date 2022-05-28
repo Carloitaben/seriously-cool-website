@@ -1,10 +1,8 @@
 import type { FC } from "react"
 
-import type {
-  ProjectDetailBlockCommonProps,
-  Media as MediaProps,
-} from "~/types"
+import type { Media as MediaProps } from "~/types"
 
+import type { ProjectDetailBlockCommonProps } from "~/components/ProjectDetailBlocks"
 import Appear from "~/components/Appear"
 import Media from "~/components/Media"
 
