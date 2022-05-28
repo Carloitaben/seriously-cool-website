@@ -13,6 +13,7 @@ import useRootData from "~/hooks/useRootData"
 
 import Navbar from "~/components/Navbar"
 import ProjectThumbnail from "~/components/ProjectThumbnail"
+import LayoutScrollableSection from "~/components/LayoutScrollableSection"
 
 export type ProjectsLoaderData = {
   projects: GetProjectsQuery["allProject"]
@@ -84,20 +85,21 @@ export default function Route() {
           {literals.navLinkProjectsLabel}
         </span>
       </Navbar>
-      <ul
-        ref={ref}
-        className="px-container desktop:-mx-1 grid h-full grid-cols-6 overflow-y-auto pb-[2.375rem] pt-0.5"
-      >
-        {projects.map((project, index) => (
-          <ProjectThumbnail
-            key={project.slug.current}
-            project={project}
-            onLoad={() => onProjectLoad(index)}
-            animate={index in animateProjects}
-            skipAppear={skipAppear}
-          />
-        ))}
-      </ul>
+      <LayoutScrollableSection>
+        <div className="px-container desktop:-mx-1 h-full overflow-y-auto pb-[2.375rem] pt-0.5">
+          <ul ref={ref} className="grid h-full grid-cols-6">
+            {projects.map((project, index) => (
+              <ProjectThumbnail
+                key={project.slug.current}
+                project={project}
+                onLoad={() => onProjectLoad(index)}
+                animate={index in animateProjects}
+                skipAppear={skipAppear}
+              />
+            ))}
+          </ul>
+        </div>
+      </LayoutScrollableSection>
     </>
   )
 }

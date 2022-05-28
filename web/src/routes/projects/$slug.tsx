@@ -1,9 +1,11 @@
+import { useState } from "react"
+import { getFileAsset } from "@sanity/asset-utils"
 import type { LoaderFunction } from "@remix-run/node"
 import { Link, useLoaderData } from "@remix-run/react"
 
 import type { GetProjectQuery, GetProjectQueryVariables } from "~/types"
 
-import { client, GET_PROJECT } from "~/graphql"
+import { client, dataset, projectId, GET_PROJECT } from "~/graphql"
 import useRootData from "~/hooks/useRootData"
 
 import Appear from "~/components/Appear"
@@ -12,7 +14,7 @@ import Navbar from "~/components/Navbar"
 import TextBlock from "~/components/TextBlock"
 import ProjectDetailClientLocation from "~/components/ProjectDetailClientLocation"
 import ProjectDetailBlocks from "~/components/ProjectDetailBlocks"
-import { useState } from "react"
+import LayoutScrollableSection from "~/components/LayoutScrollableSection"
 
 type ProjectDetailLoaderData = {
   project: GetProjectQuery["allProject"][number]
@@ -33,7 +35,31 @@ export const loader: LoaderFunction = async ({
     allProject: [project],
   } = await client.request<GetProjectQuery>(GET_PROJECT, getProjectVariables)
 
-  return { project }
+  const projectBlocksWithFileAssets = project.blocks.map((block) => {
+    switch (block.__typename) {
+      case "ProjectBlockRichText":
+        return block
+      case "Media":
+        if (block.kind !== "IMAGE") {
+          block.video.asset = getFileAsset(block.video.mp4, {
+            dataset,
+            projectId,
+            useVanityName: true,
+          })
+        }
+
+        return block
+      default:
+        return block
+    }
+  })
+
+  const projecsWithFileAssets = {
+    ...project,
+    blocks: projectBlocksWithFileAssets,
+  }
+
+  return { project: projecsWithFileAssets }
 }
 
 export default function Route() {
@@ -50,32 +76,34 @@ export default function Route() {
         </Link>
         <span className="menuContentVisible:hidden" />
       </Navbar>
-      <div className="h-full overflow-y-auto">
-        <div className="px-container mt-12 mb-24 grid grid-cols-6 gap-x-2 text-2xl">
-          <div className="col-span-3 max-w-xl text-5xl leading-tight">
-            <h1>
-              <AppearText
-                onAnimationStart={() => setFinishedTitleAnimation(true)}
-              >
-                {project.title}
-              </AppearText>
-            </h1>
-          </div>
-          <Appear animate={finishedTitleAnimation}>
-            <div className="col-span-3 max-w-2xl">
-              <TextBlock>{project.descriptionRaw}</TextBlock>
+      <LayoutScrollableSection>
+        <div className="h-full overflow-y-auto">
+          <div className="px-container mt-12 mb-24 grid grid-cols-6 gap-x-2 text-2xl">
+            <div className="col-span-3 max-w-xl text-5xl leading-tight">
+              <h1>
+                <AppearText
+                  onAnimationStart={() => setFinishedTitleAnimation(true)}
+                >
+                  {project.title}
+                </AppearText>
+              </h1>
             </div>
-          </Appear>
+            <Appear animate={finishedTitleAnimation}>
+              <div className="col-span-3 max-w-2xl">
+                <TextBlock>{project.descriptionRaw}</TextBlock>
+              </div>
+            </Appear>
+          </div>
+          <ProjectDetailBlocks>{project.blocks}</ProjectDetailBlocks>
+          <div className="px-container grid grid-cols-6 gap-x-2 text-2xl">
+            <ProjectDetailClientLocation
+              client={project.clientRaw}
+              location={project.location}
+              year={project.year}
+            />
+          </div>
         </div>
-        <ProjectDetailBlocks>{project.blocks}</ProjectDetailBlocks>
-        <div className="px-container grid grid-cols-6 gap-x-2 text-2xl">
-          <ProjectDetailClientLocation
-            client={project.clientRaw}
-            location={project.location}
-            year={project.year}
-          />
-        </div>
-      </div>
+      </LayoutScrollableSection>
     </>
   )
 }

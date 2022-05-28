@@ -7,9 +7,9 @@ import type {
   Media,
 } from "~/types"
 
-import ProjectDetailBlockText from "../ProjectDetailBlockText"
-import ProjectDetailBlockMedia from "../ProjectDetailBlockMedia"
-import ProjectDetailBlockFullMedia from "../ProjectDetailBlockFullMedia"
+import ProjectDetailBlockText from "~/components/ProjectDetailBlockText"
+import ProjectDetailBlockMedia from "~/components/ProjectDetailBlockMedia"
+import ProjectDetailBlockFullMedia from "~/components/ProjectDetailBlockFullMedia"
 
 type Props = {
   children: GetProjectQuery["allProject"][number]["blocks"]
@@ -24,7 +24,7 @@ const ProjectDetailBlocks: FC<Props> = ({ children }) => {
             return (
               <ProjectDetailBlockText
                 key={_key}
-                animate={index === 0}
+                animate={index === 0 || undefined}
                 {...(props as ProjectBlockRichText)}
               />
             )
@@ -32,7 +32,7 @@ const ProjectDetailBlocks: FC<Props> = ({ children }) => {
             return (
               <ProjectDetailBlockMedia
                 key={_key}
-                animate={index === 0}
+                animate={index === 0 || undefined}
                 {...(props as ProjectBlockMedia)}
               />
             )
@@ -40,12 +40,12 @@ const ProjectDetailBlocks: FC<Props> = ({ children }) => {
             return (
               <ProjectDetailBlockFullMedia
                 key={_key}
-                animate={index === 0}
+                animate={index === 0 || undefined}
                 {...(props as Media)}
               />
             )
           default:
-            return null
+            throw Error(`Unsupported block type: ${__typename}`)
         }
       })}
     </div>

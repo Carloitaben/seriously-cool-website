@@ -5,8 +5,8 @@ import type {
   ProjectBlockRichText,
 } from "~/types"
 
-import Appear from "../Appear"
-import TextBlock from "../TextBlock"
+import Appear from "~/components/Appear"
+import TextBlock from "~/components/TextBlock"
 
 type Props = ProjectDetailBlockCommonProps & ProjectBlockRichText
 

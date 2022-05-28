@@ -24,7 +24,7 @@ const Appear: FC<Props> = ({
   skip,
   animate,
   intersectionObserverConfig = {
-    rootMargin: "0% 0% -30%",
+    rootMargin: "0% 0% -50px",
   },
 }) => {
   const [show, setShow] = useState(animate)

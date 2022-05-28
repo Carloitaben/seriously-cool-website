@@ -6,8 +6,9 @@ import type { ProjectsLoaderData } from "~/routes/projects"
 import store from "~/store"
 import useIntersectionObserver from "~/hooks/useIntersectionObserver"
 
-import Appear from "../Appear"
-import MediaVideoGif from "../MediaVideoGif"
+import { useLayoutScrollableSectionContext } from "~/components/LayoutScrollableSection"
+import Appear from "~/components/Appear"
+import Media from "~/components/Media"
 
 type Props = {
   animate: boolean
@@ -33,7 +34,11 @@ const ProjectThumbnail: FC<Props> = ({
   const [loaded, setLoaded] = useState(false)
   const [animate, setAnimate] = useState(false)
 
-  const intersecting = useIntersectionObserver(ref)
+  const { scrollableRef } = useLayoutScrollableSectionContext()
+
+  const intersecting = useIntersectionObserver(ref, {
+    root: scrollableRef.current,
+  })
 
   useEffect(() => {
     if (intersecting && loaded && animateProp) setAnimate(true)
@@ -60,14 +65,12 @@ const ProjectThumbnail: FC<Props> = ({
             onBlur={() => setSlidingText(null)}
             onClick={() => setSlidingText(null)}
           >
-            {project?.thumbnail?.kind === "VIDEO_GIF" && (
-              <MediaVideoGif
-                {...project.thumbnail.video}
-                alt={project.thumbnail.video.alt || project.title}
-                intersecting={intersecting}
-                onLoad={onProjectLoad}
-              />
-            )}
+            <Media
+              {...project.thumbnail}
+              intersecting={intersecting}
+              onLoad={onProjectLoad}
+              // alt={project.thumbnail.video.alt || project.title}
+            />
             {/* TODO: awards with `toy` integration */}
             {/* {awardsToShow.length > 0 && (
               <div className="absolute inset-0">

@@ -1,6 +1,6 @@
 import type { FC } from "react"
 import type { Scalars } from "~/types"
-import TextBlock from "../TextBlock"
+import TextBlock from "~/components/TextBlock"
 
 type Props = {
   client: Scalars["JSON"]
