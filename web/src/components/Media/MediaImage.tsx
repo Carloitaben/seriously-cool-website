@@ -9,7 +9,9 @@ type Props = Pick<MediaImageProps, "image" | "alt"> & MediaComponentSharedProps
 
 const MediaImage = forwardRef<HTMLImageElement, Props>(
   ({ image, alt, load, onLoad, className }, ref) => {
-    const [url, setUrl] = useState<any>()
+    const { height, width } = image.asset.metadata.dimensions
+
+    const [url, setUrl] = useState<string>()
 
     useEffect(() => {
       if (load) {
@@ -25,7 +27,19 @@ const MediaImage = forwardRef<HTMLImageElement, Props>(
       }
     }, [image, load, onLoad])
 
-    return <img ref={ref} className={className} src={url} alt={alt} />
+    return (
+      <div
+        className="relative"
+        style={{ paddingBottom: `${(height / width) * 100}%` }}
+      >
+        <img
+          ref={ref}
+          src={url}
+          alt={alt}
+          className={`${className} absolute inset-0`}
+        />
+      </div>
+    )
   }
 )
 
