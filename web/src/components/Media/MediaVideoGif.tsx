@@ -35,10 +35,14 @@ const MediaVideoGif = forwardRef<HTMLVideoElement, Props>(
       if (typeof ref === "function" || !ref) return
       if (!ref.current) return
 
-      if (load) {
-        ref.current.paused && ref.current.play()
-      } else {
-        !ref.current.paused && ref.current.pause()
+      try {
+        if (load) {
+          ref.current.paused && ref.current.play()
+        } else {
+          !ref.current.paused && ref.current.pause()
+        }
+      } catch (error) {
+        // noop
       }
     }, [load, assetProp, ref])
 
