@@ -9,7 +9,7 @@ export default function useLightbox({
 }: {
   width: number
   height: number
-  enableLightbox: boolean
+  enableLightbox?: boolean
 }) {
   const id = useRef(Math.random().toString())
 

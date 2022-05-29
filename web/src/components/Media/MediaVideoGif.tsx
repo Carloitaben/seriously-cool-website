@@ -32,6 +32,7 @@ const MediaVideoGif = forwardRef<HTMLVideoElement, Props>(
   ) => {
     const [asset, setAsset] = useState<SanityFileAsset>()
     const lightboxVideoRef = useRef<HTMLVideoElement>(null)
+    const videoCurrentTime = useRef(0)
 
     const { lightboxId, setLightbox, renderLightbox, verticalLightboxImage } =
       useLightbox({
@@ -77,6 +78,31 @@ const MediaVideoGif = forwardRef<HTMLVideoElement, Props>(
       }
     }, [onLoad, ref])
 
+    function onVideoClick() {
+      if (enableLightbox) setLightbox(true)
+
+      if (typeof ref === "function" || !ref || !ref.current) return
+      videoCurrentTime.current = ref.current.currentTime
+    }
+
+    function onLightboxClick() {
+      setLightbox(false)
+
+      if (!lightboxVideoRef.current) return
+      videoCurrentTime.current = lightboxVideoRef.current.currentTime
+    }
+
+    // Sync currentTime betweeen videos
+    useEffect(() => {
+      if (renderLightbox && lightboxVideoRef.current) {
+        lightboxVideoRef.current.currentTime = videoCurrentTime.current
+      }
+
+      if (!renderLightbox && typeof ref !== "function" && ref && ref.current) {
+        ref.current.currentTime = videoCurrentTime.current
+      }
+    }, [ref, renderLightbox])
+
     return (
       <MotionConfig transition={transition}>
         <div
@@ -93,7 +119,7 @@ const MediaVideoGif = forwardRef<HTMLVideoElement, Props>(
               muted
               playsInline
               className="absolute inset-0 h-full w-full"
-              onClick={() => enableLightbox && setLightbox(true)}
+              onClick={onVideoClick}
             >
               {asset && (
                 <source src={asset.url} type={`video/${asset.extension}`} />
@@ -101,7 +127,7 @@ const MediaVideoGif = forwardRef<HTMLVideoElement, Props>(
             </motion.video>
           )}
         </div>
-        <Lightbox renderLightbox={renderLightbox} setLightbox={setLightbox}>
+        <Lightbox renderLightbox={renderLightbox} onClose={onLightboxClick}>
           <motion.video
             layoutId={lightboxId}
             ref={lightboxVideoRef}

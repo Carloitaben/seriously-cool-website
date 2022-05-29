@@ -57,7 +57,10 @@ const MediaImage = forwardRef<HTMLImageElement, Props>(
             />
           )}
         </div>
-        <Lightbox renderLightbox={renderLightbox} setLightbox={setLightbox}>
+        <Lightbox
+          renderLightbox={renderLightbox}
+          onClose={() => setLightbox(false)}
+        >
           <motion.img
             layoutId={lightboxId}
             ref={ref}

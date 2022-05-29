@@ -1,12 +1,12 @@
-import type { Transition, Variants } from "framer-motion"
+import type { Variants } from "framer-motion"
 import { AnimatePresence, motion } from "framer-motion"
-import type { Dispatch, FC, ReactNode, SetStateAction } from "react"
+import type { FC, ReactNode } from "react"
 
 import Portal from "~/components/Portal"
 
 type Props = {
   renderLightbox: boolean
-  setLightbox: Dispatch<SetStateAction<boolean>>
+  onClose: () => void
 
   children: ReactNode
 }
@@ -20,7 +20,7 @@ const variants = {
   },
 }
 
-const Lightbox: FC<Props> = ({ children, renderLightbox, setLightbox }) => {
+const Lightbox: FC<Props> = ({ children, renderLightbox, onClose }) => {
   return (
     <AnimatePresence initial={false}>
       {renderLightbox && (
@@ -31,7 +31,7 @@ const Lightbox: FC<Props> = ({ children, renderLightbox, setLightbox }) => {
             animate="show"
             exit="hide"
             variants={variants as Variants}
-            onClick={() => setLightbox(false)}
+            onClick={onClose}
           >
             <div className="flex h-full items-center justify-center">
               {children}
