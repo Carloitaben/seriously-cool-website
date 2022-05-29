@@ -1,7 +1,9 @@
-import { forwardRef, useEffect, useState } from "react"
+import { forwardRef, useEffect, useRef, useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
 
 import type { MediaImage as MediaImageProps } from "~/types"
 import { getSanityImageSource } from "~/utils"
+import Portal from "../Portal"
 
 import type { MediaComponentSharedProps } from "./Media"
 
@@ -11,7 +13,9 @@ const MediaImage = forwardRef<HTMLImageElement, Props>(
   ({ image, alt, load, onLoad, className }, ref) => {
     const { height, width } = image.asset.metadata.dimensions
 
+    const uuid = useRef(Math.random().toString())
     const [url, setUrl] = useState<string>()
+    const [lightbox, setLightbox] = useState(false)
 
     useEffect(() => {
       if (load) {
@@ -31,13 +35,36 @@ const MediaImage = forwardRef<HTMLImageElement, Props>(
       <div
         className="relative"
         style={{ paddingBottom: `${(height / width) * 100}%` }}
+        onClick={() => setLightbox((value) => !value)}
       >
-        <img
-          ref={ref}
-          src={url}
-          alt={alt}
-          className={`${className} absolute inset-0`}
-        />
+        {!lightbox && (
+          <motion.img
+            layoutId={`lightbox-img-${uuid.current}`}
+            ref={ref}
+            src={url}
+            alt={alt}
+            className={`${className} pointer-events-none absolute inset-0`}
+          />
+        )}
+        <AnimatePresence>
+          {lightbox && (
+            <Portal>
+              <motion.div className="fixed inset-0 p-4">
+                <div className="flex h-full items-center justify-center">
+                  <motion.img
+                    layoutId={`lightbox-img-${uuid.current}`}
+                    ref={ref}
+                    src={url}
+                    alt={alt}
+                    className={`pointer-events-none ${
+                      height / width > 1 ? "" : ""
+                    }`}
+                  />
+                </div>
+              </motion.div>
+            </Portal>
+          )}
+        </AnimatePresence>
       </div>
     )
   }
