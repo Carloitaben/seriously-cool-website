@@ -26,6 +26,7 @@ const MediaVideoGif = forwardRef<HTMLVideoElement, Props>(
       mp4,
       asset: assetProp,
       intersecting,
+      enableLightbox,
     },
     ref
   ) => {
@@ -36,6 +37,7 @@ const MediaVideoGif = forwardRef<HTMLVideoElement, Props>(
       useLightbox({
         width,
         height,
+        enableLightbox,
       })
 
     // Load asset
@@ -91,7 +93,7 @@ const MediaVideoGif = forwardRef<HTMLVideoElement, Props>(
               muted
               playsInline
               className="absolute inset-0 h-full w-full"
-              onClick={() => setLightbox(true)}
+              onClick={() => enableLightbox && setLightbox(true)}
             >
               {asset && (
                 <source src={asset.url} type={`video/${asset.extension}`} />

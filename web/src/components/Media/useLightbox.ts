@@ -5,9 +5,11 @@ import useOnWindowResize from "~/hooks/useOnWindowResize"
 export default function useLightbox({
   width,
   height,
+  enableLightbox,
 }: {
   width: number
   height: number
+  enableLightbox: boolean
 }) {
   const id = useRef(Math.random().toString())
 
@@ -21,7 +23,7 @@ export default function useLightbox({
   }, [height, width])
 
   useOnWindowResize(onWindowResize, {
-    disable: !lightbox,
+    disable: !lightbox || !enableLightbox,
   })
 
   const renderLightbox = lightbox && typeof verticalLightboxImage === "boolean"

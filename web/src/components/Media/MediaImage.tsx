@@ -14,7 +14,7 @@ type Props = Pick<MediaImageProps, "image" | "alt"> & MediaComponentSharedProps
 const transition: Transition = { type: "spring", bounce: 0, duration: 0.5 }
 
 const MediaImage = forwardRef<HTMLImageElement, Props>(
-  ({ image, alt, load, onLoad, className }, ref) => {
+  ({ image, alt, load, onLoad, className, enableLightbox }, ref) => {
     const { height, width } = image.asset.metadata.dimensions
 
     const [url, setUrl] = useState<string>()
@@ -37,6 +37,7 @@ const MediaImage = forwardRef<HTMLImageElement, Props>(
       useLightbox({
         width,
         height,
+        enableLightbox,
       })
 
     return (
@@ -52,7 +53,7 @@ const MediaImage = forwardRef<HTMLImageElement, Props>(
               src={url}
               alt={alt}
               className={`${className} absolute inset-0 h-full w-full`}
-              onClick={() => setLightbox(true)}
+              onClick={() => enableLightbox && setLightbox(true)}
             />
           )}
         </div>

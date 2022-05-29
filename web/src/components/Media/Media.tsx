@@ -17,6 +17,7 @@ type Props = {
   intersecting?: boolean
   onLoad?: () => void
   className?: string
+  enableLightbox?: boolean
 }
 
 // Internal media component shared props
@@ -33,7 +34,7 @@ const Media: FC<Pick<MediaProps, "kind" | "image" | "video"> & Props> = ({
   video,
   intersecting: intersectingProp,
   className = "",
-  onLoad,
+  ...props
 }) => {
   const { scrollableRef } = useLayoutScrollableSectionContext()
   const ref = useRef(null)
@@ -49,21 +50,21 @@ const Media: FC<Pick<MediaProps, "kind" | "image" | "video"> & Props> = ({
     root: scrollableRef.current,
   })
 
-  const props = {
+  const mediaProps = {
     intersecting: intersectingProp || intersecting,
     load: intersectingProp || load,
     ref,
     className,
-    onLoad,
+    ...props,
   }
 
   switch (kind) {
     case "IMAGE":
-      return <MediaImage {...props} {...image} />
+      return <MediaImage {...mediaProps} {...image} />
     case "VIDEO_GIF":
-      return <MediaVideoGif {...props} {...video} />
+      return <MediaVideoGif {...mediaProps} {...video} />
     case "VIDEO_PLAYER":
-      return <MediaVideoPlayer {...props} {...video} />
+      return <MediaVideoPlayer {...mediaProps} {...video} />
     default:
       throw Error(`Unsupported media kind: ${kind}`)
   }
