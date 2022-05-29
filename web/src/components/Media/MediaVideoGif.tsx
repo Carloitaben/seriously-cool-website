@@ -1,12 +1,18 @@
-import { forwardRef, useState, useEffect } from "react"
+import { forwardRef, useState, useEffect, useRef } from "react"
 import type { SanityFileAsset } from "@sanity/asset-utils"
+import type { Transition } from "framer-motion"
+import { motion, MotionConfig } from "framer-motion"
 
 import type { MediaVideo } from "~/types"
 
 import type { MediaComponentSharedProps } from "./Media"
+import useLightbox from "./useLightbox"
+import Lightbox from "./Lightbox"
 
 type Props = Omit<MediaVideo, "__typename" | "_key" | "_type"> &
   MediaComponentSharedProps
+
+const transition: Transition = { type: "spring", bounce: 0, duration: 0.5 }
 
 const MediaVideoGif = forwardRef<HTMLVideoElement, Props>(
   (
@@ -24,6 +30,13 @@ const MediaVideoGif = forwardRef<HTMLVideoElement, Props>(
     ref
   ) => {
     const [asset, setAsset] = useState<SanityFileAsset>()
+    const lightboxVideoRef = useRef<HTMLVideoElement>(null)
+
+    const { lightboxId, setLightbox, renderLightbox, verticalLightboxImage } =
+      useLightbox({
+        width,
+        height,
+      })
 
     // Load asset
     useEffect(() => {
@@ -32,8 +45,7 @@ const MediaVideoGif = forwardRef<HTMLVideoElement, Props>(
 
     // Handle play/pause when intersecting
     useEffect(() => {
-      if (typeof ref === "function" || !ref) return
-      if (!ref.current) return
+      if (typeof ref === "function" || !ref || !ref.current) return
 
       try {
         if (load) {
@@ -48,8 +60,7 @@ const MediaVideoGif = forwardRef<HTMLVideoElement, Props>(
 
     // Attatch events
     useEffect(() => {
-      if (typeof ref === "function" || !ref) return
-      if (!ref.current) return
+      if (typeof ref === "function" || !ref || !ref.current) return
 
       const element = ref.current
 
@@ -65,23 +76,46 @@ const MediaVideoGif = forwardRef<HTMLVideoElement, Props>(
     }, [onLoad, ref])
 
     return (
-      <div
-        className={`${className} relative w-full overflow-hidden`}
-        style={{ paddingBottom: `${(height / width) * 100}%` }}
-      >
-        <video
-          className="absolute inset-0 h-full w-full"
-          ref={ref}
-          title={alt}
-          loop
-          muted
-          playsInline
+      <MotionConfig transition={transition}>
+        <div
+          className={`${className} relative`}
+          style={{ paddingBottom: `${(height / width) * 100}%` }}
         >
-          {asset && (
-            <source src={asset.url} type={`video/${asset.extension}`} />
+          {!renderLightbox && (
+            <motion.video
+              layoutId={lightboxId}
+              ref={ref}
+              title={alt}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 h-full w-full"
+              onClick={() => setLightbox(true)}
+            >
+              {asset && (
+                <source src={asset.url} type={`video/${asset.extension}`} />
+              )}
+            </motion.video>
           )}
-        </video>
-      </div>
+        </div>
+        <Lightbox renderLightbox={renderLightbox} setLightbox={setLightbox}>
+          <motion.video
+            layoutId={lightboxId}
+            ref={lightboxVideoRef}
+            title={alt}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className={`${verticalLightboxImage ? "h-full" : "w-full"}`}
+          >
+            {asset && (
+              <source src={asset.url} type={`video/${asset.extension}`} />
+            )}
+          </motion.video>
+        </Lightbox>
+      </MotionConfig>
     )
   }
 )

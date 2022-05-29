@@ -27,7 +27,7 @@ export default function useLightbox({
   const renderLightbox = lightbox && typeof verticalLightboxImage === "boolean"
 
   return {
-    lightboxId: id.current,
+    lightboxId: `lightbox-${id.current}`,
     setLightbox,
     renderLightbox,
     verticalLightboxImage,

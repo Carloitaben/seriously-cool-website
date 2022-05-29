@@ -1,24 +1,15 @@
 import { forwardRef, useEffect, useState } from "react"
-import type { Transition, Variants } from "framer-motion"
-import { AnimatePresence, motion, MotionConfig } from "framer-motion"
+import type { Transition } from "framer-motion"
+import { motion, MotionConfig } from "framer-motion"
 
 import type { MediaImage as MediaImageProps } from "~/types"
 import { getSanityImageSource } from "~/utils"
-import Portal from "~/components/Portal"
 
 import type { MediaComponentSharedProps } from "./Media"
 import useLightbox from "./useLightbox"
+import Lightbox from "./Lightbox"
 
 type Props = Pick<MediaImageProps, "image" | "alt"> & MediaComponentSharedProps
-
-const variants = {
-  hide: {
-    "--tw-bg-opacity": 0,
-  },
-  show: {
-    "--tw-bg-opacity": 0.75,
-  },
-}
 
 const transition: Transition = { type: "spring", bounce: 0, duration: 0.5 }
 
@@ -56,7 +47,7 @@ const MediaImage = forwardRef<HTMLImageElement, Props>(
         >
           {!renderLightbox && (
             <motion.img
-              layoutId={`lightbox-img-${lightboxId}`}
+              layoutId={lightboxId}
               ref={ref}
               src={url}
               alt={alt}
@@ -65,30 +56,15 @@ const MediaImage = forwardRef<HTMLImageElement, Props>(
             />
           )}
         </div>
-        <AnimatePresence>
-          {renderLightbox && (
-            <Portal>
-              <motion.div
-                className="fixed inset-0 bg-black p-4"
-                initial="hide"
-                animate="show"
-                exit="hide"
-                variants={variants as Variants}
-                onClick={() => setLightbox(false)}
-              >
-                <div className="flex h-full items-center justify-center">
-                  <motion.img
-                    layoutId={`lightbox-img-${lightboxId}`}
-                    ref={ref}
-                    src={url}
-                    alt={alt}
-                    className={`${verticalLightboxImage ? "h-full" : "w-full"}`}
-                  />
-                </div>
-              </motion.div>
-            </Portal>
-          )}
-        </AnimatePresence>
+        <Lightbox renderLightbox={renderLightbox} setLightbox={setLightbox}>
+          <motion.img
+            layoutId={lightboxId}
+            ref={ref}
+            src={url}
+            alt={alt}
+            className={`${verticalLightboxImage ? "h-full" : "w-full"}`}
+          />
+        </Lightbox>
       </MotionConfig>
     )
   }
