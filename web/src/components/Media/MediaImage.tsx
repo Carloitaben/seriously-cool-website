@@ -1,13 +1,13 @@
-import { forwardRef, useCallback, useEffect, useRef, useState } from "react"
+import { forwardRef, useEffect, useState } from "react"
 import type { Transition, Variants } from "framer-motion"
 import { AnimatePresence, motion, MotionConfig } from "framer-motion"
 
 import type { MediaImage as MediaImageProps } from "~/types"
 import { getSanityImageSource } from "~/utils"
-import useOnWindowResize from "~/hooks/useOnWindowResize"
 import Portal from "~/components/Portal"
 
 import type { MediaComponentSharedProps } from "./Media"
+import useLightbox from "./useLightbox"
 
 type Props = Pick<MediaImageProps, "image" | "alt"> & MediaComponentSharedProps
 
@@ -26,11 +26,7 @@ const MediaImage = forwardRef<HTMLImageElement, Props>(
   ({ image, alt, load, onLoad, className }, ref) => {
     const { height, width } = image.asset.metadata.dimensions
 
-    const uuid = useRef(Math.random().toString())
     const [url, setUrl] = useState<string>()
-    const [lightbox, setLightbox] = useState(false)
-    const [verticalLightboxImage, setVerticalLightboxImage] =
-      useState<boolean>()
 
     useEffect(() => {
       if (load) {
@@ -46,18 +42,11 @@ const MediaImage = forwardRef<HTMLImageElement, Props>(
       }
     }, [image, load, onLoad])
 
-    const onWindowResize = useCallback(() => {
-      const windowAspectRatio = window.innerHeight / window.innerWidth
-      const imageAspectRatio = height / width
-      setVerticalLightboxImage(windowAspectRatio < imageAspectRatio)
-    }, [height, width])
-
-    useOnWindowResize(onWindowResize, {
-      disable: !lightbox,
-    })
-
-    const renderLightbox =
-      lightbox && typeof verticalLightboxImage === "boolean"
+    const { lightboxId, setLightbox, renderLightbox, verticalLightboxImage } =
+      useLightbox({
+        width,
+        height,
+      })
 
     return (
       <MotionConfig transition={transition}>
@@ -67,7 +56,7 @@ const MediaImage = forwardRef<HTMLImageElement, Props>(
         >
           {!renderLightbox && (
             <motion.img
-              layoutId={`lightbox-img-${uuid.current}`}
+              layoutId={`lightbox-img-${lightboxId}`}
               ref={ref}
               src={url}
               alt={alt}
@@ -89,7 +78,7 @@ const MediaImage = forwardRef<HTMLImageElement, Props>(
               >
                 <div className="flex h-full items-center justify-center">
                   <motion.img
-                    layoutId={`lightbox-img-${uuid.current}`}
+                    layoutId={`lightbox-img-${lightboxId}`}
                     ref={ref}
                     src={url}
                     alt={alt}
