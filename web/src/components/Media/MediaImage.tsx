@@ -58,7 +58,7 @@ const MediaImage = forwardRef<HTMLImageElement, Props>(
       lightbox && typeof verticalLightboxImage === "boolean"
 
     return (
-      <MotionConfig transition={{ type: "spring", mass: 0.65 }}>
+      <MotionConfig transition={{ type: "spring", bounce: 0, duration: 0.5 }}>
         <div
           className="relative"
           style={{ paddingBottom: `${(height / width) * 100}%` }}

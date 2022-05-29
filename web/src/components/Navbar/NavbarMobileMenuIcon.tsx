@@ -1,6 +1,6 @@
 import type { FC } from "react"
 import type { Transition, Variants } from "framer-motion"
-import { m, MotionConfig } from "framer-motion"
+import { motion, MotionConfig } from "framer-motion"
 
 type Props = {
   close: boolean
@@ -39,7 +39,7 @@ const NavbarMobileMenuIcon: FC<Props> = ({ close }) => {
   return (
     <div className="tablet:mr-0 -mr-2 flex h-12 w-12 items-center justify-center">
       <MotionConfig transition={transition}>
-        <m.svg
+        <motion.svg
           width="16"
           height="16"
           viewBox="0 0 16 16"
@@ -48,21 +48,21 @@ const NavbarMobileMenuIcon: FC<Props> = ({ close }) => {
           initial={false}
           animate={animate}
         >
-          <m.rect
+          <motion.rect
             variants={variants.edges}
             width="16"
             height="2"
             fill="currentColor"
             custom="top"
           />
-          <m.rect
+          <motion.rect
             variants={variants.center}
             y="7"
             width="16"
             height="2"
             fill="currentColor"
           />
-          <m.rect
+          <motion.rect
             variants={variants.edges}
             y="14"
             width="16"
@@ -70,7 +70,7 @@ const NavbarMobileMenuIcon: FC<Props> = ({ close }) => {
             fill="currentColor"
             custom="bottom"
           />
-        </m.svg>
+        </motion.svg>
       </MotionConfig>
     </div>
   )

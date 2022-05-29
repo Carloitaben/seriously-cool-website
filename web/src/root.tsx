@@ -11,11 +11,7 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react"
-import {
-  LazyMotion,
-  domAnimation,
-  useIsomorphicLayoutEffect,
-} from "framer-motion"
+import { useIsomorphicLayoutEffect } from "framer-motion"
 import type { CSSProperties } from "react"
 
 import styles from "~/styles/index.css"
@@ -175,17 +171,15 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <LazyMotion features={domAnimation}>
-        <body
-          className="selection:bg-accent selection:text-background flex h-screen flex-col"
-          style={style}
-        >
-          <Layout />
-          <ScrollRestoration />
-          <Scripts />
-          <LiveReload />
-        </body>
-      </LazyMotion>
+      <body
+        className="selection:bg-accent selection:text-background flex h-screen flex-col"
+        style={style}
+      >
+        <Layout />
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
+      </body>
     </html>
   )
 }
