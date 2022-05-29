@@ -1,6 +1,6 @@
 import type { CSSProperties, FC, ReactNode } from "react"
 import type { Variants } from "framer-motion"
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import useRootData from "~/hooks/useRootData"
 
 type Props = {
@@ -31,7 +31,7 @@ const LayoutDrawer: FC<Props> = ({ children, origin }) => {
   const childrenVariants = origin === "left" ? "right" : "left"
 
   return (
-    <motion.div
+    <m.div
       className="bottom-slidingTextDesktop selection:bg-background selection:text-accent fixed inset-x-0 top-0 overflow-hidden"
       initial={origin}
       animate="show"
@@ -39,7 +39,7 @@ const LayoutDrawer: FC<Props> = ({ children, origin }) => {
       variants={variants}
       style={style}
     >
-      <motion.div
+      <m.div
         className="pt-navbar h-full"
         initial={childrenVariants}
         animate="show"
@@ -47,8 +47,8 @@ const LayoutDrawer: FC<Props> = ({ children, origin }) => {
         variants={variants}
       >
         {children}
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   )
 }
 

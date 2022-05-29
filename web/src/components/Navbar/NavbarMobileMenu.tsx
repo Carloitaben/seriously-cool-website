@@ -1,8 +1,8 @@
 import type { FC, ReactNode } from "react"
 import { useEffect, useState } from "react"
 import type { Variants } from "framer-motion"
-import { motion, MotionConfig } from "framer-motion"
-import { useLocation, useNavigate } from "@remix-run/react"
+import { m, MotionConfig } from "framer-motion"
+import { useLocation, useNavigate, useTransition } from "@remix-run/react"
 
 import { layoutTransitionProp } from "~/utils"
 
@@ -54,14 +54,14 @@ const NavbarMobileMenu: FC<Props> = ({ children, goBackRoute }) => {
       <div className="menuContentVisible:[display:unset] hidden">
         {children}
       </div>
-      <motion.div
+      <m.div
         className="bg-accent text-background selection:bg-background selection:text-accent menuContentVisible:hidden fixed inset-0 overflow-hidden"
         initial="hide"
         animate={menuOpened ? "show" : "hide"}
         variants={variants}
         custom={{ invert: false }}
       >
-        <motion.div
+        <m.div
           className="relative h-full w-full"
           initial="hide"
           animate={menuOpened ? "show" : "hide"}
@@ -78,8 +78,8 @@ const NavbarMobileMenu: FC<Props> = ({ children, goBackRoute }) => {
               <NavbarMobileMenuIcon close={menuOpened || showCloseIcon} />
             </button>
           </div>
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
       <button
         className="menuContentVisible:hidden"
         aria-label={menuOpened ? literals.menuClose : literals.menuOpen}
