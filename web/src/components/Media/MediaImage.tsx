@@ -1,5 +1,5 @@
 import { forwardRef, useCallback, useEffect, useRef, useState } from "react"
-import type { Variants } from "framer-motion"
+import type { Transition, Variants } from "framer-motion"
 import { AnimatePresence, motion, MotionConfig } from "framer-motion"
 
 import type { MediaImage as MediaImageProps } from "~/types"
@@ -19,6 +19,8 @@ const variants = {
     "--tw-bg-opacity": 0.75,
   },
 }
+
+const transition: Transition = { type: "spring", bounce: 0, duration: 0.5 }
 
 const MediaImage = forwardRef<HTMLImageElement, Props>(
   ({ image, alt, load, onLoad, className }, ref) => {
@@ -58,7 +60,7 @@ const MediaImage = forwardRef<HTMLImageElement, Props>(
       lightbox && typeof verticalLightboxImage === "boolean"
 
     return (
-      <MotionConfig transition={{ type: "spring", mass: 0.65 }}>
+      <MotionConfig transition={transition}>
         <div
           className="relative"
           style={{ paddingBottom: `${(height / width) * 100}%` }}
