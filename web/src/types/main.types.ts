@@ -11,4 +11,3 @@ export type ToyObject = Omit<SettingsToys, "__typename" | "_key" | "_type">
  * A toy. The theme generator will pick one randomly
  */
 export type Toy = keyof ToyObject
-

@@ -1,13 +1,24 @@
-import { forwardRef, useEffect, useRef, useState } from "react"
-import { AnimatePresence, motion } from "framer-motion"
+import { forwardRef, useCallback, useEffect, useRef, useState } from "react"
+import type { Variants } from "framer-motion"
+import { AnimatePresence, motion, MotionConfig } from "framer-motion"
 
 import type { MediaImage as MediaImageProps } from "~/types"
 import { getSanityImageSource } from "~/utils"
-import Portal from "../Portal"
+import useOnWindowResize from "~/hooks/useOnWindowResize"
+import Portal from "~/components/Portal"
 
 import type { MediaComponentSharedProps } from "./Media"
 
 type Props = Pick<MediaImageProps, "image" | "alt"> & MediaComponentSharedProps
+
+const variants = {
+  hide: {
+    "--tw-bg-opacity": 0,
+  },
+  show: {
+    "--tw-bg-opacity": 0.75,
+  },
+}
 
 const MediaImage = forwardRef<HTMLImageElement, Props>(
   ({ image, alt, load, onLoad, className }, ref) => {
@@ -16,6 +27,8 @@ const MediaImage = forwardRef<HTMLImageElement, Props>(
     const uuid = useRef(Math.random().toString())
     const [url, setUrl] = useState<string>()
     const [lightbox, setLightbox] = useState(false)
+    const [verticalLightboxImage, setVerticalLightboxImage] =
+      useState<boolean>()
 
     useEffect(() => {
       if (load) {
@@ -31,41 +44,61 @@ const MediaImage = forwardRef<HTMLImageElement, Props>(
       }
     }, [image, load, onLoad])
 
+    const onWindowResize = useCallback(() => {
+      const windowAspectRatio = window.innerHeight / window.innerWidth
+      const imageAspectRatio = height / width
+      setVerticalLightboxImage(windowAspectRatio < imageAspectRatio)
+    }, [height, width])
+
+    useOnWindowResize(onWindowResize, {
+      disable: !lightbox,
+    })
+
+    const renderLightbox =
+      lightbox && typeof verticalLightboxImage === "boolean"
+
     return (
-      <div
-        className="relative"
-        style={{ paddingBottom: `${(height / width) * 100}%` }}
-        onClick={() => setLightbox((value) => !value)}
-      >
-        {!lightbox && (
-          <motion.img
-            layoutId={`lightbox-img-${uuid.current}`}
-            ref={ref}
-            src={url}
-            alt={alt}
-            className={`${className} pointer-events-none absolute inset-0`}
-          />
-        )}
+      <MotionConfig transition={{ type: "spring", mass: 0.65 }}>
+        <div
+          className="relative"
+          style={{ paddingBottom: `${(height / width) * 100}%` }}
+        >
+          {!renderLightbox && (
+            <motion.img
+              layoutId={`lightbox-img-${uuid.current}`}
+              ref={ref}
+              src={url}
+              alt={alt}
+              className={`${className} absolute inset-0 h-full w-full`}
+              onClick={() => setLightbox(true)}
+            />
+          )}
+        </div>
         <AnimatePresence>
-          {lightbox && (
+          {renderLightbox && (
             <Portal>
-              <motion.div className="fixed inset-0 p-4">
+              <motion.div
+                className="fixed inset-0 bg-black p-4"
+                initial="hide"
+                animate="show"
+                exit="hide"
+                variants={variants as Variants}
+                onClick={() => setLightbox(false)}
+              >
                 <div className="flex h-full items-center justify-center">
                   <motion.img
                     layoutId={`lightbox-img-${uuid.current}`}
                     ref={ref}
                     src={url}
                     alt={alt}
-                    className={`pointer-events-none ${
-                      height / width > 1 ? "" : ""
-                    }`}
+                    className={`${verticalLightboxImage ? "h-full" : "w-full"}`}
                   />
                 </div>
               </motion.div>
             </Portal>
           )}
         </AnimatePresence>
-      </div>
+      </MotionConfig>
     )
   }
 )
