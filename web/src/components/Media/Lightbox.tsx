@@ -9,7 +9,6 @@ import useOnKey from "~/hooks/useOnKey"
 type Props = {
   renderLightbox: boolean
   onClose: () => void
-
   children: ReactNode
 }
 
