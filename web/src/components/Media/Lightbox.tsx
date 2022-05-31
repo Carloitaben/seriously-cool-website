@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import type { FC, ReactNode } from "react"
 
 import Portal from "~/components/Portal"
+import useOnKey from "~/hooks/useOnKey"
 
 type Props = {
   renderLightbox: boolean
@@ -23,6 +24,15 @@ const variants = {
 
 const Lightbox: FC<Props> = ({ children, renderLightbox, onClose }) => {
   const ref = useFocusTrap()
+
+  useOnKey((key) => {
+    switch (key) {
+      case "Escape":
+      case "Enter":
+      case " ":
+        return onClose()
+    }
+  }, renderLightbox)
 
   return (
     <AnimatePresence initial={false}>
