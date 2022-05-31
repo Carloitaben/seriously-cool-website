@@ -2,11 +2,12 @@ import type { FC, ReactNode } from "react"
 import { useEffect, useState } from "react"
 import type { Variants } from "framer-motion"
 import { m, MotionConfig } from "framer-motion"
-import { useLocation, useNavigate, useTransition } from "@remix-run/react"
+import { useLocation, useNavigate } from "@remix-run/react"
 
 import { layoutTransitionProp } from "~/utils"
 
 import useRootData from "~/hooks/useRootData"
+import useOnKey from "~/hooks/useOnKey"
 
 import NavbarMobileMenuIcon from "./NavbarMobileMenuIcon"
 
@@ -35,6 +36,10 @@ const NavbarMobileMenu: FC<Props> = ({ children, goBackRoute }) => {
 
   const [menuOpened, setMenuOpened] = useState(false)
   const [showCloseIcon, setShowCloseIcon] = useState(pathname !== "/")
+
+  useOnKey((key) => {
+    if (key === "Escape") setMenuOpened(false)
+  }, menuOpened)
 
   useEffect(() => {
     setMenuOpened(false)
