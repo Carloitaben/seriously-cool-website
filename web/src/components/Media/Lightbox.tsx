@@ -1,3 +1,4 @@
+import { useFocusTrap } from "@mantine/hooks"
 import type { Variants } from "framer-motion"
 import { AnimatePresence, motion } from "framer-motion"
 import type { FC, ReactNode } from "react"
@@ -21,17 +22,21 @@ const variants = {
 }
 
 const Lightbox: FC<Props> = ({ children, renderLightbox, onClose }) => {
+  const ref = useFocusTrap()
+
   return (
     <AnimatePresence initial={false}>
       {renderLightbox && (
         <Portal>
           <motion.div
-            className="fixed inset-0 bg-black p-4"
+            className="fixed inset-0 bg-black p-4 focus:outline-none"
             initial="hide"
             animate="show"
             exit="hide"
             variants={variants as Variants}
             onClick={onClose}
+            ref={ref}
+            tabIndex={0}
           >
             <div className="flex h-full items-center justify-center">
               {children}
