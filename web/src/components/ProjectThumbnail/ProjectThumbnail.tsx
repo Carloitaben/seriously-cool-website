@@ -73,12 +73,12 @@ const ProjectThumbnail: FC<Props> = ({
             />
             {/* TODO: awards with `toy` integration */}
             {/* {awardsToShow.length > 0 && (
-              <div className="absolute inset-0">
-                {awardsToShow.map((award, index) => (
-                  <span key={index}>award</span>
-                ))}
-              </div>
-            )} */}
+                <div className="absolute inset-0">
+                  {awardsToShow.map((award, index) => (
+                    <span key={index}>award</span>
+                  ))}
+                </div>
+              )} */}
           </Link>
           <h6 className="desktop:hidden tablet:mt-6 mt-2 mb-10 text-2xl">
             {project.title}

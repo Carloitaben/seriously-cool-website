@@ -88,10 +88,11 @@ export default function Route() {
                 </AppearText>
               </h1>
             </div>
-            <Appear animate={finishedTitleAnimation}>
-              <div className="col-span-3 max-w-2xl">
-                <TextBlock>{project.descriptionRaw}</TextBlock>
-              </div>
+            <Appear
+              animate={finishedTitleAnimation}
+              className="col-span-3 max-w-2xl"
+            >
+              <TextBlock>{project.descriptionRaw}</TextBlock>
             </Appear>
           </div>
           <ProjectDetailBlocks>{project.blocks}</ProjectDetailBlocks>

@@ -10,10 +10,8 @@ type Props = ProjectDetailBlockCommonProps & MediaProps
 
 const ProjectDetailBlockFullMedia: FC<Props> = ({ animate, ...mediaProps }) => {
   return (
-    <Appear animate={animate}>
-      <div className="desktop:col-span-6 col-span-4">
-        <Media enableLightbox {...mediaProps} />
-      </div>
+    <Appear className="desktop:col-span-6 col-span-4" animate={animate}>
+      <Media enableLightbox {...mediaProps} />
     </Appear>
   )
 }
