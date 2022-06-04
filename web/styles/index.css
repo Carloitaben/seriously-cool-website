@@ -7,6 +7,10 @@
     @apply underline;
   }
 
+  img, video {
+    @apply select-none;
+  }
+
   button {
     text-transform: unset;
   }

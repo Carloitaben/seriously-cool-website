@@ -428,6 +428,13 @@ a {
           text-decoration-line: underline;
 }
 
+img, video {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
 button {
   text-transform: unset;
 }

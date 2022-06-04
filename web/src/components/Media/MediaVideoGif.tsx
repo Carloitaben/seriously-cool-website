@@ -1,6 +1,7 @@
 import { forwardRef, useState, useEffect, useRef } from "react"
 import type { SanityFileAsset } from "@sanity/asset-utils"
 import type { Transition } from "framer-motion"
+import { useIsomorphicLayoutEffect } from "framer-motion"
 import { motion, MotionConfig } from "framer-motion"
 
 import type { MediaVideo } from "~/types"
@@ -17,16 +18,15 @@ const transition: Transition = { type: "spring", bounce: 0, duration: 0.5 }
 const MediaVideoGif = forwardRef<HTMLVideoElement, Props>(
   (
     {
-      className,
-      width,
-      height,
       alt,
+      asset: assetProp,
+      className,
+      enableLightbox,
+      intersecting,
       load,
       onLoad,
-      mp4,
-      asset: assetProp,
-      intersecting,
-      enableLightbox,
+      height,
+      width,
     },
     ref
   ) => {
@@ -51,7 +51,7 @@ const MediaVideoGif = forwardRef<HTMLVideoElement, Props>(
       if (typeof ref === "function" || !ref || !ref.current) return
 
       try {
-        if (load) {
+        if (intersecting) {
           ref.current.paused && ref.current.play()
         } else {
           !ref.current.paused && ref.current.pause()
@@ -59,7 +59,7 @@ const MediaVideoGif = forwardRef<HTMLVideoElement, Props>(
       } catch (error) {
         // noop
       }
-    }, [load, assetProp, ref])
+    }, [load, assetProp, ref, intersecting])
 
     // Attatch events
     useEffect(() => {
@@ -93,7 +93,7 @@ const MediaVideoGif = forwardRef<HTMLVideoElement, Props>(
     }
 
     // Sync currentTime betweeen videos
-    useEffect(() => {
+    useIsomorphicLayoutEffect(() => {
       if (renderLightbox && lightboxVideoRef.current) {
         lightboxVideoRef.current.currentTime = videoCurrentTime.current
       }
