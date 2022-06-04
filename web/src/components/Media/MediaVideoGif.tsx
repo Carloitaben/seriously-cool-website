@@ -1,8 +1,7 @@
 import { forwardRef, useState, useEffect, useRef } from "react"
 import type { SanityFileAsset } from "@sanity/asset-utils"
 import type { Transition } from "framer-motion"
-import { useIsomorphicLayoutEffect } from "framer-motion"
-import { motion, MotionConfig } from "framer-motion"
+import { motion, MotionConfig, useIsomorphicLayoutEffect } from "framer-motion"
 
 import type { MediaVideo } from "~/types"
 
@@ -50,14 +49,10 @@ const MediaVideoGif = forwardRef<HTMLVideoElement, Props>(
     useEffect(() => {
       if (typeof ref === "function" || !ref || !ref.current) return
 
-      try {
-        if (intersecting) {
-          ref.current.paused && ref.current.play()
-        } else {
-          !ref.current.paused && ref.current.pause()
-        }
-      } catch (error) {
-        // noop
+      if (intersecting) {
+        ref.current.paused && ref.current.play()
+      } else {
+        !ref.current.paused && ref.current.pause()
       }
     }, [load, assetProp, ref, intersecting])
 
@@ -68,12 +63,12 @@ const MediaVideoGif = forwardRef<HTMLVideoElement, Props>(
       const element = ref.current
 
       if (element && onLoad) {
-        element.addEventListener("loadeddata", onLoad)
+        element.addEventListener("canplay", onLoad)
       }
 
       return () => {
         if (element && onLoad) {
-          element.removeEventListener("loadeddata", onLoad)
+          element.removeEventListener("canplay", onLoad)
         }
       }
     }, [onLoad, ref])
