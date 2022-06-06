@@ -15,6 +15,7 @@ type Props = {
    */
   skip?: boolean
   children: ReactElement
+  onIntersection?: (intersecting: boolean) => void
   intersectionObserverConfig?: Partial<
     Omit<IntersectionObserverHookConfig, "disconnect">
   >
@@ -24,36 +25,43 @@ const Appear: FC<Props> = ({
   children,
   skip,
   animate,
+  onIntersection,
   className = "",
-  intersectionObserverConfig = {
-    rootMargin: "0% 0% -50px",
-  },
+  intersectionObserverConfig,
 }) => {
   const [show, setShow] = useState(animate)
   const ref = useRef<HTMLDivElement>(null)
 
+  const defaultConfig = {
+    rootMargin: "0% 0% -50px",
+  }
+
   const intersecting = useIntersectionObserver(ref, {
-    disconnect: typeof animate !== "undefined",
+    ...defaultConfig,
     ...intersectionObserverConfig,
   })
 
   useEffect(() => {
-    if (animate || intersecting) setShow(true)
-  }, [animate, intersecting])
+    if (typeof animate === "boolean") {
+      if (animate) setShow(true)
+    } else if (intersecting) {
+      setShow(true)
+    }
+
+    if (onIntersection) onIntersection(intersecting)
+  }, [animate, intersecting, onIntersection])
+
+  const style = skip
+    ? undefined
+    : {
+        animation: `appear-animation 1s cubic-bezier(1, 0, 0, 1) 0s both ${
+          show ? "running" : "paused"
+        }`,
+      }
 
   return (
     <div ref={ref} className={className}>
-      <div
-        style={{
-          animation:
-            !skip &&
-            `appear-animation 1s cubic-bezier(1, 0, 0, 1) 0s both ${
-              show ? "running" : "paused"
-            }`,
-        }}
-      >
-        {children}
-      </div>
+      <div style={style}>{children}</div>
     </div>
   )
 }
