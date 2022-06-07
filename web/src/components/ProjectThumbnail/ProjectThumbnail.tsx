@@ -36,6 +36,11 @@ const ProjectThumbnail: FC<Props> = ({
 
   const { scrollableRef } = useLayoutScrollableSectionContext()
 
+  const load = useIntersectionObserver(ref, {
+    rootMargin: "0% 0% 50%",
+    root: scrollableRef.current,
+  })
+
   const intersecting = useIntersectionObserver(ref, {
     root: scrollableRef.current,
   })
@@ -68,6 +73,7 @@ const ProjectThumbnail: FC<Props> = ({
             <Media
               {...project.thumbnail}
               intersecting={intersecting}
+              load={load}
               onLoad={onProjectLoad}
               // alt={project.thumbnail.video.alt || project.title}
             />
