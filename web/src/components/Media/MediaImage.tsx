@@ -1,18 +1,15 @@
 import type { FC } from "react"
 import { useEffect, useRef, useState } from "react"
-import type { Transition } from "framer-motion"
 import { motion, MotionConfig } from "framer-motion"
 
 import type { MediaImage as MediaImageProps } from "~/types"
-import { getSanityImageSource } from "~/utils"
+import { getSanityImageSource, lightboxTransition } from "~/utils"
 
 import type { MediaComponentSharedProps } from "./Media"
 import useLightbox from "./useLightbox"
 import Lightbox from "./Lightbox"
 
 type Props = Pick<MediaImageProps, "image" | "alt"> & MediaComponentSharedProps
-
-const transition: Transition = { type: "spring", bounce: 0, duration: 0.5 }
 
 const MediaImage: FC<Props> = ({
   image,
@@ -43,7 +40,7 @@ const MediaImage: FC<Props> = ({
     })
 
   return (
-    <MotionConfig transition={transition}>
+    <MotionConfig transition={lightboxTransition}>
       <div
         className="relative"
         style={{ paddingBottom: `${(height / width) * 100}%` }}

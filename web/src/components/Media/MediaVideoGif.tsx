@@ -1,10 +1,10 @@
 import type { FC } from "react"
 import { useState, useEffect, useRef } from "react"
 import type { SanityFileAsset } from "@sanity/asset-utils"
-import type { Transition } from "framer-motion"
 import { motion, MotionConfig, useIsomorphicLayoutEffect } from "framer-motion"
 
 import type { MediaVideo } from "~/types"
+import { lightboxTransition } from "~/utils"
 
 import type { MediaComponentSharedProps } from "./Media"
 import useLightbox from "./useLightbox"
@@ -12,8 +12,6 @@ import Lightbox from "./Lightbox"
 
 type Props = Omit<MediaVideo, "__typename" | "_key" | "_type"> &
   MediaComponentSharedProps
-
-const transition: Transition = { type: "spring", bounce: 0, duration: 0.5 }
 
 const MediaVideoGif: FC<Props> = ({
   alt,
@@ -98,7 +96,7 @@ const MediaVideoGif: FC<Props> = ({
   }, [renderLightbox])
 
   return (
-    <MotionConfig transition={transition}>
+    <MotionConfig transition={lightboxTransition}>
       <div
         className={`${className} relative`}
         style={{ paddingBottom: `${(height / width) * 100}%` }}
