@@ -52,7 +52,7 @@ const MediaVideoGif: FC<Props> = ({
     } else {
       !ref.current.paused && ref.current.pause()
     }
-  }, [load, assetProp, ref, intersecting])
+  }, [intersecting])
 
   // Attatch events
   useEffect(() => {
@@ -67,7 +67,7 @@ const MediaVideoGif: FC<Props> = ({
         element.removeEventListener("canplay", onLoad)
       }
     }
-  }, [onLoad, ref])
+  }, [onLoad])
 
   function onVideoClick() {
     if (enableLightbox) {
@@ -95,7 +95,7 @@ const MediaVideoGif: FC<Props> = ({
     if (!renderLightbox && ref.current) {
       ref.current.currentTime = videoCurrentTime.current
     }
-  }, [ref, renderLightbox])
+  }, [renderLightbox])
 
   return (
     <MotionConfig transition={transition}>
