@@ -16,7 +16,7 @@ type Props = {
 }
 
 export type ProjectDetailBlockCommonProps = {
-  animate?: boolean
+  first?: boolean
 }
 
 const ProjectDetailBlocks: FC<Props> = ({ children }) => {
@@ -28,7 +28,7 @@ const ProjectDetailBlocks: FC<Props> = ({ children }) => {
             return (
               <ProjectDetailBlockText
                 key={_key}
-                animate={index === 0 || undefined}
+                first={index === 0}
                 {...(props as ProjectBlockRichText)}
               />
             )
@@ -36,7 +36,7 @@ const ProjectDetailBlocks: FC<Props> = ({ children }) => {
             return (
               <ProjectDetailBlockMedia
                 key={_key}
-                animate={index === 0 || undefined}
+                first={index === 0}
                 {...(props as ProjectBlockMedia)}
               />
             )
@@ -44,7 +44,7 @@ const ProjectDetailBlocks: FC<Props> = ({ children }) => {
             return (
               <ProjectDetailBlockFullMedia
                 key={_key}
-                animate={index === 0 || undefined}
+                first={index === 0}
                 {...(props as Media)}
               />
             )

@@ -60,7 +60,7 @@ const Appear: FC<Props> = ({
       }
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={className || undefined}>
       <div style={style}>{children}</div>
     </div>
   )

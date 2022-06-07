@@ -1,4 +1,5 @@
-import { forwardRef, useState, useEffect, useRef } from "react"
+import type { FC } from "react"
+import { useState, useEffect, useRef } from "react"
 import type { SanityFileAsset } from "@sanity/asset-utils"
 import type { Transition } from "framer-motion"
 import { motion, MotionConfig, useIsomorphicLayoutEffect } from "framer-motion"
@@ -14,135 +15,130 @@ type Props = Omit<MediaVideo, "__typename" | "_key" | "_type"> &
 
 const transition: Transition = { type: "spring", bounce: 0, duration: 0.5 }
 
-const MediaVideoGif = forwardRef<HTMLVideoElement, Props>(
-  (
-    {
-      alt,
-      asset: assetProp,
-      className,
-      enableLightbox,
-      intersecting,
-      load,
-      onLoad,
-      height,
+const MediaVideoGif: FC<Props> = ({
+  alt,
+  asset: assetProp,
+  className = "",
+  enableLightbox,
+  intersecting,
+  load,
+  onLoad,
+  height,
+  width,
+}) => {
+  const [asset, setAsset] = useState<SanityFileAsset>()
+  const videoCurrentTime = useRef(0)
+  const ref = useRef<HTMLVideoElement>(null)
+  const lightboxVideoRef = useRef<HTMLVideoElement>(null)
+
+  const { lightboxId, setLightbox, renderLightbox, verticalLightboxImage } =
+    useLightbox({
       width,
-    },
-    ref
-  ) => {
-    const [asset, setAsset] = useState<SanityFileAsset>()
-    const lightboxVideoRef = useRef<HTMLVideoElement>(null)
-    const videoCurrentTime = useRef(0)
+      height,
+      enableLightbox,
+    })
 
-    const { lightboxId, setLightbox, renderLightbox, verticalLightboxImage } =
-      useLightbox({
-        width,
-        height,
-        enableLightbox,
-      })
+  // Load asset
+  useEffect(() => {
+    if (load) setAsset(assetProp)
+  }, [assetProp, load])
 
-    // Load asset
-    useEffect(() => {
-      if (load) setAsset(assetProp)
-    }, [assetProp, load])
+  // Handle play/pause when intersecting
+  useEffect(() => {
+    if (!ref.current) return
 
-    // Handle play/pause when intersecting
-    useEffect(() => {
-      if (typeof ref === "function" || !ref || !ref.current) return
+    if (intersecting) {
+      ref.current.paused && ref.current.play()
+    } else {
+      !ref.current.paused && ref.current.pause()
+    }
+  }, [load, assetProp, ref, intersecting])
 
-      if (intersecting) {
-        ref.current.paused && ref.current.play()
-      } else {
-        !ref.current.paused && ref.current.pause()
-      }
-    }, [load, assetProp, ref, intersecting])
+  // Attatch events
+  useEffect(() => {
+    const element = ref.current
 
-    // Attatch events
-    useEffect(() => {
-      if (typeof ref === "function" || !ref || !ref.current) return
+    if (element && onLoad) {
+      element.addEventListener("canplay", onLoad)
+    }
 
-      const element = ref.current
-
+    return () => {
       if (element && onLoad) {
-        element.addEventListener("canplay", onLoad)
+        element.removeEventListener("canplay", onLoad)
       }
+    }
+  }, [onLoad, ref])
 
-      return () => {
-        if (element && onLoad) {
-          element.removeEventListener("canplay", onLoad)
-        }
-      }
-    }, [onLoad, ref])
+  function onVideoClick() {
+    if (enableLightbox) {
+      setLightbox(true)
+    }
 
-    function onVideoClick() {
-      if (enableLightbox) setLightbox(true)
-
-      if (typeof ref === "function" || !ref || !ref.current) return
+    if (ref.current) {
       videoCurrentTime.current = ref.current.currentTime
     }
+  }
 
-    function onLightboxClick() {
-      setLightbox(false)
+  function onLightboxClick() {
+    setLightbox(false)
 
-      if (!lightboxVideoRef.current) return
-      videoCurrentTime.current = lightboxVideoRef.current.currentTime
+    if (!lightboxVideoRef.current) return
+    videoCurrentTime.current = lightboxVideoRef.current.currentTime
+  }
+
+  // Sync currentTime betweeen videos
+  useIsomorphicLayoutEffect(() => {
+    if (renderLightbox && lightboxVideoRef.current) {
+      lightboxVideoRef.current.currentTime = videoCurrentTime.current
     }
 
-    // Sync currentTime betweeen videos
-    useIsomorphicLayoutEffect(() => {
-      if (renderLightbox && lightboxVideoRef.current) {
-        lightboxVideoRef.current.currentTime = videoCurrentTime.current
-      }
+    if (!renderLightbox && ref.current) {
+      ref.current.currentTime = videoCurrentTime.current
+    }
+  }, [ref, renderLightbox])
 
-      if (!renderLightbox && typeof ref !== "function" && ref && ref.current) {
-        ref.current.currentTime = videoCurrentTime.current
-      }
-    }, [ref, renderLightbox])
-
-    return (
-      <MotionConfig transition={transition}>
-        <div
-          className={`${className} relative`}
-          style={{ paddingBottom: `${(height / width) * 100}%` }}
-        >
-          {!renderLightbox && (
-            <motion.video
-              layoutId={lightboxId}
-              ref={ref}
-              title={alt}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="absolute inset-0 h-full w-full"
-              onClick={onVideoClick}
-            >
-              {asset && (
-                <source src={asset.url} type={`video/${asset.extension}`} />
-              )}
-            </motion.video>
-          )}
-        </div>
-        <Lightbox renderLightbox={renderLightbox} onClose={onLightboxClick}>
+  return (
+    <MotionConfig transition={transition}>
+      <div
+        className={`${className} relative`}
+        style={{ paddingBottom: `${(height / width) * 100}%` }}
+      >
+        {!renderLightbox && (
           <motion.video
             layoutId={lightboxId}
-            ref={lightboxVideoRef}
+            ref={ref}
             title={alt}
             autoPlay
             loop
             muted
             playsInline
-            className={`${verticalLightboxImage ? "h-full" : "w-full"}`}
+            className="absolute inset-0 h-full w-full"
+            onClick={onVideoClick}
           >
             {asset && (
               <source src={asset.url} type={`video/${asset.extension}`} />
             )}
           </motion.video>
-        </Lightbox>
-      </MotionConfig>
-    )
-  }
-)
-
-MediaVideoGif.displayName = "MediaVideoGif"
+        )}
+      </div>
+      <Lightbox renderLightbox={renderLightbox} onClose={onLightboxClick}>
+        <motion.video
+          layoutId={lightboxId}
+          ref={lightboxVideoRef}
+          title={alt}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className={`${verticalLightboxImage ? "h-full" : "w-full"}`}
+        >
+          {asset && (
+            <source src={asset.url} type={`video/${asset.extension}`} />
+          )}
+        </motion.video>
+      </Lightbox>
+    </MotionConfig>
+  )
+}
 
 export default MediaVideoGif
