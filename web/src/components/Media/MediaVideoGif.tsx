@@ -57,12 +57,12 @@ const MediaVideoGif: FC<Props> = ({
     const element = ref.current
 
     if (element && onLoad) {
-      element.addEventListener("canplay", onLoad)
+      element.addEventListener("loadeddata", onLoad)
     }
 
     return () => {
       if (element && onLoad) {
-        element.removeEventListener("canplay", onLoad)
+        element.removeEventListener("loadeddata", onLoad)
       }
     }
   }, [onLoad])
