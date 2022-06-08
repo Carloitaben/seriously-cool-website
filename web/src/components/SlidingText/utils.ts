@@ -7,8 +7,6 @@ export function getDuration(text: string[]) {
   return (characters * 30) / 100 // 100 characters = 30s
 }
 
-const TEXT_SHADOW_ITERATIONS = 10
-
 /**
  * If a screen is wide enough, it could fit all sliding text
  * and break the animation. Instead of creating more DOM nodes,
@@ -17,7 +15,7 @@ const TEXT_SHADOW_ITERATIONS = 10
 export function getTextShadow(width: number) {
   let shadows: string[] = []
 
-  for (let index = 1; index < TEXT_SHADOW_ITERATIONS + 1; index++) {
+  for (let index = 1; (index - 1) * width < window.innerWidth + 1; index++) {
     shadows.push(`${width * index}px 0 currentColor`)
   }
 
