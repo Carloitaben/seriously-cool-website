@@ -3,6 +3,7 @@ import createSchema from "part:@sanity/base/schema-creator"
 import schemaTypes from "all:part:@sanity/base/schema-type"
 
 // Objects
+import aboutFirstParagraphVariant from "./objects/aboutFirstParagraphVariant"
 import blockRichText from "./objects/blockRichText"
 import media from "./objects/media"
 import mediaImage from "./objects/mediaImage"
@@ -18,6 +19,7 @@ import settingsThemeColor from "./objects/settingsThemeColor"
 import settingsToys from "./objects/settingsToys"
 
 // Schemas
+import about from "./about"
 import project from "./project"
 import settings from "./settings"
 
@@ -25,6 +27,7 @@ export default createSchema({
   name: "default",
   types: schemaTypes.concat([
     // Objects
+    aboutFirstParagraphVariant,
     blockRichText,
     media,
     mediaImage,
@@ -40,6 +43,7 @@ export default createSchema({
     settingsToys,
 
     // Schemas
+    about,
     project,
     settings,
   ]),

@@ -25,8 +25,10 @@ export default () =>
       S.listItem()
         .title("Settings")
         .child(S.document().schemaType("settings").documentId("settings")),
-      S.divider(),
+      S.listItem()
+        .title("About")
+        .child(S.document().schemaType("about").documentId("about")),
       ...S.documentTypeListItems().filter(
-        (listItem) => !["settings"].includes(listItem.getId())
+        (listItem) => !["settings", "about"].includes(listItem.getId())
       ),
     ])
