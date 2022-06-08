@@ -54,12 +54,12 @@ export const loader: LoaderFunction = async ({
     }
   })
 
-  const projecsWithFileAssets = {
+  const projectsWithFileAssets = {
     ...project,
     blocks: projectBlocksWithFileAssets,
   }
 
-  return { project: projecsWithFileAssets }
+  return { project: projectsWithFileAssets }
 }
 
 export default function Route() {
