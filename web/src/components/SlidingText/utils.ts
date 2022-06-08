@@ -15,7 +15,7 @@ export function getDuration(text: string[]) {
 export function getTextShadow(width: number) {
   let shadows: string[] = []
 
-  for (let index = 1; (index - 1) * width < window.innerWidth + 1; index++) {
+  for (let index = 1; (index - 2) * width < window.innerWidth; index++) {
     shadows.push(`${width * index}px 0 currentColor`)
   }
 
