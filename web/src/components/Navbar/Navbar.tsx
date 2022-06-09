@@ -3,6 +3,8 @@ import { NavLink } from "@remix-run/react"
 
 import useRootData from "~/hooks/useRootData"
 
+import Link from "~/components/Link"
+
 import NavbarMailMeButton from "./NavbarMailMeButton"
 import NavbarMobileMenu from "./NavbarMobileMenu"
 
@@ -32,22 +34,14 @@ const Navbar: FC<Props> = ({ children, goBackRoute }) => {
             <NavLink to="/projects">{literals.navLinkProjectsLabel}</NavLink>
           </li>
           <li>
-            <a
-              href={literals.navLinkBehanceLink}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link href={literals.navLinkBehanceLink}>
               {literals.navLinkBehanceLabel}
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href={literals.navLinkInstagramLink}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link href={literals.navLinkInstagramLink}>
               {literals.navLinkInstagramLabel}
-            </a>
+            </Link>
           </li>
           <li>
             <NavbarMailMeButton>
