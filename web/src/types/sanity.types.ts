@@ -18,6 +18,105 @@ export type Scalars = {
   JSON: any;
 };
 
+export type About = Document & {
+  __typename?: 'About';
+  /** Date the document was created */
+  _createdAt: Maybe<Scalars['DateTime']>;
+  /** Document ID */
+  _id: Maybe<Scalars['ID']>;
+  _key: Maybe<Scalars['String']>;
+  /** Current document revision */
+  _rev: Maybe<Scalars['String']>;
+  /** Document type */
+  _type: Maybe<Scalars['String']>;
+  /** Date the document was last modified */
+  _updatedAt: Maybe<Scalars['DateTime']>;
+  firstParagraph: Maybe<Array<Maybe<AboutFirstParagraphVariant>>>;
+  paragraphs: Maybe<Array<Maybe<AboutParagraph>>>;
+};
+
+export type AboutFilter = {
+  /** Apply filters on document level */
+  _: InputMaybe<Sanity_DocumentFilter>;
+  _createdAt: InputMaybe<DatetimeFilter>;
+  _id: InputMaybe<IdFilter>;
+  _key: InputMaybe<StringFilter>;
+  _rev: InputMaybe<StringFilter>;
+  _type: InputMaybe<StringFilter>;
+  _updatedAt: InputMaybe<DatetimeFilter>;
+};
+
+export type AboutFirstParagraphVariant = {
+  __typename?: 'AboutFirstParagraphVariant';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  firstArtistHref: Maybe<Scalars['String']>;
+  firstArtistName: Maybe<Scalars['String']>;
+  secondArtistHref: Maybe<Scalars['String']>;
+  secondArtistName: Maybe<Scalars['String']>;
+};
+
+export type AboutFirstParagraphVariantFilter = {
+  _key: InputMaybe<StringFilter>;
+  _type: InputMaybe<StringFilter>;
+  firstArtistHref: InputMaybe<StringFilter>;
+  firstArtistName: InputMaybe<StringFilter>;
+  secondArtistHref: InputMaybe<StringFilter>;
+  secondArtistName: InputMaybe<StringFilter>;
+};
+
+export type AboutFirstParagraphVariantSorting = {
+  _key: InputMaybe<SortOrder>;
+  _type: InputMaybe<SortOrder>;
+  firstArtistHref: InputMaybe<SortOrder>;
+  firstArtistName: InputMaybe<SortOrder>;
+  secondArtistHref: InputMaybe<SortOrder>;
+  secondArtistName: InputMaybe<SortOrder>;
+};
+
+export type AboutParagraph = {
+  __typename?: 'AboutParagraph';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  paragraphs: Maybe<Array<Maybe<AboutParagraphRichText>>>;
+};
+
+export type AboutParagraphFilter = {
+  _key: InputMaybe<StringFilter>;
+  _type: InputMaybe<StringFilter>;
+};
+
+export type AboutParagraphRichText = {
+  __typename?: 'AboutParagraphRichText';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  variantsRaw: Maybe<Scalars['JSON']>;
+};
+
+export type AboutParagraphRichTextFilter = {
+  _key: InputMaybe<StringFilter>;
+  _type: InputMaybe<StringFilter>;
+};
+
+export type AboutParagraphRichTextSorting = {
+  _key: InputMaybe<SortOrder>;
+  _type: InputMaybe<SortOrder>;
+};
+
+export type AboutParagraphSorting = {
+  _key: InputMaybe<SortOrder>;
+  _type: InputMaybe<SortOrder>;
+};
+
+export type AboutSorting = {
+  _createdAt: InputMaybe<SortOrder>;
+  _id: InputMaybe<SortOrder>;
+  _key: InputMaybe<SortOrder>;
+  _rev: InputMaybe<SortOrder>;
+  _type: InputMaybe<SortOrder>;
+  _updatedAt: InputMaybe<SortOrder>;
+};
+
 export type Block = {
   __typename?: 'Block';
   _key: Maybe<Scalars['String']>;
@@ -564,16 +663,23 @@ export type RgbaColorSorting = {
 
 export type RootQuery = {
   __typename?: 'RootQuery';
+  About: Maybe<About>;
   Document: Maybe<Document>;
   Project: Maybe<Project>;
   SanityFileAsset: Maybe<SanityFileAsset>;
   SanityImageAsset: Maybe<SanityImageAsset>;
   Settings: Maybe<Settings>;
+  allAbout: Array<About>;
   allDocument: Array<Document>;
   allProject: Array<Project>;
   allSanityFileAsset: Array<SanityFileAsset>;
   allSanityImageAsset: Array<SanityImageAsset>;
   allSettings: Array<Settings>;
+};
+
+
+export type RootQueryAboutArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -599,6 +705,14 @@ export type RootQuerySanityImageAssetArgs = {
 
 export type RootQuerySettingsArgs = {
   id: Scalars['ID'];
+};
+
+
+export type RootQueryAllAboutArgs = {
+  limit: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  sort: InputMaybe<Array<AboutSorting>>;
+  where: InputMaybe<AboutFilter>;
 };
 
 
@@ -1205,3 +1319,8 @@ export type GetProjectQueryVariables = Exact<{
 
 
 export type GetProjectQuery = { __typename?: 'RootQuery', allProject: Array<{ __typename?: 'Project', _id: string, title: string, descriptionRaw: any, clientRaw: any, location: string, year: number, openGraphImage: { __typename?: 'Image', asset: { __typename?: 'SanityImageAsset', url: string, metadata: { __typename?: 'SanityImageMetadata', dimensions: { __typename?: 'SanityImageDimensions', height: number, width: number } } } }, thumbnail: { __typename?: 'ProjectThumbnail', kind: string, video: { __typename?: 'MediaVideo', width: number, height: number, alt: string, mp4: { __typename?: 'File', asset: { __typename?: 'SanityFileAsset', url: string } } }, image: { __typename?: 'MediaImage', alt: string, image: { __typename?: 'Image', asset: { __typename?: 'SanityImageAsset', url: string, metadata: { __typename?: 'SanityImageMetadata', dimensions: { __typename?: 'SanityImageDimensions', height: number, width: number } } } } } }, blocks: Array<{ __typename: 'Media', _key: string, kind: string, video: { __typename?: 'MediaVideo', width: number, height: number, alt: string, mp4: { __typename?: 'File', asset: { __typename?: 'SanityFileAsset', url: string } } }, image: { __typename?: 'MediaImage', alt: string, image: { __typename?: 'Image', asset: { __typename?: 'SanityImageAsset', url: string, metadata: { __typename?: 'SanityImageMetadata', dimensions: { __typename?: 'SanityImageDimensions', height: number, width: number } } } } } } | { __typename: 'ProjectBlockMedia', _key: string, mediaBlockBlocks: Array<{ __typename?: 'Media', kind: string, video: { __typename?: 'MediaVideo', width: number, height: number, alt: string, mp4: { __typename?: 'File', asset: { __typename?: 'SanityFileAsset', url: string } } }, image: { __typename?: 'MediaImage', alt: string, image: { __typename?: 'Image', asset: { __typename?: 'SanityImageAsset', url: string, metadata: { __typename?: 'SanityImageMetadata', dimensions: { __typename?: 'SanityImageDimensions', height: number, width: number } } } } } }> } | { __typename: 'ProjectBlockRichText', _key: string, textRaw: any }>, roles: Array<{ __typename?: 'ProjectRole', _key: string, pretitle: string, title: string }>, awards: Array<{ __typename?: 'ProjectAward', _key: string, textRaw: any, year: number }> }> };
+
+export type GetAboutQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAboutQuery = { __typename?: 'RootQuery', allAbout: Array<{ __typename?: 'About', _id: string, firstParagraph: Array<{ __typename?: 'AboutFirstParagraphVariant', firstArtistName: string, firstArtistHref: string, secondArtistName: string, secondArtistHref: string }>, paragraphs: Array<{ __typename?: 'AboutParagraph', _key: string, paragraphs: Array<{ __typename?: 'AboutParagraphRichText', variantsRaw: any }> }> }> };

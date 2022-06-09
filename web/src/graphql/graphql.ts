@@ -197,3 +197,23 @@ export const GET_PROJECT = gql`
     }
   }
 `
+
+export const GET_ABOUT = gql`
+  query GetAbout {
+    allAbout {
+      _id
+      firstParagraph {
+        firstArtistName
+        firstArtistHref
+        secondArtistName
+        secondArtistHref
+      }
+      paragraphs {
+        _key
+        paragraphs {
+          variantsRaw
+        }
+      }
+    }
+  }
+`

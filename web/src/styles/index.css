@@ -639,6 +639,10 @@ button {
   right: 0px;
 }
 
+.col-span-5 {
+  grid-column: span 5 / span 5;
+}
+
 .col-span-4 {
   grid-column: span 4 / span 4;
 }
@@ -732,12 +736,12 @@ button {
   width: 100%;
 }
 
-.max-w-\[14\.375rem\] {
-  max-width: 14.375rem;
-}
-
 .max-w-xl {
   max-width: 36rem;
+}
+
+.max-w-\[14\.375rem\] {
+  max-width: 14.375rem;
 }
 
 .max-w-2xl {
@@ -773,12 +777,12 @@ button {
   resize: both;
 }
 
-.grid-cols-4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
 .grid-cols-6 {
   grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .flex-col {
@@ -863,6 +867,14 @@ button {
 .py-12 {
   padding-top: 3rem;
   padding-bottom: 3rem;
+}
+
+.pt-12 {
+  padding-top: 3rem;
+}
+
+.pb-24 {
+  padding-bottom: 6rem;
 }
 
 .pb-12 {
@@ -1070,6 +1082,10 @@ button {
 
   .tablet\:hidden {
     display: none;
+  }
+
+  .tablet\:max-w-4xl {
+    max-width: 56rem;
   }
 
   .tablet\:gap-x-4 {
