@@ -5,7 +5,9 @@
   "author": "Carlo Domínguez <hello@carlo.works>",
   "license": "UNLICENSED",
   "scripts": {
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "cms": "cd cms && yarn dev",
+    "web": "cd web && yarn dev"
   },
   "husky": {
     "hooks": {
