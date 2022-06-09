@@ -1,20 +1,4 @@
-function getFromChildren(children) {
-  return children.reduce((accumulator, child) => {
-    if (child._type === "span") {
-      accumulator += child.text
-    } else if (child._type === "block" && child?.children?.length) {
-      accumulator += getFromChildren(child.children)
-    }
-
-    return accumulator
-  }, "")
-}
-
-function formatTitle(text, fallback = "No text") {
-  if (text[0]?.children?.length)
-    return getFromChildren(text[0].children) || fallback
-  return fallback
-}
+import formatRichBlockText from "../../utils/formatRichBlockText"
 
 export default {
   name: "projectAward",
@@ -47,7 +31,7 @@ export default {
       showBadge: "showBadge",
     },
     prepare: ({ text, year = "no year", showBadge }) => ({
-      title: formatTitle(text, "No text"),
+      title: formatRichBlockText(text),
       subtitle: `Year: ${year}${
         showBadge ? ". Showing badge on thumbnail" : ""
       }`,

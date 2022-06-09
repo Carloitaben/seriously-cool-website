@@ -4,6 +4,8 @@ import schemaTypes from "all:part:@sanity/base/schema-type"
 
 // Objects
 import aboutFirstParagraphVariant from "./objects/aboutFirstParagraphVariant"
+import aboutParagraph from "./objects/aboutParagraph"
+import aboutParagraphRichText from "./objects/aboutParagraphRichText"
 import blockRichText from "./objects/blockRichText"
 import media from "./objects/media"
 import mediaImage from "./objects/mediaImage"
@@ -28,6 +30,8 @@ export default createSchema({
   types: schemaTypes.concat([
     // Objects
     aboutFirstParagraphVariant,
+    aboutParagraph,
+    aboutParagraphRichText,
     blockRichText,
     media,
     mediaImage,
