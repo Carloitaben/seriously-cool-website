@@ -24,5 +24,3 @@ export const client = new GraphQLClient(
     },
   }
 )
-
-console.log(`https://${projectId}.${host}/v1/graphql/${dataset}/${endpoint}`)
