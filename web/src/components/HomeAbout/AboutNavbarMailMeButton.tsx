@@ -3,7 +3,10 @@ import { useEffect, useRef, useState, useCallback } from "react"
 
 import useOnTailwindBreakpoint from "~/hooks/useOnTailwindBreakpoint"
 import useRootData from "~/hooks/useRootData"
+
 import store from "~/store"
+
+import { className } from "~/components/LinkButton"
 
 type Props = {
   children: string
@@ -86,7 +89,7 @@ const NavbarMailMeButton: FC<Props> = ({ children }) => {
   return (
     <button
       type="button"
-      className="underline"
+      className={className}
       onMouseEnter={setText}
       onMouseLeave={unsetText}
       onFocus={setText}
