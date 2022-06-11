@@ -1,5 +1,7 @@
 import type { FC } from "react"
+
 import useRootData from "~/hooks/useRootData"
+
 import TextBlock from "../TextBlock"
 
 const Catchphrase: FC = () => {

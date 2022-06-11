@@ -7,9 +7,7 @@ export default function Route() {
       <div className="flex-1 overflow-y-auto px-1 py-2">
         <HomeAbout />
       </div>
-      <div className="flex-1 overflow-y-auto px-1 py-2">
-        <HomeProjects />
-      </div>
+      <HomeProjects />
     </div>
   )
 }
