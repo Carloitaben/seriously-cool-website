@@ -8,6 +8,7 @@ import {
 
 import type {
   GetSettingsQuery,
+  Scalars,
   SettingsCatchphrase,
   SettingsLiteral,
   StripGQLProps,
@@ -18,8 +19,8 @@ export type LoaderSettingsData = {
   slidingTexts: string[]
   literals: Record<string, string>
   catchphrase: {
-    desktop: Pick<SettingsCatchphrase, "textRaw" | "visibility">
-    mobile: Pick<SettingsCatchphrase, "textRaw" | "visibility">
+    desktop: Scalars["JSON"]
+    mobile: Scalars["JSON"]
   }
   theme: {
     fontFamily: string
@@ -104,8 +105,8 @@ export async function getLoaderSettingsData(
     slidingTexts,
     literals: formattedLiterals,
     catchphrase: {
-      desktop: catchphraseDesktop,
-      mobile: catchphraseMobile,
+      desktop: catchphraseDesktop.textRaw,
+      mobile: catchphraseMobile.textRaw,
     },
   }
 }

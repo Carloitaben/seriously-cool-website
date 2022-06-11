@@ -1,4 +1,5 @@
 import HomeAbout from "~/components/HomeAbout"
+import HomeProjects from "~/components/HomeProjects"
 
 export default function Route() {
   return (
@@ -6,8 +7,8 @@ export default function Route() {
       <div className="flex-1 overflow-y-auto px-1 py-2">
         <HomeAbout />
       </div>
-      <div className="flex-1 bg-green-500 px-1">
-        <section className="rounded-4xl bg-red-500">projects</section>
+      <div className="flex-1 overflow-y-auto px-1 py-2">
+        <HomeProjects />
       </div>
     </div>
   )
