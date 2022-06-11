@@ -11,8 +11,8 @@ const HomeProjects: FC = () => {
   const rootRef = useRef<HTMLElement>(null)
 
   return (
-    <section ref={rootRef} className="flex-1 overflow-y-auto px-1 pt-2 pb-24">
-      <div className="flex flex-col">
+    <main ref={rootRef} className="flex-1 overflow-y-auto px-1 pt-2 pb-24">
+      <section className="flex flex-col">
         <Catchphrase />
         <ul className="-mb-2 flex flex-col">
           {projects.map((project) => (
@@ -23,8 +23,8 @@ const HomeProjects: FC = () => {
             />
           ))}
         </ul>
-      </div>
-    </section>
+      </section>
+    </main>
   )
 }
 

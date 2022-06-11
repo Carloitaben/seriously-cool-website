@@ -19,14 +19,17 @@ const HomeAbout: FC<Props> = () => {
   }
 
   return (
-    <section className="flex-1 overflow-y-auto px-1 pb-24 pt-2">
-      <div className="rounded-4xl flex-1 px-16 pb-16 text-5xl" style={style}>
+    <aside className="flex-1 overflow-y-auto px-1 pb-24 pt-2">
+      <section
+        className="rounded-4xl flex-1 px-16 pb-16 text-5xl"
+        style={style}
+      >
         <AboutNavbar />
         <AboutFirstParagraph />
         <AboutParagraphs />
         <AboutLastParagraph />
-      </div>
-    </section>
+      </section>
+    </aside>
   )
 }
 

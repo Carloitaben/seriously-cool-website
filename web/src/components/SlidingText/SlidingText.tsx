@@ -48,7 +48,7 @@ const SlidingText: FC<Props> = ({ children }) => {
   }, [childrenOrMask, isFontLoaded])
 
   return (
-    <div
+    <footer
       className="fixed inset-x-4 bottom-4 flex select-none"
       style={{ color: colors.text }}
     >
@@ -74,7 +74,7 @@ const SlidingText: FC<Props> = ({ children }) => {
           {close}
         </Link>
       </div>
-    </div>
+    </footer>
   )
 }
 

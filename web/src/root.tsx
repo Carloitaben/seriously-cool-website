@@ -125,9 +125,7 @@ export default function App() {
         className="selection:bg-text selection:text-background h-screen"
         style={style}
       >
-        <main className="h-full">
-          <Outlet />
-        </main>
+        <Outlet />
         <SlidingText>{slidingTexts}</SlidingText>
         <ScrollRestoration />
         <Scripts />
