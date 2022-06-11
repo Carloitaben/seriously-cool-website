@@ -6,7 +6,7 @@ import AboutParagraphs from "./AboutParagraphs"
 
 type Props = {}
 
-const About: FC<Props> = () => {
+const HomeAbout: FC<Props> = () => {
   return (
     <section className="bg-text text-card rounded-4xl flex-1 px-16 text-5xl">
       <AboutFirstParagraph />
@@ -16,4 +16,4 @@ const About: FC<Props> = () => {
   )
 }
 
-export default About
+export default HomeAbout
