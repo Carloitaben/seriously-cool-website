@@ -897,6 +897,10 @@ button {
   padding-right: 5rem;
 }
 
+.pb-16 {
+  padding-bottom: 4rem;
+}
+
 .text-left {
   text-align: left;
 }
