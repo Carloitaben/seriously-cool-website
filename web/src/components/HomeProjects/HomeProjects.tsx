@@ -14,7 +14,7 @@ const HomeProjects: FC = () => {
     <section ref={rootRef} className="flex-1 overflow-y-auto px-1 pt-2 pb-24">
       <div className="flex flex-col">
         <Catchphrase />
-        <ul className="grid gap-2">
+        <ul className="-mb-2 flex flex-col">
           {projects.map((project) => (
             <ProjectThumbnail
               key={project.slug.current}

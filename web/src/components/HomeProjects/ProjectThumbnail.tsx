@@ -56,7 +56,7 @@ const ProjectThumbnail: FC<Props> = ({ project, rootRef }) => {
   }, [project.title])
 
   return (
-    <li ref={ref}>
+    <li ref={ref} className="pb-2">
       <Appear animate={animate}>
         <div
           data-load={load}
