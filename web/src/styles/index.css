@@ -627,8 +627,13 @@ button {
   right: 0px;
 }
 
-.bottom-slidingTextDesktop {
-  bottom: 3.125rem;
+.inset-x-4 {
+  left: 1rem;
+  right: 1rem;
+}
+
+.bottom-16 {
+  bottom: 4rem;
 }
 
 .top-0 {
@@ -637,6 +642,10 @@ button {
 
 .right-0 {
   right: 0px;
+}
+
+.bottom-4 {
+  bottom: 1rem;
 }
 
 .col-span-5 {
@@ -674,6 +683,10 @@ button {
 
 .-ml-10 {
   margin-left: -2.5rem;
+}
+
+.ml-4 {
+  margin-left: 1rem;
 }
 
 .mt-12 {
@@ -720,8 +733,8 @@ button {
   height: 3rem;
 }
 
-.h-slidingTextDesktop {
-  height: 3.125rem;
+.h-16 {
+  height: 4rem;
 }
 
 .h-auto {
@@ -734,6 +747,10 @@ button {
 
 .w-full {
   width: 100%;
+}
+
+.w-16 {
+  width: 4rem;
 }
 
 .max-w-xl {
@@ -834,12 +851,25 @@ button {
   white-space: nowrap;
 }
 
-.border-t-2 {
-  border-top-width: 2px;
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.border-2 {
+  border-width: 2px;
+}
+
+.border-text {
+  border-color: var(--theme-colors-text);
 }
 
 .border-current {
   border-color: currentColor;
+}
+
+.bg-red-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
 }
 
 .bg-black {
@@ -849,6 +879,10 @@ button {
 
 .bg-text {
   background-color: var(--theme-colors-text);
+}
+
+.bg-background {
+  background-color: var(--theme-colors-background);
 }
 
 .fill-current {
@@ -932,6 +966,10 @@ button {
   color: var(--theme-colors-background);
 }
 
+.text-text {
+  color: var(--theme-colors-text);
+}
+
 .underline {
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
@@ -980,20 +1018,20 @@ button {
   transition-duration: 75ms;
 }
 
-.selection\:bg-background *::-moz-selection {
-  background-color: var(--theme-colors-background);
-}
-
-.selection\:bg-background *::selection {
-  background-color: var(--theme-colors-background);
-}
-
 .selection\:bg-text *::-moz-selection {
   background-color: var(--theme-colors-text);
 }
 
 .selection\:bg-text *::selection {
   background-color: var(--theme-colors-text);
+}
+
+.selection\:bg-background *::-moz-selection {
+  background-color: var(--theme-colors-background);
+}
+
+.selection\:bg-background *::selection {
+  background-color: var(--theme-colors-background);
 }
 
 .selection\:text-background *::-moz-selection {
@@ -1012,20 +1050,20 @@ button {
   color: var(--theme-colors-text);
 }
 
-.selection\:bg-background::-moz-selection {
-  background-color: var(--theme-colors-background);
-}
-
-.selection\:bg-background::selection {
-  background-color: var(--theme-colors-background);
-}
-
 .selection\:bg-text::-moz-selection {
   background-color: var(--theme-colors-text);
 }
 
 .selection\:bg-text::selection {
   background-color: var(--theme-colors-text);
+}
+
+.selection\:bg-background::-moz-selection {
+  background-color: var(--theme-colors-background);
+}
+
+.selection\:bg-background::selection {
+  background-color: var(--theme-colors-background);
 }
 
 .selection\:text-background::-moz-selection {
@@ -1100,10 +1138,6 @@ button {
 
   .tablet\:leading-loose {
     line-height: 2;
-  }
-
-  .tablet\:\[display\:unset\] {
-    display: unset;
   }
 }
 

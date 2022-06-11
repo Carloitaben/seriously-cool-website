@@ -17,9 +17,6 @@ module.exports = {
         text: "var(--theme-colors-text)",
         card: "var(--theme-colors-card)",
       },
-      spacing: {
-        slidingTextDesktop: "3.125rem",
-      },
     },
   },
   plugins: [],
