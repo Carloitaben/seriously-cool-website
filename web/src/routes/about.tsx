@@ -105,9 +105,7 @@ export default function Route() {
           <div className="tablet:max-w-4xl col-span-5 max-w-xl">
             <br />
             <p>
-              {literals.aboutThemeDataPretitle} {fontFamily}{" "}
-              {literals.aboutThemeDataIntertitle} {backgroundColor}
-              {","} {textColor} {literals.and} {cardColor}
+              {`${literals.aboutThemeDataPretitle} ${fontFamily} ${literals.aboutThemeDataIntertitle} ${backgroundColor}, ${textColor} ${literals.and} ${cardColor}`}
             </p>
           </div>
         </div>
