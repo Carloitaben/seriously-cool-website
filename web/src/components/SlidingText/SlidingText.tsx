@@ -1,11 +1,10 @@
 import type { FC, CSSProperties } from "react"
 import { useMemo, useEffect, useRef, useState } from "react"
-import { Link } from "@remix-run/react"
 
 import useRootData from "~/hooks/useRootData"
 
 import store from "~/store"
-import { close } from "~/components/Svg"
+import BackButton from "./BackButton"
 
 import useIsFontLoaded from "./useIsFontLoaded"
 import { getDuration, getTextShadow } from "./utils"
@@ -49,7 +48,7 @@ const SlidingText: FC<Props> = ({ children }) => {
 
   return (
     <footer
-      className="fixed inset-x-4 bottom-4 flex select-none"
+      className="fixed inset-x-4 bottom-4 flex select-none items-center"
       style={{ color: colors.text }}
     >
       <div
@@ -66,14 +65,7 @@ const SlidingText: FC<Props> = ({ children }) => {
           ))}
         </span>
       </div>
-      <div className="flex-none">
-        <Link
-          to="/"
-          className="bg-background ml-4 flex h-16 w-16 items-center justify-center rounded-full border-2"
-        >
-          {close}
-        </Link>
-      </div>
+      <BackButton />
     </footer>
   )
 }
