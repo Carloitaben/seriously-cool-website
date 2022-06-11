@@ -42,6 +42,12 @@
       @apply mx-12;
     } 
   }
+
+  @supports selector(::-webkit-scrollbar) {
+    *::-webkit-scrollbar {
+      @apply hidden;
+    }
+  }
 }
 
 @layer components {

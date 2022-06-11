@@ -12,6 +12,9 @@ module.exports = {
       menuContentVisible: "1116px",
     },
     extend: {
+      borderRadius: {
+        "4xl": "2rem",
+      },
       colors: {
         background: "var(--theme-colors-background)",
         text: "var(--theme-colors-text)",

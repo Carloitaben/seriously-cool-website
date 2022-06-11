@@ -7,30 +7,30 @@ import {
   Links,
   LiveReload,
   Meta,
+  Outlet,
   Scripts,
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react"
-import {
-  LazyMotion,
-  domAnimation,
-  useIsomorphicLayoutEffect,
-} from "framer-motion"
 import type { CSSProperties } from "react"
+import { useIsomorphicLayoutEffect } from "framer-motion"
 
 import styles from "~/styles/index.css"
+import SlidingText from "~/components/SlidingText"
+import useOnMatchMedia from "~/hooks/useOnMatchMedia"
+import { isSanityPreview } from "~/utils"
+
+import type {
+  LoaderAboutData,
+  LoaderProjectsData,
+  LoaderSettingsData,
+} from "./utils"
 
 import {
-  getRandomArrayItem,
-  getRandomToy,
-  isSanityPreview,
-  filterSanityDocumentDrafts,
-} from "~/utils"
-
-import type { GetSettingsQuery, SettingsCatchphrase, Toy } from "./types"
-import { client, GET_SETTINGS } from "~/graphql"
-import Layout from "~/components/Layout"
-import useOnMatchMedia from "~/hooks/useOnMatchMedia"
+  getLoaderAboutData,
+  getLoaderProjectsData,
+  getLoaderSettingsData,
+} from "./utils"
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -54,114 +54,48 @@ export const links: LinksFunction = () => [
   },
 ]
 
-export type RootLoaderData = {
-  slidingTexts: string[]
-  literals: Record<string, string>
-  catchphrase: {
-    desktop: Pick<SettingsCatchphrase, "textRaw" | "visibility">
-    mobile: Pick<SettingsCatchphrase, "textRaw" | "visibility">
-  }
-  theme: {
-    fontFamily: string
-    background: string
-    text: string
-    card: string
-    toy: Toy
-  }
-}
+export type RootLoaderData = LoaderSettingsData &
+  LoaderProjectsData &
+  LoaderAboutData
 
 export const loader: LoaderFunction = async ({
   request,
 }): Promise<RootLoaderData> => {
   const preview = isSanityPreview(request)
-  const response = await client.request<GetSettingsQuery>(GET_SETTINGS)
 
-  const [{ catchphrases, colors, slidingTexts, typefaces, toys, literals }] =
-    filterSanityDocumentDrafts(response.allSettings, preview)
-
-  const { catchphrasesDesktop, catchphrasesMobile } = catchphrases.reduce<
-    Record<string, typeof catchphrases>
-  >(
-    (accumulator, catchphrase) => {
-      if (["BOTH", "DESKTOP"].includes(catchphrase.visibility)) {
-        accumulator.catchphrasesDesktop.push(catchphrase)
-      }
-
-      if (["BOTH", "MOBILE"].includes(catchphrase.visibility)) {
-        accumulator.catchphrasesMobile.push(catchphrase)
-      }
-
-      return accumulator
-    },
-    {
-      catchphrasesDesktop: [],
-      catchphrasesMobile: [],
-    }
-  )
-
-  const catchphraseDesktop = getRandomArrayItem(catchphrasesDesktop)
-  const catchphraseMobile = getRandomArrayItem(catchphrasesMobile)
-  const fontFamily = getRandomArrayItem(typefaces)
-  const toy = getRandomToy(toys)
-
-  const { background, text, card } = getRandomArrayItem(colors)
-
-  const theme = {
-    toy,
-    fontFamily,
-    background: background.hex,
-    text: text.hex,
-    card: card.hex,
-  }
-
-  const formattedLiterals = literals.reduce<Record<string, string>>(
-    (accumulator, { key, value }) => {
-      if (key in accumulator) {
-        throw Error(`found duplicated literal "${key}"`)
-      }
-
-      accumulator[key] = value
-      return accumulator
-    },
-    {}
-  )
+  const [loaderAboutData, loaderProjectsData, loaderSettingsData] =
+    await Promise.all([
+      getLoaderAboutData(preview),
+      getLoaderProjectsData(preview),
+      getLoaderSettingsData(preview),
+    ])
 
   return {
-    theme,
-    slidingTexts,
-    literals: formattedLiterals,
-    catchphrase: {
-      desktop: catchphraseDesktop,
-      mobile: catchphraseMobile,
-    },
+    ...loaderAboutData,
+    ...loaderProjectsData,
+    ...loaderSettingsData,
   }
 }
 
 export default function App() {
-  const { theme } = useLoaderData<RootLoaderData>()
-
-  const style: CSSProperties = {
-    fontFamily: theme.fontFamily,
-    background: theme.background,
-    color: theme.text,
-  }
+  const { theme, slidingTexts } = useLoaderData<RootLoaderData>()
 
   useIsomorphicLayoutEffect(() => {
     document.documentElement.style.setProperty(
       "--theme-colors-background",
-      theme.background
+      theme.colors.background
     )
 
     document.documentElement.style.setProperty(
       "--theme-colors-text",
-      theme.text
+      theme.colors.text
     )
 
     document.documentElement.style.setProperty(
       "--theme-colors-card",
-      theme.card
+      theme.colors.card
     )
-  }, [theme.background, theme.text, theme.card])
+  }, [theme.colors.background, theme.colors.text, theme.colors.card])
 
   useOnMatchMedia("(prefers-color-scheme: dark)", (matches) => {
     const link = document.querySelector<HTMLLinkElement>('link[rel="icon"]')
@@ -175,6 +109,12 @@ export default function App() {
     }
   })
 
+  const style: CSSProperties = {
+    fontFamily: theme.fontFamily,
+    background: theme.colors.background,
+    color: theme.colors.text,
+  }
+
   return (
     <html lang="en">
       <head>
@@ -182,10 +122,13 @@ export default function App() {
         <Links />
       </head>
       <body
-        className="selection:bg-text selection:text-background flex h-screen flex-col"
+        className="selection:bg-text selection:text-background h-screen"
         style={style}
       >
-        <Layout />
+        <main className="h-full">
+          <Outlet />
+        </main>
+        <SlidingText>{slidingTexts}</SlidingText>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
