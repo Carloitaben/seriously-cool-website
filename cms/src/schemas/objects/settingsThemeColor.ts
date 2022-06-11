@@ -5,7 +5,7 @@ export default {
   fields: [
     {
       name: "background",
-      title: "Background",
+      title: "Background color",
       description: "Used as background color on the homepage",
       type: "color",
       validation: (Rule) => Rule.required(),
@@ -14,9 +14,19 @@ export default {
       },
     },
     {
-      name: "accent",
-      title: "Accent",
+      name: "text",
+      title: "Text color",
       description: "Used as text color on the homepage",
+      type: "color",
+      validation: (Rule) => Rule.required(),
+      options: {
+        disableAlpha: true,
+      },
+    },
+    {
+      name: "card",
+      title: "Card text color",
+      description: "Used as text color on cards",
       type: "color",
       validation: (Rule) => Rule.required(),
       options: {
@@ -27,15 +37,17 @@ export default {
   preview: {
     select: {
       background: "background",
-      accent: "accent",
+      text: "text",
+      card: "card",
     },
-    prepare: ({ background, accent }) => {
-      if (!background || !accent) return { title: "" }
+    prepare: ({ background, text, card }) => {
+      if (!background || !text || !card) return { title: "" }
 
       background = background.hex.toUpperCase()
-      accent = accent.hex.toUpperCase()
+      text = text.hex.toUpperCase()
+      card = card.hex.toUpperCase()
 
-      return { title: `${background} + ${accent}` }
+      return { title: `${background} + ${text} + ${card}` }
     },
   },
 }
