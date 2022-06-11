@@ -58,10 +58,10 @@ const SlidingText: FC<Props> = ({ children }) => {
           ))}
         </span>
       </div>
-      <div className="flex-0">
+      <div className="flex-none">
         <Link
           to="/"
-          className="flex-0 bg-background ml-4 flex h-16 w-16 items-center justify-center rounded-full border-2"
+          className="bg-background ml-4 flex h-16 w-16 items-center justify-center rounded-full border-2"
         >
           {close}
         </Link>
