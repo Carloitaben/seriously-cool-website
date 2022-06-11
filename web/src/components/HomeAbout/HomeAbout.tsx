@@ -8,10 +8,12 @@ type Props = {}
 
 const HomeAbout: FC<Props> = () => {
   return (
-    <section className="bg-text text-card rounded-4xl flex-1 px-16 text-5xl">
-      <AboutFirstParagraph />
-      <AboutParagraphs />
-      <AboutLastParagraph />
+    <section className="flex-1 overflow-y-auto px-1 py-2">
+      <div className="bg-text text-card rounded-4xl flex-1 px-16 text-5xl">
+        <AboutFirstParagraph />
+        <AboutParagraphs />
+        <AboutLastParagraph />
+      </div>
     </section>
   )
 }
