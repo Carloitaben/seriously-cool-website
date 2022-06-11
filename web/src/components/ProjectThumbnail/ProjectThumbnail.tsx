@@ -14,14 +14,12 @@ type Props = {
   animate: boolean
   project: ProjectsLoaderData["projects"][number]
   onLoad: () => void
-  skipAppear: boolean
 }
 
 const ProjectThumbnail: FC<Props> = ({
   animate: animateProp,
   project,
   onLoad,
-  skipAppear,
 }) => {
   const setSlidingText = store((state) => state.setSlidingText)
 
@@ -59,7 +57,7 @@ const ProjectThumbnail: FC<Props> = ({
       ref={ref}
       className="desktopMax:col-span-2 desktop:col-span-3 col-span-6"
     >
-      <Appear animate={animate} skip={skipAppear}>
+      <Appear animate={animate}>
         <div className="flex flex-col">
           <Link
             className="desktop:mb-2 desktop:mx-1 relative ring-0 ring-current transition-shadow duration-75 hover:ring-2 focus:outline-none focus:ring-2"
