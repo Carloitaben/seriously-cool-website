@@ -64,7 +64,8 @@ export type RootLoaderData = {
   theme: {
     fontFamily: string
     background: string
-    accent: string
+    text: string
+    card: string
     toy: Toy
   }
 }
@@ -103,14 +104,14 @@ export const loader: LoaderFunction = async ({
   const fontFamily = getRandomArrayItem(typefaces)
   const toy = getRandomToy(toys)
 
-  const { background, accent } = getRandomArrayItem(colors)
-  const flipColors = Math.random() < 0.5
+  const { background, text, card } = getRandomArrayItem(colors)
 
   const theme = {
     toy,
     fontFamily,
-    background: flipColors ? background.hex : accent.hex,
-    accent: flipColors ? accent.hex : background.hex,
+    background: background.hex,
+    text: text.hex,
+    card: card.hex,
   }
 
   const formattedLiterals = literals.reduce<Record<string, string>>(
@@ -142,7 +143,7 @@ export default function App() {
   const style: CSSProperties = {
     fontFamily: theme.fontFamily,
     background: theme.background,
-    color: theme.accent,
+    color: theme.text,
   }
 
   useIsomorphicLayoutEffect(() => {
@@ -152,10 +153,15 @@ export default function App() {
     )
 
     document.documentElement.style.setProperty(
-      "--theme-colors-accent",
-      theme.accent
+      "--theme-colors-text",
+      theme.text
     )
-  }, [theme.accent, theme.background])
+
+    document.documentElement.style.setProperty(
+      "--theme-colors-card",
+      theme.card
+    )
+  }, [theme.background, theme.text, theme.card])
 
   useOnMatchMedia("(prefers-color-scheme: dark)", (matches) => {
     const link = document.querySelector<HTMLLinkElement>('link[rel="icon"]')
@@ -175,17 +181,15 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <LazyMotion features={domAnimation}>
-        <body
-          className="selection:bg-accent selection:text-background flex h-screen flex-col"
-          style={style}
-        >
-          <Layout />
-          <ScrollRestoration />
-          <Scripts />
-          <LiveReload />
-        </body>
-      </LazyMotion>
+      <body
+        className="selection:bg-text selection:text-background flex h-screen flex-col"
+        style={style}
+      >
+        <Layout />
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
+      </body>
     </html>
   )
 }

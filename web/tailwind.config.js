@@ -14,7 +14,8 @@ module.exports = {
     extend: {
       colors: {
         background: "var(--theme-colors-background)",
-        accent: "var(--theme-colors-accent)",
+        text: "var(--theme-colors-text)",
+        card: "var(--theme-colors-card)",
       },
       spacing: {
         slidingTextDesktop: "3.125rem",

@@ -64,52 +64,53 @@ export default function Route() {
     .replace(/-/g, " ")
     .replace(/\b\w/g, (l) => l.toUpperCase())
 
-  const accentColor = theme.accent.toUpperCase()
-  const backgroundColor = theme.background.toUpperCase()
+    const backgroundColor = theme.background.toUpperCase()
+    const textColor = theme.text.toUpperCase()
+    const cardColor = theme.card.toUpperCase()
 
-  return (
-    <>
-      <Navbar goBackRoute="/">
-        <RemixLink to="/" className="menuContentVisible:inline-block hidden">
-          {literals.close}
-        </RemixLink>
-        <span className="menuContentVisible:hidden">
-          {literals.navLinkAboutLabel}
-        </span>
-      </Navbar>
-      <div className="px-container grid h-full grid-cols-6 gap-x-2 overflow-y-auto pt-12 pb-24 text-5xl">
-        <div className="tablet:max-w-4xl col-span-5 max-w-xl">
-          <p>
-            {literals.aboutFirstParagraphPretitle}{" "}
-            <Link href={firstParagraph.firstArtistHref}>
-              {firstParagraph.firstArtistName}
-            </Link>{" "}
-            {literals.aboutFirstParagraphIntertitle}{" "}
-            <Link href={firstParagraph.secondArtistHref}>
-              {firstParagraph.secondArtistName}
-            </Link>
-            {". "}
-            {literals.aboutFirstParagraphPosttitle}
-          </p>
-        </div>
-        {paragraphs.map((paragraph) => (
-          <div
-            key={paragraph._key}
-            className="tablet:max-w-4xl col-span-5 max-w-xl"
-          >
-            <br />
-            <TextBlock>{paragraph.content}</TextBlock>
+    return (
+      <>
+        <Navbar goBackRoute="/">
+          <RemixLink to="/" className="menuContentVisible:inline-block hidden">
+            {literals.close}
+          </RemixLink>
+          <span className="menuContentVisible:hidden">
+            {literals.navLinkAboutLabel}
+          </span>
+        </Navbar>
+        <div className="px-container grid h-full grid-cols-6 gap-x-2 overflow-y-auto pt-12 pb-24 text-5xl">
+          <div className="tablet:max-w-4xl col-span-5 max-w-xl">
+            <p>
+              {literals.aboutFirstParagraphPretitle}{" "}
+              <Link href={firstParagraph.firstArtistHref}>
+                {firstParagraph.firstArtistName}
+              </Link>{" "}
+              {literals.aboutFirstParagraphIntertitle}{" "}
+              <Link href={firstParagraph.secondArtistHref}>
+                {firstParagraph.secondArtistName}
+              </Link>
+              {". "}
+              {literals.aboutFirstParagraphPosttitle}
+            </p>
           </div>
-        ))}
-        <div className="tablet:max-w-4xl col-span-5 max-w-xl">
-          <br />
-          <p>
-            {literals.aboutThemeDataPretitle} {fontFamily}{" "}
-            {literals.aboutThemeDataIntertitle} {accentColor} {literals.and}{" "}
-            {backgroundColor}
-          </p>
+          {paragraphs.map((paragraph) => (
+            <div
+              key={paragraph._key}
+              className="tablet:max-w-4xl col-span-5 max-w-xl"
+            >
+              <br />
+              <TextBlock>{paragraph.content}</TextBlock>
+            </div>
+          ))}
+          <div className="tablet:max-w-4xl col-span-5 max-w-xl">
+            <br />
+            <p>
+              {literals.aboutThemeDataPretitle} {fontFamily}{" "}
+              {literals.aboutThemeDataIntertitle} {backgroundColor}
+              {","} {textColor} {literals.and} {cardColor}
+            </p>
+          </div>
         </div>
-      </div>
-    </>
-  )
+      </>
+    )
 }

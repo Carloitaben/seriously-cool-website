@@ -22,7 +22,10 @@ export const GET_SETTINGS = gql`
         background {
           hex
         }
-        accent {
+        text {
+          hex
+        }
+        card {
           hex
         }
       }

@@ -1218,22 +1218,25 @@ export type SettingsThemeColor = {
   __typename?: 'SettingsThemeColor';
   _key: Maybe<Scalars['String']>;
   _type: Maybe<Scalars['String']>;
-  accent: Maybe<Color>;
   background: Maybe<Color>;
+  card: Maybe<Color>;
+  text: Maybe<Color>;
 };
 
 export type SettingsThemeColorFilter = {
   _key: InputMaybe<StringFilter>;
   _type: InputMaybe<StringFilter>;
-  accent: InputMaybe<ColorFilter>;
   background: InputMaybe<ColorFilter>;
+  card: InputMaybe<ColorFilter>;
+  text: InputMaybe<ColorFilter>;
 };
 
 export type SettingsThemeColorSorting = {
   _key: InputMaybe<SortOrder>;
   _type: InputMaybe<SortOrder>;
-  accent: InputMaybe<ColorSorting>;
   background: InputMaybe<ColorSorting>;
+  card: InputMaybe<ColorSorting>;
+  text: InputMaybe<ColorSorting>;
 };
 
 export type SettingsToys = {
@@ -1306,7 +1309,7 @@ export type StringFilter = {
 export type GetSettingsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetSettingsQuery = { __typename?: 'RootQuery', allSettings: Array<{ __typename?: 'Settings', _id: string, slidingTexts: Array<string>, typefaces: Array<string>, literals: Array<{ __typename?: 'SettingsLiteral', key: string, value: string }>, toys: { __typename?: 'SettingsToys', TOY_STICKERS: boolean, TOY_2D_PHYSICAL_SHAPES: boolean }, catchphrases: Array<{ __typename?: 'SettingsCatchphrase', textRaw: any, visibility: string }>, colors: Array<{ __typename?: 'SettingsThemeColor', background: { __typename?: 'Color', hex: string }, accent: { __typename?: 'Color', hex: string } }> }> };
+export type GetSettingsQuery = { __typename?: 'RootQuery', allSettings: Array<{ __typename?: 'Settings', _id: string, slidingTexts: Array<string>, typefaces: Array<string>, literals: Array<{ __typename?: 'SettingsLiteral', key: string, value: string }>, toys: { __typename?: 'SettingsToys', TOY_STICKERS: boolean, TOY_2D_PHYSICAL_SHAPES: boolean }, catchphrases: Array<{ __typename?: 'SettingsCatchphrase', textRaw: any, visibility: string }>, colors: Array<{ __typename?: 'SettingsThemeColor', background: { __typename?: 'Color', hex: string }, text: { __typename?: 'Color', hex: string }, card: { __typename?: 'Color', hex: string } }> }> };
 
 export type GetProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 

@@ -60,7 +60,7 @@ const NavbarMobileMenu: FC<Props> = ({ children, goBackRoute }) => {
         {children}
       </div>
       <m.div
-        className="bg-accent text-background selection:bg-background selection:text-accent menuContentVisible:hidden fixed inset-0 overflow-hidden"
+        className="bg-text text-background selection:bg-background selection:text-text menuContentVisible:hidden fixed inset-0 overflow-hidden"
         initial="hide"
         animate={menuOpened ? "show" : "hide"}
         variants={variants}

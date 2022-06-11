@@ -24,7 +24,7 @@ const LayoutDrawer: FC<Props> = ({ children, origin }) => {
   const { theme } = useRootData()
 
   const style: CSSProperties = {
-    background: theme.accent,
+    background: theme.text,
     color: theme.background,
   }
 
@@ -32,7 +32,7 @@ const LayoutDrawer: FC<Props> = ({ children, origin }) => {
 
   return (
     <m.div
-      className="bottom-slidingTextDesktop selection:bg-background selection:text-accent fixed inset-x-0 top-0 overflow-hidden"
+      className="bottom-slidingTextDesktop selection:bg-background selection:text-text fixed inset-x-0 top-0 overflow-hidden"
       initial={origin}
       animate="show"
       exit={origin}
