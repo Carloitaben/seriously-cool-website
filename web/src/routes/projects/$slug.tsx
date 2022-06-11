@@ -10,7 +10,6 @@ import useRootData from "~/hooks/useRootData"
 
 import Appear from "~/components/Appear"
 import AppearText from "~/components/AppearText"
-import Navbar from "~/components/Navbar"
 import TextBlock from "~/components/TextBlock"
 import ProjectDetailClientLocation from "~/components/ProjectDetailClientLocation"
 import ProjectDetailBlocks from "~/components/ProjectDetailBlocks"
@@ -70,12 +69,6 @@ export default function Route() {
 
   return (
     <>
-      <Navbar goBackRoute="/projects">
-        <Link to="/projects" className="menuContentVisible:inline-block hidden">
-          {literals.close}
-        </Link>
-        <span className="menuContentVisible:hidden" />
-      </Navbar>
       <LayoutScrollableSection>
         <div className="h-full overflow-y-auto">
           <div className="px-container mt-12 mb-24 grid grid-cols-6 gap-x-2 text-2xl">
