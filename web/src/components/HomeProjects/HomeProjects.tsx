@@ -11,7 +11,7 @@ const HomeProjects: FC = () => {
   const rootRef = useRef<HTMLElement>(null)
 
   return (
-    <section ref={rootRef} className="flex-1 overflow-y-auto px-1 py-2">
+    <section ref={rootRef} className="flex-1 overflow-y-auto px-1 pt-2 pb-24">
       <div className="flex flex-col">
         <Catchphrase />
         <ul className="grid gap-2">

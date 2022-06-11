@@ -15,7 +15,9 @@ type Props = {
 }
 
 const SlidingText: FC<Props> = ({ children }) => {
-  const { theme } = useRootData()
+  const {
+    theme: { fontFamily, colors },
+  } = useRootData()
 
   const slidingText = store((state) => state.slidingText)
   const slidingTextMask = store((state) => state.slidingTextMask)
@@ -26,7 +28,7 @@ const SlidingText: FC<Props> = ({ children }) => {
     return children
   }, [children, slidingText, slidingTextMask])
 
-  const isFontLoaded = useIsFontLoaded(theme.fontFamily)
+  const isFontLoaded = useIsFontLoaded(fontFamily)
   const childWrapper = useRef<HTMLSpanElement>(null)
   const [style, setStyle] = useState<CSSProperties>()
 
@@ -46,8 +48,14 @@ const SlidingText: FC<Props> = ({ children }) => {
   }, [childrenOrMask, isFontLoaded])
 
   return (
-    <div className="text-text border-text fixed inset-x-4 bottom-4 flex select-none">
-      <div className="bg-background flex h-16 flex-1 items-center overflow-hidden whitespace-nowrap rounded-full border-2 border-current text-2xl uppercase">
+    <div
+      className="fixed inset-x-4 bottom-4 flex select-none"
+      style={{ color: colors.text }}
+    >
+      <div
+        className="flex h-16 flex-1 items-center overflow-hidden whitespace-nowrap rounded-full border-2 border-current text-2xl uppercase"
+        style={{ background: colors.background }}
+      >
         <span
           ref={childWrapper}
           style={style}
