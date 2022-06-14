@@ -35,5 +35,15 @@ export default {
       type: "mediaVideo",
       hidden: ({ parent }) => parent?.kind !== "VIDEO_GIF",
     },
+    {
+      name: "color",
+      title: "Background color",
+      description: "A color that matches the video background",
+      type: "color",
+      validation: (Rule) => Rule.required(),
+      options: {
+        disableAlpha: true,
+      },
+    },
   ],
 }
