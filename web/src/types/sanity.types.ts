@@ -612,6 +612,7 @@ export type ProjectThumbnail = {
   __typename?: 'ProjectThumbnail';
   _key: Maybe<Scalars['String']>;
   _type: Maybe<Scalars['String']>;
+  color: Maybe<Color>;
   image: Maybe<MediaImage>;
   kind: Maybe<Scalars['String']>;
   video: Maybe<MediaVideo>;
@@ -620,6 +621,7 @@ export type ProjectThumbnail = {
 export type ProjectThumbnailFilter = {
   _key: InputMaybe<StringFilter>;
   _type: InputMaybe<StringFilter>;
+  color: InputMaybe<ColorFilter>;
   image: InputMaybe<MediaImageFilter>;
   kind: InputMaybe<StringFilter>;
   video: InputMaybe<MediaVideoFilter>;
@@ -628,6 +630,7 @@ export type ProjectThumbnailFilter = {
 export type ProjectThumbnailSorting = {
   _key: InputMaybe<SortOrder>;
   _type: InputMaybe<SortOrder>;
+  color: InputMaybe<ColorSorting>;
   image: InputMaybe<MediaImageSorting>;
   kind: InputMaybe<SortOrder>;
   video: InputMaybe<MediaVideoSorting>;
@@ -1314,14 +1317,14 @@ export type GetSettingsQuery = { __typename?: 'RootQuery', allSettings: Array<{ 
 export type GetProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetProjectsQuery = { __typename?: 'RootQuery', allProject: Array<{ __typename?: 'Project', _id: string, title: string, slug: { __typename?: 'Slug', current: string }, awards: Array<{ __typename?: 'ProjectAward', showBadge: boolean }>, thumbnail: { __typename?: 'ProjectThumbnail', kind: string, video: { __typename?: 'MediaVideo', width: number, height: number, alt: string, mp4: { __typename?: 'File', asset: { __typename?: 'SanityFileAsset', url: string } } }, image: { __typename?: 'MediaImage', alt: string, image: { __typename?: 'Image', asset: { __typename?: 'SanityImageAsset', url: string, metadata: { __typename?: 'SanityImageMetadata', dimensions: { __typename?: 'SanityImageDimensions', height: number, width: number } } } } } } }> };
+export type GetProjectsQuery = { __typename?: 'RootQuery', allProject: Array<{ __typename?: 'Project', _id: string, title: string, slug: { __typename?: 'Slug', current: string }, awards: Array<{ __typename?: 'ProjectAward', showBadge: boolean }>, thumbnail: { __typename?: 'ProjectThumbnail', kind: string, color: { __typename?: 'Color', hex: string }, video: { __typename?: 'MediaVideo', width: number, height: number, alt: string, mp4: { __typename?: 'File', asset: { __typename?: 'SanityFileAsset', url: string } } }, image: { __typename?: 'MediaImage', alt: string, image: { __typename?: 'Image', asset: { __typename?: 'SanityImageAsset', url: string, metadata: { __typename?: 'SanityImageMetadata', dimensions: { __typename?: 'SanityImageDimensions', height: number, width: number } } } } } } }> };
 
 export type GetProjectQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
 
 
-export type GetProjectQuery = { __typename?: 'RootQuery', allProject: Array<{ __typename?: 'Project', _id: string, title: string, descriptionRaw: any, clientRaw: any, location: string, year: number, openGraphImage: { __typename?: 'Image', asset: { __typename?: 'SanityImageAsset', url: string, metadata: { __typename?: 'SanityImageMetadata', dimensions: { __typename?: 'SanityImageDimensions', height: number, width: number } } } }, thumbnail: { __typename?: 'ProjectThumbnail', kind: string, video: { __typename?: 'MediaVideo', width: number, height: number, alt: string, mp4: { __typename?: 'File', asset: { __typename?: 'SanityFileAsset', url: string } } }, image: { __typename?: 'MediaImage', alt: string, image: { __typename?: 'Image', asset: { __typename?: 'SanityImageAsset', url: string, metadata: { __typename?: 'SanityImageMetadata', dimensions: { __typename?: 'SanityImageDimensions', height: number, width: number } } } } } }, blocks: Array<{ __typename: 'Media', _key: string, kind: string, video: { __typename?: 'MediaVideo', width: number, height: number, alt: string, mp4: { __typename?: 'File', asset: { __typename?: 'SanityFileAsset', url: string } } }, image: { __typename?: 'MediaImage', alt: string, image: { __typename?: 'Image', asset: { __typename?: 'SanityImageAsset', url: string, metadata: { __typename?: 'SanityImageMetadata', dimensions: { __typename?: 'SanityImageDimensions', height: number, width: number } } } } } } | { __typename: 'ProjectBlockMedia', _key: string, mediaBlockBlocks: Array<{ __typename?: 'Media', kind: string, video: { __typename?: 'MediaVideo', width: number, height: number, alt: string, mp4: { __typename?: 'File', asset: { __typename?: 'SanityFileAsset', url: string } } }, image: { __typename?: 'MediaImage', alt: string, image: { __typename?: 'Image', asset: { __typename?: 'SanityImageAsset', url: string, metadata: { __typename?: 'SanityImageMetadata', dimensions: { __typename?: 'SanityImageDimensions', height: number, width: number } } } } } }> } | { __typename: 'ProjectBlockRichText', _key: string, textRaw: any }>, roles: Array<{ __typename?: 'ProjectRole', _key: string, pretitle: string, title: string }>, awards: Array<{ __typename?: 'ProjectAward', _key: string, textRaw: any, year: number }> }> };
+export type GetProjectQuery = { __typename?: 'RootQuery', allProject: Array<{ __typename?: 'Project', _id: string, title: string, descriptionRaw: any, clientRaw: any, location: string, year: number, openGraphImage: { __typename?: 'Image', asset: { __typename?: 'SanityImageAsset', url: string, metadata: { __typename?: 'SanityImageMetadata', dimensions: { __typename?: 'SanityImageDimensions', height: number, width: number } } } }, thumbnail: { __typename?: 'ProjectThumbnail', kind: string, color: { __typename?: 'Color', hex: string }, video: { __typename?: 'MediaVideo', width: number, height: number, alt: string, mp4: { __typename?: 'File', asset: { __typename?: 'SanityFileAsset', url: string } } }, image: { __typename?: 'MediaImage', alt: string, image: { __typename?: 'Image', asset: { __typename?: 'SanityImageAsset', url: string, metadata: { __typename?: 'SanityImageMetadata', dimensions: { __typename?: 'SanityImageDimensions', height: number, width: number } } } } } }, blocks: Array<{ __typename: 'Media', _key: string, kind: string, video: { __typename?: 'MediaVideo', width: number, height: number, alt: string, mp4: { __typename?: 'File', asset: { __typename?: 'SanityFileAsset', url: string } } }, image: { __typename?: 'MediaImage', alt: string, image: { __typename?: 'Image', asset: { __typename?: 'SanityImageAsset', url: string, metadata: { __typename?: 'SanityImageMetadata', dimensions: { __typename?: 'SanityImageDimensions', height: number, width: number } } } } } } | { __typename: 'ProjectBlockMedia', _key: string, mediaBlockBlocks: Array<{ __typename?: 'Media', kind: string, video: { __typename?: 'MediaVideo', width: number, height: number, alt: string, mp4: { __typename?: 'File', asset: { __typename?: 'SanityFileAsset', url: string } } }, image: { __typename?: 'MediaImage', alt: string, image: { __typename?: 'Image', asset: { __typename?: 'SanityImageAsset', url: string, metadata: { __typename?: 'SanityImageMetadata', dimensions: { __typename?: 'SanityImageDimensions', height: number, width: number } } } } } }> } | { __typename: 'ProjectBlockRichText', _key: string, textRaw: any }>, roles: Array<{ __typename?: 'ProjectRole', _key: string, pretitle: string, title: string }>, awards: Array<{ __typename?: 'ProjectAward', _key: string, textRaw: any, year: number }> }> };
 
 export type GetAboutQueryVariables = Exact<{ [key: string]: never; }>;
 

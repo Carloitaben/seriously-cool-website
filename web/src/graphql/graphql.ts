@@ -46,6 +46,9 @@ export const GET_PROJECTS = gql`
       }
       thumbnail {
         kind
+        color {
+          hex
+        }
         video {
           mp4 {
             asset {
@@ -94,6 +97,9 @@ export const GET_PROJECT = gql`
       }
       thumbnail {
         kind
+        color {
+          hex
+        }
         video {
           mp4 {
             asset {
