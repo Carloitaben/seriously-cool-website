@@ -65,7 +65,7 @@ const ProjectThumbnail: FC<Props> = ({ project, rootRef }) => {
         >
           <Link
             className="rounded-4xl relative overflow-hidden focus:outline-none"
-            to={project.slug.current}
+            to={`projects/${project.slug.current}`}
             {...events}
           >
             <Media
