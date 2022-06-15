@@ -7,7 +7,9 @@ import type { MediaVideo } from "~/types"
 import { lightboxTransition } from "~/utils"
 
 import type { MediaComponentSharedProps } from "./Media"
+import useAttatchVideoEvents from "./useAttatchVideoEvents"
 import useLightbox from "./useLightbox"
+import usePlayPauseOnIntersection from "./usePlayPauseOnIntersection"
 import Lightbox from "./Lightbox"
 
 type Props = Omit<MediaVideo, "__typename" | "_key" | "_type"> &
@@ -41,31 +43,8 @@ const MediaVideoGif: FC<Props> = ({
     if (load) setAsset(assetProp)
   }, [assetProp, load])
 
-  // Handle play/pause when intersecting
-  useEffect(() => {
-    if (!ref.current) return
-
-    if (intersecting) {
-      ref.current.paused && ref.current.play()
-    } else {
-      !ref.current.paused && ref.current.pause()
-    }
-  }, [intersecting])
-
-  // Attatch events
-  useEffect(() => {
-    const element = ref.current
-
-    if (element && onLoad) {
-      element.addEventListener("loadeddata", onLoad)
-    }
-
-    return () => {
-      if (element && onLoad) {
-        element.removeEventListener("loadeddata", onLoad)
-      }
-    }
-  }, [onLoad])
+  useAttatchVideoEvents(ref, { onLoad })
+  usePlayPauseOnIntersection(ref, { intersecting, autoplay: true })
 
   function onVideoClick() {
     if (enableLightbox) {
