@@ -8,12 +8,18 @@ type Props = {
   alt?: string
   href: string
   children: string
+  className?: string
 }
 
-export const className =
+export const defaultStyles =
   "flex h-16 flex-none items-center justify-center rounded-full border-2 border-current px-8 text-center uppercase no-underline"
 
-const Link: FC<Props> = ({ alt, href, children }) => {
+const Link: FC<Props> = ({
+  alt,
+  href,
+  children,
+  className: classNameProp = "",
+}) => {
   const events = useMemo(() => {
     const setSlidingText = store.getState().setSlidingText
 
@@ -24,6 +30,8 @@ const Link: FC<Props> = ({ alt, href, children }) => {
       onBlur: () => setSlidingText(null),
     }
   }, [alt, children])
+
+  const className = `${classNameProp} ${defaultStyles}`
 
   if (href?.charAt(0) === "/") {
     return (

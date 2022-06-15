@@ -6,15 +6,19 @@ import useRootData from "~/hooks/useRootData"
 
 import store from "~/store"
 
-import { className } from "~/components/LinkButton"
+import { defaultStyles } from "~/components/LinkButton"
 
 type Props = {
+  className?: string
   children: string
 }
 
 const TIMEOUT_DURATION_MS = 1250
 
-const NavbarMailMeButton: FC<Props> = ({ children }) => {
+const NavbarMailMeButton: FC<Props> = ({
+  className: classNameProp = "",
+  children,
+}) => {
   const { literals } = useRootData()
 
   const [menuContentVisible, setIsMenuContentVisible] = useState(false)
@@ -85,6 +89,8 @@ const NavbarMailMeButton: FC<Props> = ({ children }) => {
       setBlockClicks(true)
     }
   }
+
+  const className = `${classNameProp} ${defaultStyles}`
 
   return (
     <button

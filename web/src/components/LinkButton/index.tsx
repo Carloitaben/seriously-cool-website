@@ -1,1 +1,1 @@
-export { default, className } from "./LinkButton"
+export { default, defaultStyles } from "./LinkButton"
