@@ -626,16 +626,20 @@ button {
   margin-bottom: -0.5rem;
 }
 
+.-mb-2 {
+  margin-bottom: -0.5rem;
+}
+
 .mt-2 {
   margin-top: 0.5rem;
 }
 
-.-ml-10 {
-  margin-left: -2.5rem;
-}
-
 .ml-4 {
   margin-left: 1rem;
+}
+
+.-ml-10 {
+  margin-left: -2.5rem;
 }
 
 .mt-12 {
@@ -644,18 +648,6 @@ button {
 
 .mb-24 {
   margin-bottom: 6rem;
-}
-
-.-mb-2 {
-  margin-bottom: -0.5rem;
-}
-
-.-mb-12 {
-  margin-bottom: -3rem;
-}
-
-.-mb-4 {
-  margin-bottom: -1rem;
 }
 
 .block {
@@ -771,20 +763,12 @@ button {
   align-items: center;
 }
 
-.justify-start {
-  justify-content: flex-start;
-}
-
 .justify-center {
   justify-content: center;
 }
 
 .justify-between {
   justify-content: space-between;
-}
-
-.gap-2 {
-  gap: 0.5rem;
 }
 
 .gap-x-2 {
@@ -842,14 +826,6 @@ button {
   border-color: currentColor;
 }
 
-.border-text {
-  border-color: var(--theme-colors-text);
-}
-
-.bg-text {
-  background-color: var(--theme-colors-text);
-}
-
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
@@ -857,11 +833,6 @@ button {
 
 .bg-background {
   background-color: var(--theme-colors-background);
-}
-
-.bg-red-900 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(127 29 29 / var(--tw-bg-opacity));
 }
 
 .fill-current {
@@ -875,11 +846,6 @@ button {
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
-}
-
-.px-8 {
-  padding-left: 2rem;
-  padding-right: 2rem;
 }
 
 .py-16 {
@@ -897,14 +863,14 @@ button {
   padding-bottom: 7rem;
 }
 
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
 .py-12 {
   padding-top: 3rem;
   padding-bottom: 3rem;
-}
-
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
 }
 
 .pb-24 {
@@ -915,24 +881,16 @@ button {
   padding-top: 0.5rem;
 }
 
-.pr-20 {
-  padding-right: 5rem;
-}
-
 .pb-16 {
   padding-bottom: 4rem;
 }
 
-.pb-20 {
-  padding-bottom: 5rem;
-}
-
-.pb-32 {
-  padding-bottom: 8rem;
-}
-
 .pb-2 {
   padding-bottom: 0.5rem;
+}
+
+.pr-20 {
+  padding-right: 5rem;
 }
 
 .text-left {
@@ -969,14 +927,6 @@ button {
 
 .leading-tight {
   line-height: 1.25;
-}
-
-.text-card {
-  color: var(--theme-colors-card);
-}
-
-.text-text {
-  color: var(--theme-colors-text);
 }
 
 .underline {

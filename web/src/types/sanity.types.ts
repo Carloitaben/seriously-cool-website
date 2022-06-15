@@ -612,6 +612,7 @@ export type ProjectThumbnail = {
   __typename?: 'ProjectThumbnail';
   _key: Maybe<Scalars['String']>;
   _type: Maybe<Scalars['String']>;
+  color: Maybe<Color>;
   image: Maybe<MediaImage>;
   kind: Maybe<Scalars['String']>;
   video: Maybe<MediaVideo>;
@@ -620,6 +621,7 @@ export type ProjectThumbnail = {
 export type ProjectThumbnailFilter = {
   _key: InputMaybe<StringFilter>;
   _type: InputMaybe<StringFilter>;
+  color: InputMaybe<ColorFilter>;
   image: InputMaybe<MediaImageFilter>;
   kind: InputMaybe<StringFilter>;
   video: InputMaybe<MediaVideoFilter>;
@@ -628,6 +630,7 @@ export type ProjectThumbnailFilter = {
 export type ProjectThumbnailSorting = {
   _key: InputMaybe<SortOrder>;
   _type: InputMaybe<SortOrder>;
+  color: InputMaybe<ColorSorting>;
   image: InputMaybe<MediaImageSorting>;
   kind: InputMaybe<SortOrder>;
   video: InputMaybe<MediaVideoSorting>;
