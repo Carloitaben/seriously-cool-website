@@ -102,6 +102,7 @@ export default function Route() {
             <TextBlock>{project.descriptionRaw}</TextBlock>
           </Appear>
         </div>
+        <ProjectDetailThumbnail project={project} />
         <ProjectDetailBlocks>{project.blocks}</ProjectDetailBlocks>
         <div className="px-container grid grid-cols-6 gap-x-2 text-2xl">
           <ProjectDetailClientLocation

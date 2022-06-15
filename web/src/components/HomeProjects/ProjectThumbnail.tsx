@@ -1,13 +1,14 @@
 import { Link } from "@remix-run/react"
 import type { FC, RefObject } from "react"
 import { useEffect, useMemo, useRef, useState } from "react"
+import { motion } from "framer-motion"
 
+import type { RootLoaderData } from "~/root"
 import store from "~/store"
 import useIntersectionObserver from "~/hooks/useIntersectionObserver"
 
 import Appear from "~/components/Appear"
 import Media from "~/components/Media"
-import type { RootLoaderData } from "~/root"
 
 type Props = {
   animate: boolean
@@ -21,6 +22,18 @@ const ProjectThumbnail: FC<Props> = ({ project, rootRef }) => {
     () => project.awards?.filter((award) => award.showBadge) || [],
     [project.awards]
   )
+
+  const events = useMemo(() => {
+    const setSlidingText = store.getState().setSlidingText
+
+    return {
+      onMouseEnter: () => setSlidingText(project.title),
+      onMouseLeave: () => setSlidingText(null),
+      onFocus: () => setSlidingText(project.title),
+      onBlur: () => setSlidingText(null),
+      onClick: () => setSlidingText(null),
+    }
+  }, [project.title])
 
   const ref = useRef<HTMLLIElement>(null)
   const [loaded, setLoaded] = useState(false)
@@ -43,38 +56,27 @@ const ProjectThumbnail: FC<Props> = ({ project, rootRef }) => {
     setLoaded(true)
   }
 
-  const events = useMemo(() => {
-    const setSlidingText = store.getState().setSlidingText
-
-    return {
-      onMouseEnter: () => setSlidingText(project.title),
-      onMouseLeave: () => setSlidingText(null),
-      onFocus: () => setSlidingText(project.title),
-      onBlur: () => setSlidingText(null),
-      onClick: () => setSlidingText(null),
-    }
-  }, [project.title])
-
   return (
     <li ref={ref} className="pb-2">
       <Appear animate={animate}>
-        <div
-          data-load={load}
-          data-intersecting={intersecting}
-          className="flex flex-col"
-        >
+        <div className="flex flex-col">
           <Link
-            className="rounded-4xl relative overflow-hidden focus:outline-none"
-            to={project.slug.current}
+            className="relative focus:outline-none"
+            to={`/projects/${project.slug.current}`}
             {...events}
           >
-            <Media
-              {...project.thumbnail}
-              intersecting={intersecting}
-              load={load}
-              onLoad={onProjectLoad}
-              // alt={project.thumbnail.video.alt || project.title}
-            />
+            <motion.div
+              layoutId={project.title}
+              className="w-full overflow-hidden"
+              style={{ borderRadius: "32px" }}
+            >
+              <Media
+                {...project.thumbnail}
+                intersecting={intersecting}
+                load={load}
+                onLoad={onProjectLoad}
+              />
+            </motion.div>
             {/* TODO: awards with `toy` integration */}
             {/* {awardsToShow.length > 0 && (
                   <div className="absolute inset-0">

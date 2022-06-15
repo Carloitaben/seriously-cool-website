@@ -1,4 +1,5 @@
 import type { FC } from "react"
+
 import useRootData from "~/hooks/useRootData"
 
 import AboutFirstParagraph from "./AboutFirstParagraph"
