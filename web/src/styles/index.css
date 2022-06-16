@@ -960,6 +960,11 @@ button {
       overscroll-behavior: contain;
 }
 
+.overscroll-none {
+  -ms-scroll-chaining: none;
+      overscroll-behavior: none;
+}
+
 .whitespace-nowrap {
   white-space: nowrap;
 }
