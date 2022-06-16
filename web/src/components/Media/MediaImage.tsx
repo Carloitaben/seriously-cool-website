@@ -6,6 +6,7 @@ import type { MediaImage as MediaImageProps } from "~/types"
 import { getSanityImageSource, lightboxTransition } from "~/utils"
 
 import type { MediaComponentSharedProps } from "./Media"
+import { borderRadius } from "./Media"
 import useLightbox from "./useLightbox"
 import Lightbox from "./Lightbox"
 
@@ -54,6 +55,7 @@ const MediaImage: FC<Props> = ({
             onLoad={onLoad}
             className={`${className} absolute inset-0 h-full w-full`}
             onClick={() => enableLightbox && setLightbox(true)}
+            style={borderRadius}
           />
         )}
       </div>

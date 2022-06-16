@@ -7,6 +7,7 @@ import type { MediaVideo } from "~/types"
 import { lightboxTransition } from "~/utils"
 
 import type { MediaComponentSharedProps } from "./Media"
+import { borderRadius } from "./Media"
 import useAttatchVideoEvents from "./useAttatchVideoEvents"
 import useLightbox from "./useLightbox"
 import usePlayPauseOnIntersection from "./usePlayPauseOnIntersection"
@@ -91,6 +92,7 @@ const MediaVideoGif: FC<Props> = ({
             playsInline
             className="absolute inset-0 h-full w-full"
             onClick={onVideoClick}
+            style={borderRadius}
           >
             {asset && (
               <source src={asset.url} type={`video/${asset.extension}`} />

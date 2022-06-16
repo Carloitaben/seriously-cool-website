@@ -64,7 +64,7 @@ const ProjectThumbnail: FC<Props> = ({ project, rootRef }) => {
           className="flex flex-col"
         >
           <Link
-            className="rounded-4xl relative overflow-hidden focus:outline-none"
+            className="relative focus:outline-none"
             to={`projects/${project.slug.current}`}
             {...events}
           >

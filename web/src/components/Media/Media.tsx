@@ -1,4 +1,4 @@
-import type { FC } from "react"
+import type { CSSProperties, FC } from "react"
 
 import type { Media as MediaProps } from "~/types"
 
@@ -15,6 +15,10 @@ export type MediaComponentSharedProps = {
   onLoad?: () => void
   className?: string
   enableLightbox?: boolean
+}
+
+export const borderRadius: CSSProperties = {
+  borderRadius: 32,
 }
 
 const Media: FC<
