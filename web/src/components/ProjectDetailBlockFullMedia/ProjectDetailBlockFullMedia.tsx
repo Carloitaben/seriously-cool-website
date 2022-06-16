@@ -12,8 +12,8 @@ import Media from "~/components/Media"
 type Props = ProjectDetailBlockCommonProps & MediaProps
 
 const ProjectDetailBlockFullMedia: FC<Props> = ({ first, ...mediaProps }) => {
-  const [loaded, setLoaded] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
+  const [loaded, setLoaded] = useState(false)
 
   const load = useIntersectionObserver(ref, {
     rootMargin: "0% 0% 50%",
@@ -27,9 +27,11 @@ const ProjectDetailBlockFullMedia: FC<Props> = ({ first, ...mediaProps }) => {
     setLoaded(true)
   }, [])
 
+  const animate = (first || intersecting) && loaded
+
   return (
     <div ref={ref} className="desktop:col-span-6 col-span-4">
-      <Appear animate={(first || intersecting) && loaded}>
+      <Appear animate={animate}>
         <Media
           enableLightbox
           load={first || load}
