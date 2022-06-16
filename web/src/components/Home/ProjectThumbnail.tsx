@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react"
-import type { FC, RefObject } from "react"
+import type { FC } from "react"
 import { useEffect, useMemo, useRef, useState } from "react"
 
 import store from "~/store"
@@ -13,10 +13,9 @@ type Props = {
   animate: boolean
   project: RootLoaderData["projects"][number]
   onLoad: () => void
-  rootRef: RefObject<HTMLElement>
 }
 
-const ProjectThumbnail: FC<Props> = ({ project, rootRef }) => {
+const ProjectThumbnail: FC<Props> = ({ project }) => {
   const awardsToShow = useMemo(
     () => project.awards?.filter((award) => award.showBadge) || [],
     [project.awards]
@@ -28,12 +27,9 @@ const ProjectThumbnail: FC<Props> = ({ project, rootRef }) => {
 
   const load = useIntersectionObserver(ref, {
     rootMargin: "0% 0% 50%",
-    root: rootRef.current,
   })
 
-  const intersecting = useIntersectionObserver(ref, {
-    root: rootRef.current,
-  })
+  const intersecting = useIntersectionObserver(ref)
 
   useEffect(() => {
     if (intersecting && loaded) setAnimate(true)

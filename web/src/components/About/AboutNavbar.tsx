@@ -9,15 +9,21 @@ const AboutNavbar: FC = () => {
   const { literals } = useRootData()
 
   return (
-    <nav className="flex items-start justify-between py-16 text-2xl">
-      <ul className="-mb-2 flex flex-wrap items-center">
-        <LinkButton className="mb-2 mr-2" href={literals.navLinkBehanceLink}>
+    <nav className="desktop:py-16 flex items-start justify-between pt-10 pb-20 text-2xl">
+      <ul className="desktop:-mb-2 -mb-3 flex flex-wrap items-center">
+        <LinkButton
+          className="desktop:mb-2 desktop:mr-2 mb-3 mr-3"
+          href={literals.navLinkBehanceLink}
+        >
           {literals.navLinkBehanceLabel}
         </LinkButton>
-        <LinkButton className="mb-2 mr-2" href={literals.navLinkInstagramLink}>
+        <LinkButton
+          className="desktop:mb-2 desktop:mr-2 mb-3 mr-3"
+          href={literals.navLinkInstagramLink}
+        >
           {literals.navLinkInstagramLabel}
         </LinkButton>
-        <AboutNavbarMailMeButton className="mb-2 mr-2">
+        <AboutNavbarMailMeButton className="desktop:mb-2 desktop:mr-2 mb-3 mr-3">
           {literals.navLinkMailMeLabel}
         </AboutNavbarMailMeButton>
       </ul>

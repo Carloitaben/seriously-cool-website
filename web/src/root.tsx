@@ -122,7 +122,7 @@ export default function App() {
         <Links />
       </head>
       <body
-        className="selection:bg-text selection:text-background h-screen"
+        className="selection:bg-text selection:text-background"
         style={style}
       >
         <Outlet />

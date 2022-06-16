@@ -7,9 +7,9 @@ const AboutNavbarRerollButton: FC = () => {
   return (
     <Link
       to="."
-      className="flex h-16 w-16 flex-none items-center justify-center rounded-full border-2 border-current"
+      className="desktop:h-16 desktop:w-16 flex h-12 w-12 flex-none items-center justify-center rounded-full border-2 border-current"
     >
-      {dice}
+      <span className="desktop:max-w-[1.875rem] max-w-[1.5rem]">{dice}</span>
     </Link>
   )
 }

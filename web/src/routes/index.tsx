@@ -1,11 +1,5 @@
-import HomeAbout from "~/components/HomeAbout"
-import HomeProjects from "~/components/HomeProjects"
+import Home from "~/components/Home"
 
 export default function Route() {
-  return (
-    <div className="flex h-full overflow-hidden px-1">
-      <HomeAbout />
-      <HomeProjects />
-    </div>
-  )
+  return <Home />
 }

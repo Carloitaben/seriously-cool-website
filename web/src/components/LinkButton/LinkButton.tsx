@@ -12,7 +12,7 @@ type Props = {
 }
 
 export const defaultStyles =
-  "flex h-16 flex-none items-center justify-center rounded-full border-2 border-current px-8 text-center uppercase no-underline"
+  "flex h-12 desktop:h-16 flex-none items-center justify-center rounded-full border-2 border-current px-5 desktop:px-8 text-center uppercase no-underline"
 
 const Link: FC<Props> = ({
   alt,
