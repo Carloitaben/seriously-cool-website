@@ -21,14 +21,14 @@ const NavbarMailMeButton: FC<Props> = ({
 }) => {
   const { literals } = useRootData()
 
-  const [menuContentVisible, setIsMenuContentVisible] = useState(false)
+  const [isDesktop, setIsDesktop] = useState(false)
   const [blockClicks, setBlockClicks] = useState(false)
   const timeout = useRef<NodeJS.Timeout>()
 
   const setSlidingText = store((state) => state.setSlidingText)
   const setSlidingTextMask = store((state) => state.setSlidingTextMask)
 
-  useOnTailwindBreakpoint("menuContentVisible", setIsMenuContentVisible)
+  useOnTailwindBreakpoint("desktop", setIsDesktop)
 
   const handleEmail = useCallback(async () => {
     try {
@@ -81,7 +81,7 @@ const NavbarMailMeButton: FC<Props> = ({
   }
 
   function handleClick() {
-    if (!menuContentVisible) {
+    if (!isDesktop) {
       return window.open(`mailto:${literals.email}`, "_blank")
     }
 
