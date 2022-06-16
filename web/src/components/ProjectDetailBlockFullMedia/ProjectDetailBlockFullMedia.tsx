@@ -9,24 +9,18 @@ import type { ProjectDetailBlockCommonProps } from "~/components/ProjectDetailBl
 import Appear from "~/components/Appear"
 import Media from "~/components/Media"
 
-import { useLayoutScrollableSectionContext } from "../LayoutScrollableSection"
-
 type Props = ProjectDetailBlockCommonProps & MediaProps
 
 const ProjectDetailBlockFullMedia: FC<Props> = ({ first, ...mediaProps }) => {
   const [loaded, setLoaded] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
-  const { scrollableRef } = useLayoutScrollableSectionContext()
-
   const load = useIntersectionObserver(ref, {
     rootMargin: "0% 0% 50%",
-    root: scrollableRef.current,
   })
 
   const intersecting = useIntersectionObserver(ref, {
     disconnect: first,
-    root: scrollableRef.current,
   })
 
   const onLoad = useCallback(() => {
