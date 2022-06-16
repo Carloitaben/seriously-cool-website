@@ -70,7 +70,7 @@ export default function Route() {
   const [finishedTitleAnimation, setFinishedTitleAnimation] = useState(false)
 
   return (
-    <div className="h-full overflow-y-auto">
+    <div className="h-full overflow-y-auto pb-20">
       <div className="px-container mt-12 mb-24 grid grid-cols-6 gap-x-2 text-2xl">
         <div className="col-span-3 max-w-xl text-5xl leading-tight">
           <h1>
