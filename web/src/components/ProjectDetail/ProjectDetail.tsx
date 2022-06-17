@@ -36,7 +36,7 @@ const ProjectDetail: FC<Props> = ({ project }) => {
         </Appear>
       </div>
       <ProjectDetailBlocks>{project.blocks}</ProjectDetailBlocks>
-      <div className="px-container grid grid-cols-6 gap-x-2 text-2xl">
+      <div className="text-2xl">
         <ProjectDetailClientLocation
           client={project.clientRaw}
           location={project.location}

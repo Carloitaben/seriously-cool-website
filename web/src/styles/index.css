@@ -433,35 +433,6 @@ button {
   text-transform: unset;
 }
 
-.px-container {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-}
-
-@media (min-width: 640px) {
-  .px-container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  .mx-container {
-    margin-left: 1rem;
-    margin-right: 1rem;
-  }
-}
-
-@media (min-width: 770px) {
-  .px-container {
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
-
-  .mx-container {
-    margin-left: 3rem;
-    margin-right: 3rem;
-  }
-}
-
 @supports selector(::-webkit-scrollbar) {
   *::-webkit-scrollbar {
     display: none;
@@ -776,10 +747,6 @@ button {
   display: grid;
 }
 
-.hidden {
-  display: none;
-}
-
 .h-12 {
   height: 3rem;
 }
@@ -832,16 +799,6 @@ button {
   flex-grow: 1;
 }
 
-.rotate-90 {
-  --tw-rotate: 90deg;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.-rotate-90 {
-  --tw-rotate: -90deg;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
 .select-none {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -855,10 +812,6 @@ button {
 
 .grid-cols-8 {
   grid-template-columns: repeat(8, minmax(0, 1fr));
-}
-
-.grid-cols-6 {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
 .grid-cols-2 {
@@ -898,11 +851,6 @@ button {
        column-gap: 2rem;
 }
 
-.gap-x-2 {
-  -moz-column-gap: 0.5rem;
-       column-gap: 0.5rem;
-}
-
 .space-x-20 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(5rem * var(--tw-space-x-reverse));
@@ -917,10 +865,6 @@ button {
 
 .overflow-hidden {
   overflow: hidden;
-}
-
-.overflow-y-auto {
-  overflow-y: auto;
 }
 
 .overflow-y-hidden {
@@ -1131,10 +1075,6 @@ button {
     margin-top: 1.5rem;
   }
 
-  .tablet\:block {
-    display: block;
-  }
-
   .tablet\:max-w-4xl {
     max-width: 56rem;
   }
@@ -1187,10 +1127,6 @@ button {
 
   .desktop\:w-16 {
     width: 4rem;
-  }
-
-  .desktop\:w-24 {
-    width: 6rem;
   }
 
   .desktop\:max-w-\[1\.875rem\] {
@@ -1248,9 +1184,5 @@ button {
   .desktop\:text-5xl {
     font-size: 3rem;
     line-height: 1;
-  }
-
-  .desktop\:\[display\:unset\] {
-    display: unset;
   }
 }

@@ -14,34 +14,6 @@
   button {
     text-transform: unset;
   }
-  
-  .px-container {
-    @apply px-2;
-  }
-  
-  .mx-container {
-    @apply mx-2;
-  }
-
-  @screen tablet {
-    .px-container {
-      @apply px-4;
-    }
-  
-    .mx-container {
-      @apply mx-4;
-    }
-  }
-  
-  @screen desktop {
-   .px-container {
-      @apply px-12;
-    }
-
-    .mx-container {
-      @apply mx-12;
-    } 
-  }
 
   @supports selector(::-webkit-scrollbar) {
     *::-webkit-scrollbar {
@@ -73,38 +45,6 @@
     }
     100% {
       transform: translateY(0%);
-    }
-  }
-
-  .h-navbar {
-    height: 3rem;
-  }
-
-  @screen tablet {
-    .h-navbar {
-      height: 4.5rem;
-    }
-  }
-
-  @screen desktop {
-    .h-navbar {
-      height: 4rem;
-    }
-  }
-
-  .pt-navbar {
-    padding-top: 3rem;
-  }
-
-  @screen tablet {
-    .pt-navbar {
-      padding-top: 4.5rem;
-    }
-  }
-
-  @screen desktop {
-    .pt-navbar {
-      padding-top: 4rem;
     }
   }
 }
