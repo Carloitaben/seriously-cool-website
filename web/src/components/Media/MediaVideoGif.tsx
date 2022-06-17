@@ -110,6 +110,7 @@ const MediaVideoGif: FC<Props> = ({
           muted
           playsInline
           className={`${verticalLightboxImage ? "h-full" : "w-full"}`}
+          style={borderRadius}
         >
           {asset && (
             <source src={asset.url} type={`video/${asset.extension}`} />

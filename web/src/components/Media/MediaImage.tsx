@@ -69,6 +69,7 @@ const MediaImage: FC<Props> = ({
           src={url}
           alt={alt}
           className={`${verticalLightboxImage ? "h-full" : "w-full"}`}
+          style={borderRadius}
         />
       </Lightbox>
     </MotionConfig>

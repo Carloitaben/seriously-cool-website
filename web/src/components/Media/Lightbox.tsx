@@ -19,7 +19,7 @@ const variants = {
   show: {
     "--tw-bg-opacity": 0.75,
   },
-}
+} as Variants
 
 const Lightbox: FC<Props> = ({ children, renderLightbox, onClose }) => {
   const ref = useFocusTrap()
@@ -42,7 +42,7 @@ const Lightbox: FC<Props> = ({ children, renderLightbox, onClose }) => {
             initial="hide"
             animate="show"
             exit="hide"
-            variants={variants as Variants}
+            variants={variants}
             onClick={onClose}
             ref={ref}
             tabIndex={0}
