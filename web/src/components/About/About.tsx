@@ -1,7 +1,7 @@
 import type { FC } from "react"
 import useRootData from "~/hooks/useRootData"
-import Appear from "../Appear"
 
+import Appear from "~/components/Appear"
 import AboutFirstParagraph from "./AboutFirstParagraph"
 import AboutLastParagraph from "./AboutLastParagraph"
 import AboutNavbar from "./AboutNavbar"
