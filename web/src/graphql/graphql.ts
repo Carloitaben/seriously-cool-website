@@ -128,6 +128,7 @@ export const GET_PROJECT = gql`
         ... on ProjectBlockMedia {
           _key
           mediaBlockBlocks {
+            _key
             kind
             video {
               mp4 {
