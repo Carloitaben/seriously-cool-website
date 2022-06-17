@@ -21,7 +21,7 @@ export type ProjectDetailBlockCommonProps = {
 
 const ProjectDetailBlocks: FC<Props> = ({ children }) => {
   return (
-    <div className="desktop:grid-cols-6 tablet:gap-x-4 desktop:gap-x-2 px-container grid grid-cols-4 gap-x-2 gap-y-2">
+    <div>
       {children.map(({ __typename, _key, ...props }, index) => {
         switch (__typename) {
           case "ProjectBlockRichText":

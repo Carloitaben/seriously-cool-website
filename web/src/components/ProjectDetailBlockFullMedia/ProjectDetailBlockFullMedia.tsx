@@ -30,7 +30,7 @@ const ProjectDetailBlockFullMedia: FC<Props> = ({ first, ...mediaProps }) => {
   const animate = (first || intersecting) && loaded
 
   return (
-    <div ref={ref} className="desktop:col-span-6 col-span-4">
+    <div ref={ref} className="desktop:col-span-6 col-span-4 mb-2 px-2">
       <Appear animate={animate}>
         <Media
           enableLightbox

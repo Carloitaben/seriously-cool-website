@@ -609,22 +609,6 @@ button {
   --tw-backdrop-sepia:  ;
 }
 
-.container {
-  width: 100%;
-}
-
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 770px) {
-  .container {
-    max-width: 770px;
-  }
-}
-
 @-webkit-keyframes sliding-text-animation {
   0% {
     transform: translateX(0%);
@@ -702,29 +686,13 @@ button {
   left: 0px;
 }
 
-.inset-2 {
-  top: 0.5rem;
-  right: 0.5rem;
-  bottom: 0.5rem;
-  left: 0.5rem;
-}
-
 .inset-x-4 {
   left: 1rem;
   right: 1rem;
 }
 
-.inset-y-2 {
-  top: 0.5rem;
-  bottom: 0.5rem;
-}
-
 .bottom-4 {
   bottom: 1rem;
-}
-
-.right-2 {
-  right: 0.5rem;
 }
 
 .col-span-5 {
@@ -743,13 +711,13 @@ button {
   grid-column: span 3 / span 3;
 }
 
-.m-2 {
-  margin: 0.5rem;
+.col-end-9 {
+  grid-column-end: 9;
 }
 
-.-my-2 {
-  margin-top: -0.5rem;
-  margin-bottom: -0.5rem;
+.my-24 {
+  margin-top: 6rem;
+  margin-bottom: 6rem;
 }
 
 .-mb-3 {
@@ -788,16 +756,12 @@ button {
   margin-bottom: 6rem;
 }
 
-.mb-1 {
-  margin-bottom: 0.25rem;
+.mt-24 {
+  margin-top: 6rem;
 }
 
-.-mb-4 {
-  margin-bottom: -1rem;
-}
-
-.-mb-6 {
-  margin-bottom: -1.5rem;
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 
 .block {
@@ -897,8 +861,8 @@ button {
   resize: both;
 }
 
-.grid-cols-4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+.grid-cols-8 {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
 }
 
 .grid-cols-6 {
@@ -917,16 +881,8 @@ button {
   align-items: flex-start;
 }
 
-.items-end {
-  align-items: flex-end;
-}
-
 .items-center {
   align-items: center;
-}
-
-.items-stretch {
-  align-items: stretch;
 }
 
 .justify-center {
@@ -937,13 +893,14 @@ button {
   justify-content: space-between;
 }
 
+.gap-x-8 {
+  -moz-column-gap: 2rem;
+       column-gap: 2rem;
+}
+
 .gap-x-2 {
   -moz-column-gap: 0.5rem;
        column-gap: 0.5rem;
-}
-
-.gap-y-2 {
-  row-gap: 0.5rem;
 }
 
 .space-x-20 > :not([hidden]) ~ :not([hidden]) {
@@ -995,11 +952,6 @@ button {
   background-color: var(--theme-colors-background);
 }
 
-.bg-red-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
-}
-
 .p-28 {
   padding: 7rem;
 }
@@ -1023,14 +975,19 @@ button {
   padding-right: 1.25rem;
 }
 
-.py-12 {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
-.px-16 {
-  padding-left: 4rem;
-  padding-right: 4rem;
+.px-18 {
+  padding-left: 4.5rem;
+  padding-right: 4.5rem;
+}
+
+.py-20 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 .pb-10 {
@@ -1069,14 +1026,6 @@ button {
   padding-right: 5rem;
 }
 
-.pl-10 {
-  padding-left: 2.5rem;
-}
-
-.pb-16 {
-  padding-bottom: 4rem;
-}
-
 .text-left {
   text-align: left;
 }
@@ -1098,11 +1047,6 @@ button {
 .text-5xl {
   font-size: 3rem;
   line-height: 1;
-}
-
-.text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
 }
 
 .uppercase {
@@ -1190,16 +1134,6 @@ button {
   .tablet\:max-w-4xl {
     max-width: 56rem;
   }
-
-  .tablet\:gap-x-4 {
-    -moz-column-gap: 1rem;
-         column-gap: 1rem;
-  }
-
-  .tablet\:text-2xl {
-    font-size: 1.5rem;
-    line-height: 2rem;
-  }
 }
 
 @media (min-width: 770px) {
@@ -1217,14 +1151,6 @@ button {
 
   .desktop\:col-span-6 {
     grid-column: span 6 / span 6;
-  }
-
-  .desktop\:col-span-3 {
-    grid-column: span 3 / span 3;
-  }
-
-  .desktop\:col-end-7 {
-    grid-column-end: 7;
   }
 
   .desktop\:-mb-2 {
@@ -1267,31 +1193,6 @@ button {
     max-width: 1.875rem;
   }
 
-  .desktop\:grid-cols-6 {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-  }
-
-  .desktop\:flex-row {
-    flex-direction: row;
-  }
-
-  .desktop\:flex-wrap {
-    flex-wrap: wrap;
-  }
-
-  .desktop\:items-start {
-    align-items: flex-start;
-  }
-
-  .desktop\:items-center {
-    align-items: center;
-  }
-
-  .desktop\:gap-x-2 {
-    -moz-column-gap: 0.5rem;
-         column-gap: 0.5rem;
-  }
-
   .desktop\:overflow-y-auto {
     overflow-y: auto;
   }
@@ -1314,11 +1215,6 @@ button {
   .desktop\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
-  }
-
-  .desktop\:py-20 {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
   }
 
   .desktop\:pr-1 {
@@ -1348,11 +1244,6 @@ button {
   .desktop\:text-5xl {
     font-size: 3rem;
     line-height: 1;
-  }
-
-  .desktop\:text-2xl {
-    font-size: 1.5rem;
-    line-height: 2rem;
   }
 
   .desktop\:\[display\:unset\] {

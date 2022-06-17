@@ -9,6 +9,9 @@ module.exports = {
       borderRadius: {
         "4xl": "2rem",
       },
+      spacing: {
+        18: "4.5rem",
+      },
       colors: {
         background: "var(--theme-colors-background)",
         text: "var(--theme-colors-text)",

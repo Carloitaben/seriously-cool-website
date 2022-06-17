@@ -71,7 +71,7 @@ export default function Route() {
 
   return (
     <div className="h-full overflow-y-auto pb-20">
-      <div className="px-container mt-12 mb-24 grid grid-cols-6 gap-x-2 text-2xl">
+      <div className="px-18 my-24 grid grid-cols-8 gap-x-8 text-2xl">
         <div className="col-span-3 max-w-xl text-5xl leading-tight">
           <h1>
             <AppearText
@@ -83,7 +83,7 @@ export default function Route() {
         </div>
         <Appear
           animate={finishedTitleAnimation}
-          className="col-span-3 max-w-2xl"
+          className="col-span-4 col-end-9 max-w-2xl"
         >
           <TextBlock>{project.descriptionRaw}</TextBlock>
         </Appear>
