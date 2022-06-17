@@ -18,7 +18,7 @@ const ProjectDetail: FC<Props> = ({ project }) => {
 
   return (
     <div className="overflow-y-hidden pb-20">
-      <div className="px-18 my-24 grid grid-cols-8 gap-x-8 text-2xl">
+      <div className="px-18 my-24 grid grid-cols-8 gap-x-8 ">
         <div className="col-span-3 max-w-xl text-5xl leading-tight">
           <h1>
             <AppearText
@@ -36,13 +36,11 @@ const ProjectDetail: FC<Props> = ({ project }) => {
         </Appear>
       </div>
       <ProjectDetailBlocks>{project.blocks}</ProjectDetailBlocks>
-      <div className="text-2xl">
-        <ProjectDetailClientLocation
-          client={project.clientRaw}
-          location={project.location}
-          year={project.year}
-        />
-      </div>
+      <ProjectDetailClientLocation
+        client={project.clientRaw}
+        location={project.location}
+        year={project.year}
+      />
     </div>
   )
 }

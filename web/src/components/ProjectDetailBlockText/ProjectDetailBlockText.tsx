@@ -12,7 +12,7 @@ type Props = ProjectDetailBlockCommonProps & ProjectBlockRichText
 const ProjectDetailBlockText: FC<Props> = ({ first, textRaw }) => {
   return (
     <div className="px-18 grid grid-cols-8 gap-x-8">
-      <Appear animate={first} className="col-span-4 col-end-9 py-20 text-2xl">
+      <Appear animate={first} className="col-span-4 col-end-9 py-20">
         <TextBlock>{textRaw}</TextBlock>
       </Appear>
     </div>

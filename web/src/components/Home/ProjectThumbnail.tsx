@@ -80,9 +80,7 @@ const ProjectThumbnail: FC<Props> = ({ project }) => {
                   </div>
                 )} */}
           </Link>
-          <h6 className="desktop:hidden tablet:mt-6 mt-2 text-2xl">
-            {project.title}
-          </h6>
+          <h6 className="desktop:hidden tablet:mt-6 mt-2">{project.title}</h6>
         </div>
       </Appear>
     </li>
