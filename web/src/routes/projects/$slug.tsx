@@ -32,8 +32,6 @@ export const loader: LoaderFunction = async ({
 
   const projectBlocksWithFileAssets = project.blocks.map((block) => {
     switch (block.__typename) {
-      case "ProjectBlockRichText":
-        return block
       case "Media":
         if (block.kind !== "IMAGE") {
           block.video.asset = getFileAsset(block.video.mp4, {
@@ -42,6 +40,20 @@ export const loader: LoaderFunction = async ({
             useVanityName: true,
           })
         }
+
+        return block
+      case "ProjectBlockMedia":
+        block.mediaBlockBlocks = block.mediaBlockBlocks.map((b) => {
+          if (b.kind !== "IMAGE") {
+            b.video.asset = getFileAsset(b.video.mp4, {
+              dataset,
+              projectId,
+              useVanityName: true,
+            })
+          }
+
+          return b
+        })
 
         return block
       default:

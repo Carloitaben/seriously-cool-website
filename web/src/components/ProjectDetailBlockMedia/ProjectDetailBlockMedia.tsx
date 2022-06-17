@@ -1,17 +1,29 @@
 import type { FC } from "react"
 
 import type { ProjectBlockMedia } from "~/types"
-
 import type { ProjectDetailBlockCommonProps } from "~/components/ProjectDetailBlocks"
-import Appear from "~/components/Appear"
+
+import Block from "./Block"
 
 type Props = ProjectDetailBlockCommonProps & ProjectBlockMedia
 
-const ProjectDetailBlockMedia: FC<Props> = ({ animate }) => {
+const ProjectDetailBlockMedia: FC<Props> = ({ first, mediaBlockBlocks }) => {
+  if (mediaBlockBlocks.length === 0) return null
+
+  if (mediaBlockBlocks.length >= 3) {
+    return <div>slider</div>
+  }
+
   return (
-    <Appear animate={animate}>
-      <div>ProjectDetailBlockMedia</div>
-    </Appear>
+    <div className="mb-2 grid grid-cols-2 gap-2 px-2">
+      {mediaBlockBlocks.map((block) => (
+        <Block
+          className={mediaBlockBlocks.length === 1 ? "col-end-3" : ""}
+          key={block._key}
+          block={block}
+        />
+      ))}
+    </div>
   )
 }
 
