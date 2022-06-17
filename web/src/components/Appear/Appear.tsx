@@ -6,6 +6,7 @@ import useIntersectionObserver from "~/hooks/useIntersectionObserver"
 
 type Props = {
   className?: string
+  innerClassName?: string
   /**
    * Programatically control the animation
    */
@@ -27,6 +28,7 @@ const Appear: FC<Props> = ({
   animate,
   onIntersection,
   className = "",
+  innerClassName = "",
   intersectionObserverConfig,
 }) => {
   const [show, setShow] = useState(animate)
@@ -60,8 +62,10 @@ const Appear: FC<Props> = ({
       }
 
   return (
-    <div ref={ref} className={className || undefined}>
-      <div style={style}>{children}</div>
+    <div ref={ref} className={className}>
+      <div className={innerClassName} style={style}>
+        {children}
+      </div>
     </div>
   )
 }
