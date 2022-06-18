@@ -9,7 +9,7 @@ const AboutNavbar: FC = () => {
   const { literals } = useRootData()
 
   return (
-    <nav className="desktop:py-16 flex items-start justify-between pt-10 pb-20">
+    <nav className="desktop:py-16 flex items-start justify-between pt-10 pb-20 text-2xl">
       <ul className="desktop:-mb-2 -mb-3 flex flex-wrap items-center">
         <LinkButton
           className="desktop:mb-2 desktop:mr-2 mb-3 mr-3"
