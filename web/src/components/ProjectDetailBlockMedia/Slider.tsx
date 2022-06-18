@@ -8,13 +8,14 @@ import useOnTailwindBreakpoint from "~/hooks/useOnTailwindBreakpoint"
 import Block from "./Block"
 
 type Props = {
+  first?: boolean
   blocks: MediaProps[]
 }
 
 const DESKTOP_GAP = 8
 const MOBILE_GAP = 4
 
-const Slider: FC<Props> = ({ blocks }) => {
+const Slider: FC<Props> = ({ first, blocks }) => {
   const ref = useRef<HTMLDivElement>(null)
   const [isDesktop, setIsDesktop] = useState<boolean>()
   const [leftConstraint, setLeftConstraint] = useState(0)
@@ -70,7 +71,7 @@ const Slider: FC<Props> = ({ blocks }) => {
             const style = getBlockStyle(block)
             return (
               <div key={block._key} className="flex-none" style={style}>
-                <Block block={block} enableLightbox={false} />
+                <Block block={block} first={first} enableLightbox={false} />
               </div>
             )
           })}

@@ -12,7 +12,7 @@ const ProjectDetailBlockMedia: FC<Props> = ({ first, mediaBlockBlocks }) => {
   if (mediaBlockBlocks.length === 0) return null
 
   if (mediaBlockBlocks.length >= 3) {
-    return <Slider blocks={mediaBlockBlocks} />
+    return <Slider blocks={mediaBlockBlocks} first={first} />
   }
 
   return (
@@ -22,6 +22,7 @@ const ProjectDetailBlockMedia: FC<Props> = ({ first, mediaBlockBlocks }) => {
           className={mediaBlockBlocks.length === 1 ? "col-end-3" : ""}
           key={block._key}
           block={block}
+          first={first}
         />
       ))}
     </div>

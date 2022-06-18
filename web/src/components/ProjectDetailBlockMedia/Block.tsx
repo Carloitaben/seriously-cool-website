@@ -9,7 +9,8 @@ import Appear from "../Appear"
 type Props = {
   className?: string
   block: MediaProps
-  enableLightbox: boolean
+  first?: boolean
+  enableLightbox?: boolean
 }
 
 const Block: FC<Props> = ({
