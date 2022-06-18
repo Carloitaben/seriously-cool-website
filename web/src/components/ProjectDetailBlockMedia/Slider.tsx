@@ -58,7 +58,7 @@ const Slider: FC<Props> = ({ blocks }) => {
   }
 
   return (
-    <div className="px-18 grid grid-cols-8 gap-x-8 overflow-hidden">
+    <div className="project-detail-grid overflow-hidden">
       <div className="-mr-18 col-span-7 col-start-2">
         <motion.div
           className="flex h-[80vh] space-x-2"
