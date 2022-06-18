@@ -45,6 +45,7 @@ const MediaImage: FC<Props> = ({
       <div
         className="relative"
         style={{ paddingBottom: `${(height / width) * 100}%` }}
+        onClick={() => enableLightbox && setLightbox(true)}
       >
         {!renderLightbox && (
           <motion.img
@@ -53,8 +54,7 @@ const MediaImage: FC<Props> = ({
             src={url}
             alt={alt}
             onLoad={onLoad}
-            className={`${className} absolute inset-0 h-full w-full`}
-            onClick={() => enableLightbox && setLightbox(true)}
+            className={`${className} pointer-events-none absolute inset-0 h-full w-full`}
             style={borderRadius}
           />
         )}

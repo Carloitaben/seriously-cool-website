@@ -3,6 +3,7 @@ import type { FC } from "react"
 import type { ProjectBlockMedia } from "~/types"
 import type { ProjectDetailBlockCommonProps } from "~/components/ProjectDetailBlocks"
 
+import Slider from "./Slider"
 import Block from "./Block"
 
 type Props = ProjectDetailBlockCommonProps & ProjectBlockMedia
@@ -11,7 +12,7 @@ const ProjectDetailBlockMedia: FC<Props> = ({ first, mediaBlockBlocks }) => {
   if (mediaBlockBlocks.length === 0) return null
 
   if (mediaBlockBlocks.length >= 3) {
-    return <div>slider</div>
+    return <Slider blocks={mediaBlockBlocks} />
   }
 
   return (
