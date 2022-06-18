@@ -433,10 +433,8 @@ button {
   text-transform: unset;
 }
 
-@supports selector(::-webkit-scrollbar) {
-  *::-webkit-scrollbar {
-    display: none;
-  }
+*::-webkit-scrollbar {
+  display: none;
 }
 
 *, ::before, ::after {
@@ -679,16 +677,16 @@ button {
   bottom: 1rem;
 }
 
-.col-span-4 {
-  grid-column: span 4 / span 4;
-}
-
 .col-span-5 {
   grid-column: span 5 / span 5;
 }
 
 .col-span-3 {
   grid-column: span 3 / span 3;
+}
+
+.col-span-4 {
+  grid-column: span 4 / span 4;
 }
 
 .col-span-7 {
@@ -939,11 +937,6 @@ button {
   padding: 1rem;
 }
 
-.py-20 {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-}
-
 .px-10 {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
@@ -967,6 +960,11 @@ button {
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+
+.py-20 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 .pb-10 {

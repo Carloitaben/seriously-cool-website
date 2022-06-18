@@ -15,10 +15,8 @@
     text-transform: unset;
   }
 
-  @supports selector(::-webkit-scrollbar) {
-    *::-webkit-scrollbar {
-      @apply hidden;
-    }
+  *::-webkit-scrollbar {
+    @apply hidden;
   }
 }
 
