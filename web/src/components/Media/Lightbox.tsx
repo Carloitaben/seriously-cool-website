@@ -2,6 +2,7 @@ import { useFocusTrap } from "@mantine/hooks"
 import type { Variants } from "framer-motion"
 import { AnimatePresence, motion } from "framer-motion"
 import type { FC, ReactNode } from "react"
+import { useEffect } from "react"
 
 import Portal from "~/components/Portal"
 import useOnKey from "~/hooks/useOnKey"
@@ -32,6 +33,14 @@ const Lightbox: FC<Props> = ({ children, renderLightbox, onClose }) => {
         return onClose()
     }
   }, renderLightbox)
+
+  useEffect(() => {
+    if (renderLightbox) {
+      window.addEventListener("scroll", onClose)
+    }
+
+    return () => window.removeEventListener("scroll", onClose)
+  }, [onClose, renderLightbox])
 
   return (
     <AnimatePresence initial={false}>
