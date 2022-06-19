@@ -17,7 +17,7 @@ const BackButton: FC = () => {
     <div className="flex-none">
       <Link
         to="/"
-        className=" ml-4 flex h-16 w-16 items-center justify-center rounded-full border-2"
+        className="ml-4 flex h-16 w-16 items-center justify-center rounded-full border-2 border-current"
         style={{ background: colors.background }}
       >
         {close}
