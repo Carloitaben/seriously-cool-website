@@ -612,7 +612,6 @@ export type ProjectThumbnail = {
   __typename?: 'ProjectThumbnail';
   _key: Maybe<Scalars['String']>;
   _type: Maybe<Scalars['String']>;
-  color: Maybe<Color>;
   image: Maybe<MediaImage>;
   kind: Maybe<Scalars['String']>;
   video: Maybe<MediaVideo>;
@@ -621,7 +620,6 @@ export type ProjectThumbnail = {
 export type ProjectThumbnailFilter = {
   _key: InputMaybe<StringFilter>;
   _type: InputMaybe<StringFilter>;
-  color: InputMaybe<ColorFilter>;
   image: InputMaybe<MediaImageFilter>;
   kind: InputMaybe<StringFilter>;
   video: InputMaybe<MediaVideoFilter>;
@@ -630,7 +628,6 @@ export type ProjectThumbnailFilter = {
 export type ProjectThumbnailSorting = {
   _key: InputMaybe<SortOrder>;
   _type: InputMaybe<SortOrder>;
-  color: InputMaybe<ColorSorting>;
   image: InputMaybe<MediaImageSorting>;
   kind: InputMaybe<SortOrder>;
   video: InputMaybe<MediaVideoSorting>;
@@ -1145,6 +1142,7 @@ export type Settings = Document & {
   _updatedAt: Maybe<Scalars['DateTime']>;
   catchphrases: Maybe<Array<Maybe<SettingsCatchphrase>>>;
   colors: Maybe<Array<Maybe<SettingsThemeColor>>>;
+  errorTexts: Maybe<Array<Maybe<Scalars['String']>>>;
   literals: Maybe<Array<Maybe<SettingsLiteral>>>;
   slidingTexts: Maybe<Array<Maybe<Scalars['String']>>>;
   slidingTextsError: Maybe<Array<Maybe<Scalars['String']>>>;
@@ -1312,7 +1310,7 @@ export type StringFilter = {
 export type GetSettingsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetSettingsQuery = { __typename?: 'RootQuery', allSettings: Array<{ __typename?: 'Settings', _id: string, slidingTexts: Array<string>, typefaces: Array<string>, literals: Array<{ __typename?: 'SettingsLiteral', key: string, value: string }>, toys: { __typename?: 'SettingsToys', TOY_STICKERS: boolean, TOY_2D_PHYSICAL_SHAPES: boolean }, catchphrases: Array<{ __typename?: 'SettingsCatchphrase', textRaw: any, visibility: string }>, colors: Array<{ __typename?: 'SettingsThemeColor', background: { __typename?: 'Color', hex: string }, text: { __typename?: 'Color', hex: string }, card: { __typename?: 'Color', hex: string } }> }> };
+export type GetSettingsQuery = { __typename?: 'RootQuery', allSettings: Array<{ __typename?: 'Settings', _id: string, slidingTexts: Array<string>, errorTexts: Array<string>, typefaces: Array<string>, literals: Array<{ __typename?: 'SettingsLiteral', key: string, value: string }>, toys: { __typename?: 'SettingsToys', TOY_STICKERS: boolean, TOY_2D_PHYSICAL_SHAPES: boolean }, catchphrases: Array<{ __typename?: 'SettingsCatchphrase', textRaw: any, visibility: string }>, colors: Array<{ __typename?: 'SettingsThemeColor', background: { __typename?: 'Color', hex: string }, text: { __typename?: 'Color', hex: string }, card: { __typename?: 'Color', hex: string } }> }> };
 
 export type GetProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 

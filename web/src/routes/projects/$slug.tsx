@@ -1,10 +1,13 @@
 import type { LoaderFunction } from "@remix-run/node"
+import { Response } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { getFileAsset } from "@sanity/asset-utils"
 
 import type { GetProjectQuery, GetProjectQueryVariables } from "~/types"
 import { filterSanityDocumentDrafts, isSanityPreview } from "~/utils"
 import { client, dataset, projectId, GET_PROJECT } from "~/graphql"
+
+import Error from "~/components/Error"
 import ProjectDetail from "~/components/ProjectDetail"
 
 export type ProjectDetailLoaderData = {
@@ -15,7 +18,9 @@ export const loader: LoaderFunction = async ({
   params,
   request,
 }): Promise<ProjectDetailLoaderData> => {
-  if (!params?.slug) throw Error("Slug is required")
+  if (!params?.slug) {
+    throw new Response("Slug is required", { status: 400 })
+  }
 
   const getProjectVariables: GetProjectQueryVariables = {
     slug: params.slug,
@@ -23,51 +28,59 @@ export const loader: LoaderFunction = async ({
 
   const preview = isSanityPreview(request)
 
-  const response = await client.request<GetProjectQuery>(
-    GET_PROJECT,
-    getProjectVariables
-  )
+  try {
+    const response = await client.request<GetProjectQuery>(
+      GET_PROJECT,
+      getProjectVariables
+    )
 
-  const [project] = filterSanityDocumentDrafts(response.allProject, preview)
+    const [project] = filterSanityDocumentDrafts(response.allProject, preview)
 
-  const projectBlocksWithFileAssets = project.blocks.map((block) => {
-    switch (block.__typename) {
-      case "Media":
-        if (block.kind !== "IMAGE") {
-          block.video.asset = getFileAsset(block.video.mp4, {
-            dataset,
-            projectId,
-            useVanityName: true,
-          })
-        }
-
-        return block
-      case "ProjectBlockMedia":
-        block.mediaBlockBlocks = block.mediaBlockBlocks.map((b) => {
-          if (b.kind !== "IMAGE") {
-            b.video.asset = getFileAsset(b.video.mp4, {
+    const projectBlocksWithFileAssets = project.blocks.map((block) => {
+      switch (block.__typename) {
+        case "Media":
+          if (block.kind !== "IMAGE") {
+            block.video.asset = getFileAsset(block.video.mp4, {
               dataset,
               projectId,
               useVanityName: true,
             })
           }
 
-          return b
-        })
+          return block
+        case "ProjectBlockMedia":
+          block.mediaBlockBlocks = block.mediaBlockBlocks.map((b) => {
+            if (b.kind !== "IMAGE") {
+              b.video.asset = getFileAsset(b.video.mp4, {
+                dataset,
+                projectId,
+                useVanityName: true,
+              })
+            }
 
-        return block
-      default:
-        return block
+            return b
+          })
+
+          return block
+        default:
+          return block
+      }
+    })
+
+    const projectsWithFileAssets = {
+      ...project,
+      blocks: projectBlocksWithFileAssets,
     }
-  })
 
-  const projectsWithFileAssets = {
-    ...project,
-    blocks: projectBlocksWithFileAssets,
+    return { project: projectsWithFileAssets }
+  } catch (error) {
+    throw new Response("Project not found", { status: 404 })
   }
-
-  return { project: projectsWithFileAssets }
 }
+
+export const ErrorBoundary = () => <Error />
+
+export const CatchBoundary = () => <Error />
 
 export default function Route() {
   const { project } = useLoaderData<ProjectDetailLoaderData>()

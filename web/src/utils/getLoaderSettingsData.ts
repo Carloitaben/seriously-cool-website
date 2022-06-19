@@ -17,6 +17,7 @@ import type {
 
 export type LoaderSettingsData = {
   slidingTexts: string[]
+  errorText: string
   literals: Record<string, string>
   catchphrase: {
     desktop: Scalars["JSON"]
@@ -74,16 +75,25 @@ export async function getLoaderSettingsData(
 ): Promise<LoaderSettingsData> {
   const response = await client.request<GetSettingsQuery>(GET_SETTINGS)
 
-  const [{ catchphrases, colors, slidingTexts, typefaces, toys, literals }] =
-    filterSanityDocumentDrafts(response.allSettings, preview)
+  const [
+    {
+      catchphrases,
+      colors,
+      slidingTexts,
+      errorTexts,
+      typefaces,
+      toys,
+      literals,
+    },
+  ] = filterSanityDocumentDrafts(response.allSettings, preview)
 
   const { catchphrasesDesktop, catchphrasesMobile } =
     reduceCatchphrases(catchphrases)
 
   const catchphraseDesktop = getRandomArrayItem(catchphrasesDesktop)
   const catchphraseMobile = getRandomArrayItem(catchphrasesMobile)
-
   const fontFamily = getRandomArrayItem(typefaces)
+  const errorText = getRandomArrayItem(errorTexts)
   const toy = getRandomToy(toys)
 
   const { background, text, card } = getRandomArrayItem(colors)
@@ -103,6 +113,7 @@ export async function getLoaderSettingsData(
   return {
     theme,
     slidingTexts,
+    errorText,
     literals: formattedLiterals,
     catchphrase: {
       desktop: catchphraseDesktop.textRaw,
