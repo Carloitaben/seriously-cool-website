@@ -5,6 +5,7 @@ export const GET_SETTINGS = gql`
     allSettings {
       _id
       slidingTexts
+      slidingTextsError
       errorTexts
       typefaces
       literals {

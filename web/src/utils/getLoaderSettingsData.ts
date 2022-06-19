@@ -17,6 +17,7 @@ import type {
 
 export type LoaderSettingsData = {
   slidingTexts: string[]
+  slidingTextsError: string[]
   errorText: string
   literals: Record<string, string>
   catchphrase: {
@@ -80,6 +81,7 @@ export async function getLoaderSettingsData(
       catchphrases,
       colors,
       slidingTexts,
+      slidingTextsError,
       errorTexts,
       typefaces,
       toys,
@@ -113,6 +115,7 @@ export async function getLoaderSettingsData(
   return {
     theme,
     slidingTexts,
+    slidingTextsError,
     errorText,
     literals: formattedLiterals,
     catchphrase: {
