@@ -17,7 +17,7 @@ const ProjectDetail: FC<Props> = ({ project }) => {
   const [finishedTitleAnimation, setFinishedTitleAnimation] = useState(false)
 
   return (
-    <div className="overflow-y-hidden pb-20">
+    <div className="overflow-hidden pb-20">
       <div className="px-18 my-24 grid grid-cols-8 gap-x-8 ">
         <div className="col-span-3 max-w-xl text-5xl leading-tight">
           <h1>

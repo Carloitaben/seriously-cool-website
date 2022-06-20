@@ -677,6 +677,14 @@ button {
   bottom: 1rem;
 }
 
+.top-0 {
+  top: 0px;
+}
+
+.left-0 {
+  left: 0px;
+}
+
 .col-span-5 {
   grid-column: span 5 / span 5;
 }
@@ -707,6 +715,10 @@ button {
 
 .col-end-3 {
   grid-column-end: 3;
+}
+
+.m-2 {
+  margin: 0.5rem;
 }
 
 .my-24 {
@@ -788,6 +800,14 @@ button {
 
 .h-16 {
   height: 4rem;
+}
+
+.h-20 {
+  height: 5rem;
+}
+
+.h-\[70vh\] {
+  height: 70vh;
 }
 
 .max-h-\[10\.375rem\] {
@@ -904,6 +924,10 @@ button {
   overflow: hidden;
 }
 
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
 .overflow-y-hidden {
   overflow-y: hidden;
 }
@@ -933,12 +957,36 @@ button {
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
+.bg-red-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
+}
+
+.bg-red-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(127 29 29 / var(--tw-bg-opacity));
+}
+
+.bg-blue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}
+
+.bg-red-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 242 242 / var(--tw-bg-opacity));
+}
+
 .p-28 {
   padding: 7rem;
 }
 
 .p-4 {
   padding: 1rem;
+}
+
+.p-24 {
+  padding: 6rem;
 }
 
 .px-10 {
