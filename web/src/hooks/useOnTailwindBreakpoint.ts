@@ -1,4 +1,4 @@
-import type { tailwindScreen } from "~/types"
+import type { TailwindScreen } from "~/types"
 import tailwindConfig from "tailwind.config"
 
 import useOnMatchMedia from "./useOnMatchMedia"
@@ -8,7 +8,7 @@ import useOnMatchMedia from "./useOnMatchMedia"
  * matches the current media query
  */
 export default function useOnTailwindBreakpoint(
-  screen: tailwindScreen,
+  screen: TailwindScreen,
   callback: (matches: boolean) => void
 ) {
   useOnMatchMedia(

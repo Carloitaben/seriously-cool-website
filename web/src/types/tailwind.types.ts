@@ -4,4 +4,4 @@ export type TailwindConfig = typeof tailwindConfig
 
 export type TailwindScreens = TailwindConfig["theme"]["screens"]
 
-export type tailwindScreen = keyof TailwindScreens
+export type TailwindScreen = keyof TailwindScreens
