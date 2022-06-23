@@ -16,11 +16,6 @@ type Props = {
 }
 
 const ProjectThumbnail: FC<Props> = ({ project }) => {
-  const awardsToShow = useMemo(
-    () => project.awards?.filter((award) => award.showBadge) || [],
-    [project.awards]
-  )
-
   const ref = useRef<HTMLLIElement>(null)
   const [loaded, setLoaded] = useState(false)
   const [animate, setAnimate] = useState(false)
@@ -71,14 +66,6 @@ const ProjectThumbnail: FC<Props> = ({ project }) => {
               onLoad={onProjectLoad}
               // alt={project.thumbnail.video.alt || project.title}
             />
-            {/* TODO: awards with `toy` integration */}
-            {/* {awardsToShow.length > 0 && (
-                  <div className="absolute inset-0">
-                    {awardsToShow.map((award, index) => (
-                      <span key={index}>award</span>
-                    ))}
-                  </div>
-                )} */}
           </Link>
           <h6 className="desktop:hidden tablet:mt-6 mt-2">{project.title}</h6>
         </div>
