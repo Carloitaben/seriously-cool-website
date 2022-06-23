@@ -1,10 +1,6 @@
 import { client, GET_SETTINGS } from "~/graphql"
 
-import {
-  filterSanityDocumentDrafts,
-  getRandomArrayItem,
-  getRandomToy,
-} from "~/utils"
+import { filterSanityDocumentDrafts, getRandomArrayItem } from "~/utils"
 
 import type {
   GetSettingsQuery,
@@ -12,7 +8,6 @@ import type {
   SettingsCatchphrase,
   SettingsLiteral,
   StripGQLProps,
-  Toy,
 } from "~/types"
 
 export type LoaderSettingsData = {
@@ -26,7 +21,6 @@ export type LoaderSettingsData = {
   }
   theme: {
     fontFamily: string
-    toy: Toy
     colors: {
       background: string
       text: string
@@ -84,7 +78,6 @@ export async function getLoaderSettingsData(
       slidingTextsError,
       errorTexts,
       typefaces,
-      toys,
       literals,
     },
   ] = filterSanityDocumentDrafts(response.allSettings, preview)
@@ -96,12 +89,10 @@ export async function getLoaderSettingsData(
   const catchphraseMobile = getRandomArrayItem(catchphrasesMobile)
   const fontFamily = getRandomArrayItem(typefaces)
   const errorText = getRandomArrayItem(errorTexts)
-  const toy = getRandomToy(toys)
 
   const { background, text, card } = getRandomArrayItem(colors)
 
   const theme = {
-    toy,
     fontFamily,
     colors: {
       background: background.hex,

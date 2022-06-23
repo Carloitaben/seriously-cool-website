@@ -12,10 +12,6 @@ export const GET_SETTINGS = gql`
         key
         value
       }
-      toys {
-        TOY_STICKERS
-        TOY_2D_PHYSICAL_SHAPES
-      }
       catchphrases {
         textRaw
         visibility

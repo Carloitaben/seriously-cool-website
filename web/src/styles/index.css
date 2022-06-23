@@ -830,10 +830,6 @@ button {
   flex: none;
 }
 
-.grow {
-  flex-grow: 1;
-}
-
 .select-none {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -1059,10 +1055,6 @@ button {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.filter {
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
 .transition {
   transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -1095,14 +1087,6 @@ button {
   color: var(--theme-colors-background);
 }
 
-.selection\:text-card *::-moz-selection {
-  color: var(--theme-colors-card);
-}
-
-.selection\:text-card *::selection {
-  color: var(--theme-colors-card);
-}
-
 .selection\:text-text *::-moz-selection {
   color: var(--theme-colors-text);
 }
@@ -1133,14 +1117,6 @@ button {
 
 .selection\:text-background::selection {
   color: var(--theme-colors-background);
-}
-
-.selection\:text-card::-moz-selection {
-  color: var(--theme-colors-card);
-}
-
-.selection\:text-card::selection {
-  color: var(--theme-colors-card);
 }
 
 .selection\:text-text::-moz-selection {
