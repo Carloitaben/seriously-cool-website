@@ -1,15 +1,6 @@
 export default [
   {
     group: "theme",
-    name: "toys",
-    title: "Toys",
-    type: "settingsToys",
-    options: {
-      sortable: false,
-    },
-  },
-  {
-    group: "theme",
     name: "colors",
     title: "Theme colors",
     type: "array",
