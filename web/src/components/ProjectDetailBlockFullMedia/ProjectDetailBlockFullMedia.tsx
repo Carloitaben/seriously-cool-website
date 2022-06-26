@@ -16,6 +16,7 @@ const ProjectDetailBlockFullMedia: FC<Props> = ({ first, ...mediaProps }) => {
   const [loaded, setLoaded] = useState(false)
 
   const load = useIntersectionObserver(ref, {
+    disconnect: first,
     rootMargin: "0% 0% 50%",
   })
 
