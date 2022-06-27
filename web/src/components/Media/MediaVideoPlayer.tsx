@@ -11,6 +11,7 @@ import { borderRadius } from "./Media"
 import useAttatchVideoEvents from "./useAttatchVideoEvents"
 import usePlayPauseOnIntersection from "./usePlayPauseOnIntersection"
 import useLightbox from "./useLightbox"
+import VideoControls from "./VideoControls"
 
 type Props = Omit<MediaVideo, "__typename" | "_key" | "_type"> &
   MediaComponentSharedProps
@@ -63,22 +64,28 @@ const MediaVideoGif: FC<Props> = ({
         style={{ paddingBottom: `${(height / width) * 100}%` }}
       >
         <motion.div {...wrapperProps}>
-          <motion.video
-            ref={ref}
-            title={alt}
+          <motion.div
             layout
-            loop
-            playsInline
-            onTap={onTap}
             style={borderRadius}
-            className={`pointer-events-auto object-contain ${
+            className={`overflow-hidden ${
               renderLightbox && verticalLightboxImage ? "h-full" : "w-full"
             }`}
           >
-            {asset && (
-              <source src={asset.url} type={`video/${asset.extension}`} />
-            )}
-          </motion.video>
+            <motion.video
+              ref={ref}
+              title={alt}
+              layout
+              loop
+              playsInline
+              onTap={onTap}
+              className="pointer-events-auto h-full w-full object-contain"
+            >
+              {asset && (
+                <source src={asset.url} type={`video/${asset.extension}`} />
+              )}
+            </motion.video>
+            <VideoControls video={ref} />
+          </motion.div>
         </motion.div>
       </div>
     </MotionConfig>
