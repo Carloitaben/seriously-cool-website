@@ -688,24 +688,8 @@ button {
   bottom: 1rem;
 }
 
-.z-40 {
-  z-index: 40;
-}
-
 .z-30 {
   z-index: 30;
-}
-
-.z-20 {
-  z-index: 20;
-}
-
-.z-10 {
-  z-index: 10;
-}
-
-.z-0 {
-  z-index: 0;
 }
 
 .col-span-5 {
@@ -967,10 +951,6 @@ button {
 
 .p-28 {
   padding: 7rem;
-}
-
-.p-4 {
-  padding: 1rem;
 }
 
 .px-10 {

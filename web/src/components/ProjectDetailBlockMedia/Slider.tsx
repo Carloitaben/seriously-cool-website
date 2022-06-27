@@ -6,6 +6,7 @@ import { motion } from "framer-motion"
 import type { Media as MediaProps } from "~/types"
 import useOnTailwindBreakpoint from "~/hooks/useOnTailwindBreakpoint"
 import Block from "./Block"
+import useOnWindowResize from "~/hooks/useOnWindowResize"
 
 type Props = {
   first?: boolean
@@ -22,22 +23,13 @@ const Slider: FC<Props> = ({ first, blocks }) => {
 
   useOnTailwindBreakpoint("desktop", setIsDesktop)
 
-  useEffect(() => {
-    function callback() {
-      const element = ref.current
+  useOnWindowResize(() => {
+    const element = ref.current
 
-      if (!element || typeof isDesktop === "undefined") return
-
-      const gap = isDesktop ? DESKTOP_GAP : MOBILE_GAP
-
-      setLeftConstraint((element.scrollWidth - element.offsetWidth + gap) * -1)
-    }
-
-    callback()
-
-    window.addEventListener("resize", callback, true)
-    return () => window.removeEventListener("resize", callback)
-  }, [isDesktop])
+    if (!element || typeof isDesktop === "undefined") return
+    const gap = isDesktop ? DESKTOP_GAP : MOBILE_GAP
+    setLeftConstraint((element.scrollWidth - element.offsetWidth + gap) * -1)
+  })
 
   const dragConstraints: DraggableProps["dragConstraints"] = {
     right: 0,

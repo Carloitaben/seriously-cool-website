@@ -25,7 +25,6 @@
     "framer-motion": "^6.3.11",
     "graphql": "^16.5.0",
     "graphql-request": "^4.3.0",
-    "lodash.throttle": "^4.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "zustand": "^4.0.0-rc.1"
@@ -37,7 +36,6 @@
     "@remix-run/dev": "^1.6.0",
     "@remix-run/eslint-config": "^1.6.0",
     "@types/fontfaceobserver": "^2.1.0",
-    "@types/lodash.throttle": "^4.1.7",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
     "autoprefixer": "^10.4.7",

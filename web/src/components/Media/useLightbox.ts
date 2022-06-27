@@ -31,9 +31,7 @@ export default function useLightbox({
     setVerticalLightboxImage(windowAspectRatio < imageAspectRatio)
   }, [height, width])
 
-  useOnWindowResize(onWindowResize, {
-    disable: !enabled,
-  })
+  useOnWindowResize(onWindowResize, enabled)
 
   const renderLightbox = enabled && typeof verticalLightboxImage === "boolean"
 
