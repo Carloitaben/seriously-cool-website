@@ -71,7 +71,7 @@ const Slider: FC<Props> = ({ first, blocks }) => {
             const style = getBlockStyle(block)
             return (
               <div key={block._key} className="flex-none" style={style}>
-                <Block block={block} first={first} enableLightbox={false} />
+                <Block block={block} first={first} />
               </div>
             )
           })}

@@ -14,7 +14,6 @@ export type MediaComponentSharedProps = {
   load: boolean
   onLoad?: () => void
   className?: string
-  enableLightbox?: boolean
 }
 
 export const borderRadius: CSSProperties = {

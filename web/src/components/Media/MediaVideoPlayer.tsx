@@ -1,7 +1,7 @@
 import type { FC } from "react"
 import { useState, useEffect, useRef } from "react"
 import type { SanityFileAsset } from "@sanity/asset-utils"
-import { motion, MotionConfig, useIsomorphicLayoutEffect } from "framer-motion"
+import { motion, MotionConfig } from "framer-motion"
 
 import type { MediaVideo } from "~/types"
 import { lightboxTransition } from "~/utils"
@@ -9,18 +9,16 @@ import { lightboxTransition } from "~/utils"
 import type { MediaComponentSharedProps } from "./Media"
 import { borderRadius } from "./Media"
 import useAttatchVideoEvents from "./useAttatchVideoEvents"
-import useLightbox from "./useLightbox"
 import usePlayPauseOnIntersection from "./usePlayPauseOnIntersection"
-import Lightbox from "./Lightbox"
+import useLightbox from "./useLightbox"
 
 type Props = Omit<MediaVideo, "__typename" | "_key" | "_type"> &
   MediaComponentSharedProps
 
-const MediaVideoPlayer: FC<Props> = ({
+const MediaVideoGif: FC<Props> = ({
   alt,
   asset: assetProp,
   className = "",
-  enableLightbox,
   intersecting,
   load,
   onLoad,
@@ -28,16 +26,17 @@ const MediaVideoPlayer: FC<Props> = ({
   width,
 }) => {
   const [asset, setAsset] = useState<SanityFileAsset>()
-  const videoCurrentTime = useRef(0)
   const ref = useRef<HTMLVideoElement>(null)
-  const lightboxVideoRef = useRef<HTMLVideoElement>(null)
 
-  const { lightboxId, setLightbox, renderLightbox, verticalLightboxImage } =
-    useLightbox({
-      width,
-      height,
-      enableLightbox,
-    })
+  const {
+    toggleLightbox,
+    renderLightbox,
+    verticalLightboxImage,
+    wrapperProps,
+  } = useLightbox({
+    width,
+    height,
+  })
 
   // Load asset
   useEffect(() => {
@@ -47,75 +46,41 @@ const MediaVideoPlayer: FC<Props> = ({
   useAttatchVideoEvents(ref, { onLoad })
   usePlayPauseOnIntersection(ref, { intersecting, autoplay: false })
 
-  function onVideoClick() {
-    if (enableLightbox) {
-      setLightbox(true)
-    }
+  function onTap() {
+    const element = ref.current
+    if (!element) return
 
-    if (ref.current) {
-      videoCurrentTime.current = ref.current.currentTime
-    }
+    toggleLightbox()
+    element.paused ? element.play() : element.pause()
   }
-
-  function onLightboxClick() {
-    setLightbox(false)
-
-    if (!lightboxVideoRef.current) return
-    videoCurrentTime.current = lightboxVideoRef.current.currentTime
-  }
-
-  // Sync currentTime betweeen videos
-  useIsomorphicLayoutEffect(() => {
-    if (renderLightbox && lightboxVideoRef.current) {
-      lightboxVideoRef.current.currentTime = videoCurrentTime.current
-    }
-
-    if (!renderLightbox && ref.current) {
-      ref.current.currentTime = videoCurrentTime.current
-    }
-  }, [renderLightbox])
 
   return (
     <MotionConfig transition={lightboxTransition}>
       <div
-        className={`${className} relative`}
+        className={`${className} ${renderLightbox ? "" : "relative"}`}
         style={{ paddingBottom: `${(height / width) * 100}%` }}
       >
-        {!renderLightbox && (
+        <motion.div {...wrapperProps}>
           <motion.video
-            layoutId={lightboxId}
             ref={ref}
             title={alt}
+            layout
             loop
             playsInline
-            className="absolute inset-0 h-full w-full"
-            onClick={onVideoClick}
+            onTap={onTap}
             style={borderRadius}
+            className={`pointer-events-auto object-contain ${
+              renderLightbox && verticalLightboxImage ? "h-full" : "w-full"
+            }`}
           >
             {asset && (
               <source src={asset.url} type={`video/${asset.extension}`} />
             )}
           </motion.video>
-        )}
+        </motion.div>
       </div>
-      <Lightbox renderLightbox={renderLightbox} onClose={onLightboxClick}>
-        <motion.video
-          layoutId={lightboxId}
-          ref={lightboxVideoRef}
-          title={alt}
-          autoPlay
-          loop
-          playsInline
-          className={`${verticalLightboxImage ? "h-full" : "w-full"}`}
-          style={borderRadius}
-        >
-          {asset && (
-            <source src={asset.url} type={`video/${asset.extension}`} />
-          )}
-        </motion.video>
-      </Lightbox>
     </MotionConfig>
   )
 }
 
-export default MediaVideoPlayer
+export default MediaVideoGif

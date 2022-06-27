@@ -34,7 +34,6 @@ const ProjectDetailBlockFullMedia: FC<Props> = ({ first, ...mediaProps }) => {
     <div ref={ref} className="desktop:col-span-6 col-span-4 mb-2 px-2">
       <Appear animate={animate}>
         <Media
-          enableLightbox
           load={first || load}
           intersecting={first || intersecting}
           onLoad={onLoad}

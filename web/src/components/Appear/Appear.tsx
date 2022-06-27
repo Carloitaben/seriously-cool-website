@@ -32,6 +32,7 @@ const Appear: FC<Props> = ({
   intersectionObserverConfig,
 }) => {
   const [show, setShow] = useState(animate)
+  const [finished, setFinished] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
   const defaultConfig = {
@@ -53,17 +54,22 @@ const Appear: FC<Props> = ({
     if (onIntersection) onIntersection(intersecting)
   }, [animate, intersecting, onIntersection])
 
-  const style = skip
-    ? undefined
-    : {
-        animation: `appear-animation 1s cubic-bezier(1, 0, 0, 1) 0s both ${
-          show ? "running" : "paused"
-        }`,
-      }
+  const style =
+    skip || finished
+      ? undefined
+      : {
+          animation: `appear-animation 1s cubic-bezier(1, 0, 0, 1) 0s both ${
+            show ? "running" : "paused"
+          }`,
+        }
 
   return (
     <div ref={ref} className={className}>
-      <div className={innerClassName} style={style}>
+      <div
+        className={innerClassName}
+        style={style}
+        onAnimationEnd={() => setFinished(true)}
+      >
         {children}
       </div>
     </div>

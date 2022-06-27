@@ -8,7 +8,6 @@ import { getSanityImageSource, lightboxTransition } from "~/utils"
 import type { MediaComponentSharedProps } from "./Media"
 import { borderRadius } from "./Media"
 import useLightbox from "./useLightbox"
-import Lightbox from "./Lightbox"
 
 type Props = Pick<MediaImageProps, "image" | "alt"> & MediaComponentSharedProps
 
@@ -18,7 +17,6 @@ const MediaImage: FC<Props> = ({
   load,
   onLoad,
   className = "",
-  enableLightbox,
 }) => {
   const { height, width } = image.asset.metadata.dimensions
 
@@ -33,45 +31,38 @@ const MediaImage: FC<Props> = ({
     }
   }, [image, load, onLoad])
 
-  const { lightboxId, setLightbox, renderLightbox, verticalLightboxImage } =
-    useLightbox({
-      width,
-      height,
-      enableLightbox,
-    })
+  const {
+    toggleLightbox,
+    renderLightbox,
+    verticalLightboxImage,
+    wrapperProps,
+  } = useLightbox({
+    width,
+    height,
+  })
 
   return (
     <MotionConfig transition={lightboxTransition}>
       <div
-        className="relative"
+        className={renderLightbox ? "" : "relative"}
         style={{ paddingBottom: `${(height / width) * 100}%` }}
-        onClick={() => enableLightbox && setLightbox(true)}
       >
-        {!renderLightbox && (
+        <motion.div {...wrapperProps}>
           <motion.img
-            layoutId={lightboxId}
+            layout
             ref={ref}
             src={url}
             alt={alt}
+            onTap={toggleLightbox}
             onLoad={onLoad}
-            className={`${className} pointer-events-none absolute inset-0 h-full w-full`}
             style={borderRadius}
+            draggable={false}
+            className={`${className} pointer-events-auto object-contain ${
+              renderLightbox && verticalLightboxImage ? "h-full" : "w-full"
+            }`}
           />
-        )}
+        </motion.div>
       </div>
-      <Lightbox
-        renderLightbox={renderLightbox}
-        onClose={() => setLightbox(false)}
-      >
-        <motion.img
-          layoutId={lightboxId}
-          ref={ref}
-          src={url}
-          alt={alt}
-          className={`${verticalLightboxImage ? "h-full" : "w-full"}`}
-          style={borderRadius}
-        />
-      </Lightbox>
     </MotionConfig>
   )
 }

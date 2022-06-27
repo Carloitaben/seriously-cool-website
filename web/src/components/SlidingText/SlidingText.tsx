@@ -1,16 +1,32 @@
 import type { FC, CSSProperties } from "react"
 import { useMemo, useEffect, useRef, useState } from "react"
+import type { Variants } from "framer-motion"
+import { motion } from "framer-motion"
 
 import useRootData from "~/hooks/useRootData"
-
 import store from "~/store"
-import BackButton from "./BackButton"
+import { lightboxTransition } from "~/utils"
 
+import BackButton from "./BackButton"
 import useIsFontLoaded from "./useIsFontLoaded"
 import { getDuration, getTextShadow } from "./utils"
 
 type Props = {
   children: string[]
+}
+
+const variants: Variants = {
+  show: {
+    y: "0rem",
+    transition: {
+      ...lightboxTransition,
+      delay: lightboxTransition.duration,
+    },
+  },
+  hide: {
+    y: "5rem",
+    transition: lightboxTransition,
+  },
 }
 
 const SlidingText: FC<Props> = ({ children }) => {
@@ -20,6 +36,7 @@ const SlidingText: FC<Props> = ({ children }) => {
 
   const slidingText = store((state) => state.slidingText)
   const slidingTextMask = store((state) => state.slidingTextMask)
+  const lightboxId = store((state) => state.lightboxId)
 
   const childrenOrMask = useMemo(() => {
     if (slidingTextMask) return slidingTextMask
@@ -47,8 +64,11 @@ const SlidingText: FC<Props> = ({ children }) => {
   }, [childrenOrMask, isFontLoaded])
 
   return (
-    <footer
+    <motion.footer
       className="fixed inset-x-4 bottom-4 flex select-none items-center"
+      initial="show"
+      animate={lightboxId ? "hide" : "show"}
+      variants={variants}
       style={{ color: colors.text }}
     >
       <div
@@ -66,7 +86,7 @@ const SlidingText: FC<Props> = ({ children }) => {
         </span>
       </div>
       <BackButton />
-    </footer>
+    </motion.footer>
   )
 }
 

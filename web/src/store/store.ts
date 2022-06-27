@@ -1,30 +1,15 @@
 import create from "zustand"
 
-export type Store = {
-  slidingText: string[] | null
-  setSlidingText: (slidingText: string[] | string | null) => void
-  slidingTextMask: Store["slidingText"]
-  setSlidingTextMask: Store["setSlidingText"]
-}
+import type { MediaSlice } from "./mediaSlice"
+import { createMediaSlice } from "./mediaSlice"
+import type { SlidingTextSlice } from "./slidingtextSlice"
+import { createSlidingTextSlice } from "./slidingtextSlice"
 
-function ensureArray(text: string[] | string | null) {
-  if (typeof text === "string") return [text]
-  return text
-}
+export type Store = SlidingTextSlice & MediaSlice
 
-const useStore = create<Store>((set, get) => ({
-  slidingText: null,
-  setSlidingText: (text) =>
-    set((state) => ({
-      ...state,
-      slidingText: ensureArray(text),
-    })),
-  slidingTextMask: null,
-  setSlidingTextMask: (text) =>
-    set((state) => ({
-      ...state,
-      slidingTextMask: ensureArray(text),
-    })),
+const store = create<Store>()((...actions) => ({
+  ...createSlidingTextSlice(...actions),
+  ...createMediaSlice(...actions),
 }))
 
-export default useStore
+export default store
