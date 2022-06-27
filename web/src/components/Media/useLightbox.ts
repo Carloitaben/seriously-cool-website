@@ -2,6 +2,7 @@ import type { MotionProps } from "framer-motion"
 import type { HTMLAttributes } from "react"
 import { useCallback, useRef, useState } from "react"
 
+import useOnKey from "~/hooks/useOnKey"
 import useOnWindowResize from "~/hooks/useOnWindowResize"
 import store from "~/store"
 
@@ -27,13 +28,15 @@ export default function useLightbox({
     if (enableLightbox) setLightboxId(lightboxId ? null : id.current)
   }, [enableLightbox, lightboxId, setLightboxId])
 
-  const onWindowResize = useCallback(() => {
+  useOnWindowResize(() => {
     const windowAspectRatio = window.innerHeight / window.innerWidth
     const imageAspectRatio = height / width
     setVerticalLightboxImage(windowAspectRatio < imageAspectRatio)
-  }, [height, width])
+  }, enabled)
 
-  useOnWindowResize(onWindowResize, enabled)
+  useOnKey((key) => {
+    if (key === "Escape") setLightboxId(null)
+  }, enabled)
 
   const renderLightbox = enabled && typeof verticalLightboxImage === "boolean"
 
