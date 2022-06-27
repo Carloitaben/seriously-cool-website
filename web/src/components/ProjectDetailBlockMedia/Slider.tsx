@@ -1,12 +1,13 @@
 import type { CSSProperties, FC } from "react"
-import { useEffect, useState, useRef } from "react"
+import { useState, useRef } from "react"
 import type { DraggableProps } from "framer-motion"
 import { motion } from "framer-motion"
 
 import type { Media as MediaProps } from "~/types"
 import useOnTailwindBreakpoint from "~/hooks/useOnTailwindBreakpoint"
-import Block from "./Block"
 import useOnWindowResize from "~/hooks/useOnWindowResize"
+
+import Block from "./Block"
 
 type Props = {
   first?: boolean
