@@ -1,6 +1,6 @@
 import type { MotionProps } from "framer-motion"
 import type { HTMLAttributes } from "react"
-import { useCallback, useRef, useState } from "react"
+import { useEffect, useCallback, useRef, useState } from "react"
 
 import useOnKey from "~/hooks/useOnKey"
 import useOnWindowResize from "~/hooks/useOnWindowResize"
@@ -37,6 +37,15 @@ export default function useLightbox({
   useOnKey((key) => {
     if (key === "Escape") setLightboxId(null)
   }, enabled)
+
+  useEffect(() => {
+    function handleScroll() {
+      setLightboxId(null)
+    }
+
+    if (enabled) window.addEventListener("scroll", handleScroll, true)
+    return () => window.removeEventListener("scroll", handleScroll, true)
+  }, [enabled, setLightboxId])
 
   const renderLightbox = enabled && typeof verticalLightboxImage === "boolean"
 
