@@ -24,6 +24,7 @@ const MediaVideoGif: FC<Props> = ({
   onLoad,
   height,
   width,
+  enableLightbox,
 }) => {
   const [asset, setAsset] = useState<SanityFileAsset>()
   const ref = useRef<HTMLVideoElement>(null)
@@ -36,6 +37,7 @@ const MediaVideoGif: FC<Props> = ({
   } = useLightbox({
     width,
     height,
+    enableLightbox,
   })
 
   // Load asset

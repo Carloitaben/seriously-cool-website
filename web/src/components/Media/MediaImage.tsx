@@ -17,6 +17,7 @@ const MediaImage: FC<Props> = ({
   load,
   onLoad,
   className = "",
+  enableLightbox,
 }) => {
   const { height, width } = image.asset.metadata.dimensions
 
@@ -39,6 +40,7 @@ const MediaImage: FC<Props> = ({
   } = useLightbox({
     width,
     height,
+    enableLightbox,
   })
 
   return (

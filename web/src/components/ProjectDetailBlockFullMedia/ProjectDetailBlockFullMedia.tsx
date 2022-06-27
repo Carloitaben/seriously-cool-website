@@ -37,6 +37,7 @@ const ProjectDetailBlockFullMedia: FC<Props> = ({ first, ...mediaProps }) => {
           load={first || load}
           intersecting={first || intersecting}
           onLoad={onLoad}
+          enableLightbox
           {...mediaProps}
         />
       </Appear>

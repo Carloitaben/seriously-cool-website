@@ -23,6 +23,7 @@ const ProjectDetailBlockMedia: FC<Props> = ({ first, mediaBlockBlocks }) => {
           key={block._key}
           block={block}
           first={first}
+          enableLightbox
         />
       ))}
     </div>

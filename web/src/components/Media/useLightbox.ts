@@ -8,9 +8,11 @@ import store from "~/store"
 export default function useLightbox({
   width,
   height,
+  enableLightbox,
 }: {
   width: number
   height: number
+  enableLightbox?: boolean
 }) {
   const id = useRef(`lightbox-${Math.random().toString()}`)
   const [verticalLightboxImage, setVerticalLightboxImage] = useState<boolean>()
@@ -19,11 +21,11 @@ export default function useLightbox({
   const lightboxId = store((state) => state.lightboxId)
   const setLightboxId = store((state) => state.setLightboxId)
 
-  const enabled = lightboxId === id.current
+  const enabled = lightboxId === id.current && enableLightbox
 
   const toggleLightbox = useCallback(() => {
-    setLightboxId(lightboxId ? null : id.current)
-  }, [lightboxId, setLightboxId])
+    if (enableLightbox) setLightboxId(lightboxId ? null : id.current)
+  }, [enableLightbox, lightboxId, setLightboxId])
 
   const onWindowResize = useCallback(() => {
     const windowAspectRatio = window.innerHeight / window.innerWidth

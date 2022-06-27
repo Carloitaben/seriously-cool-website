@@ -10,9 +10,15 @@ type Props = {
   className?: string
   block: MediaProps
   first?: boolean
+  enableLightbox?: boolean
 }
 
-const Block: FC<Props> = ({ className = "", first, block }) => {
+const Block: FC<Props> = ({
+  className = "",
+  first,
+  block,
+  enableLightbox = false,
+}) => {
   const ref = useRef<HTMLDivElement>(null)
   const [loaded, setLoaded] = useState(false)
 
@@ -37,6 +43,7 @@ const Block: FC<Props> = ({ className = "", first, block }) => {
           load={load}
           intersecting={intersecting}
           onLoad={onLoad}
+          enableLightbox={enableLightbox}
           {...block}
         />
       </Appear>
