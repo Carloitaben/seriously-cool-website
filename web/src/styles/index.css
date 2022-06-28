@@ -1329,6 +1329,10 @@ button {
     padding-left: 50%;
   }
 
+  .desktop\:pb-2 {
+    padding-bottom: 0.5rem;
+  }
+
   .desktop\:text-5xl {
     font-size: 3rem;
     line-height: 1;

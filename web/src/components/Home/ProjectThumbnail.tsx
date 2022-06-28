@@ -47,7 +47,7 @@ const ProjectThumbnail: FC<Props> = ({ project }) => {
   }, [project.title])
 
   return (
-    <li ref={ref} className="pb-2">
+    <li ref={ref}>
       <Appear animate={animate}>
         <div
           data-load={load}
@@ -55,7 +55,7 @@ const ProjectThumbnail: FC<Props> = ({ project }) => {
           className="flex flex-col"
         >
           <Link
-            className="relative focus:outline-none"
+            className="desktop:pb-2 relative focus:outline-none"
             to={`projects/${project.slug.current}`}
             {...events}
           >
@@ -67,7 +67,9 @@ const ProjectThumbnail: FC<Props> = ({ project }) => {
               // alt={project.thumbnail.video.alt || project.title}
             />
           </Link>
-          <h6 className="desktop:hidden tablet:mt-6 mt-2">{project.title}</h6>
+          <h6 className="desktop:hidden tablet:mt-6 mt-2 mb-2">
+            {project.title}
+          </h6>
         </div>
       </Appear>
     </li>
