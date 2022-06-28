@@ -14,7 +14,7 @@ const Error: FC = () => {
   })
 
   return (
-    <div className="flex h-screen items-center justify-center text-8xl">
+    <div className="flex h-screen items-center justify-center pb-24 text-center text-8xl">
       {errorText}
     </div>
   )
