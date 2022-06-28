@@ -51,6 +51,7 @@ export default function useLightbox({
 
   const wrapperProps: MotionProps & HTMLAttributes<HTMLElement> = {
     layoutId: id.current,
+    tabIndex: enabled ? 0 : undefined,
     onLayoutAnimationStart() {
       setAnimating(true)
     },
@@ -60,7 +61,7 @@ export default function useLightbox({
     style: {
       zIndex: enabled || animating ? 40 : "auto",
     },
-    className: `pointer-events-none ${
+    className: `pointer-events-none focus:outline-none ${
       renderLightbox
         ? "fixed inset-4 flex items-center justify-center"
         : "absolute inset-0"

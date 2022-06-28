@@ -1,6 +1,7 @@
 import type { FC } from "react"
 import { useEffect, useRef, useState } from "react"
 import { motion, MotionConfig } from "framer-motion"
+import { useFocusTrap } from "@mantine/hooks"
 
 import type { MediaImage as MediaImageProps } from "~/types"
 import { getSanityImageSource, lightboxTransition } from "~/utils"
@@ -43,9 +44,12 @@ const MediaImage: FC<Props> = ({
     enableLightbox,
   })
 
+  const focusTrapRef = useFocusTrap(renderLightbox)
+
   return (
     <MotionConfig transition={lightboxTransition}>
       <div
+        ref={focusTrapRef}
         className={renderLightbox ? "" : "relative"}
         style={{ paddingBottom: `${(height / width) * 100}%` }}
       >

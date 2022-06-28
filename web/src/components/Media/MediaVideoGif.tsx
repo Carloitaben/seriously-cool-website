@@ -1,7 +1,8 @@
 import type { FC } from "react"
 import { useState, useEffect, useRef } from "react"
-import type { SanityFileAsset } from "@sanity/asset-utils"
 import { motion, MotionConfig } from "framer-motion"
+import type { SanityFileAsset } from "@sanity/asset-utils"
+import { useFocusTrap } from "@mantine/hooks"
 
 import type { MediaVideo } from "~/types"
 import { lightboxTransition } from "~/utils"
@@ -48,9 +49,12 @@ const MediaVideoGif: FC<Props> = ({
   useAttatchVideoEvents(ref, { onLoad })
   usePlayPauseOnIntersection(ref, { intersecting, autoplay: true })
 
+  const focusTrapRef = useFocusTrap(renderLightbox)
+
   return (
     <MotionConfig transition={lightboxTransition}>
       <div
+        ref={focusTrapRef}
         className={`${className} ${renderLightbox ? "" : "relative"}`}
         style={{ paddingBottom: `${(height / width) * 100}%` }}
       >
