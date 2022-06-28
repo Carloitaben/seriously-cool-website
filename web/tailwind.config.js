@@ -4,6 +4,7 @@ module.exports = {
     screens: {
       tablet: "640px",
       desktop: "770px",
+      homeMaxWidth: "1920px",
     },
     extend: {
       borderRadius: {

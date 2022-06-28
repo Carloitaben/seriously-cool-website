@@ -12,13 +12,13 @@ const Home: FC = () => {
   const { projects } = useRootData()
 
   return (
-    <div className="desktop:pl-[50%] overflow-hidden">
-      <main className="pl-1 pr-2 pt-2 pb-24">
+    <div className="desktop:pl-[50%] homeMaxWidth:pl-[60rem] overflow-hidden">
+      <main className="desktop:pr-2 px-1 pt-2 pb-24">
         <section className="flex flex-col">
           <Logo />
           {/* <Catchphrase /> */}
           <About />
-          <ul className="-mb-2 flex flex-col">
+          <ul className="projects-grid desktop:-mx-1 desktop:-mb-2 grid">
             {projects.map((project) => (
               <ProjectThumbnail key={project.slug.current} project={project} />
             ))}
