@@ -7,12 +7,9 @@ type Props = {
 
 const SliderPicker: FC<Props> = ({ className = "" }) => {
   return (
-    <div className={`relative h-[0.625rem] ${className}`}>
+    <div className={`relative h-2 ${className}`}>
       <div className="absolute inset-0 rounded-full bg-white/50" />
-      <motion.div
-        style={{ width: 50 }}
-        className="absolute inset-y-0 left-0 rounded-full bg-white"
-      />
+      <motion.div className="absolute top-0 left-0 -mt-1 h-4 w-4 rounded-full bg-white" />
     </div>
   )
 }

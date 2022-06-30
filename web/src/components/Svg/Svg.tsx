@@ -40,17 +40,17 @@ export const dice = (
 )
 
 export const play = (
-  <svg width="40" height="46" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
-      d="M39 21.2518C40.3333 22.0288 40.3333 23.9712 39 24.7482L3 45.7265C1.66667 46.5035 0 45.5323 0 43.9783V2.02165C0 0.467701 1.66667 -0.503517 3 0.273459L39 21.2518Z"
-      fill="#FAFAFA"
+      d="M23.038 14.272c1.323.772 1.323 2.684 0 3.456L5.008 28.245C3.674 29.023 2 28.061 2 26.518V5.482c0-1.544 1.674-2.505 3.008-1.727l18.03 10.517Z"
+      fill="currentColor"
     />
   </svg>
 )
 
 export const pause = (
-  <svg width="36" height="48" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="12" height="48" rx="2" fill="currentColor" />
-    <rect x="24" width="12" height="48" rx="2" fill="currentColor" />
+  <svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="4" width="6" height="24" rx="2" fill="currentColor" />
+    <rect x="14" y="4" width="6" height="24" rx="2" fill="currentColor" />
   </svg>
 )
