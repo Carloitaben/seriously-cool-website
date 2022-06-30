@@ -52,13 +52,15 @@ const MediaVideoGif: FC<Props> = ({
 
   const focusTrapRef = useFocusTrap(renderLightbox)
 
-  function onTap() {
-    const element = ref.current
-    if (!element) return
+  useEffect(() => {
+    if (!ref.current) return
 
-    toggleLightbox()
-    element.paused ? element.play() : element.pause()
-  }
+    if (renderLightbox && ref.current.paused) {
+      ref.current.play()
+    } else {
+      ref.current.pause()
+    }
+  }, [renderLightbox])
 
   return (
     <MotionConfig transition={lightboxTransition}>
@@ -81,7 +83,7 @@ const MediaVideoGif: FC<Props> = ({
               layout
               loop
               playsInline
-              onTap={onTap}
+              onTap={toggleLightbox}
               className="pointer-events-auto h-full w-full object-contain"
             >
               {asset && (
