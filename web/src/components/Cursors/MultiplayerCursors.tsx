@@ -33,7 +33,6 @@ const MultiplayerCursors: FC = () => {
     const handleClientDisconnection: WebSocketMessageHandler<
       "onClientDisconnection"
     > = ({ id }) => {
-      console.log("!!!! someone disconnected!", id)
       setConnectedIds((current) => {
         const index = current.findIndex((conncetedId) => conncetedId === id)
         if (index > -1) current.splice(index, 1)
