@@ -17,7 +17,9 @@ import { useIsomorphicLayoutEffect } from "framer-motion"
 
 import styles from "~/styles/index.css"
 import SlidingText from "~/components/SlidingText"
+import Cursors from "~/components/Cursors"
 import useOnMatchMedia from "~/hooks/useOnMatchMedia"
+import { WebSocketProvider } from "./hooks/useWebSocket"
 import { isSanityPreview } from "~/utils"
 
 import type {
@@ -127,6 +129,9 @@ export default function App() {
       >
         <Outlet />
         <SlidingText>{slidingTexts}</SlidingText>
+        <WebSocketProvider>
+          <Cursors />
+        </WebSocketProvider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
