@@ -11,23 +11,27 @@ export const WebSocketProvider: FC<{ children: ReactNode }> = ({
   const { pathname } = useLocation()
 
   useEffect(() => {
-    const room = pathname === "/" ? "home" : "project"
-    const connection = new WebSocket(`ws://localhost:8080/?room=${room}`)
+    try {
+      const room = pathname === "/" ? "home" : "project"
+      const connection = new WebSocket(`ws://localhost:8080/?room=${room}`)
 
-    function onOpen() {
-      setSocket(connection)
-    }
+      function onOpen() {
+        setSocket(connection)
+      }
 
-    function onClose() {
-      setSocket(undefined)
-    }
+      function onClose() {
+        setSocket(undefined)
+      }
 
-    connection.addEventListener("open", onOpen, true)
-    connection.addEventListener("close", onClose, true)
-    return () => {
-      connection.close()
-      connection.removeEventListener("open", onOpen, true)
-      connection.removeEventListener("close", onClose, true)
+      connection.addEventListener("open", onOpen, true)
+      connection.addEventListener("close", onClose, true)
+      return () => {
+        connection.close()
+        connection.removeEventListener("open", onOpen, true)
+        connection.removeEventListener("close", onClose, true)
+      }
+    } catch (error) {
+      // noop
     }
   }, [pathname])
 
