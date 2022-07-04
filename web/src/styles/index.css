@@ -718,6 +718,10 @@ button {
   z-index: 30;
 }
 
+.z-50 {
+  z-index: 50;
+}
+
 .col-span-5 {
   grid-column: span 5 / span 5;
 }

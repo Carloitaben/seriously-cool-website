@@ -1,59 +1,15 @@
 import type { FC } from "react"
 import { useRef, useEffect } from "react"
 
-import useWebSocket from "~/hooks/useWebSocket"
+import { WebSocketProvider } from "~/hooks/useWebSocket"
 import { throttle } from "~/utils"
 
+import MultiplayerCursors from "./MultiplayerCursors"
 import type { CursorProps } from "./Cursor"
 import Cursor from "./Cursor"
-import MultiplayerCursors from "./MultiplayerCursors"
 
 const Cursors: FC = () => {
-  const socket = useWebSocket()
   const cursor = useRef<CursorProps>(null)
-
-  useEffect(() => {
-    if (!socket || !cursor.current) return
-
-    const handlePress = (active: boolean, forceTouch = false) => {
-      socket.send(
-        JSON.stringify({
-          event: "onClientCursorPress",
-          payload: { active, forceTouch },
-        })
-      )
-    }
-
-    const handleForceTouchUp = () => handlePress(false, true)
-    const handleForceTouchDown = () => handlePress(true, true)
-    const handleMouseUp = () => handlePress(false)
-    const handleMouseDown = () => handlePress(true)
-
-    const handleSendSocketMessage = throttle((event: MouseEvent) => {
-      socket.send(
-        JSON.stringify({
-          event: "onClientCursorMove",
-          payload: {
-            x: (event.clientX * 100) / window.innerWidth,
-            y: (event.clientY * 100) / window.innerHeight,
-          },
-        })
-      )
-    }, 80)
-
-    window.addEventListener("webkitmouseforceup", handleForceTouchUp, true)
-    window.addEventListener("webkitmouseforcedown", handleForceTouchDown, true)
-    window.addEventListener("mouseup", handleMouseUp, true)
-    window.addEventListener("mousedown", handleMouseDown, true)
-    window.addEventListener("mousemove", handleSendSocketMessage, true)
-    return () => {
-      window.removeEventListener("webkitmouseforceup", handleForceTouchUp, true) // prettier-ignore
-      window.removeEventListener("webkitmouseforcedown", handleForceTouchDown, true) // prettier-ignore
-      window.removeEventListener("mouseup", handleMouseUp, true)
-      window.removeEventListener("mousedown", handleMouseDown, true)
-      window.removeEventListener("mousemove", handleSendSocketMessage, true)
-    }
-  }, [socket])
 
   useEffect(() => {
     const handleForceTouchUp = () => {
@@ -94,7 +50,9 @@ const Cursors: FC = () => {
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 z-50">
       <Cursor ref={cursor} type="finger" />
-      <MultiplayerCursors />
+      <WebSocketProvider>
+        <MultiplayerCursors />
+      </WebSocketProvider>
     </div>
   )
 }

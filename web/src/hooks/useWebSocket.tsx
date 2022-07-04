@@ -1,5 +1,6 @@
 import type { FC, ReactNode } from "react"
 import { createContext, useState, useContext, useEffect } from "react"
+import { useLocation } from "@remix-run/react"
 
 export const webSocketContext = createContext<WebSocket | undefined>(undefined)
 
@@ -7,9 +8,11 @@ export const WebSocketProvider: FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [socket, setSocket] = useState<WebSocket>()
+  const { pathname } = useLocation()
 
   useEffect(() => {
-    const connection = new WebSocket("ws://localhost:8080/")
+    const room = pathname === "/" ? "home" : "project"
+    const connection = new WebSocket(`ws://localhost:8080/?room=${room}`)
 
     function onOpen() {
       setSocket(connection)
@@ -26,7 +29,7 @@ export const WebSocketProvider: FC<{ children: ReactNode }> = ({
       connection.removeEventListener("open", onOpen, true)
       connection.removeEventListener("close", onClose, true)
     }
-  }, [])
+  }, [pathname])
 
   return (
     <webSocketContext.Provider value={socket}>

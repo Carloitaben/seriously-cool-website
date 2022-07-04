@@ -15,13 +15,17 @@ const app = express()
 const httpServer = createServer(app)
 const webSocketServer = new WebSocket.WebSocketServer({ port: 8080 })
 
+const urlParamMatch = /(\/\?room=")([^"]+)"/g
 webSocketServer.on("connection", (socket, request) => {
   socket.id = request.headers["sec-websocket-key"]
+  socket.room = request.url.replace("/?room=", "")
 
   // Send to socket all currently connected ids
   const otherConnections = []
   webSocketServer.clients.forEach((client) => {
-    if (client !== socket) otherConnections.push(client.id)
+    if (client !== socket && client.room === socket.room) {
+      otherConnections.push(client.id)
+    }
   })
   socket.send(
     JSON.stringify({
@@ -33,7 +37,11 @@ webSocketServer.on("connection", (socket, request) => {
 
   // Broadcast to currently connected new socket conections
   webSocketServer.clients.forEach((client) => {
-    if (client !== socket && client.readyState === WebSocket.OPEN) {
+    if (
+      client !== socket &&
+      client.room === socket.room &&
+      client.readyState === WebSocket.OPEN
+    ) {
       client.send(
         JSON.stringify({
           id: socket.id,
@@ -50,7 +58,11 @@ webSocketServer.on("connection", (socket, request) => {
     switch (event) {
       case "onClientCursorMove":
         webSocketServer.clients.forEach((client) => {
-          if (client !== socket && client.readyState === WebSocket.OPEN) {
+          if (
+            client !== socket &&
+            client.room === socket.room &&
+            client.readyState === WebSocket.OPEN
+          ) {
             client.send(
               JSON.stringify({
                 id: socket.id,
@@ -63,7 +75,11 @@ webSocketServer.on("connection", (socket, request) => {
         break
       case "onClientCursorPress":
         webSocketServer.clients.forEach((client) => {
-          if (client !== socket && client.readyState === WebSocket.OPEN) {
+          if (
+            client !== socket &&
+            client.room === socket.room &&
+            client.readyState === WebSocket.OPEN
+          ) {
             client.send(
               JSON.stringify({
                 id: socket.id,
@@ -81,7 +97,11 @@ webSocketServer.on("connection", (socket, request) => {
 
   socket.on("close", () => {
     webSocketServer.clients.forEach((client) => {
-      if (client !== socket && client.readyState === WebSocket.OPEN) {
+      if (
+        client !== socket &&
+        client.room === socket.room &&
+        client.readyState === WebSocket.OPEN
+      ) {
         client.send(
           JSON.stringify({
             id: socket.id,
