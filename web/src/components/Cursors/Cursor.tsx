@@ -30,38 +30,32 @@ export type CursorComponentRef = {
 }
 
 const Cursor = forwardRef<CursorComponentRef, Props>(({ type }, ref) => {
-  const controls = useAnimation()
-  const initialized = useRef(false)
-  const innerRef = useRef<HTMLDivElement>(null)
+  const containerControls = useAnimation()
+  const cursorControls = useAnimation()
 
-  useEffect(() => {
-    controls.set({
-      scale: 0,
-      top: "50%",
-      left: "50%",
-    })
-  }, [controls])
+  const initialized = useRef(false)
 
   const handleMove = useCallback(
     (x: number, y: number) => {
       if (!initialized.current) {
-        controls.set({
-          top: `${y}%`,
-          left: `${x}%`,
+        containerControls.set({
+          x: `${x}%`,
+          y: `${y}%`,
         })
-        return (initialized.current = true)
+
+        initialized.current = true
+        return cursorControls.start({ scale: 1 }, transition)
       }
 
-      controls.start(
+      containerControls.start(
         {
-          scale: 1,
-          top: `${y}%`,
-          left: `${x}%`,
+          x: `${x}%`,
+          y: `${y}%`,
         },
         transition
       )
     },
-    [controls]
+    [containerControls, cursorControls]
   )
 
   useImperativeHandle(
@@ -75,14 +69,18 @@ const Cursor = forwardRef<CursorComponentRef, Props>(({ type }, ref) => {
 
   return (
     <motion.div
-      className="absolute"
-      ref={innerRef}
-      initial="hidden"
-      animate={controls}
-      exit="hidden"
-      variants={variants}
+      className="absolute inset-0 will-change-transform"
+      animate={containerControls}
     >
-      {cursorFinger}
+      <motion.div
+        className="inline-block"
+        initial="hidden"
+        exit="hidden"
+        animate={cursorControls}
+        variants={variants}
+      >
+        {cursorFinger}
+      </motion.div>
     </motion.div>
   )
 })
