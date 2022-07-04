@@ -15,15 +15,17 @@ const Cursors: FC = () => {
   useEffect(() => {
     if (!socket || !cursor.current) return
 
-    const handlePress = (active: boolean) => {
+    const handlePress = (active: boolean, forceTouch = false) => {
       socket.send(
         JSON.stringify({
           event: "onClientCursorPress",
-          payload: { active },
+          payload: { active, forceTouch },
         })
       )
     }
 
+    const handleForceTouchUp = () => handlePress(false, true)
+    const handleForceTouchDown = () => handlePress(true, true)
     const handleMouseUp = () => handlePress(false)
     const handleMouseDown = () => handlePress(true)
 
@@ -39,10 +41,14 @@ const Cursors: FC = () => {
       )
     }, 80)
 
+    window.addEventListener("webkitmouseforceup", handleForceTouchUp, true)
+    window.addEventListener("webkitmouseforcedown", handleForceTouchDown, true)
     window.addEventListener("mouseup", handleMouseUp, true)
     window.addEventListener("mousedown", handleMouseDown, true)
     window.addEventListener("mousemove", handleSendSocketMessage, true)
     return () => {
+      window.removeEventListener("webkitmouseforceup", handleForceTouchUp, true) // prettier-ignore
+      window.removeEventListener("webkitmouseforcedown", handleForceTouchDown, true) // prettier-ignore
       window.removeEventListener("mouseup", handleMouseUp, true)
       window.removeEventListener("mousedown", handleMouseDown, true)
       window.removeEventListener("mousemove", handleSendSocketMessage, true)
@@ -50,12 +56,19 @@ const Cursors: FC = () => {
   }, [socket])
 
   useEffect(() => {
+    const handleForceTouchUp = () => {
+      cursor.current!.click(false, true)
+    }
+    const handleForceTouchDown = () => {
+      cursor.current!.click(true, true)
+    }
+
     const handleMouseUp = () => {
-      cursor.current!.click(false)
+      cursor.current!.click(false, false)
     }
 
     const handleMouseDown = () => {
-      cursor.current!.click(true)
+      cursor.current!.click(true, false)
     }
 
     const handleMouseMove = throttle((event: MouseEvent) => {
@@ -64,10 +77,14 @@ const Cursors: FC = () => {
       cursor.current!.move(x, y)
     }, 50)
 
+    window.addEventListener("webkitmouseforceup", handleForceTouchUp, true)
+    window.addEventListener("webkitmouseforcedown", handleForceTouchDown, true)
     window.addEventListener("mouseup", handleMouseUp, true)
     window.addEventListener("mousedown", handleMouseDown, true)
     window.addEventListener("mousemove", handleMouseMove, true)
     return () => {
+      window.removeEventListener("webkitmouseforceup", handleForceTouchUp, true) // prettier-ignore
+      window.removeEventListener("webkitmouseforcedown", handleForceTouchDown, true) // prettier-ignore
       window.removeEventListener("mouseup", handleMouseUp, true)
       window.removeEventListener("mousedown", handleMouseDown, true)
       window.removeEventListener("mousemove", handleMouseMove, true)

@@ -30,7 +30,7 @@ const MultiplayerCursor: FC<Props> = ({ id: idProp }) => {
       "onClientCursorPress"
     > = ({ id, payload }) => {
       if (id === idProp) {
-        cursor.current!.click(payload.active)
+        cursor.current!.click(payload.active, payload.forceTouch)
       }
     }
 

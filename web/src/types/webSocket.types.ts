@@ -8,7 +8,7 @@ type EventsNameAndHandlers = {
   onClientConnection: Event<null>
   onClientDisconnection: Event<null>
   onClientCursorMove: Event<{ x: number; y: number }>
-  onClientCursorPress: Event<{ active: boolean }>
+  onClientCursorPress: Event<{ active: boolean; forceTouch: boolean }>
 }
 
 export type WebSocketEvent = keyof EventsNameAndHandlers

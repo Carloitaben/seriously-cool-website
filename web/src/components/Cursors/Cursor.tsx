@@ -21,7 +21,7 @@ const transition: Transition = {
 
 export type CursorComponentRef = {
   move: (x: number, y: number) => void
-  click: (active: boolean) => void
+  click: (active: boolean, forceTouch: boolean) => void
 }
 
 const Cursor = forwardRef<CursorComponentRef, Props>(({ type }, ref) => {
@@ -54,10 +54,10 @@ const Cursor = forwardRef<CursorComponentRef, Props>(({ type }, ref) => {
   )
 
   const handleClick = useCallback(
-    (active: boolean) => {
+    (active: boolean, forceTouch: boolean) => {
       cursorControls.start(
         {
-          scale: active ? 0.75 : 1,
+          scale: active ? (forceTouch ? 0.8 : 0.9) : 1,
         },
         transition
       )
@@ -71,7 +71,7 @@ const Cursor = forwardRef<CursorComponentRef, Props>(({ type }, ref) => {
       move: handleMove,
       click: handleClick,
     }),
-    [handleClick, handleMove]
+    [handleMove, handleClick]
   )
 
   return (
