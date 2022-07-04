@@ -1,7 +1,7 @@
 import type { FC } from "react"
 import { useEffect, useRef } from "react"
 
-import type { WebSocketMessageHandler } from "~/types"
+import type { WebSocketEvent, WebSocketMessageHandler } from "~/types"
 import useWebSocket from "~/hooks/useWebSocket"
 
 import Cursor from "./Cursor"
@@ -37,7 +37,7 @@ const MultiplayerCursor: FC<Props> = ({ id: idProp }) => {
     function handleMessage({ data }: { data: string }) {
       const { event, ...rest } = JSON.parse(data.toString())
 
-      switch (event) {
+      switch (event as WebSocketEvent) {
         case "onClientCursorMove":
           return handleClientCursorMove(rest)
         case "onClientCursorPress":

@@ -1,15 +1,18 @@
-export type WebSocketEvent<Payload = null> = {
+type Event<Payload = null> = {
   id: string
   payload: Payload
 }
 
 type EventsNameAndHandlers = {
-  onInitialConnection: WebSocketEvent<string[]>
-  onClientConnection: WebSocketEvent<null>
-  onClientDisconnection: WebSocketEvent<null>
-  onClientCursorMove: WebSocketEvent<{ x: number; y: number }>
-  onClientCursorPress: WebSocketEvent<{ active: boolean }>
+  onInitialConnection: Event<string[]>
+  onClientConnection: Event<null>
+  onClientDisconnection: Event<null>
+  onClientCursorMove: Event<{ x: number; y: number }>
+  onClientCursorPress: Event<{ active: boolean }>
 }
 
-export type WebSocketMessageHandler<Event extends keyof EventsNameAndHandlers> =
-  (data: EventsNameAndHandlers[Event]) => void
+export type WebSocketEvent = keyof EventsNameAndHandlers
+
+export type WebSocketMessageHandler<Event extends WebSocketEvent> = (
+  data: EventsNameAndHandlers[Event]
+) => void

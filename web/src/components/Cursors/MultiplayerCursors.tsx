@@ -13,7 +13,6 @@ const MultiplayerCursors: FC = () => {
 
   useEffect(() => {
     if (!socket) return
-    console.log("TODO: this component should be loaded using React.lazy")
 
     const handleInitialConnection: WebSocketMessageHandler<
       "onInitialConnection"

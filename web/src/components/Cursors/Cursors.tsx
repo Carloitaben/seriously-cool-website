@@ -6,7 +6,6 @@ import { throttle } from "~/utils"
 
 import type { CursorComponentRef } from "./Cursor"
 import Cursor from "./Cursor"
-
 import MultiplayerCursors from "./MultiplayerCursors"
 
 const Cursors: FC = () => {
