@@ -3,16 +3,12 @@ export type WebSocketEvent<Payload = null> = {
   payload: Payload
 }
 
-export type CursorMovePayload = {
-  x: number
-  y: number
-}
-
 type EventsNameAndHandlers = {
   onInitialConnection: WebSocketEvent<string[]>
   onClientConnection: WebSocketEvent<null>
   onClientDisconnection: WebSocketEvent<null>
-  onClientCursorMove: WebSocketEvent<CursorMovePayload>
+  onClientCursorMove: WebSocketEvent<{ x: number; y: number }>
+  onClientCursorPress: WebSocketEvent<{ active: boolean }>
 }
 
 export type WebSocketMessageHandler<Event extends keyof EventsNameAndHandlers> =

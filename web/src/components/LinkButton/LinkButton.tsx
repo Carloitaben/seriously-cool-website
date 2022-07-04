@@ -44,6 +44,7 @@ const Link: FC<Props> = ({
   if (href?.includes("http")) {
     return (
       <a
+        draggable="false"
         className={className}
         href={href}
         target="blank"

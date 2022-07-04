@@ -61,6 +61,19 @@ webSocketServer.on("connection", (socket, request) => {
           }
         })
         break
+      case "onClientCursorPress":
+        webSocketServer.clients.forEach((client) => {
+          if (client !== socket && client.readyState === WebSocket.OPEN) {
+            client.send(
+              JSON.stringify({
+                id: socket.id,
+                event,
+                payload,
+              })
+            )
+          }
+        })
+        break
       default:
         console.warn("unhandled socket event", event)
     }

@@ -22,7 +22,15 @@ const MultiplayerCursor: FC<Props> = ({ id: idProp }) => {
       "onClientCursorMove"
     > = ({ id, payload }) => {
       if (id === idProp) {
-        cursor.current?.move(payload.x, payload.y)
+        cursor.current!.move(payload.x, payload.y)
+      }
+    }
+
+    const handleClientCursorPress: WebSocketMessageHandler<
+      "onClientCursorPress"
+    > = ({ id, payload }) => {
+      if (id === idProp) {
+        cursor.current!.click(payload.active)
       }
     }
 
@@ -32,8 +40,8 @@ const MultiplayerCursor: FC<Props> = ({ id: idProp }) => {
       switch (event) {
         case "onClientCursorMove":
           return handleClientCursorMove(rest)
-        // case "onClientCursorAction": use this to handle clicks and shake
-        //   return handleClientCursorAction(rest)
+        case "onClientCursorPress":
+          return handleClientCursorPress(rest)
       }
     }
 

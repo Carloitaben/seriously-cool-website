@@ -1,10 +1,4 @@
-import {
-  forwardRef,
-  useEffect,
-  useRef,
-  useCallback,
-  useImperativeHandle,
-} from "react"
+import { forwardRef, useRef, useCallback, useImperativeHandle } from "react"
 import type { Transition, Variants } from "framer-motion"
 import { motion, useAnimation } from "framer-motion"
 
@@ -27,6 +21,7 @@ const transition: Transition = {
 
 export type CursorComponentRef = {
   move: (x: number, y: number) => void
+  click: (active: boolean) => void
 }
 
 const Cursor = forwardRef<CursorComponentRef, Props>(({ type }, ref) => {
@@ -58,13 +53,25 @@ const Cursor = forwardRef<CursorComponentRef, Props>(({ type }, ref) => {
     [containerControls, cursorControls]
   )
 
+  const handleClick = useCallback(
+    (active: boolean) => {
+      cursorControls.start(
+        {
+          scale: active ? 0.75 : 1,
+        },
+        transition
+      )
+    },
+    [cursorControls]
+  )
+
   useImperativeHandle(
     ref,
     () => ({
       move: handleMove,
-      // TODO: click. handleClick
+      click: handleClick,
     }),
-    [handleMove]
+    [handleClick, handleMove]
   )
 
   return (

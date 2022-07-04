@@ -16,11 +16,17 @@ const Cursors: FC = () => {
   useEffect(() => {
     if (!socket || !cursor.current) return
 
-    const handleMouseMove = throttle((event: MouseEvent) => {
-      const x = (event.clientX * 100) / window.innerWidth
-      const y = (event.clientY * 100) / window.innerHeight
-      cursor.current!.move(x, y)
-    }, 50)
+    const handlePress = (active: boolean) => {
+      socket.send(
+        JSON.stringify({
+          event: "onClientCursorPress",
+          payload: { active },
+        })
+      )
+    }
+
+    const handleMouseUp = () => handlePress(false)
+    const handleMouseDown = () => handlePress(true)
 
     const handleSendSocketMessage = throttle((event: MouseEvent) => {
       socket.send(
@@ -34,13 +40,40 @@ const Cursors: FC = () => {
       )
     }, 80)
 
-    window.addEventListener("mousemove", handleMouseMove, true)
+    window.addEventListener("mouseup", handleMouseUp, true)
+    window.addEventListener("mousedown", handleMouseDown, true)
     window.addEventListener("mousemove", handleSendSocketMessage, true)
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove, true)
+      window.removeEventListener("mouseup", handleMouseUp, true)
+      window.removeEventListener("mousedown", handleMouseDown, true)
       window.removeEventListener("mousemove", handleSendSocketMessage, true)
     }
   }, [socket])
+
+  useEffect(() => {
+    const handleMouseUp = () => {
+      cursor.current!.click(false)
+    }
+
+    const handleMouseDown = () => {
+      cursor.current!.click(true)
+    }
+
+    const handleMouseMove = throttle((event: MouseEvent) => {
+      const x = (event.clientX * 100) / window.innerWidth
+      const y = (event.clientY * 100) / window.innerHeight
+      cursor.current!.move(x, y)
+    }, 50)
+
+    window.addEventListener("mouseup", handleMouseUp, true)
+    window.addEventListener("mousedown", handleMouseDown, true)
+    window.addEventListener("mousemove", handleMouseMove, true)
+    return () => {
+      window.removeEventListener("mouseup", handleMouseUp, true)
+      window.removeEventListener("mousedown", handleMouseDown, true)
+      window.removeEventListener("mousemove", handleMouseMove, true)
+    }
+  }, [])
 
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0">

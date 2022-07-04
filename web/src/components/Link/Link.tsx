@@ -24,7 +24,7 @@ const Link: FC<Props> = ({ alt, href, children }) => {
 
   if (href?.charAt(0) === "/") {
     return (
-      <RemixLink to={href} {...events}>
+      <RemixLink draggable="false" to={href} {...events}>
         {children}
       </RemixLink>
     )
@@ -32,7 +32,13 @@ const Link: FC<Props> = ({ alt, href, children }) => {
 
   if (href?.includes("http")) {
     return (
-      <a href={href} target="blank" rel="noopener noreferrer" {...events}>
+      <a
+        href={href}
+        target="blank"
+        rel="noopener noreferrer"
+        draggable="false"
+        {...events}
+      >
         {children}
       </a>
     )
