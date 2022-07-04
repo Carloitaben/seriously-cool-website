@@ -13,16 +13,16 @@ type Props = {
 
 const MultiplayerCursor: FC<Props> = ({ id: idProp }) => {
   const socket = useWebSocket()
-  const ref = useRef<CursorComponentRef>(null)
+  const cursor = useRef<CursorComponentRef>(null)
 
   useEffect(() => {
-    if (!socket || !ref.current) return
+    if (!socket || !cursor.current) return
 
     const handleClientCursorMove: WebSocketMessageHandler<
       "onClientCursorMove"
     > = ({ id, payload }) => {
       if (id === idProp) {
-        ref.current?.move(payload.x, payload.y)
+        cursor.current?.move(payload.x, payload.y)
       }
     }
 
@@ -41,7 +41,7 @@ const MultiplayerCursor: FC<Props> = ({ id: idProp }) => {
     return () => socket.removeEventListener("message", handleMessage, true)
   }, [socket, idProp])
 
-  return <Cursor ref={ref} type="finger" />
+  return <Cursor ref={cursor} type="finger" />
 }
 
 export default MultiplayerCursor

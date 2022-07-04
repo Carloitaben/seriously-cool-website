@@ -5,7 +5,7 @@ import {
   useCallback,
   useImperativeHandle,
 } from "react"
-import type { AnimationProps, Transition } from "framer-motion"
+import type { Transition, Variants } from "framer-motion"
 import { motion, useAnimation } from "framer-motion"
 
 import { cursorFinger } from "~/components/Svg"
@@ -14,13 +14,15 @@ type Props = {
   type: "finger"
 }
 
-const exit: AnimationProps["exit"] = {
-  scale: 0,
+const variants: Variants = {
+  hidden: {
+    scale: 0,
+  },
 }
 
 const transition: Transition = {
   type: "spring",
-  mass: 0.25,
+  mass: 0.05,
 }
 
 export type CursorComponentRef = {
@@ -66,6 +68,7 @@ const Cursor = forwardRef<CursorComponentRef, Props>(({ type }, ref) => {
     ref,
     () => ({
       move: handleMove,
+      // TODO: click. handleClick
     }),
     [handleMove]
   )
@@ -74,8 +77,10 @@ const Cursor = forwardRef<CursorComponentRef, Props>(({ type }, ref) => {
     <motion.div
       className="absolute"
       ref={innerRef}
+      initial="hidden"
       animate={controls}
-      exit={exit}
+      exit="hidden"
+      variants={variants}
     >
       {cursorFinger}
     </motion.div>

@@ -16,6 +16,10 @@
     text-transform: unset;
   }
 
+  * {
+    @apply !cursor-none;
+  }
+
   *::-webkit-scrollbar {
     @apply hidden;
   }
