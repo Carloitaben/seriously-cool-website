@@ -1,53 +1,87 @@
-import type { FC } from "react"
-import { useEffect } from "react"
-import type { Variants } from "framer-motion"
-import { motion, useMotionTemplate, useSpring } from "framer-motion"
+import {
+  forwardRef,
+  useEffect,
+  useRef,
+  useCallback,
+  useImperativeHandle,
+} from "react"
+import type { AnimationProps, Transition } from "framer-motion"
+import { motion, useAnimation } from "framer-motion"
 
 import { cursorFinger } from "~/components/Svg"
 
 type Props = {
-  x: number
-  y: number
+  type: "finger"
 }
 
-const variants: Variants = {
-  hide: {
-    scale: 0,
-  },
-  show: {
-    scale: 1,
-  },
+const exit: AnimationProps["exit"] = {
+  scale: 0,
 }
 
-const Cursor: FC<Props> = ({ x, y }) => {
-  const xSpring = useSpring(window.innerWidth / 2, { mass: 0.25 })
-  const ySpring = useSpring(window.innerHeight / 2, { mass: 0.25 })
+const transition: Transition = {
+  type: "spring",
+  mass: 0.25,
+}
 
-  const xTemplate = useMotionTemplate`${xSpring}%`
-  const yTemplate = useMotionTemplate`${ySpring}%`
+export type CursorComponentRef = {
+  move: (x: number, y: number) => void
+}
 
-  const style = {
-    left: xTemplate,
-    top: yTemplate,
-  }
+const Cursor = forwardRef<CursorComponentRef, Props>(({ type }, ref) => {
+  const controls = useAnimation()
+  const initialized = useRef(false)
+  const innerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    xSpring.set(x)
-    ySpring.set(y)
-  }, [x, xSpring, y, ySpring])
+    controls.set({
+      scale: 0,
+      top: "50%",
+      left: "50%",
+    })
+  }, [controls])
+
+  const handleMove = useCallback(
+    (x: number, y: number) => {
+      if (!initialized.current) {
+        controls.set({
+          top: `${y}%`,
+          left: `${x}%`,
+        })
+        return (initialized.current = true)
+      }
+
+      controls.start(
+        {
+          scale: 1,
+          top: `${y}%`,
+          left: `${x}%`,
+        },
+        transition
+      )
+    },
+    [controls]
+  )
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      move: handleMove,
+    }),
+    [handleMove]
+  )
 
   return (
     <motion.div
       className="absolute"
-      // initial="hide"
-      // animate="show"
-      // exit="hide"
-      // variants={variants}
-      style={style}
+      ref={innerRef}
+      animate={controls}
+      exit={exit}
     >
       {cursorFinger}
     </motion.div>
   )
-}
+})
+
+Cursor.displayName = "Cursor"
 
 export default Cursor
