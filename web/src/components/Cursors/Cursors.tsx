@@ -92,7 +92,7 @@ const Cursors: FC = () => {
   }, [])
 
   return (
-    <div aria-hidden className="pointer-events-none fixed inset-0">
+    <div aria-hidden className="pointer-events-none fixed inset-0 z-50">
       <Cursor ref={cursor} type="finger" />
       <MultiplayerCursors />
     </div>
