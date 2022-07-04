@@ -19,12 +19,12 @@ const transition: Transition = {
   mass: 0.05,
 }
 
-export type CursorComponentRef = {
+export type CursorProps = {
   move: (x: number, y: number) => void
   click: (active: boolean, forceTouch: boolean) => void
 }
 
-const Cursor = forwardRef<CursorComponentRef, Props>(({ type }, ref) => {
+const Cursor = forwardRef<CursorProps, Props>(({ type }, ref) => {
   const containerControls = useAnimation()
   const cursorControls = useAnimation()
 

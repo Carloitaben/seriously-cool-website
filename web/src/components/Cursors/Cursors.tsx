@@ -4,13 +4,13 @@ import { useRef, useEffect } from "react"
 import useWebSocket from "~/hooks/useWebSocket"
 import { throttle } from "~/utils"
 
-import type { CursorComponentRef } from "./Cursor"
+import type { CursorProps } from "./Cursor"
 import Cursor from "./Cursor"
 import MultiplayerCursors from "./MultiplayerCursors"
 
 const Cursors: FC = () => {
   const socket = useWebSocket()
-  const cursor = useRef<CursorComponentRef>(null)
+  const cursor = useRef<CursorProps>(null)
 
   useEffect(() => {
     if (!socket || !cursor.current) return
