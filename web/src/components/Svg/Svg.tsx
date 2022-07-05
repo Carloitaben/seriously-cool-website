@@ -54,3 +54,65 @@ export const pause = (
     <rect x="14" y="4" width="6" height="24" rx="2" fill="currentColor" />
   </svg>
 )
+
+export const diceFace1 = (
+  <svg width="21" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M21 0H0v21h21V0ZM10.5 12a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+      fill="currentColor"
+    />
+  </svg>
+)
+
+export const diceFace2 = (
+  <svg width="21" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M0 0h21v21H0V0Zm17 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM5.5 17a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+      fill="currentColor"
+    />
+  </svg>
+)
+export const diceFace3 = (
+  <svg width="21" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M21 0H0v21h21V0ZM10.5 12a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM17 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM5.5 17a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+      fill="currentColor"
+    />
+  </svg>
+)
+export const diceFace4 = (
+  <svg width="21" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M0 0h21v21H0V0Zm17 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM5.5 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM17 15.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM5.5 17a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+      fill="currentColor"
+    />
+  </svg>
+)
+export const diceFace5 = (
+  <svg width="21" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M21 0H0v21h21V0ZM10.5 12a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM17 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM5.5 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM17 15.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM5.5 17a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+      fill="currentColor"
+    />
+  </svg>
+)
+export const diceFace6 = (
+  <svg width="21" height="21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M0 0h21v21H0V0Zm17 10.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM5.5 12a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM17 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM5.5 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM17 15.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM5.5 17a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+      fill="currentColor"
+    />
+  </svg>
+)

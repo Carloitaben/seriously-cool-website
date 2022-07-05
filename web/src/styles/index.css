@@ -417,6 +417,14 @@ video {
   height: auto;
 }
 
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
 a {
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
@@ -432,10 +440,6 @@ img,
 
 button {
   text-transform: unset;
-}
-
-*::-webkit-scrollbar {
-  display: none;
 }
 
 *, ::before, ::after {
@@ -598,6 +602,54 @@ button {
        column-gap: 2rem;
   padding-left: 4.5rem;
   padding-right: 4.5rem;
+}
+
+.dice-wrapper {
+  width: 21px;
+  height: 21px;
+  perspective: 600px;
+  transform: rotateZ(-15deg);
+}
+
+.dice {
+  transform: translateZ(-10.5px);
+  transform-style: preserve-3d;
+}
+
+.dice-face-front {
+  transform: rotateY(0deg) translateZ(10.5px);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.dice-face-right {
+  transform: rotateY(90deg) translateZ(10.5px);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.dice-face-back {
+  transform: rotateY(180deg) translateZ(10.5px);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.dice-face-left {
+  transform: rotateY(-90deg) translateZ(10.5px);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.dice-face-top {
+  transform: rotateX(90deg) translateZ(10.5px);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.dice-face-bottom {
+  transform: rotateX(-90deg) translateZ(10.5px);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
 }
 
 @-webkit-keyframes sliding-text-animation {
@@ -778,12 +830,16 @@ button {
   margin-top: -15rem;
 }
 
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
 .-ml-2 {
   margin-left: -0.5rem;
 }
 
-.mr-2 {
-  margin-right: 0.5rem;
+.mr-1 {
+  margin-right: 0.25rem;
 }
 
 .-mr-18 {
@@ -800,14 +856,6 @@ button {
 
 .-ml-10 {
   margin-left: -2.5rem;
-}
-
-.mb-1 {
-  margin-bottom: 0.25rem;
-}
-
-.mr-1 {
-  margin-right: 0.25rem;
 }
 
 .block {
@@ -834,12 +882,12 @@ button {
   height: 3rem;
 }
 
-.h-screen {
-  height: 100vh;
-}
-
 .h-full {
   height: 100%;
+}
+
+.h-screen {
+  height: 100vh;
 }
 
 .h-60 {
@@ -890,10 +938,6 @@ button {
   max-width: 36rem;
 }
 
-.max-w-\[1\.5rem\] {
-  max-width: 1.5rem;
-}
-
 .max-w-2xl {
   max-width: 42rem;
 }
@@ -904,6 +948,10 @@ button {
 
 .flex-none {
   flex: none;
+}
+
+.transform {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .select-none {
@@ -1004,6 +1052,10 @@ button {
   border-color: currentColor;
 }
 
+.bg-text {
+  background-color: var(--theme-colors-text);
+}
+
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
@@ -1101,16 +1153,12 @@ button {
   padding-top: 0.5rem;
 }
 
-.pb-6 {
-  padding-bottom: 1.5rem;
+.pb-4 {
+  padding-bottom: 1rem;
 }
 
 .pr-20 {
   padding-right: 5rem;
-}
-
-.pb-4 {
-  padding-bottom: 1rem;
 }
 
 .text-left {
@@ -1309,10 +1357,6 @@ button {
 
   .desktop\:w-16 {
     width: 4rem;
-  }
-
-  .desktop\:max-w-\[1\.875rem\] {
-    max-width: 1.875rem;
   }
 
   .desktop\:overflow-y-auto {
