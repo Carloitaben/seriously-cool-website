@@ -14,6 +14,11 @@ yarn-error.log*
 .env
 .env.*
 
+# cloudflare
+functions/\[\[path\]\].js
+functions/\[\[path\]\].js.map
+.mf
+
 .cache
 build
 public/build

@@ -3,8 +3,17 @@ type Event<Payload = null> = {
   payload: Payload
 }
 
-type EventsNameAndHandlers = {
-  onInitialConnection: Event<string[]>
+export type EventsNameAndHandlers = {
+  onInitialConnection: Event<
+    {
+      id: string
+      room: string
+      lastPayload: {
+        x?: number
+        y?: number
+      }
+    }[]
+  >
   onClientConnection: Event<null>
   onClientDisconnection: Event<null>
   onClientCursorMove: Event<{ x: number; y: number }>

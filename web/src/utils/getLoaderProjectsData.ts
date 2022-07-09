@@ -1,18 +1,20 @@
 import { getFileAsset } from "@sanity/asset-utils"
 
-import { client, dataset, projectId, GET_PROJECTS } from "~/graphql"
+import { getClient, dataset, projectId, GET_PROJECTS } from "~/graphql"
 
 import { filterSanityDocumentDrafts } from "~/utils"
 
-import type { GetProjectQuery, GetProjectsQuery } from "~/types"
+import type { Context, GetProjectQuery, GetProjectsQuery } from "~/types"
 
 export type LoaderProjectsData = {
   projects: GetProjectQuery["allProject"]
 }
 
 export async function getLoaderProjectsData(
-  preview: boolean
+  preview: boolean,
+  context: Context
 ): Promise<LoaderProjectsData> {
+  const client = getClient(context)
   const response = await client.request<GetProjectsQuery>(GET_PROJECTS)
 
   const projects = filterSanityDocumentDrafts(response.allProject, preview)

@@ -1,7 +1,6 @@
-import dotenv from "dotenv"
 import { RemixServer } from "@remix-run/react"
 import { renderToString } from "react-dom/server"
-import type { EntryContext } from "@remix-run/node"
+import type { EntryContext } from "@remix-run/cloudflare"
 
 export default function handleRequest(
   request: Request,
@@ -9,8 +8,6 @@ export default function handleRequest(
   responseHeaders: Headers,
   remixContext: EntryContext
 ) {
-  dotenv.config()
-
   const markup = renderToString(
     <RemixServer context={remixContext} url={request.url} />
   )

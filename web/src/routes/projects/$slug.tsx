@@ -1,11 +1,10 @@
-import type { LoaderFunction } from "@remix-run/node"
-import { Response } from "@remix-run/node"
+import type { LoaderFunction } from "@remix-run/cloudflare"
 import { useLoaderData } from "@remix-run/react"
 import { getFileAsset } from "@sanity/asset-utils"
 
 import type { GetProjectQuery, GetProjectQueryVariables } from "~/types"
 import { filterSanityDocumentDrafts, isSanityPreview } from "~/utils"
-import { client, dataset, projectId, GET_PROJECT } from "~/graphql"
+import { dataset, projectId, getClient, GET_PROJECT } from "~/graphql"
 
 import Error from "~/components/Error"
 import ProjectDetail from "~/components/ProjectDetail"
@@ -17,16 +16,19 @@ export type ProjectDetailLoaderData = {
 export const loader: LoaderFunction = async ({
   params,
   request,
+  context,
 }): Promise<ProjectDetailLoaderData> => {
   if (!params?.slug) {
     throw new Response("Slug is required", { status: 400 })
   }
 
+  const client = getClient(context)
+
   const getProjectVariables: GetProjectQueryVariables = {
     slug: params.slug,
   }
 
-  const preview = isSanityPreview(request)
+  const preview = isSanityPreview(request, context)
 
   try {
     const response = await client.request<GetProjectQuery>(

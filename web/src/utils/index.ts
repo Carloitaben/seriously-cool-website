@@ -1,4 +1,5 @@
 export * from "./filterSanityDocumentDrafts"
+export * from "./get"
 export * from "./getLoaderAboutData"
 export * from "./getLoaderProjectsData"
 export * from "./getLoaderSettingsData"

@@ -1,5 +1,4 @@
-import type { LoaderFunction } from "@remix-run/node"
-import { Response } from "@remix-run/node"
+import type { LoaderFunction } from "@remix-run/cloudflare"
 
 import Error from "~/components/Error"
 
