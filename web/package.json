@@ -5,14 +5,17 @@
   "sideEffects": false,
   "license": "UNLICENSED",
   "scripts": {
-    "predev": "yarn graphql-codegen --config codegen.yml",
-    "build": "npm run build:css && remix build",
+    "process:types": "yarn graphql-codegen --config codegen.yml",
+    "process:server": "yarn tsc ./src/server/*.ts --outDir ./src/server/build --target esnext --moduleResolution node --noEmitHelpers true --skipLibCheck true",
+    "prebuild": "run-p process:*",
+    "build": "yarn build:css && remix build",
     "build:css": "tailwindcss -m -i ./styles/index.css -o src/styles/index.css",
-    "start": "cross-env NODE_ENV=production npm run dev:wrangler",
+    "start": "cross-env NODE_ENV=production yarn dev:wrangler",
+    "predev": "run-p process:*",
     "dev:remix": "remix watch",
     "dev:wrangler": "cross-env NODE_ENV=development wrangler pages dev ./public --binding $(cat .env) --kv cmsCache",
     "dev:css": "tailwindcss -w -i ./styles/index.css -o src/styles/index.css",
-    "dev": "concurrently \"npm run dev:css\" \"remix build && run-p dev:*\""
+    "dev": "concurrently \"yarn dev:css\" \"remix build && run-p dev:*\""
   },
   "dependencies": {
     "@mantine/hooks": "^4.2.11",
