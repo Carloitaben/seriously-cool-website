@@ -129,7 +129,7 @@ export default function App() {
       >
         <Outlet />
         <SlidingText>{slidingTexts}</SlidingText>
-        {/* <Cursors /> */}
+        <Cursors />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

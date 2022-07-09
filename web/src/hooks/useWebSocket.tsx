@@ -13,7 +13,7 @@ export const WebSocketProvider: FC<{ children: ReactNode }> = ({
   useEffect(() => {
     try {
       const room = pathname === "/" ? "home" : "project"
-      const connection = new WebSocket(`ws://localhost:8080/?room=${room}`)
+      const connection = new WebSocket(`ws://localhost:8788/?room=${room}`)
 
       function onOpen() {
         setSocket(connection)

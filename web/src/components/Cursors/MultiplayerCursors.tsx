@@ -18,7 +18,8 @@ const MultiplayerCursors: FC = () => {
     const handleInitialConnection: WebSocketMessageHandler<
       "onInitialConnection"
     > = ({ payload }) => {
-      setConnectedIds(payload)
+      const ids = payload.map(({ id }) => id)
+      setConnectedIds(ids)
     }
 
     const handleClientConnection: WebSocketMessageHandler<

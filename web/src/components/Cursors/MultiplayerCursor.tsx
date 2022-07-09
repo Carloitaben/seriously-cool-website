@@ -5,7 +5,7 @@ import type { WebSocketEvent, WebSocketMessageHandler } from "~/types"
 import useWebSocket from "~/hooks/useWebSocket"
 
 import Cursor from "./Cursor"
-import type { CursorComponentRef } from "./Cursor"
+import type { CursorProps } from "./Cursor"
 
 type Props = {
   id: string
@@ -13,7 +13,7 @@ type Props = {
 
 const MultiplayerCursor: FC<Props> = ({ id: idProp }) => {
   const socket = useWebSocket()
-  const cursor = useRef<CursorComponentRef>(null)
+  const cursor = useRef<CursorProps>(null)
 
   useEffect(() => {
     if (!socket || !cursor.current) return
