@@ -66,38 +66,40 @@ function reduceLiterals(literals: StripGQLProps<SettingsLiteral>[]) {
   )
 }
 
+function reducer(response: GetSettingsQuery, preview: boolean) {
+  const [
+    {
+      catchphrases,
+      colors,
+      slidingTexts,
+      slidingTextsError,
+      errorTexts,
+      typefaces,
+      literals,
+    },
+  ] = filterSanityDocumentDrafts(response.allSettings, preview)
+
+  return {
+    catchphrases,
+    colors,
+    slidingTexts,
+    slidingTextsError,
+    errorTexts,
+    typefaces,
+    literals,
+  }
+}
+
 export async function getLoaderSettingsData(
   preview: boolean,
   context: Context
 ): Promise<LoaderSettingsData> {
   const response = await get({
-    preview,
-    context,
     gql: GET_SETTINGS,
     key: "getSettings",
-    reducer: (response: GetSettingsQuery) => {
-      const [
-        {
-          catchphrases,
-          colors,
-          slidingTexts,
-          slidingTextsError,
-          errorTexts,
-          typefaces,
-          literals,
-        },
-      ] = filterSanityDocumentDrafts(response.allSettings, preview)
-
-      return {
-        catchphrases,
-        colors,
-        slidingTexts,
-        slidingTextsError,
-        errorTexts,
-        typefaces,
-        literals,
-      }
-    },
+    preview,
+    context,
+    reducer,
   })
 
   const { catchphrasesDesktop, catchphrasesMobile } = reduceCatchphrases(

@@ -20,25 +20,27 @@ export type LoaderAboutData = {
   }
 }
 
+function reducer(response: GetAboutQuery, preview: boolean) {
+  const [{ firstParagraph, paragraphs }] = filterSanityDocumentDrafts(
+    response.allAbout,
+    preview
+  )
+  return {
+    firstParagraph,
+    paragraphs,
+  }
+}
+
 export async function getLoaderAboutData(
   preview: boolean,
   context: Context
 ): Promise<LoaderAboutData> {
   const response = await get({
-    preview,
-    context,
     gql: GET_ABOUT,
     key: "getAbout",
-    reducer: (response: GetAboutQuery) => {
-      const [{ firstParagraph, paragraphs }] = filterSanityDocumentDrafts(
-        response.allAbout,
-        preview
-      )
-      return {
-        firstParagraph,
-        paragraphs,
-      }
-    },
+    preview,
+    context,
+    reducer,
   })
 
   const randomFirstParagraph = getRandomArrayItem(response.firstParagraph)

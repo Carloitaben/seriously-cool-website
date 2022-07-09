@@ -1,20 +1,24 @@
 import { getClient } from "~/graphql"
 import type { Context } from "~/types"
 
-async function getFromCms<Reducer extends (response: any) => any>({
+async function getFromCms<
+  Reducer extends (response: any, preview: boolean) => any
+>({
   gql,
-  context,
-  reducer,
   variables,
+  context,
+  preview,
+  reducer,
 }: {
   gql: string
-  context: Context
-  reducer: Reducer
   variables?: any
+  context: Context
+  preview: boolean
+  reducer: Reducer
 }): Promise<ReturnType<Reducer>> {
   const client = getClient(context)
   const response = await client.request<Parameters<Reducer>[0]>(gql, variables)
-  return reducer(response)
+  return reducer(response, preview)
 }
 
 /**
@@ -31,7 +35,9 @@ async function getFromCms<Reducer extends (response: any) => any>({
  * })
  * ```
  */
-export async function get<Reducer extends (response: any) => any>({
+export async function get<
+  Reducer extends (response: any, preview: boolean) => any
+>({
   key,
   gql,
   variables,
@@ -47,7 +53,7 @@ export async function get<Reducer extends (response: any) => any>({
   reducer: Reducer
 }) {
   // Skip cache on CMS preview mode
-  if (preview) return getFromCms({ gql, context, reducer, variables })
+  if (preview) return getFromCms({ gql, context, reducer, variables, preview })
 
   // Try to return from KV
   const cache = await context.cmsCache.get<ReturnType<Reducer>>(key, {
@@ -57,7 +63,7 @@ export async function get<Reducer extends (response: any) => any>({
   if (cache !== null) return cache
 
   // Fetch and store reduced value on KV
-  const result = await getFromCms({ gql, context, reducer, variables })
+  const result = await getFromCms({ gql, context, reducer, variables, preview })
   await context.cmsCache.put(key, JSON.stringify(result))
   return result
 }
