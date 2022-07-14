@@ -2,8 +2,8 @@ import type { FC } from "react"
 import { useEffect, useState } from "react"
 import { AnimatePresence } from "framer-motion"
 
-import { throttle } from "~/utils"
-import type { WebSocketMessageHandler } from "~/types"
+import type { ServerEvents, ServerMessageHandler } from "~/types"
+import { sendSocketEventToServer, throttle } from "~/utils"
 import useWebSocket from "~/hooks/useWebSocket"
 
 import MultiplayerCursor from "./MultiplayerCursor"
@@ -15,26 +15,34 @@ const MultiplayerCursors: FC = () => {
   useEffect(() => {
     if (!socket) return
 
-    const handleInitialConnection: WebSocketMessageHandler<
-      "onInitialConnection"
+    // Request a list of connected clients for this room
+    sendSocketEventToServer("initialConnection", {
+      socket,
+      payload: {
+        theme: "sword",
+      },
+    })
+
+    const handleInitialConnection: ServerMessageHandler<
+      "initialConnection"
     > = ({ payload }) => {
       const ids = payload.map(({ id }) => id)
       setConnectedIds(ids)
     }
 
-    const handleClientConnection: WebSocketMessageHandler<
-      "onClientConnection"
-    > = ({ id }) => {
+    const handlePlayerRoomEnter: ServerMessageHandler<"playerRoomEnter"> = ({
+      payload,
+    }) => {
       setConnectedIds((current) => {
-        const index = current.findIndex((conncetedId) => conncetedId === id)
-        if (index === -1) current.push(id)
+        const index = current.findIndex((id) => id === payload.id)
+        if (index === -1) current.push(payload.id)
         return [...current]
       })
     }
 
-    const handleClientDisconnection: WebSocketMessageHandler<
-      "onClientDisconnection"
-    > = ({ id }) => {
+    const handlePlayerRoomLeave: ServerMessageHandler<"playerRoomLeave"> = ({
+      id,
+    }) => {
       setConnectedIds((current) => {
         const index = current.findIndex((conncetedId) => conncetedId === id)
         if (index > -1) current.splice(index, 1)
@@ -44,14 +52,15 @@ const MultiplayerCursors: FC = () => {
 
     function handleMessage({ data }: { data: string }) {
       const { event, ...params } = JSON.parse(data)
+      console.log("received message", event, params)
 
-      switch (event) {
-        case "onInitialConnection":
+      switch (event as ServerEvents) {
+        case "initialConnection":
           return handleInitialConnection(params)
-        case "onClientConnection":
-          return handleClientConnection(params)
-        case "onClientDisconnection":
-          return handleClientDisconnection(params)
+        case "playerRoomEnter":
+          return handlePlayerRoomEnter(params)
+        case "playerRoomLeave":
+          return handlePlayerRoomLeave(params)
       }
     }
 
@@ -63,12 +72,13 @@ const MultiplayerCursors: FC = () => {
     if (!socket) return
 
     const handlePress = (active: boolean, forceTouch = false) => {
-      socket.send(
-        JSON.stringify({
-          event: "onClientCursorPress",
-          payload: { active, forceTouch },
-        })
-      )
+      sendSocketEventToServer("playerCursorPress", {
+        socket,
+        payload: {
+          active,
+          forceTouch,
+        },
+      })
     }
 
     const handleForceTouchUp = () => handlePress(false, true)
@@ -77,15 +87,13 @@ const MultiplayerCursors: FC = () => {
     const handleMouseDown = () => handlePress(true)
 
     const handleSendSocketMessage = throttle((event: MouseEvent) => {
-      socket.send(
-        JSON.stringify({
-          event: "onClientCursorMove",
-          payload: {
-            x: (event.clientX * 100) / window.innerWidth,
-            y: (event.clientY * 100) / window.innerHeight,
-          },
-        })
-      )
+      sendSocketEventToServer("playerCursorMove", {
+        socket,
+        payload: {
+          x: (event.clientX * 100) / window.innerWidth,
+          y: (event.clientY * 100) / window.innerHeight,
+        },
+      })
     }, 80)
 
     window.addEventListener("webkitmouseforceup", handleForceTouchUp, true)

@@ -6,7 +6,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "process:types": "yarn graphql-codegen --config codegen.yml",
-    "process:server": "yarn tsc ./src/server/*.ts --outDir ./src/server/build --target esnext --moduleResolution node --noEmitHelpers true --skipLibCheck true",
+    "process:server": "yarn tsc ./src/server/*.ts --outDir ./build --target esnext --moduleResolution node --noEmitHelpers true --skipLibCheck true",
     "prebuild": "run-p process:*",
     "build": "yarn build:css && remix build",
     "build:css": "tailwindcss -m -i ./styles/index.css -o src/styles/index.css",

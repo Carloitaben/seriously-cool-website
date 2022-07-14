@@ -4,6 +4,6 @@
 module.exports = {
   appDirectory: "./src",
   devServerBroadcastDelay: 1000,
-  server: "./src/server/build/index.js",
+  server: "./build/server/index.js",
   serverBuildTarget: "cloudflare-pages",
 }

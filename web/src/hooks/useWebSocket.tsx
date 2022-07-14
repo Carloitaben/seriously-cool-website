@@ -11,6 +11,7 @@ export const WebSocketProvider: FC<{ children: ReactNode }> = ({
   const { pathname } = useLocation()
 
   useEffect(() => {
+    console.log("pathname", pathname)
     try {
       const room = pathname === "/" ? "home" : "project"
       const connection = new WebSocket(`ws://localhost:8788/?room=${room}`)
