@@ -7,7 +7,9 @@
   "scripts": {
     "format": "prettier --write .",
     "cms": "cd cms && yarn dev",
-    "web": "cd web && yarn dev"
+    "web": "cd web && yarn dev",
+    "deploy:cms": "cd cms && yarn deploy",
+    "deploy:web": "cd web && yarn deploy"
   },
   "husky": {
     "hooks": {

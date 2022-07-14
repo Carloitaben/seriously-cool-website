@@ -14,6 +14,10 @@ yarn-error.log*
 .env
 .env.*
 
+# cloudflare
+functions
+.mf
+
 .cache
 build
 public/build

@@ -7,3 +7,9 @@ export type StripGQLProps<
     _type: Maybe<Scalars["String"]>
   }
 > = Omit<T, "__typename" | "_key" | "_type">
+
+export type Context = {
+  SANITY_API_TOKEN: string
+  SANITY_STUDIO_PREVIEW_SECRET: string
+  cmsCache: KVNamespace
+}

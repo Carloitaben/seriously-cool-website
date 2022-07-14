@@ -3,4 +3,7 @@
  */
 module.exports = {
   appDirectory: "./src",
+  devServerBroadcastDelay: 1000,
+  server: "./build/server/index.js",
+  serverBuildTarget: "cloudflare-pages",
 }

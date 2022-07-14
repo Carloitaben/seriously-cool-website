@@ -2,7 +2,7 @@ import type {
   LinksFunction,
   LoaderFunction,
   MetaFunction,
-} from "@remix-run/node"
+} from "@remix-run/cloudflare"
 import {
   Links,
   LiveReload,
@@ -17,6 +17,7 @@ import { useIsomorphicLayoutEffect } from "framer-motion"
 
 import styles from "~/styles/index.css"
 import SlidingText from "~/components/SlidingText"
+import Cursors from "~/components/Cursors"
 import useOnMatchMedia from "~/hooks/useOnMatchMedia"
 import { isSanityPreview } from "~/utils"
 
@@ -60,14 +61,15 @@ export type RootLoaderData = LoaderSettingsData &
 
 export const loader: LoaderFunction = async ({
   request,
+  context,
 }): Promise<RootLoaderData> => {
-  const preview = isSanityPreview(request)
+  const preview = isSanityPreview(request, context)
 
   const [loaderAboutData, loaderProjectsData, loaderSettingsData] =
     await Promise.all([
-      getLoaderAboutData(preview),
-      getLoaderProjectsData(preview),
-      getLoaderSettingsData(preview),
+      getLoaderAboutData(preview, context),
+      getLoaderProjectsData(preview, context),
+      getLoaderSettingsData(preview, context),
     ])
 
   return {
@@ -127,6 +129,7 @@ export default function App() {
       >
         <Outlet />
         <SlidingText>{slidingTexts}</SlidingText>
+        <Cursors />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

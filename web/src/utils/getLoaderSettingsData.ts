@@ -1,8 +1,9 @@
-import { client, GET_SETTINGS } from "~/graphql"
+import { GET_SETTINGS } from "~/graphql"
 
-import { filterSanityDocumentDrafts, getRandomArrayItem } from "~/utils"
+import { get, filterSanityDocumentDrafts, getRandomArrayItem } from "~/utils"
 
 import type {
+  Context,
   GetSettingsQuery,
   Scalars,
   SettingsCatchphrase,
@@ -65,11 +66,7 @@ function reduceLiterals(literals: StripGQLProps<SettingsLiteral>[]) {
   )
 }
 
-export async function getLoaderSettingsData(
-  preview: boolean
-): Promise<LoaderSettingsData> {
-  const response = await client.request<GetSettingsQuery>(GET_SETTINGS)
-
+function reducer(response: GetSettingsQuery, preview: boolean) {
   const [
     {
       catchphrases,
@@ -82,15 +79,39 @@ export async function getLoaderSettingsData(
     },
   ] = filterSanityDocumentDrafts(response.allSettings, preview)
 
-  const { catchphrasesDesktop, catchphrasesMobile } =
-    reduceCatchphrases(catchphrases)
+  return {
+    catchphrases,
+    colors,
+    slidingTexts,
+    slidingTextsError,
+    errorTexts,
+    typefaces,
+    literals,
+  }
+}
+
+export async function getLoaderSettingsData(
+  preview: boolean,
+  context: Context
+): Promise<LoaderSettingsData> {
+  const response = await get({
+    gql: GET_SETTINGS,
+    key: "getSettings",
+    preview,
+    context,
+    reducer,
+  })
+
+  const { catchphrasesDesktop, catchphrasesMobile } = reduceCatchphrases(
+    response.catchphrases
+  )
 
   const catchphraseDesktop = getRandomArrayItem(catchphrasesDesktop)
   const catchphraseMobile = getRandomArrayItem(catchphrasesMobile)
-  const fontFamily = getRandomArrayItem(typefaces)
-  const errorText = getRandomArrayItem(errorTexts)
+  const fontFamily = getRandomArrayItem(response.typefaces)
+  const errorText = getRandomArrayItem(response.errorTexts)
 
-  const { background, text, card } = getRandomArrayItem(colors)
+  const { background, text, card } = getRandomArrayItem(response.colors)
 
   const theme = {
     fontFamily,
@@ -101,12 +122,12 @@ export async function getLoaderSettingsData(
     },
   }
 
-  const formattedLiterals = reduceLiterals(literals)
+  const formattedLiterals = reduceLiterals(response.literals)
 
   return {
     theme,
-    slidingTexts,
-    slidingTextsError,
+    slidingTexts: response.slidingTexts,
+    slidingTextsError: response.slidingTextsError,
     errorText,
     literals: formattedLiterals,
     catchphrase: {
