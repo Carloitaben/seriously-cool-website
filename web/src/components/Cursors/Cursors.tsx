@@ -1,10 +1,8 @@
 import type { FC } from "react"
 import { useRef, useEffect } from "react"
 
-import { WebSocketProvider } from "~/hooks/useWebSocket"
 import { throttle } from "~/utils"
 
-import MultiplayerCursors from "./MultiplayerCursors"
 import type { CursorProps } from "./Cursor"
 import Cursor from "./Cursor"
 
@@ -50,9 +48,6 @@ const Cursors: FC = () => {
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 z-50">
       <Cursor ref={cursor} type="finger" />
-      <WebSocketProvider>
-        <MultiplayerCursors />
-      </WebSocketProvider>
     </div>
   )
 }
