@@ -30,7 +30,7 @@ async function getFromCms<
  *   context,
  *   preview,
  *   gql: GET_FROM_CMS,
- *   key: "unique_identifier",
+ *   key: "unique-identifier",
  *   reducer: response => response.filter(item => item.published)
  * })
  * ```

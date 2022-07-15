@@ -1,8 +1,8 @@
 import { getFileAsset } from "@sanity/asset-utils"
 
-import { getClient, dataset, projectId, GET_PROJECTS } from "~/graphql"
+import { dataset, projectId, GET_PROJECTS } from "~/graphql"
 
-import { filterSanityDocumentDrafts } from "~/utils"
+import { get, filterSanityDocumentDrafts } from "~/utils"
 
 import type { Context, GetProjectQuery, GetProjectsQuery } from "~/types"
 
@@ -10,16 +10,10 @@ export type LoaderProjectsData = {
   projects: GetProjectQuery["allProject"]
 }
 
-export async function getLoaderProjectsData(
-  preview: boolean,
-  context: Context
-): Promise<LoaderProjectsData> {
-  const client = getClient(context)
-  const response = await client.request<GetProjectsQuery>(GET_PROJECTS)
-
+function reducer(response: GetProjectsQuery, preview: boolean) {
   const projects = filterSanityDocumentDrafts(response.allProject, preview)
 
-  const projectsWithFileAssets = projects.map((project) => {
+  return projects.map((project) => {
     switch (project?.thumbnail?.kind) {
       case "VIDEO_GIF":
         project.thumbnail.video.asset = getFileAsset(
@@ -28,12 +22,24 @@ export async function getLoaderProjectsData(
         )
         break
       default:
-        console.log("unhandled thumbnail kind", project?.thumbnail?.kind)
-        break
+        console.warn("unhandled thumbnail kind", project?.thumbnail?.kind)
     }
 
     return project
   })
+}
 
-  return { projects: projectsWithFileAssets }
+export async function getLoaderProjectsData(
+  preview: boolean,
+  context: Context
+): Promise<LoaderProjectsData> {
+  const projects = await get({
+    gql: GET_PROJECTS,
+    key: "get-projects",
+    preview,
+    context,
+    reducer,
+  })
+
+  return { projects }
 }

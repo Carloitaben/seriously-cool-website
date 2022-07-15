@@ -96,7 +96,7 @@ export async function getLoaderSettingsData(
 ): Promise<LoaderSettingsData> {
   const response = await get({
     gql: GET_SETTINGS,
-    key: "getSettings",
+    key: "get-settings",
     preview,
     context,
     reducer,

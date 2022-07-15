@@ -37,7 +37,7 @@ export async function getLoaderAboutData(
 ): Promise<LoaderAboutData> {
   const response = await get({
     gql: GET_ABOUT,
-    key: "getAbout",
+    key: "get-about",
     preview,
     context,
     reducer,
