@@ -1,5 +1,5 @@
 const localUrl = `http://localhost:3000`
-const remoteUrl = `https://your-deployed-website.com` // TODO
+const remoteUrl = `https://main.seriously-cool-website.pages.dev/` // TODO
 const baseUrl =
   window?.location?.hostname === "localhost" ? localUrl : remoteUrl
 
