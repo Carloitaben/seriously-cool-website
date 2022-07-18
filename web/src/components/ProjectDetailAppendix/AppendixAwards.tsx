@@ -38,15 +38,17 @@ const AppendixAwards: FC<Props> = ({ project }) => {
           <Fragment key={group}>
             <div>
               {group !== "null" && <h5 className="uppercase">{group}</h5>}
-              {awards.map((award, awardIndex) => (
-                <h6
-                  className="inline-flex w-full justify-between"
-                  key={awardIndex}
-                >
-                  <TextBlock>{award.textRaw}</TextBlock>
-                  <span>{award.year}</span>
-                </h6>
-              ))}
+              {awards
+                .sort((a, b) => a.year - b.year)
+                .map((award, awardIndex) => (
+                  <h6
+                    className="inline-flex w-full justify-between"
+                    key={awardIndex}
+                  >
+                    <TextBlock>{award.textRaw}</TextBlock>
+                    <span>{award.year}</span>
+                  </h6>
+                ))}
             </div>
             {groupIndex + 1 !== self.length && <br />}
           </Fragment>
