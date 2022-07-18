@@ -15,13 +15,6 @@ export default [
   },
   {
     group: "appendix",
-    name: "location",
-    title: "Location",
-    type: "string",
-    validation: (Rule) => Rule.required(),
-  },
-  {
-    group: "appendix",
     name: "year",
     title: "Year",
     type: "number",

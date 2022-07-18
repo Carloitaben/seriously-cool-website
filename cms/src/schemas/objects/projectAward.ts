@@ -6,6 +6,12 @@ export default {
   type: "object",
   fields: [
     {
+      name: "category",
+      title: "Category",
+      description: "Awards with the same category will be grouped together",
+      type: "string",
+    },
+    {
       name: "text",
       title: "Name",
       type: "blockRichText",
