@@ -8,10 +8,11 @@ import type { Scalars } from "~/types"
 import Link from "~/components/Link"
 
 type Props = {
+  className?: string
   children: Scalars["JSON"]
 }
 
-const TextBlock: FC<Props> = ({ children }) => {
+const TextBlock: FC<Props> = ({ className = "", children }) => {
   const components = useMemo((): Partial<PortableTextReactComponents> => {
     return {
       marks: {
@@ -21,7 +22,7 @@ const TextBlock: FC<Props> = ({ children }) => {
   }, [])
 
   return (
-    <span className="space-y-4">
+    <span className={`space-y-4 ${className}`}>
       <PortableText value={children} components={components} />
     </span>
   )

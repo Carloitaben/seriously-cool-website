@@ -39,9 +39,6 @@ export const GET_PROJECTS = gql`
         current
       }
       title
-      awards {
-        showBadge
-      }
       thumbnail {
         kind
         video {
@@ -184,7 +181,7 @@ export const GET_PROJECT = gql`
         }
       }
       clientRaw
-      location
+      category
       year
       roles {
         _key
@@ -195,6 +192,7 @@ export const GET_PROJECT = gql`
         _key
         textRaw
         year
+        category
       }
     }
   }
