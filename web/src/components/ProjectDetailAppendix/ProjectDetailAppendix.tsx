@@ -21,7 +21,7 @@ const ProjectDetailAppendix: FC<Props> = ({ project }) => {
       <AppendixAwards project={project} />
       <AppendixSection title={literals.credit}>
         <h5 className="uppercase">{project.category}</h5>
-        <div className="flex justify-between">
+        <div className="flex justify-between space-x-8">
           <TextBlock className="max-w-2xl">{project.clientRaw}</TextBlock>
           <span>{project.year}</span>
         </div>

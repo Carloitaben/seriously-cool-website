@@ -42,7 +42,7 @@ const AppendixAwards: FC<Props> = ({ project }) => {
                 .sort((a, b) => a.year - b.year)
                 .map((award, awardIndex) => (
                   <h6
-                    className="inline-flex w-full justify-between"
+                    className="inline-flex w-full justify-between space-x-8"
                     key={awardIndex}
                   >
                     <TextBlock>{award.textRaw}</TextBlock>
