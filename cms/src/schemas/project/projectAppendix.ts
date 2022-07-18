@@ -1,6 +1,13 @@
 export default [
   {
     group: "appendix",
+    name: "category",
+    title: "Category",
+    type: "string",
+    validation: (Rule) => Rule.required(),
+  },
+  {
+    group: "appendix",
     name: "client",
     title: "Client",
     type: "blockRichText",
