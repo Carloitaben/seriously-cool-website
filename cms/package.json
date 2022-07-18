@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "sanity start",
     "build": "sanity build",
-    "deploy": "sanity graphql deploy"
+    "deploy:graphql": "sanity graphql deploy",
+    "deploy:studio": "sanity deploy",
+    "deploy": "yarn deploy:graphql && yarn deploy:studio"
   },
   "dependencies": {
     "@sanity/base": "^2.30.0",
