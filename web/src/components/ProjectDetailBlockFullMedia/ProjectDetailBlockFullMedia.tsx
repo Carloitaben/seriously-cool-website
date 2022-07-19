@@ -31,7 +31,10 @@ const ProjectDetailBlockFullMedia: FC<Props> = ({ first, ...mediaProps }) => {
   const animate = (first || intersecting) && loaded
 
   return (
-    <div ref={ref} className="desktop:col-span-6 col-span-4 mb-2 px-2">
+    <div
+      ref={ref}
+      className="desktop:col-span-6 tablet:px-2 tablet:mb-2 col-span-4 mb-0.5 px-0.5"
+    >
       <Appear animate={animate}>
         <Media
           load={first || load}

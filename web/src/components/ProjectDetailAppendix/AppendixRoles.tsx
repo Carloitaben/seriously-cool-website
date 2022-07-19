@@ -15,11 +15,11 @@ const AppendixRoles: FC<Props> = ({ project }) => {
   if (!project.roles.length) return null
 
   return (
-    <AppendixSection title={literals.contribution}>
+    <AppendixSection title={literals.contribution} className="tablet:mb-0 mb-6">
       {project.roles.map((role, index) => (
         <div key={role._key}>
           <h5 className="uppercase">{role.pretitle}</h5>
-          <p className="max-w-2xl">{role.title}</p>
+          <p className="tablet:max-w-2xl max-w-xl">{role.title}</p>
           {index + 1 !== project.roles.length && <br />}
         </div>
       ))}

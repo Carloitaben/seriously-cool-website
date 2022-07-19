@@ -124,7 +124,7 @@ export default function App() {
         <Links />
       </head>
       <body
-        className="selection:bg-text selection:text-background text-2xl"
+        className="selection:bg-text selection:text-background tablet:text-2xl text-lg"
         style={style}
       >
         <Outlet />

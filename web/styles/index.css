@@ -7,6 +7,10 @@
     scroll-behavior: smooth;
   }
 
+  * {
+    @apply !cursor-none;
+  }
+
   *::-webkit-scrollbar {
     @apply hidden;
   }
@@ -23,14 +27,6 @@
   button {
     text-transform: unset;
   }
-
-  * {
-    @apply !cursor-none;
-  }
-
-  *::-webkit-scrollbar {
-    @apply hidden;
-  }
 }
 
 @layer components {
@@ -46,7 +42,7 @@
   }
 
   .project-detail-grid {
-    @apply px-18 grid grid-cols-8 gap-x-8;
+    @apply tablet:px-18 tablet:grid-cols-8 tablet:gap-x-8 grid grid-cols-4 gap-x-4 px-4;
   }
 
   .dice-wrapper {

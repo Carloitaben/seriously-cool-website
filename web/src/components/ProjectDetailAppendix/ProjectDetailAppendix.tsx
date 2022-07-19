@@ -16,13 +16,15 @@ const ProjectDetailAppendix: FC<Props> = ({ project }) => {
   const { literals } = useRootData()
 
   return (
-    <div className="px-18 gap-y-18 pb-18 grid grid-cols-8 gap-x-8 pt-24">
+    <div className="tablet:px-18 tablet:gap-y-18 tablet:pb-18 tablet:grid-cols-8 tablet:pt-24 grid grid-cols-4 gap-y-3 gap-x-8 px-4 pb-5 pt-3">
       <AppendixRoles project={project} />
       <AppendixAwards project={project} />
       <AppendixSection title={literals.credit}>
         <h5 className="uppercase">{project.category}</h5>
-        <div className="flex justify-between space-x-8">
-          <TextBlock className="max-w-2xl">{project.clientRaw}</TextBlock>
+        <div className="flex items-end justify-between space-x-8">
+          <TextBlock className="tablet:max-w-2xl max-w-xl">
+            {project.clientRaw}
+          </TextBlock>
           <span>{project.year}</span>
         </div>
       </AppendixSection>

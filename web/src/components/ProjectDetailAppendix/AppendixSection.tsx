@@ -9,7 +9,7 @@ type Props = {
 const AppendixSection: FC<Props> = ({ title, className = "", children }) => {
   return (
     <>
-      <h4 className="col-span-4 text-5xl">{title}</h4>
+      <h4 className="tablet:text-5xl col-span-4 text-2xl">{title}</h4>
       <div className={`col-span-4 ${className}`}>{children}</div>
     </>
   )

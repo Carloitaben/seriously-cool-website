@@ -32,7 +32,7 @@ const AppendixAwards: FC<Props> = ({ project }) => {
   if (!groupedAwards) return null
 
   return (
-    <AppendixSection title={literals.awards}>
+    <AppendixSection title={literals.awards} className="tablet:mb-0 mb-6">
       {Object.entries(groupedAwards).map(
         ([group, awards], groupIndex, self) => (
           <Fragment key={group}>

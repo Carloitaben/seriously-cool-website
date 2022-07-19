@@ -14,7 +14,7 @@ const ProjectDetailBlockText: FC<Props> = ({ first, textRaw }) => {
     <div className="project-detail-grid">
       <Appear
         animate={first || undefined}
-        className="col-span-4 col-end-9 py-20"
+        className="tablet:col-end-9 tablet:py-20 col-span-4 max-w-xl py-4"
       >
         <TextBlock>{textRaw}</TextBlock>
       </Appear>

@@ -65,7 +65,7 @@ const SlidingText: FC<Props> = ({ children }) => {
 
   return (
     <motion.footer
-      className="fixed inset-x-4 bottom-4 flex select-none items-center"
+      className="fixed inset-x-4 bottom-4 flex select-none items-center text-2xl"
       initial="show"
       animate={lightboxId ? "hide" : "show"}
       variants={variants}
