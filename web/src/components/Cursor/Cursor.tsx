@@ -5,7 +5,7 @@ import { motion, useAnimation, useAnimationFrame } from "framer-motion"
 
 import { cursorFinger } from "~/components/Svg"
 
-import { move, lerpDelta } from "./utils"
+import { lerpDelta } from "./utils"
 
 type Position = {
   x: number
@@ -91,7 +91,7 @@ const Cursor: FC = () => {
     const delta = (time - last.current) / 1000
     last.current = time
 
-    if (!position.current) return
+    if (!position.current || !ref.current) return
 
     if (!lerpPosition.current) {
       lerpPosition.current = position.current
@@ -115,7 +115,7 @@ const Cursor: FC = () => {
       }
     }
 
-    move(ref, lerpPosition.current)
+    ref.current.style.transform = `translate(${lerpPosition.current.x}%, ${lerpPosition.current.y}%)`
   })
 
   return (
