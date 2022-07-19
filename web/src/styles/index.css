@@ -859,6 +859,14 @@ button {
   margin-bottom: 1.5rem;
 }
 
+.mb-0\.5 {
+  margin-bottom: 0.125rem;
+}
+
+.mb-0 {
+  margin-bottom: 0px;
+}
+
 .-mr-18 {
   margin-right: -4.5rem;
 }
@@ -873,14 +881,6 @@ button {
 
 .-ml-10 {
   margin-left: -2.5rem;
-}
-
-.mb-0\.5 {
-  margin-bottom: 0.125rem;
-}
-
-.mb-0 {
-  margin-bottom: 0px;
 }
 
 .block {
@@ -1166,16 +1166,6 @@ button {
   padding-right: 1rem;
 }
 
-.px-2 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-}
-
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
 .px-0\.5 {
   padding-left: 0.125rem;
   padding-right: 0.125rem;
@@ -1184,6 +1174,16 @@ button {
 .px-0 {
   padding-left: 0px;
   padding-right: 0px;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .pb-10 {
@@ -1415,14 +1415,14 @@ button {
     padding-right: 4.5rem;
   }
 
-  .tablet\:py-20 {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-  }
-
   .tablet\:px-2 {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+  }
+
+  .tablet\:py-20 {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
   }
 
   .tablet\:pb-18 {

@@ -17,7 +17,7 @@ import { useIsomorphicLayoutEffect } from "framer-motion"
 
 import styles from "~/styles/index.css"
 import SlidingText from "~/components/SlidingText"
-import Cursors from "~/components/Cursors"
+import Cursor from "~/components/Cursor"
 import useOnMatchMedia from "~/hooks/useOnMatchMedia"
 import { isSanityPreview } from "~/utils"
 
@@ -129,7 +129,7 @@ export default function App() {
       >
         <Outlet />
         <SlidingText>{slidingTexts}</SlidingText>
-        <Cursors />
+        <Cursor />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
