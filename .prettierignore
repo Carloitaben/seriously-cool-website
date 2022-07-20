@@ -18,6 +18,9 @@ yarn-error.log*
 functions
 .mf
 
+# tailwind
+web/src/styles
+
 .cache
 build
 public/build
