@@ -9,7 +9,10 @@ export type StripGQLProps<
 > = Omit<T, "__typename" | "_key" | "_type">
 
 export type Context = {
+  /**
+   * Boolean as string
+   */
+  SANITY_PREVIEW: string
   SANITY_API_TOKEN: string
-  SANITY_STUDIO_PREVIEW_SECRET: string
   cmsCache: KVNamespace
 }

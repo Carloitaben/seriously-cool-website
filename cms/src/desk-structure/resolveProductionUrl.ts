@@ -1,5 +1,5 @@
 const localUrl = `http://localhost:3000`
-const remoteUrl = `https://main.seriously-cool-website.pages.dev/` // TODO
+const remoteUrl = `https://main.seriously-cool-website.pages.dev/`
 const baseUrl =
   window?.location?.hostname === "localhost" ? localUrl : remoteUrl
 
@@ -10,7 +10,5 @@ export default function resolveProductionUrl(doc, prependSlug?: `/${string}/`) {
 
   const url = new URL(baseUrl)
   url.pathname = `${prependSlug || ""}${slug}`
-  url.searchParams.set(`preview`, process.env.SANITY_STUDIO_PREVIEW_SECRET)
-
   return url.toString()
 }
