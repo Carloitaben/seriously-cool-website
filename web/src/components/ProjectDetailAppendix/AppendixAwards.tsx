@@ -18,7 +18,7 @@ const AppendixAwards: FC<Props> = ({ project }) => {
   const { literals } = useRootData()
 
   const groupedAwards =
-    project.awards.length > 0 &&
+    project.awards &&
     project.awards.reduce<Record<string, AwardGroup>>((accumulator, award) => {
       if (award.category in accumulator) {
         accumulator[award.category].push(award)
