@@ -1,14 +1,13 @@
 {
   "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", "tailwind.config.js"],
   "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "esnext"],
+    "lib": ["DOM", "DOM.Iterable", "ES2019"],
     "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "moduleResolution": "node",
-    "module": "ESNext",
     "resolveJsonModule": true,
-    "target": "esnext",
+    "target": "ES2019",
     "strict": true,
     "baseUrl": ".",
     "paths": {

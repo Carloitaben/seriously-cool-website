@@ -13,11 +13,11 @@ import {
   useLoaderData,
 } from "@remix-run/react"
 import type { CSSProperties } from "react"
-import { lazy, Suspense } from "react"
 import { useIsomorphicLayoutEffect } from "framer-motion"
 
 import styles from "~/styles/index.css"
 import SlidingText from "~/components/SlidingText"
+import Cursor from "~/components/Cursor"
 import useOnMatchMedia from "~/hooks/useOnMatchMedia"
 import { isSanityPreview } from "~/utils"
 
@@ -32,8 +32,6 @@ import {
   getLoaderProjectsData,
   getLoaderSettingsData,
 } from "./utils"
-
-const Cursor = lazy(() => import("~/components/Cursor"))
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -131,9 +129,7 @@ export default function App() {
       >
         <Outlet />
         <SlidingText>{slidingTexts}</SlidingText>
-        <Suspense>
-          <Cursor />
-        </Suspense>
+        <Cursor />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
