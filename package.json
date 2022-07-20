@@ -5,19 +5,15 @@
   "author": "Carlo Domínguez <hello@carlo.works>",
   "license": "UNLICENSED",
   "scripts": {
+    "prepare": "husky install",
     "format": "prettier --write .",
     "cms": "cd cms && yarn dev",
     "web": "cd web && yarn dev",
     "deploy:cms": "cd cms && yarn deploy",
     "deploy:web": "cd web && yarn deploy"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
-  },
   "devDependencies": {
-    "husky": "^8.0.1",
+    "husky": "^8.0.0",
     "prettier": "^2.6.2",
     "prettier-plugin-tailwindcss": "^0.1.11",
     "pretty-quick": "^3.1.3"
