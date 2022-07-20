@@ -426,10 +426,6 @@ html:focus-within {
   scroll-behavior: smooth;
 }
 
-* {
-  cursor: none !important;
-}
-
 *::-webkit-scrollbar {
   display: none;
 }
