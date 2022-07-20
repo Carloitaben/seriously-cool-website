@@ -1,25 +1,28 @@
 import { useEffect } from "react"
 
 /**
- * Executes a callback whenever the provided `breakpoint` matches
+ * Executes a callback whenever the provided `query` matches
  */
 export default function useOnMatchMedia(
-  breakpoint: string,
+  query: string,
   callback: (matches: boolean) => void
 ) {
   useEffect(() => {
-    const mediaQuery = window.matchMedia(breakpoint)
+    const mediaQuery = window.matchMedia(query)
 
-    function handleMediaQueryChange(event: MediaQueryListEvent) {
+    function onChange(event: MediaQueryListEvent) {
       callback(event.matches)
     }
 
     // Execute on mount
     callback(mediaQuery.matches)
 
-    mediaQuery.addEventListener("change", handleMediaQueryChange)
-
-    return () =>
-      mediaQuery.removeEventListener("change", handleMediaQueryChange)
-  }, [breakpoint, callback])
+    if ("addEventListener" in mediaQuery) {
+      mediaQuery.addEventListener("change", onChange)
+      return () => mediaQuery.removeEventListener("change", onChange)
+    } else {
+      mediaQuery.addListener(onChange)
+      return () => mediaQuery.removeListener(onChange)
+    }
+  }, [query, callback])
 }
