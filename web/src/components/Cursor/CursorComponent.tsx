@@ -3,9 +3,11 @@ import { useCallback, useEffect, useRef } from "react"
 import type { Transition, Variants } from "framer-motion"
 import { motion, useAnimation, useAnimationFrame } from "framer-motion"
 
-import { cursorFinger } from "~/components/Svg"
-
 import { lerpDelta } from "./utils"
+
+type Props = {
+  cursor: JSX.Element
+}
 
 type Position = {
   x: number
@@ -25,7 +27,7 @@ const transition: Transition = {
 
 const LERP_PERCENTAGE = 0.3
 
-const CursorComponent: FC = () => {
+const CursorComponent: FC<Props> = ({ cursor }) => {
   const last = useRef(0)
   const lerpPosition = useRef<Position>()
   const position = useRef<Position>()
@@ -128,7 +130,7 @@ const CursorComponent: FC = () => {
           variants={variants}
           className="inline-block"
         >
-          {cursorFinger}
+          {cursor}
         </motion.div>
       </div>
     </div>
