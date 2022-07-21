@@ -13,8 +13,8 @@ import {
   diceFace6,
 } from "~/components/Svg"
 
-const transformOffsetX = transform([0, 64], [-25, 25])
-const transformOffsetY = transform([0, 64], [25, -25])
+const transformOffsetX = transform([0, 64], [-55, 55])
+const transformOffsetY = transform([0, 64], [55, -55])
 
 const hoverSpring: Transition = {
   type: "spring",
