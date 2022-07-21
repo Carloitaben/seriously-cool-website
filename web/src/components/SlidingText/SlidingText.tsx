@@ -72,7 +72,7 @@ const SlidingText: FC<Props> = ({ children }) => {
       style={{ color: colors.text }}
     >
       <div
-        className="flex h-16 flex-1 items-center overflow-hidden whitespace-nowrap rounded-full border-2 border-current uppercase"
+        className="tablet:h-16 flex h-12 flex-1 items-center overflow-hidden whitespace-nowrap rounded-full border-2 border-current uppercase"
         style={{ background: colors.background }}
       >
         <span

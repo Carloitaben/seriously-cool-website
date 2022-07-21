@@ -38,7 +38,7 @@ const BackButton: FC = () => {
         >
           <Link
             to="/"
-            className="ml-4 flex h-16 w-16 items-center justify-center rounded-full border-2 border-current"
+            className="tablet:h-16 tablet:w-16 ml-4 flex h-12 w-12 items-center justify-center rounded-full border-2 border-current"
             style={{ background: colors.background }}
           >
             {close}

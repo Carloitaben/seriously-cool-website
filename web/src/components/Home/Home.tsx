@@ -13,7 +13,7 @@ const Home: FC = () => {
 
   return (
     <div className="desktop:pl-[50%] homeMaxWidth:pl-[60rem] overflow-hidden">
-      <main className="desktop:pr-2 px-1 pt-2 pb-24">
+      <main className="desktop:pr-2 tablet:pb-24 px-1 pt-2 pb-20">
         <section className="flex flex-col">
           <Logo />
           {/* <Catchphrase /> */}

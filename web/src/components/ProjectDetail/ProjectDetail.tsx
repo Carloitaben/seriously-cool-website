@@ -19,7 +19,7 @@ const ProjectDetail: FC<Props> = ({ project }) => {
 
   return (
     <>
-      <div className="overflow-hidden pb-20">
+      <div className="tablet:pb-20 overflow-hidden pb-16">
         <div className="tablet:px-18 tablet:my-24 tablet:grid-cols-8 mt-10 mb-7 grid grid-cols-4 gap-x-8 px-4">
           <div className="tablet:col-span-3 tablet:text-5xl tablet:mb-0 tablet:max-w-xl col-span-4 mb-5 max-w-md text-2xl leading-tight">
             <h1>
