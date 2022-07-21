@@ -26,7 +26,7 @@ const LightboxScrim: FC = () => {
     <AnimatePresence initial={false}>
       {lightboxId && (
         <motion.div
-          className="fixed inset-0 z-30 bg-black"
+          className="fixed inset-0 z-30 h-full bg-black"
           initial="hide"
           animate="show"
           exit="hide"
