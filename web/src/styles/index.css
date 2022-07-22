@@ -931,10 +931,6 @@ button {
   height: 1rem;
 }
 
-.h-16 {
-  height: 4rem;
-}
-
 .max-h-\[10\.375rem\] {
   max-height: 10.375rem;
 }
@@ -953,10 +949,6 @@ button {
 
 .w-4 {
   width: 1rem;
-}
-
-.w-16 {
-  width: 4rem;
 }
 
 .max-w-xl {
@@ -1206,6 +1198,10 @@ button {
   padding-bottom: 1rem;
 }
 
+.pb-16 {
+  padding-bottom: 4rem;
+}
+
 .pb-5 {
   padding-bottom: 1.25rem;
 }
@@ -1216,10 +1212,6 @@ button {
 
 .pr-20 {
   padding-right: 5rem;
-}
-
-.pb-16 {
-  padding-bottom: 4rem;
 }
 
 .text-left {
@@ -1433,20 +1425,20 @@ button {
     padding-bottom: 5rem;
   }
 
-  .tablet\:pb-18 {
-    padding-bottom: 4.5rem;
-  }
-
-  .tablet\:pt-24 {
-    padding-top: 6rem;
-  }
-
   .tablet\:pb-24 {
     padding-bottom: 6rem;
   }
 
   .tablet\:pb-20 {
     padding-bottom: 5rem;
+  }
+
+  .tablet\:pb-18 {
+    padding-bottom: 4.5rem;
+  }
+
+  .tablet\:pt-24 {
+    padding-top: 6rem;
   }
 
   .tablet\:text-2xl {
