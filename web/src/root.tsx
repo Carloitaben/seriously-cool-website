@@ -50,6 +50,11 @@ export const links: LinksFunction = () => [
     href: styles,
   },
   {
+    rel: "preload",
+    as: "style",
+    href: "https://use.typekit.net/jvo7aft.css",
+  },
+  {
     rel: "stylesheet",
     href: "https://use.typekit.net/jvo7aft.css",
   },
