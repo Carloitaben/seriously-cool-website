@@ -1,9 +1,10 @@
 import type { FC } from "react"
 
 import useRootData from "~/hooks/useRootData"
-import LinkButton from "../LinkButton"
+import LinkButton from "~/components/LinkButton"
+
 import AboutNavbarMailMeButton from "./AboutNavbarMailMeButton"
-import AboutNavbarRerollButton from "./AboutNavbarRerollButton"
+import RerollButton from "./RerollButton"
 
 const AboutNavbar: FC = () => {
   const { literals } = useRootData()
@@ -28,7 +29,7 @@ const AboutNavbar: FC = () => {
         </AboutNavbarMailMeButton>
       </ul>
       <div className="flex">
-        <AboutNavbarRerollButton />
+        <RerollButton />
       </div>
     </nav>
   )

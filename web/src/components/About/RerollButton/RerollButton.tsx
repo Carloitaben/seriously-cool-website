@@ -1,7 +1,6 @@
 import { Link } from "@remix-run/react"
 import type { FC } from "react"
-import { useRef, useEffect, useState } from "react"
-import type { Transition } from "framer-motion"
+import { useCallback, useRef, useEffect, useState } from "react"
 import { motion, transform, useAnimation } from "framer-motion"
 
 import {
@@ -13,33 +12,45 @@ import {
   diceFace6,
 } from "~/components/Svg"
 
+import type { HoverPosition } from "./utils"
+import { transition } from "./utils"
+
+import useIsLoading from "./useIsLoading"
+import useCanHover from "./useCanHover"
+import useAnimateLoading from "./useAnimateLoading"
+
 const transformOffsetX = transform([0, 64], [-55, 55])
 const transformOffsetY = transform([0, 64], [55, -55])
 
-const hoverSpring: Transition = {
-  type: "spring",
-  mass: 0.5,
-  stiffness: 200,
-}
-
-const AboutNavbarRerollButton: FC = () => {
+const RerollButton: FC = () => {
   const [hovering, setHovering] = useState(false)
+  const lastHoverPosition = useRef<HoverPosition>()
   const ref = useRef<HTMLAnchorElement>(null)
 
   const controls = useAnimation()
+  const canHover = useCanHover()
+  const { onClick, loading } = useIsLoading()
+
+  useAnimateLoading({ loading, controls, lastHoverPosition })
 
   useEffect(() => {
     const element = ref.current
 
     function handleMouseMove(event: MouseEvent) {
-      controls.start({
-        rotateX: transformOffsetY(event.offsetY),
-        rotateY: transformOffsetX(event.offsetX),
-        transition: hoverSpring,
-      })
+      const x = transformOffsetY(event.offsetY)
+      const y = transformOffsetX(event.offsetX)
+      lastHoverPosition.current = { x, y }
+
+      if (!loading) {
+        controls.start({
+          rotateX: x,
+          rotateY: y,
+          transition,
+        })
+      }
     }
 
-    if (hovering && element) {
+    if (hovering && element && canHover) {
       element.addEventListener("mousemove", handleMouseMove, true)
     }
 
@@ -48,34 +59,33 @@ const AboutNavbarRerollButton: FC = () => {
         element.removeEventListener("mousemove", handleMouseMove, true)
       }
     }
-  }, [controls, hovering])
+  }, [canHover, controls, hovering, loading])
 
-  function handleMouseEnter() {
+  const onMouseEnter = useCallback(() => {
     setHovering(true)
-  }
+  }, [])
 
-  function handleMouseLeave() {
+  const onMouseLeave = useCallback(() => {
+    lastHoverPosition.current = undefined
     setHovering(false)
-    controls.start({
-      rotateX: 0,
-      rotateY: 0,
-      rotateZ: 0,
-      transition: hoverSpring,
-    })
-  }
 
-  function onLinkClick() {
-    console.log("clicked on link")
-  }
+    if (!loading) {
+      controls.start({
+        rotateX: 0,
+        rotateY: 0,
+        transition,
+      })
+    }
+  }, [controls, loading])
 
   return (
     <Link
       to="."
       ref={ref}
       className="desktop:h-16 desktop:w-16 flex h-12 w-12 items-center justify-center rounded-full border-2 border-current"
-      onClick={onLinkClick}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       <div className="dice-wrapper pointer-events-none">
         <motion.div className="dice relative h-full w-full" animate={controls}>
@@ -103,4 +113,4 @@ const AboutNavbarRerollButton: FC = () => {
   )
 }
 
-export default AboutNavbarRerollButton
+export default RerollButton
