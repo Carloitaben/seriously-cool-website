@@ -19,7 +19,7 @@ import styles from "~/styles/index.css"
 import SlidingText from "~/components/SlidingText"
 import Cursor from "~/components/Cursor"
 import useOnMatchMedia from "~/hooks/useOnMatchMedia"
-import { isSanityPreview } from "~/utils"
+import { getRandomArrayItem, isSanityPreview } from "~/utils"
 
 import type {
   LoaderAboutData,
@@ -62,7 +62,9 @@ export const links: LinksFunction = () => [
 
 export type RootLoaderData = LoaderSettingsData &
   LoaderProjectsData &
-  LoaderAboutData
+  LoaderAboutData & {
+    cursor: string
+  }
 
 export const loader: LoaderFunction = async ({
   request,
@@ -77,15 +79,18 @@ export const loader: LoaderFunction = async ({
       getLoaderSettingsData(preview, context),
     ])
 
+  const cursor = getRandomArrayItem(["arrow", "finger", "sword"])
+
   return {
     ...loaderAboutData,
     ...loaderProjectsData,
     ...loaderSettingsData,
+    cursor,
   }
 }
 
 export default function App() {
-  const { theme, slidingTexts } = useLoaderData<RootLoaderData>()
+  const { theme, slidingTexts, cursor } = useLoaderData<RootLoaderData>()
 
   useIsomorphicLayoutEffect(() => {
     document.documentElement.style.setProperty(
@@ -134,7 +139,7 @@ export default function App() {
       >
         <Outlet />
         <SlidingText>{slidingTexts}</SlidingText>
-        <Cursor />
+        <Cursor cursor={cursor} />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
